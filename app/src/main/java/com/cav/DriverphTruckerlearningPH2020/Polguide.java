@@ -1,22 +1,14 @@
 package com.cav.DriverphTruckerlearningPH2020;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
-import com.google.android.material.navigation.NavigationView;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
-public class Polguide extends AppCompatActivity{
+public class Polguide extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +20,7 @@ public class Polguide extends AppCompatActivity{
         toolbar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Polguide.this, Dashboard.class));
+                startActivity(new Intent(com.cav.DriverphTruckerlearningPH2020.Polguide.this, com.cav.DriverphTruckerlearningPH2020.Dashboard.class));
             }
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -46,6 +38,6 @@ public class Polguide extends AppCompatActivity{
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(Polguide.this, Dashboard.class));
+        startActivity(new Intent(com.cav.DriverphTruckerlearningPH2020.Polguide.this, com.cav.DriverphTruckerlearningPH2020.Dashboard.class));
     }
 }

@@ -1,8 +1,6 @@
 package com.cav.DriverphTruckerlearningPH2020;
 
-import java.io.Serializable;
-
-public class Score implements Serializable {
+public class MyScoresServer {
 
     public int user_id;
     public String email;
@@ -14,14 +12,9 @@ public class Score implements Serializable {
     public String date_taken;
     public int isLocked;
     public int isCompleted;
-    public int sync_status;
 
-    public Score() {
-    }
-
-    public Score(int user_id, String email, int score, int num_of_items, String chapter,
-                 int num_of_attempt, String duration, String date_taken, int isLocked,
-                 int isCompleted, int sync_status) {
+    public MyScoresServer(int user_id, String email, int score, int num_of_items, String chapter,
+                          int num_of_attempt, String duration, String date_taken, int isLocked, int isCompleted) {
         this.user_id = user_id;
         this.email = email;
         this.score = score;
@@ -32,7 +25,10 @@ public class Score implements Serializable {
         this.date_taken = date_taken;
         this.isLocked = isLocked;
         this.isCompleted = isCompleted;
-        this.sync_status = sync_status;
+    }
+
+    public MyScoresServer() {
+
     }
 
     public int getUser_id() {
@@ -113,13 +109,5 @@ public class Score implements Serializable {
 
     public void setIsCompleted(int isCompleted) {
         this.isCompleted = isCompleted;
-    }
-
-    public int getSync_status() {
-        return sync_status;
-    }
-
-    public void setSync_status(int sync_status) {
-        this.sync_status = sync_status;
     }
 }

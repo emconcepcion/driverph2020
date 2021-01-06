@@ -1,11 +1,11 @@
 package com.cav.DriverphTruckerlearningPH2020;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.WindowManager;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class SplashScreen extends AppCompatActivity {
 
@@ -14,16 +14,16 @@ public class SplashScreen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.splash_screen);
+        setContentView(R.layout.activity_splash_screen);
 
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         new Handler().postDelayed(new Runnable(){
             @Override
             public void run() {
-                Intent mainIntent = new Intent(SplashScreen.this, Login.class);
-                SplashScreen.this.startActivity(mainIntent);
-                SplashScreen.this.finish();
+                Intent mainIntent = new Intent(com.cav.DriverphTruckerlearningPH2020.SplashScreen.this, com.cav.DriverphTruckerlearningPH2020.Login.class);
+                com.cav.DriverphTruckerlearningPH2020.SplashScreen.this.startActivity(mainIntent);
+                com.cav.DriverphTruckerlearningPH2020.SplashScreen.this.finish();
             }
         }, SPLASH_DISPLAY_LENGTH);
 //

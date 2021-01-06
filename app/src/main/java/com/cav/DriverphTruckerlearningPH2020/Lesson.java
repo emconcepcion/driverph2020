@@ -1,17 +1,15 @@
 package com.cav.DriverphTruckerlearningPH2020;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.anton46.stepsview.StepsView;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import com.cav.DriverphTruckerlearningPH2020.databinding.ActivityLessonBinding;
 import com.muddzdev.styleabletoast.StyleableToast;
 
@@ -21,7 +19,7 @@ public class Lesson extends AppCompatActivity {
     ActivityLessonBinding binding;
     String[] descriptionData = {"One", "Two", "Three", "Four", "Five", "Six"};
     int arrSize;
-    TextView arraySize;
+    public static TextView arraySize, progress_Module;
     int current_state = 0;
     Bundle data = new Bundle();
 
@@ -38,6 +36,8 @@ public class Lesson extends AppCompatActivity {
         arraySize = findViewById(R.id.arr_size);
         arrSize = descriptionData.length;
         arraySize.setText(String.valueOf(arrSize));
+        progress_Module = findViewById(R.id.progress_Module);
+        progress_Module.setText(com.cav.DriverphTruckerlearningPH2020.Lesson.progress_Module.getText().toString());
 
         binding.spb.setLabels(descriptionData)
                 .setBarColorIndicator(Color.BLACK)
@@ -59,7 +59,7 @@ public class Lesson extends AppCompatActivity {
                         current_state = data.getInt("progress", current_state);
 
                     } else {
-                        Intent i = new Intent(Lesson.this, Lesson.class);
+                        Intent i = new Intent(com.cav.DriverphTruckerlearningPH2020.Lesson.this, com.cav.DriverphTruckerlearningPH2020.Lesson.class);
                         data = getIntent().getExtras();
                         binding.spb.setCompletedPosition(current_state);
                         i.putExtra("progress", current_state);
@@ -68,9 +68,9 @@ public class Lesson extends AppCompatActivity {
                     }
 //                data.getInt("progress", current_state);
 
-                    StyleableToast.makeText(Lesson.this, "Lesson number: " + (current_state+1), Toast.LENGTH_SHORT, R.style.toastStyle).show();
+                    StyleableToast.makeText(com.cav.DriverphTruckerlearningPH2020.Lesson.this, "Lesson number: " + (current_state+1), Toast.LENGTH_SHORT, R.style.toastStyle).show();
                 }else if(binding.btnNextLesson.isPressed()){
-                    startActivity(new Intent(Lesson.this, VoiceResponse.class));
+                    startActivity(new Intent(com.cav.DriverphTruckerlearningPH2020.Lesson.this, com.cav.DriverphTruckerlearningPH2020.VoiceResponse.class));
                 }
 
 //                Log.d("current state = ", current_state + "");
@@ -88,7 +88,7 @@ public class Lesson extends AppCompatActivity {
                     if (data != null) {
                         current_state = data.getInt("progress", current_state);
                     } else {
-                        Intent i = new Intent(Lesson.this, Lesson.class);
+                        Intent i = new Intent(com.cav.DriverphTruckerlearningPH2020.Lesson.this, com.cav.DriverphTruckerlearningPH2020.Lesson.class);
                         data = getIntent().getExtras();
                         binding.spb.setCompletedPosition(current_state);
                         i.putExtra("progress", current_state);
@@ -96,7 +96,7 @@ public class Lesson extends AppCompatActivity {
                         finish();
                         startActivity(getIntent());
                     }
-                    StyleableToast.makeText(Lesson.this, "Lesson number: " + (current_state-1), Toast.LENGTH_SHORT, R.style.toastStyle).show();
+                    StyleableToast.makeText(com.cav.DriverphTruckerlearningPH2020.Lesson.this, "Lesson number: " + (current_state-1), Toast.LENGTH_SHORT, R.style.toastStyle).show();
                 }
                 //  Log.d("current state = ", current_state + "");
             }

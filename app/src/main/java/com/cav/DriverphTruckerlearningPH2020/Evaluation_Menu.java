@@ -1,11 +1,11 @@
 package com.cav.DriverphTruckerlearningPH2020;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 public class Evaluation_Menu extends AppCompatActivity {
 
@@ -19,13 +19,13 @@ public class Evaluation_Menu extends AppCompatActivity {
         cardViewBasicBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(Evaluation_Menu.this,Evaluation_Basic_Content.class));
+                startActivity(new Intent(com.cav.DriverphTruckerlearningPH2020.Evaluation_Menu.this,Evaluation_Basic_Content.class));
             }
         });
     }
 
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(Evaluation_Menu.this,Lessons_Menu.class));
+        startActivity(new Intent(com.cav.DriverphTruckerlearningPH2020.Evaluation_Menu.this,Lessons_Menu.class));
     }
 }

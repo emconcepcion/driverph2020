@@ -1,8 +1,5 @@
 package com.cav.DriverphTruckerlearningPH2020;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -14,17 +11,20 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import org.json.JSONObject;
 
 import java.util.HashMap;
 
 public class AccountEdit extends AppCompatActivity {
     TextView changeavatar;
-    EditText et_firstname, et_lastname, et_email, et_username, et_password;
-    public String email, img_num, fname, lname,username, password, id;
+    public static EditText et_firstname, et_lastname, et_email, et_username, et_password;
+    public static String email, img_num, fname, lname,username, password, id;
     ImageView avatar_edit;
     Button btnsave, btncancel;
-    private String updateUrl= "https://driver-ph.000webhostapp.com/driverphtest/update_user_information.php";
+    private String updateUrl= "https://phportal.net/driverph/update_user_information.php";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,20 +52,20 @@ public class AccountEdit extends AppCompatActivity {
         settextdata(fname, lname, email, username, password, img_num);
 
         changeavatar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(AccountEdit.this, ChangeAvatar.class);
-                Bundle extras = new Bundle();
-                extras.putString("first_name", fname);
-                extras.putString("last_name", lname);
-                extras.putString("email", email);
-                extras.putString("username", username);
-                extras.putString("password",password);
-                extras.putString("image", img_num);
-                extras.putString("id", id);
-                intent.putExtras(extras);
-                startActivity(intent);
-            }
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(com.cav.DriverphTruckerlearningPH2020.AccountEdit.this, ChangeAvatar.class);
+                    Bundle extras = new Bundle();
+                    extras.putString("first_name", fname);
+                    extras.putString("last_name", lname);
+                    extras.putString("email", email);
+                    extras.putString("username", username);
+                    extras.putString("password",password);
+                    extras.putString("image", img_num);
+                    extras.putString("id", id);
+                    intent.putExtras(extras);
+                    startActivity(intent);
+                }
         });
 
         btnsave.setOnClickListener(new View.OnClickListener() {
@@ -78,7 +78,7 @@ public class AccountEdit extends AppCompatActivity {
         btncancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AccountEdit.this, MyAccount.class);
+                Intent intent = new Intent(com.cav.DriverphTruckerlearningPH2020.AccountEdit.this, com.cav.DriverphTruckerlearningPH2020.MyAccount.class);
                 Bundle extras = new Bundle();
                 extras.putString("email", email);
                 intent.putExtras(extras);
@@ -118,7 +118,7 @@ public class AccountEdit extends AppCompatActivity {
         final String password_u = et_password.getText().toString();
         final String img_num_u = img_num;
         class Update extends AsyncTask<Void, Void, String> {
-            ProgressDialog pdLoading = new ProgressDialog(AccountEdit.this);
+            ProgressDialog pdLoading = new ProgressDialog(com.cav.DriverphTruckerlearningPH2020.AccountEdit.this);
 
             @Override
             protected void onPreExecute() {
@@ -152,17 +152,17 @@ public class AccountEdit extends AppCompatActivity {
             protected void onPostExecute(String s){
                 super.onPostExecute(s);
                 pdLoading.dismiss();
-                Toast.makeText(AccountEdit.this, "Information Update Successfully, Please Login Again", Toast.LENGTH_SHORT).show();
+                Toast.makeText(com.cav.DriverphTruckerlearningPH2020.AccountEdit.this, "Information Update Successfully, Please Login Again", Toast.LENGTH_SHORT).show();
                 try{
                     //Converting response to JSON Object
                     JSONObject obj = new JSONObject(s);
 
                     //if no error in response
                     if (!obj.getBoolean("error")){
-                        Toast.makeText(AccountEdit.this, obj.getString("message"), Toast.LENGTH_LONG).show();
+                        Toast.makeText(com.cav.DriverphTruckerlearningPH2020.AccountEdit.this, obj.getString("message"), Toast.LENGTH_LONG).show();
                     }
                 } catch (Exception e ){
-                    Intent intent = new Intent(AccountEdit.this, Login.class);
+                    Intent intent = new Intent(com.cav.DriverphTruckerlearningPH2020.AccountEdit.this, Login.class);
                     startActivity(intent);
 //                    Toast.makeText(AccountEdit.this, "Exception: "+e, Toast.LENGTH_SHORT).show();
                 }

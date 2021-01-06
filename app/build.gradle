@@ -1,17 +1,20 @@
 apply plugin: 'com.android.application'
 
+apply plugin: 'com.google.gms.google-services'
+
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
 
     defaultConfig {
         applicationId "com.cav.quizinstructions"
-        minSdkVersion 16
+        minSdkVersion 26
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        useLibrary 'org.apache.http.legacy'
     }
 
     compileOptions {
@@ -26,6 +29,10 @@ android {
         }
     }
 
+    aaptOptions {
+        noCompress 'db'
+    }
+
     viewBinding
             {
                 enabled=true
@@ -36,6 +43,11 @@ dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+//    implementation 'com.android.support:support-compat:28.0.0'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    //noinspection GradleCompatible
+//    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.android.support.constraint:constraint-layout:2.0.4'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
@@ -58,5 +70,14 @@ dependencies {
 
     // MDC-101 Android: Material Components (MDC) Basics (Java) https://codelabs.developers.google.com/codelabs/mdc-101-java#1
     api 'com.google.android.material:material:1.1.0-alpha06'
+
+    implementation 'com.google.code.gson:gson:2.8.2'
+
+    implementation 'com.squareup.okhttp3:okhttp:3.2.0'
+    //noinspection GradleCompatible
+    implementation 'com.android.support:cardview-v7:24.0.+'
+    //noinspection GradleCompatible
+    implementation 'com.android.support:recyclerview-v7:24.0.+'
+    implementation 'com.github.bumptech.glide:glide:3.7.0'
 
 }

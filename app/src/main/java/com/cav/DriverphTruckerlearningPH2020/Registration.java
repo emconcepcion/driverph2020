@@ -1,7 +1,5 @@
 package com.cav.DriverphTruckerlearningPH2020;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -10,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
@@ -22,10 +22,10 @@ import java.util.HashMap;
 public class Registration extends AppCompatActivity {
     EditText edittext_firstname, edittext_lastname, edittext_email, edittext_username, edittext_password;
     public String firstname, lastname, email, username, password;
-    private String sendUrl="https://driver-ph.000webhostapp.com/driverphtest/registerData.php";
+    private String sendUrl="https://phportal.net/driverph/registerData.php";
     //private String sendUrl="C:\\xampp\\htdocs\\login.php";
     private RequestQueue requestQueue;
-    private static final String TAG=Registration.class.getSimpleName();
+    private static final String TAG= com.cav.DriverphTruckerlearningPH2020.Registration.class.getSimpleName();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +49,7 @@ public class Registration extends AppCompatActivity {
 
 
                 if(firstname.isEmpty() || lastname.isEmpty() || email.isEmpty() || username.isEmpty() || password.isEmpty()) {
-                    Toast.makeText(Registration.this,"Please Fill all the Textbox", Toast.LENGTH_LONG).show();
+                    Toast.makeText(com.cav.DriverphTruckerlearningPH2020.Registration.this,"Please Fill all the Textbox", Toast.LENGTH_LONG).show();
                 }else{
                     add_data();
                 }
@@ -67,7 +67,7 @@ public class Registration extends AppCompatActivity {
 
         class Product extends AsyncTask<Void, Void, String> {
 
-            ProgressDialog pdLoading = new ProgressDialog(Registration.this);
+            ProgressDialog pdLoading = new ProgressDialog(com.cav.DriverphTruckerlearningPH2020.Registration.this);
 
             @Override
             protected void onPreExecute() {
@@ -82,7 +82,7 @@ public class Registration extends AppCompatActivity {
             @Override
             protected String doInBackground(Void... voids) {
                 //creating request handler object
-                RequestHandler requestHandler = new RequestHandler();
+                com.cav.DriverphTruckerlearningPH2020.RequestHandler requestHandler = new com.cav.DriverphTruckerlearningPH2020.RequestHandler();
 
                 //creating request parameters
                 HashMap<String, String> params = new HashMap<>();
@@ -109,8 +109,8 @@ public class Registration extends AppCompatActivity {
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    Toast.makeText(Registration.this, "Register Successfully", Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(Registration.this, Login.class);
+                    Toast.makeText(com.cav.DriverphTruckerlearningPH2020.Registration.this, "Register Successfully", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(com.cav.DriverphTruckerlearningPH2020.Registration.this, com.cav.DriverphTruckerlearningPH2020.Login.class);
                     intent.addFlags(intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
                 }

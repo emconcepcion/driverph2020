@@ -1,7 +1,5 @@
 package com.cav.DriverphTruckerlearningPH2020;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +7,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class ChangeAvatar extends AppCompatActivity {
     public String email, img_num, fname, lname,username, password, id, oldimage;
@@ -60,7 +60,7 @@ public class ChangeAvatar extends AppCompatActivity {
 
                 img_num = "1";
 
-                Toast.makeText(ChangeAvatar.this, img_num, Toast.LENGTH_SHORT).show();
+                Toast.makeText(com.cav.DriverphTruckerlearningPH2020.ChangeAvatar.this, img_num, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -76,7 +76,7 @@ public class ChangeAvatar extends AppCompatActivity {
 
                 img_num = "1";
 
-                Toast.makeText(ChangeAvatar.this, img_num, Toast.LENGTH_SHORT).show();
+                Toast.makeText(com.cav.DriverphTruckerlearningPH2020.ChangeAvatar.this, img_num, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -92,7 +92,7 @@ public class ChangeAvatar extends AppCompatActivity {
 
                 img_num = "2";
 
-                Toast.makeText(ChangeAvatar.this, img_num, Toast.LENGTH_SHORT).show();
+                Toast.makeText(com.cav.DriverphTruckerlearningPH2020.ChangeAvatar.this, img_num, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -108,7 +108,7 @@ public class ChangeAvatar extends AppCompatActivity {
 
                 img_num = "3";
 
-                Toast.makeText(ChangeAvatar.this, img_num, Toast.LENGTH_SHORT).show();
+                Toast.makeText(com.cav.DriverphTruckerlearningPH2020.ChangeAvatar.this, img_num, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -124,7 +124,7 @@ public class ChangeAvatar extends AppCompatActivity {
 
                 img_num = "4";
 
-                Toast.makeText(ChangeAvatar.this, img_num, Toast.LENGTH_SHORT).show();
+                Toast.makeText(com.cav.DriverphTruckerlearningPH2020.ChangeAvatar.this, img_num, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -140,7 +140,7 @@ public class ChangeAvatar extends AppCompatActivity {
 
                 img_num = "5";
 
-                Toast.makeText(ChangeAvatar.this, img_num, Toast.LENGTH_SHORT).show();
+                Toast.makeText(com.cav.DriverphTruckerlearningPH2020.ChangeAvatar.this, img_num, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -156,14 +156,14 @@ public class ChangeAvatar extends AppCompatActivity {
 
                 img_num = "6";
 
-                Toast.makeText(ChangeAvatar.this, img_num, Toast.LENGTH_SHORT).show();
+                Toast.makeText(com.cav.DriverphTruckerlearningPH2020.ChangeAvatar.this, img_num, Toast.LENGTH_SHORT).show();
             }
         });
 
         selectbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ChangeAvatar.this, AccountEdit.class);
+                Intent intent = new Intent(com.cav.DriverphTruckerlearningPH2020.ChangeAvatar.this, com.cav.DriverphTruckerlearningPH2020.AccountEdit.class);
                 Bundle extras = new Bundle();
                 extras.putString("first_name", fname);
                 extras.putString("last_name", lname);
@@ -180,7 +180,7 @@ public class ChangeAvatar extends AppCompatActivity {
         cancelbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ChangeAvatar.this, AccountEdit.class);
+                Intent intent = new Intent(com.cav.DriverphTruckerlearningPH2020.ChangeAvatar.this, com.cav.DriverphTruckerlearningPH2020.AccountEdit.class);
                 Bundle extras = new Bundle();
                 extras.putString("first_name", fname);
                 extras.putString("last_name", lname);

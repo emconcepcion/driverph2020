@@ -7,7 +7,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 
 public class MySingleton {
-    private static MySingleton mInstance;
+    private static com.cav.DriverphTruckerlearningPH2020.MySingleton mInstance;
     private RequestQueue requestQueue;
     private static Context mCtx;
 
@@ -25,9 +25,9 @@ public class MySingleton {
     }
 
     //return an instance of this class
-    public static synchronized MySingleton getInstance(Context context){
+    public static synchronized com.cav.DriverphTruckerlearningPH2020.MySingleton getInstance(Context context){
         if (mInstance == null){
-            mInstance = new MySingleton(context);
+            mInstance = new com.cav.DriverphTruckerlearningPH2020.MySingleton(context);
         }
         return mInstance;
     }

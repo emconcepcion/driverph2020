@@ -1,9 +1,6 @@
 package com.cav.DriverphTruckerlearningPH2020;
 
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -12,21 +9,22 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.navigation.NavigationView;
 
 import org.json.JSONObject;
 
 import java.util.HashMap;
 
-import de.hdodenhof.circleimageview.CircleImageView;
-
 public class MyAccount extends AppCompatActivity {
     FloatingActionButton fabedit;
     public ImageView avatarimage;
-    public TextView tv_fullname, tv_email, tv_username, tv_password;
+    public TextView tv_fullname, tv_email, tv_password;
+    public static TextView tv_username;
     public String email, img_num, fname, lname, id;
-    private String retrievedatasUrl="https://driver-ph.000webhostapp.com/driverphtest/retrievemyaccount.php";
+    private String retrievedatasUrl="https://phportal.net/driverph/retrievemyaccount.php";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +48,7 @@ public class MyAccount extends AppCompatActivity {
         fabedit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MyAccount.this, AccountEdit.class);
+                Intent intent = new Intent(com.cav.DriverphTruckerlearningPH2020.MyAccount.this, AccountEdit.class);
                 Bundle extras = new Bundle();
                 extras.putString("first_name", fname);
                 extras.putString("last_name", lname);
@@ -122,7 +120,7 @@ public class MyAccount extends AppCompatActivity {
                         }
                     }
                 } catch (Exception e ){
-                    Toast.makeText(MyAccount.this, "Exception: "+e, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(com.cav.DriverphTruckerlearningPH2020.MyAccount.this, "Exception: "+e, Toast.LENGTH_SHORT).show();
                 }
             }
         }

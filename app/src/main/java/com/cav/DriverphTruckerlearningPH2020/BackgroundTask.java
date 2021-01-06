@@ -1,15 +1,11 @@
 package com.cav.DriverphTruckerlearningPH2020;
 
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
-import android.os.Bundle;
 import android.widget.Toast;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -22,13 +18,19 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+
+import static android.content.Context.MODE_PRIVATE;
+
 /**
  * Created by prabeesh on 7/14/2015.
  */
 public class BackgroundTask extends AsyncTask<String,Void,String> {
+
     AlertDialog alertDialog;
     public String fname;
     Context ctx;
+    public static final String SHARED_PREFS = "sharedPrefs";
+    public static final String EMAIL = "text";
     BackgroundTask(Context ctx)
     {
         this.ctx =ctx;
@@ -42,7 +44,8 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
     }
     @Override
     protected String doInBackground(String... params) {
-        String login_url = "https://driver-ph.000webhostapp.com/driverphtest/login.php";
+//        String login_url = "https://driver-ph.000webhostapp.com/driverphtest/login.php";
+        String login_url = "https://phportal.net/driverph/login.php";
         String method = params[0];
         if(method.equals("login"))
         {
@@ -97,14 +100,15 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
             Toast.makeText(ctx, "Incorrect....", Toast.LENGTH_SHORT).show();
         }else{
             alertDialog.dismiss();
+            SharedPreferences sharedPreferences = ctx.getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString(EMAIL, email);
+            editor.apply();
             Intent intent = new Intent(ctx,Dashboard.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            Bundle extras = new Bundle();
-            extras.putString("email", email);
-            intent.putExtras(extras);
+//            Bundle extras = new Bundle();
+//            extras.putString("email", email);
+//            intent.putExtras(extras);
             ctx.startActivity(intent);
         }
-
-
-
     }
 }
