@@ -2,6 +2,7 @@ package com.cav.DriverphTruckerlearningPH2020;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -16,14 +17,19 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 
+import static com.cav.DriverphTruckerlearningPH2020.Constant.SP_LESSONID;
+import static com.cav.DriverphTruckerlearningPH2020.Dashboard.SERVER_DASHBOARD;
+
 public class Login extends AppCompatActivity {
     EditText username, password1;
     public String u_name, pword, password2;
     public static String email;
     TextView fgtpassword;
     private String retrievedatasUrl = "https://phportal.net/driverph/login.php";
+    private String retrieveprogress = "https://phportal.net/driverph/retrieve_progress.php";
     public static final String SHARED_PREFS = "sharedPrefs";
     public static final String EMAIL = "text";
+    public static String user_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +48,7 @@ public class Login extends AppCompatActivity {
                 u_name = username.getText().toString().trim();
                 pword = password1.getText().toString().trim();
                 if (u_name.isEmpty() || pword.isEmpty()) {
-                    Toast.makeText(com.cav.DriverphTruckerlearningPH2020.Login.this, "Please Fill all the Textbox", Toast.LENGTH_LONG).show();
+                    Toast.makeText(Login.this, "Please Fill all the Textbox", Toast.LENGTH_LONG).show();
                 } else {
                     userLogin();
                 }
@@ -62,22 +68,15 @@ public class Login extends AppCompatActivity {
         fgtpassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(Login.this, ForgotPassword.class);
-//                intent.addFlags(intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                startActivity(intent);
+                Intent intent = new Intent(Login.this, ForgotPassword.class);
+                intent.addFlags(intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
             }
         });
     }
 
     @Override
     public void onBackPressed() {
-//        this.getSharedPreferences(SHARED_PREFS, 0).edit().clear().apply();
-//        this.getSharedPreferences(Uid_PREFS, 0).edit().clear().apply();
-//        this.getSharedPreferences("mySavedAttempt", 0).edit().clear().apply();
-//        Intent intent = new Intent(Intent.ACTION_MAIN);
-//        intent.addCategory(Intent.CATEGORY_HOME);
-//        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//        startActivity(intent);
         System.exit(0);
     }
 
@@ -99,7 +98,7 @@ public class Login extends AppCompatActivity {
             @Override
             protected String doInBackground(Void... voids) {
                 //creating request handler object
-                com.cav.DriverphTruckerlearningPH2020.RequestHandler requestHandler = new com.cav.DriverphTruckerlearningPH2020.RequestHandler();
+                RequestHandler requestHandler = new RequestHandler();
 
                 //creating request parameters
                 HashMap<String, String> params = new HashMap<>();
@@ -119,19 +118,17 @@ public class Login extends AppCompatActivity {
                     //if no error in response
                     if (!obj.getBoolean("error")) {
                         email = obj.getString("email");
-
-//                        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
-//                        SharedPreferences.Editor editor = sharedPreferences.edit();
-//                        editor.putString("email", email);
-//                        editor.apply();
+                        user_id = obj.getString("id");
+                        SharedPreferences sharedPreferences = getSharedPreferences("MySharedPrefForEmail", MODE_PRIVATE);
+                        SharedPreferences.Editor myEdit = sharedPreferences.edit();
+                        myEdit.putString("driver_email", email);
+                        myEdit.putString("driver_password", password1.getText().toString());
+                        myEdit.putString("driver_userId", user_id);
+                        myEdit.commit();
+                        pdLoading.dismiss();
+                        progress();
 
                         pdLoading.dismiss();
-                        Intent intent = new Intent(com.cav.DriverphTruckerlearningPH2020.Login.this, Dashboard.class);
-                        Bundle extras = new Bundle();
-                        extras.putString("email", email);
-                        extras.putString("password", pass);
-                        intent.putExtras(extras);
-                        startActivity(intent);
                     } else {
                         pdLoading.dismiss();
                         Toast.makeText(com.cav.DriverphTruckerlearningPH2020.Login.this, "Incorrect", Toast.LENGTH_SHORT).show();
@@ -144,6 +141,63 @@ public class Login extends AppCompatActivity {
         }
 
         show_prod show = new show_prod();
+        show.execute();
+    }
+
+    public void progress() {
+        final String uid = user_id;
+
+        class progress_class extends AsyncTask<Void, Void, String> {
+
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+
+            }
+
+            @Override
+            protected String doInBackground(Void... voids) {
+                //creating request handler object
+                RequestHandler requestHandler = new RequestHandler();
+
+                //creating request parameters
+                HashMap<String, String> params = new HashMap<>();
+                params.put("id", uid);
+
+                //returing the response
+                return requestHandler.sendPostRequest(retrieveprogress, params);
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+                try {
+                    //Converting response to JSON Object
+                    JSONObject obj = new JSONObject(s);
+
+                    //if no error in response
+                    if (!obj.getBoolean("error")) {
+                        String lesson_id = obj.getString("lessonId");
+                        String lesson_title = obj.getString("lessonTitle");
+                        String module_id = obj.getString("moduleId");
+                        String module_name = obj.getString("moduleName");
+                        Intent intent = new Intent(Login.this, Dashboard.class);
+                        startActivity(intent);
+
+                        SharedPreferences sharedPreferences = getSharedPreferences(SP_LESSONID, MODE_PRIVATE);
+                        SharedPreferences.Editor myEdit = sharedPreferences.edit();
+                        myEdit.putString("lessonId", lesson_id);
+                        myEdit.putString("lessonTitle", lesson_title);
+                        myEdit.putString("moduleId", module_id);
+                        myEdit.putString("moduleName", module_name);
+                        myEdit.apply();
+                    }
+                } catch (Exception e) {
+                    Toast.makeText(Login.this, "Exception: " + e, Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+        progress_class show = new progress_class();
         show.execute();
     }
 }

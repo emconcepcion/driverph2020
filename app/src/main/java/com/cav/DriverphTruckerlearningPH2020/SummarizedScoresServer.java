@@ -1,17 +1,22 @@
 package com.cav.DriverphTruckerlearningPH2020;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.RequestQueue;
@@ -24,18 +29,24 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
 import static com.cav.DriverphTruckerlearningPH2020.Dashboard.Uid_PREFS;
+import static com.cav.DriverphTruckerlearningPH2020.Dashboard.dashboard_email;
 
 public class SummarizedScoresServer extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
-    private List<com.cav.DriverphTruckerlearningPH2020.MyScoresServer> myScoresServerList;
+    private List<MyScoresServer> myScoresServerList;
     private TextView myUSerId, myEmailSum;
     private static final String Server_Scores_URL = "https://phportal.net/driverph/scoresOnline.php";
 
@@ -53,7 +64,7 @@ public class SummarizedScoresServer extends AppCompatActivity {
         myScoresServerList = new ArrayList<>();
         loadRecyclerViewData();
         if (!checkNetworkConnection()){
-            StyleableToast.makeText(getApplicationContext(), com.cav.DriverphTruckerlearningPH2020.SummarizedScoresServer.this.getString(R.string.connect_to_net_to_view_summary),
+            StyleableToast.makeText(getApplicationContext(), SummarizedScoresServer.this.getString(R.string.connect_to_net_to_view_summary),
                     Toast.LENGTH_LONG, R.style.toastStyle).show();
         }
 
@@ -75,14 +86,14 @@ public class SummarizedScoresServer extends AppCompatActivity {
                 new com.android.volley.Response.Listener<String>() {
                     @Override
                     public void onResponse(String s) {
-                        Toast.makeText(com.cav.DriverphTruckerlearningPH2020.SummarizedScoresServer.this, "Loading...", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SummarizedScoresServer.this, "Loading...", Toast.LENGTH_SHORT).show();
                         try {
                             JSONObject jsonObject = new JSONObject(s);
                             JSONArray array = jsonObject.getJSONArray("data");
 
                             for (int i = 0; i < array.length(); i++) {
                                 JSONObject o = array.getJSONObject(i);
-                                com.cav.DriverphTruckerlearningPH2020.MyScoresServer scoresServer = new com.cav.DriverphTruckerlearningPH2020.MyScoresServer(o.getInt("userId"),
+                                MyScoresServer scoresServer = new MyScoresServer(o.getInt("userId"),
                                         o.getString("email"), o.getInt("numberOfCorrectAnswers"),
                                         o.getInt("numberOfQuestions"), o.getString("module"),
                                         o.getInt("retryCount"), o.getString("minutesToFinish"),
@@ -90,7 +101,7 @@ public class SummarizedScoresServer extends AppCompatActivity {
                                         o.getInt("passed"));
                                 myScoresServerList.add(scoresServer);
                             }
-                            adapter = new com.cav.DriverphTruckerlearningPH2020.CustomAdapter(myScoresServerList, getApplicationContext());
+                            adapter = new CustomAdapter(myScoresServerList, getApplicationContext());
                             recyclerView.setAdapter(adapter);
 
                         } catch (JSONException e) {
@@ -102,17 +113,17 @@ public class SummarizedScoresServer extends AppCompatActivity {
                 new com.android.volley.Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-                        Toast.makeText(com.cav.DriverphTruckerlearningPH2020.SummarizedScoresServer.this, volleyError.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SummarizedScoresServer.this, volleyError.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }) {
-                    @Override
-                    protected Map<String, String> getParams() throws AuthFailureError {
-                        Map<String, String> params = new HashMap<>();
-                        String emSum = myEmailSum.getText().toString();
-                        params.put("email", emSum);
-                        Log.d("email", emSum + "");
-                        Log.d("yes", "successful...");
-                        return params;
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                String emSum = myEmailSum.getText().toString();
+                params.put("email", emSum);
+                Log.d("email", emSum + "");
+                Log.d("yes", "successful...");
+                return params;
             }
         };
 

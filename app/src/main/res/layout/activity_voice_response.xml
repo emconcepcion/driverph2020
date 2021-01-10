@@ -5,15 +5,13 @@
     android:layout_height="match_parent"
     tools:context=".VoiceResponse">
 
-    <include layout="@layout/toolbar"
-        android:id="@+id/toolbar"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_below="@id/toolbar"
         android:padding="16dp"
+        android:layout_marginTop="20dp"
         >
 
         <TextView
@@ -117,26 +115,15 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/btn_back_to_lesson"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="16dp"
-        android:text="@string/back" />
-
-    <Button
         android:id="@+id/btn_next"
-        android:layout_width="wrap_content"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="40dp"
         android:layout_marginTop="15dp"
-        android:layout_marginRight="16dp"
         android:text="@string/next"
-        android:layout_alignParentRight="true" />
+        android:background="@drawable/yellow_button"
+        android:layout_centerHorizontal="true"/>
 
 
 </RelativeLayout>

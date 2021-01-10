@@ -1,42 +1,57 @@
 package com.cav.DriverphTruckerlearningPH2020;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.util.Linkify;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-import androidx.core.content.ContextCompat;
-
 import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkError;
+import com.android.volley.NoConnectionError;
+import com.android.volley.ParseError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.ServerError;
+import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.muddzdev.styleabletoast.StyleableToast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.cav.DriverphTruckerlearningPH2020.BackgroundTask.SHARED_PREFS;
 import static com.cav.DriverphTruckerlearningPH2020.Constant.MODULE_ID_1;
 import static com.cav.DriverphTruckerlearningPH2020.Constant.MODULE_ID_2;
 import static com.cav.DriverphTruckerlearningPH2020.Constant.MODULE_ID_3;
+import static com.cav.DriverphTruckerlearningPH2020.Login.SHARED_PREFS;
 
 public class Quizzes_menu extends AppCompatActivity {
     private static final String Server_All_Attempts_URL = "https://phportal.net/driverph/get_all_attempts.php";
@@ -82,14 +97,13 @@ public class Quizzes_menu extends AppCompatActivity {
 
         mylatestModLocked = findViewById(R.id.latestMod1Locked);
         mylatestModCompleted = findViewById(R.id.latestMod1Completed);
-        mylatestModLocked.setText(com.cav.DriverphTruckerlearningPH2020.Dashboard.myLatestIsUnlocked);
-        mylatestModCompleted.setText(com.cav.DriverphTruckerlearningPH2020.Dashboard.myLatestIsCompleted);
+        mylatestModLocked.setText(Dashboard.myLatestIsUnlocked);
+        mylatestModCompleted.setText(Dashboard.myLatestIsCompleted);
 
         sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         dash_email = sharedPreferences.getString("email", "");
         Intent i = getIntent();
         Bundle b = i.getExtras();
-//        dashboard_email = b.getString("email");
         int uidDb = b.getInt("user_idFromServer");
         int uid = b.getInt("user_idFromDashboard");
         myEmailQMenu.setText(dash_email);
@@ -104,13 +118,13 @@ public class Quizzes_menu extends AppCompatActivity {
             public void onClick(View v) {
                 isFromQuizMenu = true;
                 tChapter.setText(MODULE_ID_1);
-                com.cav.DriverphTruckerlearningPH2020.Dashboard.recentModule.setText(MODULE_ID_1);
+                Dashboard.recentModule.setText(MODULE_ID_1);
                 String chapTest1 = tChapter.getText().toString();
                 SharedPreferences sp1 = getSharedPreferences("ChapFromQuizzes", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor1 = sp1.edit();
                 editor1.putString("Qchapter", chapTest1);
                 editor1.apply();
-                startActivity(new Intent(com.cav.DriverphTruckerlearningPH2020.Quizzes_menu.this, com.cav.DriverphTruckerlearningPH2020.QuizInstructions.class));
+                startActivity(new Intent(Quizzes_menu.this, QuizInstructions.class));
             }
         });
 
@@ -119,13 +133,13 @@ public class Quizzes_menu extends AppCompatActivity {
             public void onClick(View v) {
                 isFromQuizMenu = true;
                 tChapter.setText(MODULE_ID_2);
-                com.cav.DriverphTruckerlearningPH2020.Dashboard.recentModule.setText(MODULE_ID_2);
+                Dashboard.recentModule.setText(MODULE_ID_2);
                 String chapTest2 = tChapter.getText().toString();
                 SharedPreferences sp2 = getSharedPreferences("ChapFromQuizzes", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor2 = sp2.edit();
                 editor2.putString("Qchapter", chapTest2);
                 editor2.apply();
-                startActivity(new Intent(com.cav.DriverphTruckerlearningPH2020.Quizzes_menu.this, com.cav.DriverphTruckerlearningPH2020.QuizInstructions.class));
+                startActivity(new Intent(Quizzes_menu.this, QuizInstructions.class));
             }
         });
 
@@ -134,13 +148,13 @@ public class Quizzes_menu extends AppCompatActivity {
             public void onClick(View v) {
                 isFromQuizMenu = true;
                 tChapter.setText(MODULE_ID_3);
-                com.cav.DriverphTruckerlearningPH2020.Dashboard.recentModule.setText(MODULE_ID_3);
+                Dashboard.recentModule.setText(MODULE_ID_3);
                 String chapTest3 = tChapter.getText().toString();
                 SharedPreferences sp3 = getSharedPreferences("ChapFromQuizzes", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor3 = sp3.edit();
                 editor3.putString("Qchapter", chapTest3);
                 editor3.apply();
-                startActivity(new Intent(com.cav.DriverphTruckerlearningPH2020.Quizzes_menu.this, com.cav.DriverphTruckerlearningPH2020.QuizInstructions.class));
+                startActivity(new Intent(Quizzes_menu.this, QuizInstructions.class));
             }
         });
 
@@ -160,14 +174,14 @@ public class Quizzes_menu extends AppCompatActivity {
         btn_list_completed_quizzes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(com.cav.DriverphTruckerlearningPH2020.Quizzes_menu.this, com.cav.DriverphTruckerlearningPH2020.CompletedQuizzes.class));
+                startActivity(new Intent(Quizzes_menu.this, CompletedQuizzes.class));
             }
         });
     }
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(com.cav.DriverphTruckerlearningPH2020.Quizzes_menu.this, com.cav.DriverphTruckerlearningPH2020.Dashboard.class);
+        Intent intent = new Intent(Quizzes_menu.this, Dashboard.class);
         Bundle extras = new Bundle();
         extras.putString("email", myEmailQMenu.getText().toString());
         intent.putExtras(extras);
@@ -194,64 +208,80 @@ public class Quizzes_menu extends AppCompatActivity {
                 if (sameUser && myLatestChapter.equals(MODULE_ID_1)
                         && latestUnlocked == 0 && latestCompleted == 1) {
                     cardViewMod2.setClickable(true);
-                    cardViewMod1.setClickable(false);
-                    cardViewMod1.setBackground(ContextCompat.getDrawable(this, R.drawable.passed_locked));
-                    cardViewMod3.setClickable(false);
-                    cardViewMod3.setBackground(ContextCompat.getDrawable(this, R.drawable.mod_lock));
+                    passedLockMod1();
+                    lockedMod3();
                 } else {
-                    cardViewMod2.setClickable(false);
-                    cardViewMod2.setBackground(ContextCompat.getDrawable(this, R.drawable.mod_lock));
-                    cardViewMod3.setClickable(false);
-                    cardViewMod3.setBackground(ContextCompat.getDrawable(this, R.drawable.mod_lock));
+                    lockedMod2();
+                    lockedMod3();
                 }
                 break;
             case MODULE_ID_2:
                 if (sameUser && myLatestChapter.equals(MODULE_ID_2)
                         && latestUnlocked == 0 && latestCompleted == 1) {
                     cardViewMod3.setClickable(true);
-                    cardViewMod1.setClickable(false);
-                    cardViewMod1.setBackground(ContextCompat.getDrawable(this, R.drawable.passed_locked));
-                    cardViewMod2.setClickable(false);
-                    cardViewMod2.setBackground(ContextCompat.getDrawable(this, R.drawable.passed_locked));
+                    passedLockMod1();
+                    passedLockMod2();
                 } else {
-                    cardViewMod1.setClickable(false);
-                    cardViewMod1.setBackground(ContextCompat.getDrawable(this, R.drawable.passed_locked));
-                    cardViewMod3.setClickable(false);
-                    cardViewMod3.setBackground(ContextCompat.getDrawable(this, R.drawable.mod_lock));
+                    passedLockMod1();
+                    lockedMod3();
                 }
                 break;
             case MODULE_ID_3:
                 if (sameUser && myLatestChapter.equals(MODULE_ID_3)
                         && latestUnlocked == 0 && latestCompleted == 1) {
-                    cardViewMod3.setClickable(false);
-                    cardViewMod3.setBackground(ContextCompat.getDrawable(this, R.drawable.passed_locked));
-                    cardViewMod1.setClickable(false);
-                    cardViewMod1.setBackground(ContextCompat.getDrawable(this, R.drawable.passed_locked));
-                    cardViewMod2.setClickable(false);
-                    cardViewMod2.setBackground(ContextCompat.getDrawable(this, R.drawable.passed_locked));
+                    passedLockMod1();
+                    passedLockMod2();
+                    passedLockMod3();
+                } else{
+                    passedLockMod1();
+                    passedLockMod2();
                 }
                 break;
         }
 
+        if (sameUser && myLatestChapter.equals(MODULE_ID_1) &&
+                latestUnlocked == 1 && latestCompleted == 0) {
+            cardViewMod1.setClickable(true);
+        }
+
         if (myLatestChapter.equals("")) {
-            cardViewMod1.setClickable(true);
-            cardViewMod2.setClickable(false);
-            cardViewMod2.setBackground(ContextCompat.getDrawable(this, R.drawable.mod_lock));
-            cardViewMod3.setClickable(false);
-            cardViewMod3.setBackground(ContextCompat.getDrawable(this, R.drawable.mod_lock));
+            initialLock();
         }
 
-        if (sameUser && latestUnlocked == 1 && latestCompleted == 0) {
-            cardViewMod1.setClickable(true);
+        if (!sameUser && !myLatestChapter.equals("")) {
+            initialLock();
         }
+    }
 
-        if (sameUser && myLatestChapter.equals("")) {
-            cardViewMod1.setClickable(true);
-            cardViewMod2.setClickable(false);
-            cardViewMod2.setBackground(ContextCompat.getDrawable(this, R.drawable.mod_lock));
-            cardViewMod3.setClickable(false);
-            cardViewMod3.setBackground(ContextCompat.getDrawable(this, R.drawable.mod_lock));
-        }
+    public void initialLock(){
+        cardViewMod1.setClickable(true);
+        lockedMod2();
+        lockedMod3();
+    }
+
+    public void passedLockMod1(){
+        cardViewMod1.setClickable(false);
+        cardViewMod1.setBackground(ContextCompat.getDrawable(this, R.drawable.passed_locked));
+    }
+
+    public void passedLockMod2(){
+        cardViewMod2.setClickable(false);
+        cardViewMod2.setBackground(ContextCompat.getDrawable(this, R.drawable.passed_locked));
+    }
+
+    public void passedLockMod3(){
+        cardViewMod3.setClickable(false);
+        cardViewMod3.setBackground(ContextCompat.getDrawable(this, R.drawable.passed_locked));
+    }
+
+    public void lockedMod2(){
+        cardViewMod2.setClickable(false);
+        cardViewMod2.setBackground(ContextCompat.getDrawable(this, R.drawable.mod_lock));
+    }
+
+    public void lockedMod3(){
+        cardViewMod3.setClickable(false);
+        cardViewMod3.setBackground(ContextCompat.getDrawable(this, R.drawable.mod_lock));
     }
 
     //load all data attempts and unlocked modules from web
@@ -259,15 +289,15 @@ public class Quizzes_menu extends AppCompatActivity {
         ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Loading data...");
         progressDialog.show();
-        com.cav.DriverphTruckerlearningPH2020.Database db = new com.cav.DriverphTruckerlearningPH2020.Database(this);
+        Database db = new Database(this);
         db.Open();
-        StringRequest stringRequest = new StringRequest(Request.Method.DEPRECATED_GET_OR_POST,
+        StringRequest stringRequest = new StringRequest(com.android.volley.Request.Method.DEPRECATED_GET_OR_POST,
                 Server_All_Attempts_URL,
-                new Response.Listener<String>() {
+                new com.android.volley.Response.Listener<String>() {
                     @Override
                     public void onResponse(String s) {
                         progressDialog.dismiss();
-                        Toast.makeText(com.cav.DriverphTruckerlearningPH2020.Quizzes_menu.this, "Loading all attempts", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Quizzes_menu.this, "Loading all attempts", Toast.LENGTH_SHORT).show();
                         try {
                             JSONObject jObj = new JSONObject(s);
 
@@ -307,32 +337,32 @@ public class Quizzes_menu extends AppCompatActivity {
                                 String date_taken = menuitemArray.getJSONObject(i).getString("date_taken");
                                 myLatestIsUnlocked = menuitemArray.getJSONObject(i).getString("isUnlocked");
                                 myLatestIsCompleted = menuitemArray.getJSONObject(i).getString("isCompleted");
-                                com.cav.DriverphTruckerlearningPH2020.MyScoresServer mS1 = new com.cav.DriverphTruckerlearningPH2020.MyScoresServer(Integer.parseInt(myLatestUserId), email, Integer.parseInt(score),
+                                MyScoresServer mS1 = new MyScoresServer(Integer.parseInt(myLatestUserId), email, Integer.parseInt(score),
                                         Integer.parseInt(num_items), myLatestChapter, Integer.parseInt(myLatestAttempt), duration,
                                         date_taken, Integer.parseInt(myLatestIsUnlocked), Integer.parseInt(myLatestIsCompleted));
                                 db.addScoresServer(mS1);
                             }
 
-                            Toast.makeText(com.cav.DriverphTruckerlearningPH2020.Quizzes_menu.this, "Fetched from attempts: " + myLatestUserId, Toast.LENGTH_SHORT).show();
-                            Toast.makeText(com.cav.DriverphTruckerlearningPH2020.Quizzes_menu.this, "Latest Chapter: " + myLatestChapter, Toast.LENGTH_SHORT).show();
-                            com.cav.DriverphTruckerlearningPH2020.Dashboard.recentModule.setText(myLatestChapter);
+                            Toast.makeText(Quizzes_menu.this, "Fetched from attempts: " + myLatestUserId, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Quizzes_menu.this, "Latest Chapter: " + myLatestChapter, Toast.LENGTH_SHORT).show();
+                            Dashboard.recentModule.setText(myLatestChapter);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
 
                     }
                 },
-                new Response.ErrorListener() {
+                new com.android.volley.Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
                         progressDialog.dismiss();
-                        Toast.makeText(com.cav.DriverphTruckerlearningPH2020.Quizzes_menu.this, volleyError.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Quizzes_menu.this, volleyError.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                String fetchedChap = com.cav.DriverphTruckerlearningPH2020.Dashboard.recentModule.getText().toString();
+                String fetchedChap = Dashboard.recentModule.getText().toString();
                 params.put("email", dash_email);
                 params.put("chapter", fetchedChap);
                 Log.d("email", dash_email + "");
@@ -344,6 +374,4 @@ public class Quizzes_menu extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
     }
-
-
 }

@@ -1,5 +1,7 @@
 package com.cav.DriverphTruckerlearningPH2020;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -7,8 +9,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 public class ChangeAvatar extends AppCompatActivity {
     public String email, img_num, fname, lname,username, password, id, oldimage;
@@ -40,7 +40,6 @@ public class ChangeAvatar extends AppCompatActivity {
         lname = getIntent().getStringExtra("last_name");
         email = getIntent().getStringExtra("email");
         username = getIntent().getStringExtra("username");
-        password = getIntent().getStringExtra("password");
         img_num = getIntent().getStringExtra("image");
         oldimage = getIntent().getStringExtra("image");
         id = getIntent().getStringExtra("id");
@@ -60,7 +59,7 @@ public class ChangeAvatar extends AppCompatActivity {
 
                 img_num = "1";
 
-                Toast.makeText(com.cav.DriverphTruckerlearningPH2020.ChangeAvatar.this, img_num, Toast.LENGTH_SHORT).show();
+                Toast.makeText(ChangeAvatar.this, img_num, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -76,7 +75,7 @@ public class ChangeAvatar extends AppCompatActivity {
 
                 img_num = "1";
 
-                Toast.makeText(com.cav.DriverphTruckerlearningPH2020.ChangeAvatar.this, img_num, Toast.LENGTH_SHORT).show();
+                Toast.makeText(ChangeAvatar.this, img_num, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -92,7 +91,7 @@ public class ChangeAvatar extends AppCompatActivity {
 
                 img_num = "2";
 
-                Toast.makeText(com.cav.DriverphTruckerlearningPH2020.ChangeAvatar.this, img_num, Toast.LENGTH_SHORT).show();
+                Toast.makeText(ChangeAvatar.this, img_num, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -108,7 +107,7 @@ public class ChangeAvatar extends AppCompatActivity {
 
                 img_num = "3";
 
-                Toast.makeText(com.cav.DriverphTruckerlearningPH2020.ChangeAvatar.this, img_num, Toast.LENGTH_SHORT).show();
+                Toast.makeText(ChangeAvatar.this, img_num, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -124,7 +123,7 @@ public class ChangeAvatar extends AppCompatActivity {
 
                 img_num = "4";
 
-                Toast.makeText(com.cav.DriverphTruckerlearningPH2020.ChangeAvatar.this, img_num, Toast.LENGTH_SHORT).show();
+                Toast.makeText(ChangeAvatar.this, img_num, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -140,7 +139,7 @@ public class ChangeAvatar extends AppCompatActivity {
 
                 img_num = "5";
 
-                Toast.makeText(com.cav.DriverphTruckerlearningPH2020.ChangeAvatar.this, img_num, Toast.LENGTH_SHORT).show();
+                Toast.makeText(ChangeAvatar.this, img_num, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -156,20 +155,19 @@ public class ChangeAvatar extends AppCompatActivity {
 
                 img_num = "6";
 
-                Toast.makeText(com.cav.DriverphTruckerlearningPH2020.ChangeAvatar.this, img_num, Toast.LENGTH_SHORT).show();
+                Toast.makeText(ChangeAvatar.this, img_num, Toast.LENGTH_SHORT).show();
             }
         });
 
         selectbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(com.cav.DriverphTruckerlearningPH2020.ChangeAvatar.this, com.cav.DriverphTruckerlearningPH2020.AccountEdit.class);
+                Intent intent = new Intent(ChangeAvatar.this, AccountEdit.class);
                 Bundle extras = new Bundle();
                 extras.putString("first_name", fname);
                 extras.putString("last_name", lname);
                 extras.putString("email", email);
                 extras.putString("username", username);
-                extras.putString("password",password);
                 extras.putString("image", img_num);
                 extras.putString("id", id);
                 intent.putExtras(extras);
@@ -180,13 +178,12 @@ public class ChangeAvatar extends AppCompatActivity {
         cancelbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(com.cav.DriverphTruckerlearningPH2020.ChangeAvatar.this, com.cav.DriverphTruckerlearningPH2020.AccountEdit.class);
+                Intent intent = new Intent(ChangeAvatar.this, AccountEdit.class);
                 Bundle extras = new Bundle();
                 extras.putString("first_name", fname);
                 extras.putString("last_name", lname);
                 extras.putString("email", email);
                 extras.putString("username", username);
-                extras.putString("password",password);
                 extras.putString("image", oldimage);
                 extras.putString("id", id);
                 intent.putExtras(extras);

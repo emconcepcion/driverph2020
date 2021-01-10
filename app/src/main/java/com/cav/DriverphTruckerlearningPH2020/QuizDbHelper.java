@@ -7,14 +7,14 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Build;
 
-import com.cav.DriverphTruckerlearningPH2020.DbContract.*;
-import com.cav.DriverphTruckerlearningPH2020.QuizContract.*;
+import   com.cav.DriverphTruckerlearningPH2020.DbContract.*;
+import   com.cav.DriverphTruckerlearningPH2020.QuizContract.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.cav.DriverphTruckerlearningPH2020.DbContract.ScoresTable.DATABASE_NAME;
-import static com.cav.DriverphTruckerlearningPH2020.DbContract.ScoresTable.TABLE_NAME_SCORES;
+import static   com.cav.DriverphTruckerlearningPH2020.DbContract.ScoresTable.DATABASE_NAME;
+import static   com.cav.DriverphTruckerlearningPH2020.DbContract.ScoresTable.TABLE_NAME_SCORES;
 
 public class QuizDbHelper extends SQLiteOpenHelper {
 
@@ -75,13 +75,14 @@ public class QuizDbHelper extends SQLiteOpenHelper {
                 ScoresTable.COLUMN_NAME_DATE_TAKEN, ScoresTable.COLUMN_NAME_IS_LOCKED,
                 ScoresTable.COLUMN_NAME_IS_COMPLETED, ScoresTable.SYNC_STATUS};
         String selection = ScoresTable.COLUMN_NAME_USER_ID + " LIKE ?";
-        String[] selection_args = {String.valueOf(com.cav.DriverphTruckerlearningPH2020.Dashboard.thisUserId)};
+        String[] selection_args = {String.valueOf(  Dashboard.thisUserId)};
         return (database.query(ScoresTable.TABLE_NAME_SCORES, projection, selection, selection_args,
                 null, null, null));
     }
 
     public void updateLocalDatabase(int user_id, String email, int score, int num_items, String chap,
-                                    int num_of_attempt, String date_taken, int sync_status,
+                                    int num_of_attempt, String duration, String date_taken,
+                                    int isLocked, int isCompleted, int sync_status,
                                     SQLiteDatabase database) {
         //update syncstatus based on the score
         ContentValues contentValues = new ContentValues();
@@ -92,18 +93,18 @@ public class QuizDbHelper extends SQLiteOpenHelper {
         database.update(ScoresTable.TABLE_NAME_SCORES, contentValues, selection, selection_args);
     }
 
-    public List<com.cav.DriverphTruckerlearningPH2020.Question> getAllQuestions() {
-        List<com.cav.DriverphTruckerlearningPH2020.Question> questionList = new ArrayList<>();
+    public List<  Question> getAllQuestions() {
+        List<  Question> questionList = new ArrayList<>();
         db = getReadableDatabase();
 
-        String getChapter = "\"" + com.cav.DriverphTruckerlearningPH2020.QuizInstructions.chapter + "\"";
+        String getChapter = "\"" +   QuizInstructions.chapter + "\"";
 
         Cursor c = db.rawQuery("SELECT * FROM " + QuestionsTable.TABLE_NAME +
                 " WHERE chapter " + "=" + getChapter, null);
 
         if (c.moveToFirst()) {
             do {
-                com.cav.DriverphTruckerlearningPH2020.Question question = new com.cav.DriverphTruckerlearningPH2020.Question();
+                  Question question = new   Question();
                 question.setQuestion(c.getString(c.getColumnIndex(QuestionsTable.COLUMN_QUESTION)));
                 question.setOption1(c.getString(c.getColumnIndex(QuestionsTable.COLUMN_OPTION1)));
                 question.setOption2(c.getString(c.getColumnIndex(QuestionsTable.COLUMN_OPTION2)));
@@ -111,6 +112,7 @@ public class QuizDbHelper extends SQLiteOpenHelper {
                 question.setOption4(c.getString(c.getColumnIndex(QuestionsTable.COLUMN_OPTION4)));
                 question.setAnswerNr(c.getInt(c.getColumnIndex(QuestionsTable.COLUMN_ANSWER_NR)));
                 question.setChapter(c.getString(c.getColumnIndex(QuestionsTable.COLUMN_CHAPTER)));
+                question.setModuleName(c.getString(c.getColumnIndex(QuestionsTable.COLUMN_MODULE_NAME)));
                 questionList.add(question);
             } while (c.moveToNext());
         }
@@ -119,19 +121,19 @@ public class QuizDbHelper extends SQLiteOpenHelper {
         return questionList;
     }
 
-    public List<com.cav.DriverphTruckerlearningPH2020.MyScoresServer> getAllScores() {
+    public List<MyScoresServer> getAllScores() {
     //    List<Score> scoresList = new ArrayList<>();
-        List<com.cav.DriverphTruckerlearningPH2020.MyScoresServer> myScoresServerList = new ArrayList<>();
+        List<MyScoresServer> myScoresServerList = new ArrayList<>();
         db = getReadableDatabase();
 
-        String user_id = "\"" + com.cav.DriverphTruckerlearningPH2020.Dashboard.user_id + "\"";
+        String user_id = "\"" + Dashboard.user_id + "\"";
 
-        Cursor c = db.rawQuery("SELECT * FROM " + ScoresMySQLTable.TABLE_NAME_SCORES_MYSQL +
+        Cursor c = db.rawQuery("SELECT * FROM " + DbContract.ScoresMySQLTable.TABLE_NAME_SCORES_MYSQL +
                 " WHERE user_id " + "=" + user_id, null);
 
         if (c.moveToFirst()) {
             do {
-                com.cav.DriverphTruckerlearningPH2020.MyScoresServer myScoresServer = new com.cav.DriverphTruckerlearningPH2020.MyScoresServer();
+                  MyScoresServer myScoresServer = new   MyScoresServer();
                 myScoresServer.setUser_id(c.getInt(c.getColumnIndex(ScoresMySQLTable.COLUMN_NAME_USER_ID_MYSQL)));
                 myScoresServer.setEmail(c.getString(c.getColumnIndex(ScoresMySQLTable.COLUMN_NAME_EMAIL_MYSQL)));
                 myScoresServer.setScore(c.getInt(c.getColumnIndex(ScoresMySQLTable.COLUMN_NAME_SCORE_MYSQL)));
@@ -147,31 +149,6 @@ public class QuizDbHelper extends SQLiteOpenHelper {
 
         c.close();
         return myScoresServerList;
-    }
-
-    public Cursor getAttemptFromLocalDatabase(int user_id, String chapter, SQLiteDatabase sqLiteDatabase) {
-
-        //projection are the column names
-        String[] attemptCount = {ScoresTable.COLUMN_NAME_USER_ID, ScoresTable.COLUMN_NAME_NUM_ATTEMPT, ScoresTable.COLUMN_NAME_CHAPTER};
-        String selection = ScoresTable.COLUMN_NAME_USER_ID + " LIKE ? AND " + ScoresTable.COLUMN_NAME_CHAPTER + " LIKE ?";
-        String[] selection_args = {String.valueOf(user_id),chapter};
-        Cursor cursor = sqLiteDatabase.query(ScoresTable.TABLE_NAME_SCORES, attemptCount, selection, selection_args,
-                null, null, null);
-        return cursor;
-    }
-
-    public Cursor getLockedUnlockedFromLocalDatabase(int user_id, String chapter, int isLocked, int isCompleted, SQLiteDatabase sqLiteDatabase) {
-
-        //projection are the column names
-        String[] checkLockUnlock = {ScoresMySQLTable.COLUMN_NAME_USER_ID_MYSQL,
-                ScoresMySQLTable.COLUMN_NAME_CHAPTER_MYSQL,
-                ScoresMySQLTable.COLUMN_NAME_IS_LOCKED_MYSQL,
-                ScoresMySQLTable.COLUMN_NAME_IS_COMPLETED_MYSQL};
-        String selection = ScoresMySQLTable.COLUMN_NAME_USER_ID_MYSQL + " LIKE ? AND " + ScoresMySQLTable.COLUMN_NAME_CHAPTER_MYSQL + " LIKE ?";
-        String[] selection_args = {String.valueOf(user_id), chapter};
-        Cursor cursor = sqLiteDatabase.query(ScoresMySQLTable.TABLE_NAME_SCORES_MYSQL, checkLockUnlock, selection, selection_args,
-                null, null, null);
-        return cursor;
     }
 
 }

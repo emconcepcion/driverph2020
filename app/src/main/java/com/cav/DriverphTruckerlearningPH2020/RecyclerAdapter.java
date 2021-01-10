@@ -15,7 +15,7 @@ import static com.cav.DriverphTruckerlearningPH2020.Constant._1;
 import static com.cav.DriverphTruckerlearningPH2020.Constant._2;
 import static com.cav.DriverphTruckerlearningPH2020.Constant._3;
 
-public class RecyclerAdapter extends RecyclerView.Adapter <com.cav.DriverphTruckerlearningPH2020.RecyclerAdapter.MyViewHolder> {
+public class RecyclerAdapter extends RecyclerView.Adapter <RecyclerAdapter.MyViewHolder> {
 
     public ArrayList<Score> arrayList = new ArrayList<>();
 
@@ -52,7 +52,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter <com.cav.DriverphTruck
         holder.Chapter.setText(chap);
         holder.Attempt.setText("Attempt #:" +arrayList.get(position).getNum_of_attempt());
         int sync_status = arrayList.get(position).getSync_status();
-        if (sync_status == com.cav.DriverphTruckerlearningPH2020.DbContract.SYNC_STATUS_SAVED) {
+        if (sync_status == DbContract.SYNC_STATUS_SAVED) {
             holder.Sync_status.setImageResource(R.drawable.saved);
         }else {
             holder.Sync_status.setImageResource(R.drawable.ic_sync);

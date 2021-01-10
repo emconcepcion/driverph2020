@@ -1,7 +1,12 @@
 package com.cav.DriverphTruckerlearningPH2020;
 
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -9,21 +14,23 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
 
 import org.json.JSONObject;
 
 import java.util.HashMap;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class MyAccount extends AppCompatActivity {
     FloatingActionButton fabedit;
     public ImageView avatarimage;
-    public TextView tv_fullname, tv_email, tv_password;
-    public static TextView tv_username;
+    public TextView tv_fullname, tv_email, tv_username, changepassword;
     public String email, img_num, fname, lname, id;
+    ProgressDialog pdLoading;
+    SharedPreferences sharedPreferences;
+    //    private String retrievedatasUrl="https://driver-ph.000webhostapp.com/driverphtest/retrievemyaccount.php";
     private String retrievedatasUrl="https://phportal.net/driverph/retrievemyaccount.php";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,11 +43,16 @@ public class MyAccount extends AppCompatActivity {
         tv_fullname = findViewById(R.id.tv_fullname);
         tv_email = findViewById(R.id.tv_email);
         tv_username = findViewById(R.id.tv_username);
-        tv_password = findViewById(R.id.tv_password);
+        changepassword = findViewById(R.id.changepassword);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
+        pdLoading = new ProgressDialog(MyAccount.this);
+        pdLoading.setMessage("\tLoading...");
+        pdLoading.setCancelable(false);
+        pdLoading.show();
+        pdLoading.setMax(3000000);
         email = getIntent().getStringExtra("email");
         myaccountdata(email);
 
@@ -48,15 +60,25 @@ public class MyAccount extends AppCompatActivity {
         fabedit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(com.cav.DriverphTruckerlearningPH2020.MyAccount.this, AccountEdit.class);
+                Intent intent = new Intent(MyAccount.this, AccountEdit.class);
                 Bundle extras = new Bundle();
                 extras.putString("first_name", fname);
                 extras.putString("last_name", lname);
                 extras.putString("email", email);
                 extras.putString("username", tv_username.getText().toString());
-                extras.putString("password", tv_password.getText().toString());
                 extras.putString("image", img_num);
                 extras.putString("id", id);
+                intent.putExtras(extras);
+                startActivity(intent);
+            }
+        });
+
+        changepassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MyAccount.this, ChangePassword.class);
+                Bundle extras = new Bundle();
+                extras.putString("email", email);
                 intent.putExtras(extras);
                 startActivity(intent);
             }
@@ -101,7 +123,7 @@ public class MyAccount extends AppCompatActivity {
                         tv_fullname.setText(obj.getString("first_name") + " " + obj.getString("last_name"));
                         tv_email.setText(obj.getString("email"));
                         tv_username.setText(obj.getString("username"));
-                        tv_password.setText(obj.getString("password"));
+//                        tv_password.setText(obj.getString("password"));
                         img_num = obj.getString("image");
                         id = obj.getString("id");
 
@@ -118,9 +140,11 @@ public class MyAccount extends AppCompatActivity {
                         }else if(img_num.equals("6")){
                             avatarimage.setImageDrawable(getResources().getDrawable(R.drawable.avatar6));
                         }
+
+                        pdLoading.dismiss();
                     }
                 } catch (Exception e ){
-                    Toast.makeText(com.cav.DriverphTruckerlearningPH2020.MyAccount.this, "Exception: "+e, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MyAccount.this, "Exception: "+e, Toast.LENGTH_SHORT).show();
                 }
             }
         }

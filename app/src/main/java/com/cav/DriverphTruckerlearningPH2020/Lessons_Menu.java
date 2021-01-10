@@ -1,5 +1,9 @@
 package com.cav.DriverphTruckerlearningPH2020;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -8,12 +12,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-
+import static com.cav.DriverphTruckerlearningPH2020.Basic_Content.currentLesson;
+import static com.cav.DriverphTruckerlearningPH2020.Basic_Content.moduleName;
+import static com.cav.DriverphTruckerlearningPH2020.Constant.MODULE_ID_1;
+import static com.cav.DriverphTruckerlearningPH2020.Constant.MODULE_ID_2;
+import static com.cav.DriverphTruckerlearningPH2020.Constant.MODULE_ID_3;
+import static com.cav.DriverphTruckerlearningPH2020.Constant.SP_LESSONID;
 import static com.cav.DriverphTruckerlearningPH2020.Constant._1;
 import static com.cav.DriverphTruckerlearningPH2020.Constant._2;
 import static com.cav.DriverphTruckerlearningPH2020.Constant._3;
+import static com.cav.DriverphTruckerlearningPH2020.Dashboard.dashboard_email;
 
 public class Lessons_Menu extends AppCompatActivity {
 
@@ -24,6 +32,8 @@ public class Lessons_Menu extends AppCompatActivity {
     SharedPreferences sp;
     public static TextView myEmailLesson;
     public static boolean isFromLessonsMenu;
+    public static String compe, lessonIdServer, lessonTitleServer,
+            moduleIdServer, moduleNameServer, mod;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,15 +44,20 @@ public class Lessons_Menu extends AppCompatActivity {
         cardViewMod1 = findViewById(R.id.cardView_basic_competencies);
         cardViewMod2 = findViewById(R.id.cardView_common_competencies);
         cardViewMod3 = findViewById(R.id.cardView_core_competencies);
-        cardViewMod1.setClickable(true);
 
         Button btnEvaluation = findViewById(R.id.button5);
         myEmailLesson = findViewById(R.id.email_lesson);
-//        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
-//        String emailLesson = sharedPreferences.getString(EMAIL, "");
-        myEmailLesson.setText(com.cav.DriverphTruckerlearningPH2020.Dashboard.dashboard_email);
-        com.cav.DriverphTruckerlearningPH2020.Quizzes_menu.isFromQuizMenu = false;
+        myEmailLesson.setText(Dashboard.dashboard_email);
+        Quizzes_menu.isFromQuizMenu = false;
         isFromLessonsMenu=true;
+
+        SharedPreferences sharedPreferences = getSharedPreferences(SP_LESSONID, MODE_PRIVATE);
+        lessonIdServer = sharedPreferences.getString("lessonId", "");
+        lessonTitleServer = sharedPreferences.getString("lessonTitle", "");
+        moduleIdServer = sharedPreferences.getString("moduleId", "");
+        moduleNameServer = sharedPreferences.getString("moduleName", "");
+
+        initialLock();
 
         cardViewMod1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,14 +68,11 @@ public class Lessons_Menu extends AppCompatActivity {
                 SharedPreferences.Editor editor = sp.edit();
                 editor.putString("chapter", chapTest);
                 editor.apply();
-                startActivity(new Intent(com.cav.DriverphTruckerlearningPH2020.Lessons_Menu.this, com.cav.DriverphTruckerlearningPH2020.Lessons_Basic_Content.class));
+                startActivity(new Intent(Lessons_Menu.this,Lessons_Basic_Content.class));
 
-                String compe = "1";
-                Intent intent = new Intent(com.cav.DriverphTruckerlearningPH2020.Lessons_Menu.this, com.cav.DriverphTruckerlearningPH2020.Basic_Content.class);
-                Bundle extras = new Bundle();
-                extras.putString("module", compe);
-                intent.putExtras(extras);
-                startActivity(intent);
+                compe = MODULE_ID_1;
+                mod = _1;
+                goToModuleList();
             }
         });
 
@@ -74,7 +86,11 @@ public class Lessons_Menu extends AppCompatActivity {
                 SharedPreferences.Editor editor = sp.edit();
                 editor.putString("chapter", chapTest);
                 editor.apply();
-                startActivity(new Intent(com.cav.DriverphTruckerlearningPH2020.Lessons_Menu.this, com.cav.DriverphTruckerlearningPH2020.Lessons_Basic_Content.class));
+                startActivity(new Intent(Lessons_Menu.this,Lessons_Basic_Content.class));
+
+                compe = MODULE_ID_2;
+                mod = _2;
+                goToModuleList();
             }
         });
 
@@ -87,21 +103,52 @@ public class Lessons_Menu extends AppCompatActivity {
                 SharedPreferences.Editor editor = sp.edit();
                 editor.putString("chapter", chapTest);
                 editor.apply();
-                startActivity(new Intent(com.cav.DriverphTruckerlearningPH2020.Lessons_Menu.this, com.cav.DriverphTruckerlearningPH2020.Lessons_Basic_Content.class));
+                startActivity(new Intent(Lessons_Menu.this,Lessons_Basic_Content.class));
+
+                compe = MODULE_ID_3;
+                mod = _3;
+                goToModuleList();
             }
         });
 
         btnEvaluation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(com.cav.DriverphTruckerlearningPH2020.Lessons_Menu.this, com.cav.DriverphTruckerlearningPH2020.Evaluation_Menu.class));
+                startActivity(new Intent(Lessons_Menu.this,Evaluation_Menu.class));
             }
         });
     }
 
+    public void initialLock(){
+        cardViewMod1.setClickable(true);
+        lockedMod2();
+        lockedMod3();
+    }
+
+    public void lockedMod2(){
+        cardViewMod2.setClickable(false);
+        cardViewMod2.setBackground(ContextCompat.getDrawable(this, R.drawable.mod_lock));
+    }
+
+    public void lockedMod3(){
+        cardViewMod3.setClickable(false);
+        cardViewMod3.setBackground(ContextCompat.getDrawable(this, R.drawable.mod_lock));
+    }
+
+    public void goToModuleList(){
+        Intent intent = new Intent(Lessons_Menu.this, Basic_Content.class);
+        Bundle extras = new Bundle();
+        extras.putString("module", compe);
+        extras.putString("moduleName", mod);
+        intent.putExtras(extras);
+        startActivity(intent);
+    }
+
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(com.cav.DriverphTruckerlearningPH2020.Lessons_Menu.this, com.cav.DriverphTruckerlearningPH2020.Dashboard.class);
+        Dashboard.activeLesson.setText(currentLesson);
+        Dashboard.activeModule.setText(moduleName);
+        Intent intent = new Intent(Lessons_Menu.this, Dashboard.class);
         Bundle extras = new Bundle();
         extras.putString("email", myEmailLesson.getText().toString());
         intent.putExtras(extras);

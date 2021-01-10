@@ -204,7 +204,9 @@ public class QuizInstructions extends AppCompatActivity {
                 String option4 = menuitemArray.getJSONObject(i).getString("choiceD");
                 String answer_nr = menuitemArray.getJSONObject(i).getString("correctAnswer");
                 String chapter = menuitemArray.getJSONObject(i).getString("module");
-                com.cav.DriverphTruckerlearningPH2020.Question q1 = new com.cav.DriverphTruckerlearningPH2020.Question(question, option1, option2, option3, option4, Integer.parseInt(answer_nr), chapter);
+                String moduleName = menuitemArray.getJSONObject(i).getString("moduleName");
+                Question q1 = new Question(question, option1, option2, option3, option4,
+                        Integer.parseInt(answer_nr), chapter, moduleName);
                 db.addQuestion(q1);
             }
 

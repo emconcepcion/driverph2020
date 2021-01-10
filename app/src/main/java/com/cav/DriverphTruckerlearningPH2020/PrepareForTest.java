@@ -19,18 +19,20 @@ public class PrepareForTest extends AppCompatActivity {
 
     public static String chapter;
     Button buttonStartQuiz, back_btn;
-    private TextView textViewChapter;
+    private TextView textViewChapter, secondChance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_prepare_for_test);
 
-        com.cav.DriverphTruckerlearningPH2020.Dashboard.getmInstanceActivity().loadDataAllAttemptsAndLevels();
+        Dashboard.getmInstanceActivity().loadDataAllAttemptsAndLevels();
 
         buttonStartQuiz = findViewById(R.id.btn_start_myTest);
         back_btn = findViewById(R.id.btn_back_to_quizMenu);
         textViewChapter = findViewById(R.id.textview_module_title);
+        secondChance = findViewById(R.id.textview_instruct_msg1);
+        secondChance.setText("We believe in second chances, too.\nTake a deep breath and take the test again.");
 
         if (Lessons_Menu.isFromLessonsMenu) {
             SharedPreferences sp1 = getApplicationContext()
@@ -59,26 +61,26 @@ public class PrepareForTest extends AppCompatActivity {
     }
 
     private void backToQuizMenu() {
-        startActivity(new Intent(com.cav.DriverphTruckerlearningPH2020.PrepareForTest.this, com.cav.DriverphTruckerlearningPH2020.Dashboard.class));
+        startActivity(new Intent(PrepareForTest.this, Dashboard.class));
     }
 
     private void startQuiz() {
         String chapTitle = textViewChapter.getText().toString();
         if (checkNetworkConnection()) {
-            Intent i = new Intent(com.cav.DriverphTruckerlearningPH2020.PrepareForTest.this, QuizActivity.class);
+            Intent i = new Intent(PrepareForTest.this, QuizActivity.class);
             Bundle b = new Bundle();
             b.putString("chapter", chapTitle);
-            com.cav.DriverphTruckerlearningPH2020.Dashboard.recentModule.setText(chapTitle);
+            Dashboard.recentModule.setText(chapTitle);
             i.putExtras(b);
             startActivity(i);
         } else {
-            AlertDialog alertDialog = new AlertDialog.Builder(com.cav.DriverphTruckerlearningPH2020.PrepareForTest.this).create();
+            AlertDialog alertDialog = new AlertDialog.Builder(PrepareForTest.this).create();
             alertDialog.setTitle("Log in to Continue");
             alertDialog.setMessage("Please connect to the internet and log in before clicking \"Retake the Test.\"");
             alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
-                            startActivity(new Intent(com.cav.DriverphTruckerlearningPH2020.PrepareForTest.this, com.cav.DriverphTruckerlearningPH2020.Login.class));
+                            startActivity(new Intent(PrepareForTest.this, Login.class));
                             dialog.dismiss();
                         }
                     });

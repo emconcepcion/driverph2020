@@ -1,6 +1,11 @@
 package com.cav.DriverphTruckerlearningPH2020;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.annotation.SuppressLint;
+import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -12,15 +17,17 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkError;
@@ -37,10 +44,16 @@ import com.muddzdev.styleabletoast.StyleableToast;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import static com.cav.DriverphTruckerlearningPH2020.Dashboard.Uid_PREFS;
 
@@ -103,12 +116,13 @@ public class QuizStatusList extends AppCompatActivity {
             }
         };
 
+        submitScore();
+
         refresh_list.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View v) {
                 if (QuizActivity.endedAttempt){ //|| (QuizActivity.endedAttempt)
-                    submitScore();
                     btn_view_result.setVisibility(View.GONE);
                     refresh_list.setVisibility(View.GONE);
                     Button backToQMenu = findViewById(R.id.btn_backToQMenu);
@@ -116,12 +130,11 @@ public class QuizStatusList extends AppCompatActivity {
                     backToQMenu.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            startActivity(new Intent(com.cav.DriverphTruckerlearningPH2020.QuizStatusList.this, Dashboard.class));
+                            startActivity(new Intent(QuizStatusList.this, Dashboard.class));
 
                         }
                     });
                 }else{
-                    submitScore();
                     submittedScore = true;
                     refresh_list.setVisibility(View.INVISIBLE);
                     btn_view_result.setVisibility(View.VISIBLE);
@@ -175,13 +188,13 @@ public class QuizStatusList extends AppCompatActivity {
 
         //user must log in to change its user name from guest to email address for saving
         if (emailA.equals("guest_user")){
-            AlertDialog alertDialog = new AlertDialog.Builder(com.cav.DriverphTruckerlearningPH2020.QuizStatusList.this).create();
+            AlertDialog alertDialog = new AlertDialog.Builder(QuizStatusList.this).create();
             alertDialog.setTitle("Log in to Continue");
             alertDialog.setMessage("Please connect to the internet and log in before clicking \"Start the quiz\"");
             alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
-                            startActivity(new Intent(com.cav.DriverphTruckerlearningPH2020.QuizStatusList.this, com.cav.DriverphTruckerlearningPH2020.Login.class));
+                            startActivity(new Intent(QuizStatusList.this, Login.class));
                             dialog.dismiss();
                         }
                     });
@@ -251,12 +264,12 @@ public class QuizStatusList extends AppCompatActivity {
                                 if (Response.equals("OK")) {
                                     saveToLocalStorage(userId, email, score, num_items, chap, num_of_attempt, duration,
                                             date_taken, isLocked, isCompleted, DbContract.SYNC_STATUS_SAVED);
-                                    StyleableToast.makeText(getApplicationContext(), com.cav.DriverphTruckerlearningPH2020.QuizStatusList.this.getString(R.string.synced),
+                                    StyleableToast.makeText(getApplicationContext(), QuizStatusList.this.getString(R.string.synced),
                                             Toast.LENGTH_LONG, R.style.toastStyle).show();
                                 } else { //for server error, unable to save, sav storage to local
                                     saveToLocalStorage(userId, email, score, num_items, chap, num_of_attempt, duration,
                                             date_taken, isLocked, isCompleted, DbContract.SYNC_STATUS_FAILED);
-                                    StyleableToast.makeText(getApplicationContext(), com.cav.DriverphTruckerlearningPH2020.QuizStatusList.this.getString(R.string.sync_error_json),
+                                    StyleableToast.makeText(getApplicationContext(), QuizStatusList.this.getString(R.string.sync_error_json),
                                             Toast.LENGTH_LONG, R.style.toastStyle).show();
                                 }
                             } catch (JSONException e) {
@@ -268,22 +281,22 @@ public class QuizStatusList extends AppCompatActivity {
                 public void onErrorResponse(VolleyError error) {
                     saveToLocalStorage(userId, email, score, num_items, chap, num_of_attempt, duration,
                             date_taken, isLocked, isCompleted, DbContract.SYNC_STATUS_FAILED);
-                    StyleableToast.makeText(getApplicationContext(), com.cav.DriverphTruckerlearningPH2020.QuizStatusList.this.getString(R.string.sync_error),
+                    StyleableToast.makeText(getApplicationContext(), QuizStatusList.this.getString(R.string.sync_error),
                             Toast.LENGTH_LONG, R.style.toastStyle).show();
 
                     if (error instanceof TimeoutError) {
-                        Toast.makeText(com.cav.DriverphTruckerlearningPH2020.QuizStatusList.this, "Timeout error", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(QuizStatusList.this, "Timeout error", Toast.LENGTH_SHORT).show();
                     } else if (error instanceof NoConnectionError) {
                         checkNetworkConnection();
-                        Toast.makeText(com.cav.DriverphTruckerlearningPH2020.QuizStatusList.this, "Network error", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(QuizStatusList.this, "Network error", Toast.LENGTH_SHORT).show();
                     } else if (error instanceof AuthFailureError) {
-                        Toast.makeText(com.cav.DriverphTruckerlearningPH2020.QuizStatusList.this, "Auth error", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(QuizStatusList.this, "Auth error", Toast.LENGTH_SHORT).show();
                     } else if (error instanceof ServerError) {
-                        Toast.makeText(com.cav.DriverphTruckerlearningPH2020.QuizStatusList.this, "Server error", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(QuizStatusList.this, "Server error", Toast.LENGTH_SHORT).show();
                     } else if (error instanceof NetworkError) {
-                        Toast.makeText(com.cav.DriverphTruckerlearningPH2020.QuizStatusList.this, "Network error", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(QuizStatusList.this, "Network error", Toast.LENGTH_SHORT).show();
                     } else if (error instanceof ParseError) {
-                        Toast.makeText(com.cav.DriverphTruckerlearningPH2020.QuizStatusList.this, "Parse error", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(QuizStatusList.this, "Parse error", Toast.LENGTH_SHORT).show();
                     }
                 }
             }) {
@@ -307,23 +320,23 @@ public class QuizStatusList extends AppCompatActivity {
                     return params;
                 }
             };
-            MySingleton.getInstance(com.cav.DriverphTruckerlearningPH2020.QuizStatusList.this).addToRequestQueue(stringRequest);
+            MySingleton.getInstance(QuizStatusList.this).addToRequestQueue(stringRequest);
             saveToLocalStorage(userId, email, score, num_items, chap, num_of_attempt, duration,
                     date_taken, isLocked, isCompleted, DbContract.SYNC_STATUS_SAVED);
-            StyleableToast.makeText(getApplicationContext(), com.cav.DriverphTruckerlearningPH2020.QuizStatusList.this.getString(R.string.saved),
+            StyleableToast.makeText(getApplicationContext(), QuizStatusList.this.getString(R.string.saved),
                     Toast.LENGTH_LONG, R.style.toastStyle).show();
         } else { // no internet, save to SQLite
             saveToLocalStorage(userId, email, score, num_items, chap, num_of_attempt, duration,
                     date_taken, isLocked, isCompleted, DbContract.SYNC_STATUS_FAILED);
-            StyleableToast.makeText(getApplicationContext(), com.cav.DriverphTruckerlearningPH2020.QuizStatusList.this.getString(R.string.connect_to_net_to_save),
+            StyleableToast.makeText(getApplicationContext(), QuizStatusList.this.getString(R.string.connect_to_net_to_save),
                     Toast.LENGTH_LONG, R.style.toastStyle).show();
         }
 
     }
 
     public void saveAllAttemptsToAppServer(int userId, String email, int score, int num_items, String chap,
-                                int num_of_attempt, String duration, String date_taken,
-                                int isLocked, int isCompleted) {
+                                           int num_of_attempt, String duration, String date_taken,
+                                           int isLocked, int isCompleted) {
         if (checkNetworkConnection()) {
             StringRequest stringRequest = new StringRequest(Request.Method.POST,
                     DbContract.ScoresTable.SERVER_ALL_ATTEMPTS_URL,
@@ -339,12 +352,12 @@ public class QuizStatusList extends AppCompatActivity {
                                 if (Response.equals("OK")) {
                                     saveToLocalStorage(userId, email, score, num_items, chap, num_of_attempt, duration,
                                             date_taken, isLocked, isCompleted, DbContract.SYNC_STATUS_SAVED);
-                                    StyleableToast.makeText(getApplicationContext(), com.cav.DriverphTruckerlearningPH2020.QuizStatusList.this.getString(R.string.synced),
+                                    StyleableToast.makeText(getApplicationContext(), QuizStatusList.this.getString(R.string.synced),
                                             Toast.LENGTH_LONG, R.style.toastStyle).show();
                                 } else { //for server error, unable to save, will be handled by saveToAppServer
                                     saveToLocalStorage(userId, email, score, num_items, chap, num_of_attempt, duration,
                                             date_taken, isLocked, isCompleted, DbContract.SYNC_STATUS_FAILED);
-                                    StyleableToast.makeText(getApplicationContext(), com.cav.DriverphTruckerlearningPH2020.QuizStatusList.this.getString(R.string.sync_error_json),
+                                    StyleableToast.makeText(getApplicationContext(), QuizStatusList.this.getString(R.string.sync_error_json),
                                             Toast.LENGTH_LONG, R.style.toastStyle).show();
                                 }
                             } catch (JSONException e) {
@@ -357,22 +370,22 @@ public class QuizStatusList extends AppCompatActivity {
 
                     saveToLocalStorage(userId, email, score, num_items, chap, num_of_attempt, duration,
                             date_taken, isLocked, isCompleted, DbContract.SYNC_STATUS_FAILED);
-                    StyleableToast.makeText(getApplicationContext(), com.cav.DriverphTruckerlearningPH2020.QuizStatusList.this.getString(R.string.sync_error),
+                    StyleableToast.makeText(getApplicationContext(), QuizStatusList.this.getString(R.string.sync_error),
                             Toast.LENGTH_LONG, R.style.toastStyle).show();
 
                     if (error instanceof TimeoutError) {
-                        Toast.makeText(com.cav.DriverphTruckerlearningPH2020.QuizStatusList.this, "Timeout error", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(QuizStatusList.this, "Timeout error", Toast.LENGTH_SHORT).show();
                     } else if (error instanceof NoConnectionError) {
                         checkNetworkConnection();
-                        Toast.makeText(com.cav.DriverphTruckerlearningPH2020.QuizStatusList.this, "Network error", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(QuizStatusList.this, "Network error", Toast.LENGTH_SHORT).show();
                     } else if (error instanceof AuthFailureError) {
-                        Toast.makeText(com.cav.DriverphTruckerlearningPH2020.QuizStatusList.this, "Auth error", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(QuizStatusList.this, "Auth error", Toast.LENGTH_SHORT).show();
                     } else if (error instanceof ServerError) {
-                        Toast.makeText(com.cav.DriverphTruckerlearningPH2020.QuizStatusList.this, "Server error", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(QuizStatusList.this, "Server error", Toast.LENGTH_SHORT).show();
                     } else if (error instanceof NetworkError) {
-                        Toast.makeText(com.cav.DriverphTruckerlearningPH2020.QuizStatusList.this, "Network error", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(QuizStatusList.this, "Network error", Toast.LENGTH_SHORT).show();
                     } else if (error instanceof ParseError) {
-                        Toast.makeText(com.cav.DriverphTruckerlearningPH2020.QuizStatusList.this, "Parse error", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(QuizStatusList.this, "Parse error", Toast.LENGTH_SHORT).show();
                     }
                 }
             }) {
@@ -396,7 +409,7 @@ public class QuizStatusList extends AppCompatActivity {
                     return params;
                 }
             };
-            MySingleton.getInstance(com.cav.DriverphTruckerlearningPH2020.QuizStatusList.this).addToRequestQueue(stringRequest);
+            MySingleton.getInstance(QuizStatusList.this).addToRequestQueue(stringRequest);
             Toast.makeText(this, "Saved to all attempts db.", Toast.LENGTH_SHORT).show();
         }
 
@@ -422,7 +435,7 @@ public class QuizStatusList extends AppCompatActivity {
     public boolean checkNetworkConnection() {
         ConnectivityManager connectivityManager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
-        StyleableToast.makeText(getApplicationContext(), com.cav.DriverphTruckerlearningPH2020.QuizStatusList.this.getString(R.string.check_net),
+        StyleableToast.makeText(getApplicationContext(), QuizStatusList.this.getString(R.string.check_net),
                 Toast.LENGTH_LONG, R.style.toastStyle).show();
         return (networkInfo != null && networkInfo.isConnected());
     }
@@ -430,8 +443,8 @@ public class QuizStatusList extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-            registerReceiver(new NetworkMonitor(), new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
-            registerReceiver(broadcastReceiver, new IntentFilter(DbContract.ScoresTable.UI_UPDATE_BROADCAST));
+        registerReceiver(new NetworkMonitor(), new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
+        registerReceiver(broadcastReceiver, new IntentFilter(DbContract.ScoresTable.UI_UPDATE_BROADCAST));
     }
 
     @Override
@@ -453,7 +466,7 @@ public class QuizStatusList extends AppCompatActivity {
         String email = bundle.getString("myEmail");
         int userId = bundle.getInt("myUserId");
 
-        Intent intent = new Intent(com.cav.DriverphTruckerlearningPH2020.QuizStatusList.this, QuizResults.class);
+        Intent intent = new Intent(QuizStatusList.this, QuizResults.class);
         intent.putStringArrayListExtra("askedQuestions", arrayList);
         intent.putExtra("score", score);
         intent.putExtra("items", items);
@@ -468,11 +481,11 @@ public class QuizStatusList extends AppCompatActivity {
     @SuppressLint("SetTextI18n")
     @Override
     public void onBackPressed() { {
-            TextView backAgain = findViewById(R.id.need_refresh);
-            backAgain.setVisibility(View.VISIBLE);
-            backAgain.setText("Please press the button to proceed.");
+        TextView backAgain = findViewById(R.id.need_refresh);
+        backAgain.setVisibility(View.VISIBLE);
+        backAgain.setText("Please press the button to proceed.");
 //            finish();
-        }
+    }
 
     }
 }

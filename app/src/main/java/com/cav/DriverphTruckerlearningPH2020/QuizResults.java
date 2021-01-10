@@ -48,7 +48,6 @@ public class QuizResults extends AppCompatActivity {
     ListView listView;
     TextView score_result, chapter_name;
     Button btn_willRetake, btn_willReview, btn_willUnlock;
-
     public static boolean unlocked;
     public static boolean isRetake;
     TextView myEmailResult, myUserId;
@@ -60,12 +59,8 @@ public class QuizResults extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz_results);
 
-        com.cav.DriverphTruckerlearningPH2020.Dashboard.getmInstanceActivity().loadDataAllAttemptsAndLevels();
+        Dashboard.getmInstanceActivity().loadDataAllAttemptsAndLevels();
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
         btn_willRetake = findViewById(R.id.btn_retake);
         btn_willReview = findViewById(R.id.btn_review);
         btn_willUnlock = findViewById(R.id.btn_unlock);
@@ -139,7 +134,7 @@ public class QuizResults extends AppCompatActivity {
         switch (unlockNextModule) {
             case MODULE_ID_1:
                 //module 1 is active and need to unlock mod2
-                com.cav.DriverphTruckerlearningPH2020.Dashboard.recentModule.setText(MODULE_ID_2);
+                Dashboard.recentModule.setText(MODULE_ID_2);
                 UNLOCK_MOD2 = txt_score_result;
                 if (UNLOCK_MOD2 >= (items_test * 0.8)) {
                     updateUnlockedModuleToServer(thisUserId, MODULE_ID_1, 0, 1);
@@ -149,7 +144,7 @@ public class QuizResults extends AppCompatActivity {
                 break;
             case MODULE_ID_2:
                 // module 2 is active and need to unlock mod3
-                com.cav.DriverphTruckerlearningPH2020.Dashboard.recentModule.setText(MODULE_ID_3);
+                Dashboard.recentModule.setText(MODULE_ID_3);
                 UNLOCK_MOD3 = txt_score_result;
                 if (UNLOCK_MOD3 >= (items_test * 0.8)) {
                     updateUnlockedModuleToServer(thisUserId, MODULE_ID_2, 0, 1);
@@ -159,7 +154,7 @@ public class QuizResults extends AppCompatActivity {
                 break;
             case MODULE_ID_3:
                 // module 3 is active and need to lock all
-                com.cav.DriverphTruckerlearningPH2020.Dashboard.recentModule.setText(MODULE_ID_3);
+                Dashboard.recentModule.setText(MODULE_ID_3);
                 UNLOCK_MOD3 = txt_score_result;
                 if (UNLOCK_MOD3 >= (items_test * 0.8)) {
                     updateUnlockedModuleToServer(thisUserId, MODULE_ID_3, 0, 1);
@@ -168,11 +163,11 @@ public class QuizResults extends AppCompatActivity {
                 }
                 break;
         }
-        Intent intent = new Intent(com.cav.DriverphTruckerlearningPH2020.QuizResults.this, Lessons_Menu.class);
+        Intent intent = new Intent(QuizResults.this, Lessons_Menu.class);
         Bundle bundle = new Bundle();
-        bundle.putInt("user_idFromServer", Integer.parseInt(com.cav.DriverphTruckerlearningPH2020.Dashboard.myLatestUserId));
-        bundle.putInt("user_idFromDashboard", com.cav.DriverphTruckerlearningPH2020.Dashboard.thisUserId);
-        bundle.putString("myLatestChapter", com.cav.DriverphTruckerlearningPH2020.Dashboard.recentModule.getText().toString());
+        bundle.putInt("user_idFromServer", Integer.parseInt(Dashboard.myLatestUserId));
+        bundle.putInt("user_idFromDashboard", Dashboard.thisUserId);
+        bundle.putString("myLatestChapter", Dashboard.recentModule.getText().toString());
         intent.putExtras(bundle);
         startActivity(intent);
 
@@ -183,19 +178,19 @@ public class QuizResults extends AppCompatActivity {
     }
 
     public void review() {
-        startActivity(new Intent(com.cav.DriverphTruckerlearningPH2020.QuizResults.this, Lessons_Menu.class));
+        startActivity(new Intent(QuizResults.this, Lessons_Menu.class));
     }
 
     public void retake() {
         isRetake = true;
-        Intent resultIntent = new Intent(com.cav.DriverphTruckerlearningPH2020.QuizResults.this, PrepareForTest.class);
+        Intent resultIntent = new Intent(QuizResults.this, PrepareForTest.class);
         startActivity(resultIntent);
     }
 
     public void updateUnlockedModuleToServer(int userId, String chap, int isUnLocked, int isCompleted) {
         if (checkNetworkConnection()) {
             StringRequest stringRequest = new StringRequest(Request.Method.POST,
-                    com.cav.DriverphTruckerlearningPH2020.DbContract.ScoresTable.SERVER_UPDATE_PROGRESS,
+                    DbContract.ScoresTable.SERVER_UPDATE_PROGRESS,
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
@@ -216,18 +211,18 @@ public class QuizResults extends AppCompatActivity {
                 public void onErrorResponse(VolleyError error) {
 
                     if (error instanceof TimeoutError) {
-                        Toast.makeText(com.cav.DriverphTruckerlearningPH2020.QuizResults.this, "Timeout error", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(QuizResults.this, "Timeout error", Toast.LENGTH_SHORT).show();
                     } else if (error instanceof NoConnectionError) {
                         checkNetworkConnection();
-                        Toast.makeText(com.cav.DriverphTruckerlearningPH2020.QuizResults.this, "Network error", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(QuizResults.this, "Network error", Toast.LENGTH_SHORT).show();
                     } else if (error instanceof AuthFailureError) {
-                        Toast.makeText(com.cav.DriverphTruckerlearningPH2020.QuizResults.this, "Auth error", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(QuizResults.this, "Auth error", Toast.LENGTH_SHORT).show();
                     } else if (error instanceof ServerError) {
-                        Toast.makeText(com.cav.DriverphTruckerlearningPH2020.QuizResults.this, "Server error", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(QuizResults.this, "Server error", Toast.LENGTH_SHORT).show();
                     } else if (error instanceof NetworkError) {
-                        Toast.makeText(com.cav.DriverphTruckerlearningPH2020.QuizResults.this, "Network error", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(QuizResults.this, "Network error", Toast.LENGTH_SHORT).show();
                     } else if (error instanceof ParseError) {
-                        Toast.makeText(com.cav.DriverphTruckerlearningPH2020.QuizResults.this, "Parse error", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(QuizResults.this, "Parse error", Toast.LENGTH_SHORT).show();
                     }
                 }
             }) {
@@ -235,14 +230,14 @@ public class QuizResults extends AppCompatActivity {
                 @Override
                 protected Map<String, String> getParams() throws AuthFailureError {
                     Map<String, String> params = new HashMap<>();
-                    params.put("email", com.cav.DriverphTruckerlearningPH2020.Dashboard.dashboard_email);
+                    params.put("email", Dashboard.dashboard_email);
                     params.put("chapter", chap);
                     params.put("isLocked", String.valueOf(isUnLocked));
                     params.put("isCompleted", String.valueOf(isCompleted));
                     return params;
                 }
             };
-            MySingleton.getInstance(com.cav.DriverphTruckerlearningPH2020.QuizResults.this).addToRequestQueue(stringRequest);
+            MySingleton.getInstance(QuizResults.this).addToRequestQueue(stringRequest);
             Toast.makeText(this, "Updated unlocked modules.", Toast.LENGTH_SHORT).show();
         }
     }

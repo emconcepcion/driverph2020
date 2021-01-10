@@ -14,8 +14,6 @@
     <string name="pass">Pass the quiz and unlock the next lesson.</string>
     <string name="time_limit">Time limit: 3 minutes</string>
     <string name="questions_5">Questions: 5</string>
-    <string name="prepForTest">We believe in second chances, too.
-        Take a deep breath and take the test again.</string>
     <string name="read_questions">Read each question carefully. Choose the best answer and click NEXT once
         you are ready for the next question. You cannot go back to the previous question items to change your answers.</string>
     <string name="start_quiz">Start the test</string>
@@ -123,5 +121,6 @@
     <string name="alt311">ALT311204 Performance Job Estimate</string>
     <string name="reload_this_page">Please connect to the internet to save your scores.\nOnce done, reload this page.</string>
     <string name="click_refresh_list_to_proceed">Click Refresh list to proceed.</string>
+    <string name="prepForTest">We believe in second chances, too. Take a deep breath and take the test again.</string>
 
 </resources>

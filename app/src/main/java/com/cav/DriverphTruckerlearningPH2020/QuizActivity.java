@@ -40,7 +40,7 @@ import static com.cav.DriverphTruckerlearningPH2020.Dashboard.Uid_PREFS;
 
 public class QuizActivity extends AppCompatActivity {
 
-    public static TextView textViewChapter;
+    public static TextView textViewChapter, textViewModuleName;
     private TextView textViewQuestion;
     private TextView textViewScore;
     public static TextView textViewEmail;
@@ -99,6 +99,7 @@ public class QuizActivity extends AppCompatActivity {
         rb3 = findViewById(R.id.radio_btn_option3);
         rb4 = findViewById(R.id.radio_btn_option4);
         textViewChapter = findViewById(R.id.textview_chapter);
+        textViewModuleName = findViewById(R.id.textview_moduleName);
         btn_next = findViewById(R.id.btn_next);
         btn_sound = findViewById(R.id.btn_sound);
         textViewScore = findViewById(R.id.textview_score);
@@ -113,7 +114,7 @@ public class QuizActivity extends AppCompatActivity {
 
         textViewScore.setVisibility(View.GONE);
         textViewEmail.setVisibility(View.GONE);
-        com.cav.DriverphTruckerlearningPH2020.QuizDbHelper dbHelper = new com.cav.DriverphTruckerlearningPH2020.QuizDbHelper(this);
+        QuizDbHelper dbHelper = new com.cav.DriverphTruckerlearningPH2020.QuizDbHelper(this);
         questionList = dbHelper.getAllQuestions();
         int tenQuestions = (questionList.size() - 10);
         questionCountTotal = (questionList.size() - tenQuestions);
@@ -128,7 +129,7 @@ public class QuizActivity extends AppCompatActivity {
         int uid = sharedPreferences.getInt("user_id", 0);
         textViewUserIdQAct.setText(String.valueOf(uid));
 
-        mediaPlayer = MediaPlayer.create(com.cav.DriverphTruckerlearningPH2020.QuizActivity.this, R.raw.bg_music);
+        mediaPlayer = MediaPlayer.create(QuizActivity.this, R.raw.bg_music);
         mediaPlayer.setLooping(true);
         mediaPlayer.start();
 
@@ -198,6 +199,8 @@ public class QuizActivity extends AppCompatActivity {
 
             textViewQuestion.setText(currentQuestion.getQuestion());
             textViewChapter.setText(currentQuestion.getChapter());
+            textViewModuleName.setText(currentQuestion.getModuleName());
+
             rb1.setText(currentQuestion.getOption1());
             rb2.setText(currentQuestion.getOption2());
             rb3.setText(currentQuestion.getOption3());
@@ -215,7 +218,7 @@ public class QuizActivity extends AppCompatActivity {
     }
 
     private void timer() {
-        countDownTimer = new CountDownTimer(20000, 1000) {
+        countDownTimer = new CountDownTimer(40000, 1000) {
 
             public void onTick(long millisUntilFinished) {
                 int minutes = (int) (millisUntilFinished / 1000) / 60;
@@ -274,27 +277,27 @@ public class QuizActivity extends AppCompatActivity {
             switch (currentQuestion.getAnswerNr()) {
                 case 1:
                     currentQuestion.getOption1();
-                    askedQuestions.add(currentQuestion.getQuestion() + "\n\nAnswer: " + currentQuestion.getOption1() + "\n");
+                    askedQuestions.add("\n" +currentQuestion.getQuestion() + "\n\nAnswer: " + currentQuestion.getOption1() + "\n");
                     break;
                 case 2:
                     currentQuestion.getOption2();
-                    askedQuestions.add(currentQuestion.getQuestion() + "\n\n" + "Answer: " + currentQuestion.getOption2());
+                    askedQuestions.add("\n" +currentQuestion.getQuestion() + "\n\nAnswer: " + currentQuestion.getOption2()+ "\n");
                     break;
                 case 3:
                     currentQuestion.getOption3();
-                    askedQuestions.add(currentQuestion.getQuestion() + "\n\n" + "Answer: " + currentQuestion.getOption3());
+                    askedQuestions.add("\n" +currentQuestion.getQuestion() + "\n\nAnswer: " + currentQuestion.getOption3()+ "\n");
                     break;
                 case 4:
                     currentQuestion.getOption4();
-                    askedQuestions.add(currentQuestion.getQuestion() + "\n\n" + "Answer: " + currentQuestion.getOption4());
+                    askedQuestions.add("\n" +currentQuestion.getQuestion() + "\n\nAnswer: " + currentQuestion.getOption4()+ "\n");
                     break;
             }
             score++;
             textViewScore.setText("Score: " + score);
 
         } else {
-            String ansNotAvailable = "Correct answer is hidden.";
-            askedQuestions.add(currentQuestion.getQuestion() + "\n" + ansNotAvailable);
+            String ansNotAvailable = "\nCorrect answer is hidden.\n";
+            askedQuestions.add("\n" +currentQuestion.getQuestion() + "\n" + ansNotAvailable);
         }
 
         showSolution();
@@ -357,19 +360,14 @@ public class QuizActivity extends AppCompatActivity {
     }
 
     public void toResults() {
-        Calendar calendar = Calendar.getInstance();
-    //    SimpleDateFormat simpleDate = new SimpleDateFormat("EEEE MMMM dd, yyyy");
         SimpleDateFormat simpleDate = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-//        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy-hh-mm-ss");
         String currentDate = simpleDate.format(new Date());
         Log.d("QuizActivity", "Current Timestamp: " + currentDate);
-
-       // String currentDate = simpleDate.format(calendar.getTime());
 
         int tenQuestions = (questionList.size() - 10);
         questionCountTotal = (questionList.size() - tenQuestions);
 
-        String timeSet = "00:20";
+        String timeSet = "00:40";
         String timeLeft = textViewCountdown.getText().toString();
 
 
@@ -377,7 +375,7 @@ public class QuizActivity extends AppCompatActivity {
         int newAttempt = Integer.parseInt(attempt.getText().toString());
         String myEmail = textViewEmail.getText().toString();
 
-        Intent i = new Intent(com.cav.DriverphTruckerlearningPH2020.QuizActivity.this, com.cav.DriverphTruckerlearningPH2020.QuizStatusList.class);
+        Intent i = new Intent(QuizActivity.this, QuizStatusList.class);
         Bundle bundle = new Bundle();
         bundle.putStringArrayList("askedQuestions", askedQuestions);
         bundle.putInt("score", score);
@@ -410,7 +408,6 @@ public class QuizActivity extends AppCompatActivity {
         i.putExtra("date_taken", currentDate);
         i.putExtras(bundle);
         startActivity(i);
-
     }
 
     private void finishQuiz() {
@@ -472,7 +469,7 @@ public class QuizActivity extends AppCompatActivity {
                 int tenQuestions = (questionList.size() - 10);
                 questionCountTotal = (questionList.size() - tenQuestions);
 
-                String timeSet = "00:20";
+                String timeSet = "00:40";
                 String timeLeft = textViewCountdown.getText().toString();
 
                 int newAttempt = Integer.parseInt(attempt.getText().toString());

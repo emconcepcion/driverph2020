@@ -1,20 +1,24 @@
 package com.cav.DriverphTruckerlearningPH2020;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.muddzdev.styleabletoast.StyleableToast;
 
@@ -36,8 +40,9 @@ public class CompletedQuizzes extends AppCompatActivity {
     RecyclerView.LayoutManager layoutManager;
     RecyclerAdapter adapter;
     ArrayList<Score> arrayList = new ArrayList<>();
-    ArrayList<com.cav.DriverphTruckerlearningPH2020.MyScoresServer> myScoresServerArrayList = new ArrayList<>();
+    ArrayList<MyScoresServer> myScoresServerArrayList = new ArrayList<>();
     BroadcastReceiver broadcastReceiver;
+    SwipeRefreshLayout swipeRefreshLayout;
     Button summary_btn;
     private final String SCORES_URL = "https://phportal.net/driverph/scoresOnline.php";
 
@@ -47,6 +52,7 @@ public class CompletedQuizzes extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_completed_quizzes);
 
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.refreshView);
         summary_btn = findViewById(R.id.btn_summarized_scorelist);
         recyclerView = findViewById(R.id.recyclerView);
         layoutManager = new LinearLayoutManager(this);
@@ -63,27 +69,42 @@ public class CompletedQuizzes extends AppCompatActivity {
         };
         getJSON(SCORES_URL);
 
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                swipeRefreshLayout.setRefreshing(false);
+                Intent intent = getIntent();
+                finish();
+                overridePendingTransition(0, 0);
+                startActivity(intent);
+                overridePendingTransition(0, 0);
+                StyleableToast.makeText(getApplicationContext(), CompletedQuizzes.this.getString(R.string.list_updated),
+                        Toast.LENGTH_LONG, R.style.toastStyle).show();
+            }
+        });
+
         summary_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(com.cav.DriverphTruckerlearningPH2020.CompletedQuizzes.this, SummarizedScoresServer.class);
+                Intent intent = new Intent(CompletedQuizzes.this, SummarizedScoresServer.class);
                 Bundle extras = new Bundle();
                 extras.putString("email", dashboard_email);
                 intent.putExtras(extras);
                 startActivity(intent);
             }
         });
+
     }
 
-    public void onClick (View v){
-        Intent intent = getIntent();
-        finish();
-        overridePendingTransition(0, 0);
-        startActivity(intent);
-        overridePendingTransition(0, 0);
-        StyleableToast.makeText(getApplicationContext(), com.cav.DriverphTruckerlearningPH2020.CompletedQuizzes.this.getString(R.string.list_updated),
-                Toast.LENGTH_LONG, R.style.toastStyle).show();
-    }
+//    public void onClick (View v){
+//        Intent intent = getIntent();
+//        finish();
+//        overridePendingTransition(0, 0);
+//        startActivity(intent);
+//        overridePendingTransition(0, 0);
+//        StyleableToast.makeText(getApplicationContext(), CompletedQuizzes.this.getString(R.string.list_updated),
+//                Toast.LENGTH_LONG, R.style.toastStyle).show();
+//    }
 
     public void readFromLocalStorage(){
 
@@ -203,7 +224,7 @@ public class CompletedQuizzes extends AppCompatActivity {
                 String date_taken = menuitemArray.getJSONObject(i).getString("date_taken");
                 String isLocked = menuitemArray.getJSONObject(i).getString("isLocked");
                 String isCompleted = menuitemArray.getJSONObject(i).getString("isLocked");
-                com.cav.DriverphTruckerlearningPH2020.MyScoresServer s1 = new com.cav.DriverphTruckerlearningPH2020.MyScoresServer(Integer.parseInt(userId), email, Integer.parseInt(score),
+                MyScoresServer s1 = new MyScoresServer(Integer.parseInt(userId), email, Integer.parseInt(score),
                         Integer.parseInt(num_items), chap, Integer.parseInt(num_of_attempt), duration,
                         date_taken, Integer.parseInt(isLocked), Integer.parseInt(isCompleted));
                 db.addScoresServer(s1);
