@@ -50,7 +50,7 @@ public class MyAccount extends AppCompatActivity {
 
         pdLoading = new ProgressDialog(MyAccount.this);
         pdLoading.setMessage("\tLoading...");
-        pdLoading.setCancelable(false);
+        pdLoading.setCancelable(true);
         pdLoading.show();
         pdLoading.setMax(3000000);
         email = getIntent().getStringExtra("email");

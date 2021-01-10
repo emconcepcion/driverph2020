@@ -136,7 +136,7 @@ public class QuizInstructions extends AppCompatActivity {
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
 //                Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT).show();
-                Toast.makeText(getApplicationContext(), "Loading...", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(), "Loading...", Toast.LENGTH_SHORT).show();
                 try {
                     parserQuestionsFromString(s);
                 } catch (Exception e) {

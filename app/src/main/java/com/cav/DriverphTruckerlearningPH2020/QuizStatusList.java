@@ -435,8 +435,8 @@ public class QuizStatusList extends AppCompatActivity {
     public boolean checkNetworkConnection() {
         ConnectivityManager connectivityManager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
-        StyleableToast.makeText(getApplicationContext(), QuizStatusList.this.getString(R.string.check_net),
-                Toast.LENGTH_LONG, R.style.toastStyle).show();
+//        StyleableToast.makeText(getApplicationContext(), QuizStatusList.this.getString(R.string.check_net),
+//                Toast.LENGTH_LONG, R.style.toastStyle).show();
         return (networkInfo != null && networkInfo.isConnected());
     }
 
@@ -484,7 +484,6 @@ public class QuizStatusList extends AppCompatActivity {
         TextView backAgain = findViewById(R.id.need_refresh);
         backAgain.setVisibility(View.VISIBLE);
         backAgain.setText("Please press the button to proceed.");
-//            finish();
     }
 
     }

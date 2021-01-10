@@ -7,17 +7,27 @@
     android:layout_height="match_parent"
     tools:context=".SummarizedScoresServer">
 
-    <include layout="@layout/toolbar"
-        android:id="@+id/toolbar"/>
+    <TextView
+        android:id="@+id/sumScores"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:text="Completed Test Scores"
+        android:gravity="center_horizontal" />
 
     <TextView
         android:id="@+id/summarized_scoreList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
-        android:layout_below="@id/toolbar"
+        android:layout_below="@id/sumScores"
+        android:textColor="@color/dark_blue"
         android:text="Showing the summarized result for each chapter test:"
         android:gravity="center_horizontal" />
 
@@ -43,7 +53,8 @@
         android:layout_marginBottom="10dp"
         android:layout_alignParentBottom="true"
         android:text="userid"
-        android:gravity="center_horizontal" />
+        android:gravity="center_horizontal"
+        android:visibility="invisible"/>
 
     <TextView
         android:id="@+id/tv_email_summary"
@@ -53,7 +64,8 @@
         android:layout_marginTop="20dp"
         android:layout_marginBottom="10dp"
         android:layout_alignParentBottom="true"
-        android:text="email"/>
+        android:text="email"
+        android:visibility="invisible"/>
 
 
 </RelativeLayout>

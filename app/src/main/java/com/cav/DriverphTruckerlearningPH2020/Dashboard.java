@@ -50,6 +50,7 @@ import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -93,12 +94,10 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
     public static String user_idPassedTests;
     private TextView welcome_fname;
     public static TextView myEmailForAttempts;
-    public static boolean emptyUserIdFromDb;
     public static String lessonIdFromServer, moduleNameFromServer,
             lessonTitleFromServer, moduleIdFromServer;
     CircleImageView dahsboard_avatar;
-    SharedPreferences sp;
-    SharedPreferences sharedPreferences;
+    SharedPreferences sp, sharedPreferences;
     public static final String Uid_PREFS = "USER_IDPREFS";
     private final String retrieveUrl = "https://phportal.net/driverph/retrieve.php";
     private final String QUESTIONS_URL = "https://phportal.net/driverph/questions.php";
@@ -159,7 +158,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
             }
         });
 
-        //if no record yet from the database
+        //if no record fetched from the database
         if (myLatestUserId == null || myLatestIsUnlocked == null ||
                 myLatestIsCompleted == null || myLatestAttempt == null || myLatestChapter == null) {
             myLatestUserId = "0";
@@ -202,43 +201,23 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
     }
 
     private void resumeModule() {
-        String module= activeModule.getText().toString();
-        switch (module){
-            case Constant._1:
-            case MODULE_ID_1:
-            case "null":
-                Intent intent1 = new Intent(Dashboard.this, Basic_Content.class);
-                Bundle extras1 = new Bundle();
-                extras1.putString("module", MODULE_ID_1);
-                extras1.putString("lessonId", activeLessonId.getText().toString());
-                extras1.putString("moduleName", activeModule.getText().toString());
-                intent1.putExtras(extras1);
-                startActivity(intent1);
-                break;
-            case Constant._2:
-            case MODULE_ID_2:
-                Intent intent2 = new Intent(Dashboard.this, Basic_Content.class);
-                Bundle extras2 = new Bundle();
-                extras2.putString("module", MODULE_ID_2);
-                extras2.putString("lessonId", activeLessonId.getText().toString());
-                extras2.putString("moduleName", activeModule.getText().toString());
-                intent2.putExtras(extras2);
-                startActivity(intent2);
-                break;
-            case Constant._3:
-            case MODULE_ID_3:
-                Intent intent3 = new Intent(Dashboard.this, Basic_Content.class);
-                Bundle extras3 = new Bundle();
-                extras3.putString("module", MODULE_ID_3);
-                extras3.putString("lessonId", activeLessonId.getText().toString());
-                extras3.putString("moduleName", activeModule.getText().toString());
-                intent3.putExtras(extras3);
-                startActivity(intent3);
-                break;
-            default:
-                startActivity(new Intent(Dashboard.this, Lessons_Menu.class));
-                break;
-        }
+        String module= activeModuleId.getText().toString();
+
+        SimpleDateFormat simpleDate = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        String currentDate = simpleDate.format(new Date());
+
+        Intent intent1 = new Intent(Dashboard.this, Lessons_Basic_Content.class);
+        Bundle extras1 = new Bundle();
+        extras1.putString("module", module);
+        extras1.putString("course", lessonTitleFromServer);
+        extras1.putString("email", dashboard_email);
+        extras1.putInt("status", 1);
+        extras1.putString("dateStarted", currentDate);
+        extras1.putString("dateFinished", currentDate);
+        extras1.putString("lessonId", activeLessonId.getText().toString());
+        extras1.putString("moduleName", activeModule.getText().toString());
+        intent1.putExtras(extras1);
+        startActivity(intent1);
     }
 
     public static Dashboard getmInstanceActivity() {
@@ -262,9 +241,8 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
                 SharedPreferences.Editor editor = sp.edit();
                 editor.putInt("user_id", thisUserId);
                 editor.apply();
-                Toast.makeText(Dashboard.this, "Dashboard User id: " + thisUserId, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(Dashboard.this, "Dashboard User id: " + thisUserId, Toast.LENGTH_SHORT).show();
 
-                //  uidFromDb = Integer.parseInt(myLatestUserId);
                 Intent intent = new Intent(Dashboard.this, Lessons_Menu.class);
                 Bundle bundle = new Bundle();
                 bundle.putInt("user_idFromServer", Integer.parseInt(myLatestUserId));
@@ -292,9 +270,8 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
                 SharedPreferences.Editor editor = sp.edit();
                 editor.putInt("user_id", thisUserId);
                 editor.apply();
-                Toast.makeText(Dashboard.this, "Dashboard User id: " + thisUserId, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(Dashboard.this, "Dashboard User id: " + thisUserId, Toast.LENGTH_SHORT).show();
 
-                //  uidFromDb = Integer.parseInt(myLatestUserId);
                 Intent intent = new Intent(Dashboard.this, Quizzes_menu.class);
                 Bundle bundle = new Bundle();
                 bundle.putInt("user_idFromServer", Integer.parseInt(myLatestUserId));
@@ -396,7 +373,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
                             navImage.setImageDrawable(getResources().getDrawable(R.drawable.avatar6));
                             dahsboard_avatar.setImageDrawable(getResources().getDrawable(R.drawable.avatar6));
                         }
-                        Toast.makeText(Dashboard.this, "Fetched from user table: " + user_id, Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(Dashboard.this, "Fetched from user table: " + user_id, Toast.LENGTH_SHORT).show();
                     }
                 } catch (Exception e) {
                     Toast.makeText(Dashboard.this, "Exception: " + e, Toast.LENGTH_SHORT).show();
@@ -510,7 +487,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
 
         Intent logout = new Intent(Dashboard.this, Login.class);
         startActivity(logout);
-        Toast.makeText(this, "Log Out Success", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "Log Out Success", Toast.LENGTH_SHORT).show();
         System.exit(0);
     }
 
@@ -534,44 +511,44 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
 
                             for (int i = 0; i < menuitemArray.length(); i++) {
 
-                                Log.d("user_id " + i,
-                                        menuitemArray.getJSONObject(i).getString("user_id")
+                                Log.d("userId " + i,
+                                        menuitemArray.getJSONObject(i).getString("userId")
                                                 .toString());
                                 Log.d("email: " + i, menuitemArray.getJSONObject(i)
                                         .getString("email"));
-                                Log.d("score: " + i, menuitemArray.getJSONObject(i)
-                                        .getString("score"));
-                                Log.d("num_of_items: " + i, menuitemArray.getJSONObject(i)
-                                        .getString("num_of_items"));
-                                Log.d("chapter: " + i, menuitemArray.getJSONObject(i)
-                                        .getString("chapter"));
-                                Log.d("num_of_attempt: " + i, menuitemArray.getJSONObject(i)
-                                        .getString("num_of_attempt"));
-                                Log.d("duration: " + i, menuitemArray.getJSONObject(i)
-                                        .getString("duration"));
-                                Log.d("date_taken: " + i, menuitemArray.getJSONObject(i)
-                                        .getString("date_taken"));
+                                Log.d("numberOfCorrectAnswers: " + i, menuitemArray.getJSONObject(i)
+                                        .getString("numberOfCorrectAnswers"));
+                                Log.d("numberOfQuestions: " + i, menuitemArray.getJSONObject(i)
+                                        .getString("numberOfQuestions"));
+                                Log.d("module: " + i, menuitemArray.getJSONObject(i)
+                                        .getString("module"));
+                                Log.d("retryCount: " + i, menuitemArray.getJSONObject(i)
+                                        .getString("retryCount"));
+                                Log.d("minutesToFinish: " + i, menuitemArray.getJSONObject(i)
+                                        .getString("minutesToFinish"));
+                                Log.d("createdOn: " + i, menuitemArray.getJSONObject(i)
+                                        .getString("createdOn"));
                                 Log.d("isUnlocked: " + i, menuitemArray.getJSONObject(i)
                                         .getString("isUnlocked"));
-                                Log.d("isCompleted: " + i, menuitemArray.getJSONObject(i)
-                                        .getString("isCompleted"));
+                                Log.d("passed: " + i, menuitemArray.getJSONObject(i)
+                                        .getString("passed"));
 
-                                user_idPassedTests = menuitemArray.getJSONObject(i).getString("user_id");
+                                user_idPassedTests = menuitemArray.getJSONObject(i).getString("userId");
                                 String email = menuitemArray.getJSONObject(i).getString("email");
-                                String score = menuitemArray.getJSONObject(i).getString("score");
-                                String num_items = menuitemArray.getJSONObject(i).getString("num_of_items");
-                                String chapter = menuitemArray.getJSONObject(i).getString("chapter");
-                                String num_of_attempt = menuitemArray.getJSONObject(i).getString("num_of_attempt");
-                                String duration = menuitemArray.getJSONObject(i).getString("duration");
-                                String date_taken = menuitemArray.getJSONObject(i).getString("date_taken");
+                                String score = menuitemArray.getJSONObject(i).getString("numberOfCorrectAnswers");
+                                String num_items = menuitemArray.getJSONObject(i).getString("numberOfQuestions");
+                                String chapter = menuitemArray.getJSONObject(i).getString("module");
+                                String num_of_attempt = menuitemArray.getJSONObject(i).getString("retryCount");
+                                String duration = menuitemArray.getJSONObject(i).getString("minutesToFinish");
+                                String date_taken = menuitemArray.getJSONObject(i).getString("createdOn");
                                 String isLocked = menuitemArray.getJSONObject(i).getString("isUnlocked");
-                                String isCompleted = menuitemArray.getJSONObject(i).getString("isCompleted");
+                                String isCompleted = menuitemArray.getJSONObject(i).getString("passed");
                                 MyScoresServer mS1 = new MyScoresServer(Integer.parseInt(user_idPassedTests), email, Integer.parseInt(score),
                                         Integer.parseInt(num_items), chapter, Integer.parseInt(num_of_attempt), duration,
                                         date_taken, Integer.parseInt(isLocked), Integer.parseInt(isCompleted));
                                 db.addScoresServer(mS1);
                             }
-                            Toast.makeText(Dashboard.this, "Fetched from passed tests: " + user_idPassedTests, Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(Dashboard.this, "Fetched from passed tests: " + user_idPassedTests, Toast.LENGTH_SHORT).show();
 
 
                         } catch (JSONException e) {
@@ -613,7 +590,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
 //                Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT).show();
-                Toast.makeText(getApplicationContext(), "Loading...", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(), "Loading...", Toast.LENGTH_SHORT).show();
                 try {
                     parserQuestionsFromString(s);
                 } catch (Exception e) {
@@ -707,7 +684,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
                     @Override
                     public void onResponse(String s) {
                         progressDialog.dismiss();
-                        Toast.makeText(Dashboard.this, "Loading all attempts", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(Dashboard.this, "Loading all attempts", Toast.LENGTH_SHORT).show();
                         try {
                             JSONObject jObj = new JSONObject(s);
 
@@ -753,8 +730,8 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
                                 db.addScoresServer(mS1);
                             }
 
-                            Toast.makeText(Dashboard.this, "Fetched from attempts: " + myLatestUserId, Toast.LENGTH_SHORT).show();
-                            Toast.makeText(Dashboard.this, "Latest Chapter: " + myLatestChapter, Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(Dashboard.this, "Fetched from attempts: " + myLatestUserId, Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(Dashboard.this, "Latest Chapter: " + myLatestChapter, Toast.LENGTH_SHORT).show();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -794,7 +771,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
                     @Override
                     public void onResponse(String s) {
                         progressDialog.dismiss();
-                        Toast.makeText(Dashboard.this, "Loading all attempts", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(Dashboard.this, "Loading all attempts", Toast.LENGTH_SHORT).show();
                         try {
                             JSONObject jObj = new JSONObject(s);
 
@@ -823,8 +800,8 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
                                 myProgressDateFinished = menuitemArray.getJSONObject(i).getString("dateFinished");
                             }
 
-                            Toast.makeText(Dashboard.this, "Fetched from Progress: " + myProgressUserId, Toast.LENGTH_SHORT).show();
-                            Toast.makeText(Dashboard.this, "Progress Module: " + myProgressChapter, Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(Dashboard.this, "Fetched from Progress: " + myProgressUserId, Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(Dashboard.this, "Progress Module: " + myProgressChapter, Toast.LENGTH_SHORT).show();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

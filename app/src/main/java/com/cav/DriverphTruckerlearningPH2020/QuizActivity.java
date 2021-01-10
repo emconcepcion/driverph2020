@@ -81,7 +81,6 @@ public class QuizActivity extends AppCompatActivity {
     MediaPlayer mediaPlayer;
     public static int testResultUnlock, testResultCompleted;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -218,7 +217,7 @@ public class QuizActivity extends AppCompatActivity {
     }
 
     private void timer() {
-        countDownTimer = new CountDownTimer(40000, 1000) {
+        countDownTimer = new CountDownTimer(600000, 1000) {
 
             public void onTick(long millisUntilFinished) {
                 int minutes = (int) (millisUntilFinished / 1000) / 60;
@@ -256,7 +255,6 @@ public class QuizActivity extends AppCompatActivity {
                 mediaPlayer.pause();
                 toResults();
                 finish();
-//                finishQuiz();
                 if (countDownTimer != null) {
                     countDownTimer.cancel();
                 }
@@ -367,7 +365,7 @@ public class QuizActivity extends AppCompatActivity {
         int tenQuestions = (questionList.size() - 10);
         questionCountTotal = (questionList.size() - tenQuestions);
 
-        String timeSet = "00:40";
+        String timeSet = "10:00";
         String timeLeft = textViewCountdown.getText().toString();
 
 
@@ -469,7 +467,7 @@ public class QuizActivity extends AppCompatActivity {
                 int tenQuestions = (questionList.size() - 10);
                 questionCountTotal = (questionList.size() - tenQuestions);
 
-                String timeSet = "00:40";
+                String timeSet = "10:00";
                 String timeLeft = textViewCountdown.getText().toString();
 
                 int newAttempt = Integer.parseInt(attempt.getText().toString());

@@ -42,6 +42,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.ref.WeakReference;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -54,6 +55,7 @@ import static com.cav.DriverphTruckerlearningPH2020.Constant.MODULE_ID_3;
 import static com.cav.DriverphTruckerlearningPH2020.Login.SHARED_PREFS;
 
 public class Quizzes_menu extends AppCompatActivity {
+
     private static final String Server_All_Attempts_URL = "https://phportal.net/driverph/get_all_attempts.php";
 
     public static CardView cardViewMod1;
@@ -84,7 +86,6 @@ public class Quizzes_menu extends AppCompatActivity {
         cardViewMod1 = findViewById(R.id.cardView_basic_competencies);
         cardViewMod2 = findViewById(R.id.cardView_common_competencies);
         cardViewMod3 = findViewById(R.id.cardView_core_competencies);
-        cardViewMod1.setClickable(true);
 
         loadDataAllAttemptsAndLevels();
 
@@ -189,11 +190,10 @@ public class Quizzes_menu extends AppCompatActivity {
         finish();
     }
 
-    private void lockAndUnlockModules() {
+    public void lockAndUnlockModules() {
 
         // locked 0, unlocked 1
         int currUser = Integer.parseInt(userIdQMenu.getText().toString());
-        String currChap = tChapter.getText().toString();
         int dbUser = Integer.parseInt(uidDb_txt.getText().toString());
         boolean sameUser = String.valueOf(dbUser).equals(String.valueOf(currUser));
         Intent intent = getIntent();
@@ -297,7 +297,7 @@ public class Quizzes_menu extends AppCompatActivity {
                     @Override
                     public void onResponse(String s) {
                         progressDialog.dismiss();
-                        Toast.makeText(Quizzes_menu.this, "Loading all attempts", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(Quizzes_menu.this, "Loading all attempts", Toast.LENGTH_SHORT).show();
                         try {
                             JSONObject jObj = new JSONObject(s);
 
@@ -343,8 +343,8 @@ public class Quizzes_menu extends AppCompatActivity {
                                 db.addScoresServer(mS1);
                             }
 
-                            Toast.makeText(Quizzes_menu.this, "Fetched from attempts: " + myLatestUserId, Toast.LENGTH_SHORT).show();
-                            Toast.makeText(Quizzes_menu.this, "Latest Chapter: " + myLatestChapter, Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(Quizzes_menu.this, "Fetched from attempts: " + myLatestUserId, Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(Quizzes_menu.this, "Latest Chapter: " + myLatestChapter, Toast.LENGTH_SHORT).show();
                             Dashboard.recentModule.setText(myLatestChapter);
                         } catch (JSONException e) {
                             e.printStackTrace();

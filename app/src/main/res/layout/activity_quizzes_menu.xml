@@ -213,7 +213,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="61dp"
         android:layout_marginHorizontal="20dp"
-        android:background="#A82196F3"
+        android:background="@drawable/rounded_login_button"
         android:padding="15dp"
         android:textColor="@android:color/white"
         android:text="View Leaderboard"
@@ -229,9 +229,9 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="120dp"
-        android:background="#A82196F3"
+        android:background="@drawable/rounded_login_button"
         android:padding="15dp"
-        android:text="View Saved Test Scores"
+        android:text="View Test Scores"
         android:textAllCaps="false"
         android:textColor="@android:color/white"
         android:textSize="18sp"
@@ -244,13 +244,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="45dp"
         android:text="Test Chapter"
-        android:textColor="@android:color/white"
-        android:textSize="24sp"
+        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button6"
-        android:visibility="invisible"/>
+        android:visibility="invisible"
+        />
 
     <TextView
         android:id="@+id/email_qMenu"
@@ -264,6 +264,7 @@
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button6"
+        android:visibility="invisible"
         />
 
     <TextView
@@ -276,7 +277,7 @@
         android:text="user_id"
         app:layout_constraintStart_toEndOf="@+id/tChap"
         app:layout_constraintTop_toBottomOf="@+id/button6"
-        android:visibility="visible"/>
+        android:visibility="invisible"/>
 
     <TextView
         android:id="@+id/txt_uidDbQuizMenu"
@@ -287,8 +288,8 @@
         android:text="uidDb"
         app:layout_constraintStart_toEndOf="@+id/tChap"
         app:layout_constraintTop_toBottomOf="@+id/button6"
-        tools:visibility="visible" />
-
+        android:layout_marginLeft="24dp"
+        android:visibility="invisible"/>
 
 
     <TextView
@@ -299,7 +300,9 @@
         android:layout_marginTop="20dp"
         android:text="mod1locked"
         app:layout_constraintBottom_toBottomOf="@id/imageView6"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginLeft="20dp"
+        android:visibility="invisible"/>
 
     <TextView
         android:id="@+id/latestMod1Completed"
@@ -309,7 +312,8 @@
         android:text="mod1completed"
         app:layout_constraintBottom_toBottomOf="@id/imageView6"
         app:layout_constraintStart_toStartOf="parent"
-       />
+        android:layout_marginLeft="250dp"
+        android:visibility="invisible"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

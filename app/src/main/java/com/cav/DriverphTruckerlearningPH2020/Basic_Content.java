@@ -32,6 +32,11 @@ import java.util.List;
 
 import static com.cav.DriverphTruckerlearningPH2020.Constant.SP_LESSONID;
 import static com.cav.DriverphTruckerlearningPH2020.Dashboard.dashboard_email;
+import static com.cav.DriverphTruckerlearningPH2020.Dashboard.myLatestChapter;
+import static com.cav.DriverphTruckerlearningPH2020.Dashboard.myLatestIsCompleted;
+import static com.cav.DriverphTruckerlearningPH2020.Dashboard.myLatestIsUnlocked;
+import static com.cav.DriverphTruckerlearningPH2020.Dashboard.myLatestUserId;
+import static com.cav.DriverphTruckerlearningPH2020.Dashboard.thisUserId;
 
 public class Basic_Content extends AppCompatActivity {
     public static WeakReference<Basic_Content> weakActivityBasicContent;
@@ -59,7 +64,6 @@ public class Basic_Content extends AppCompatActivity {
         content.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //Toast.makeText(Basic_Content.this, al.get(position), Toast.LENGTH_SHORT).show();
                 SimpleDateFormat simpleDate = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
                 String currentDate = simpleDate.format(new Date());
 
@@ -95,7 +99,16 @@ public class Basic_Content extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         if (Lessons_Menu.isFromLessonsMenu){
-            startActivity(new Intent(Basic_Content.this, Lessons_Menu.class));
+//            startActivity(new Intent(Basic_Content.this, Lessons_Menu.class));
+            Intent intent = new Intent(Basic_Content.this, Lessons_Menu.class);
+            Bundle bundle = new Bundle();
+            bundle.putInt("user_idFromServer", Integer.parseInt(myLatestUserId));
+            bundle.putInt("user_idFromDashboard", thisUserId);
+            bundle.putInt("myLatestIsUnlocked", Integer.parseInt(myLatestIsUnlocked));
+            bundle.putInt("myLatestIsCompleted", Integer.parseInt(myLatestIsCompleted));
+            bundle.putString("myLatestChapter", myLatestChapter);
+            intent.putExtras(bundle);
+            startActivity(intent);
         }else{
             startActivity(new Intent(Basic_Content.this, Dashboard.class));
         }

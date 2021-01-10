@@ -4,17 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FAFAFA"
     tools:context=".Advisory">
-
-<!--    <include layout="@layout/toolbar"-->
-<!--        android:id="@+id/toolbar"/>-->
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_marginTop="55dp">
+        android:layout_marginTop="15dp">
 
         <TextView
             android:layout_width="match_parent"
@@ -29,13 +25,69 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="130dp"
             android:orientation="horizontal"
-            android:layout_marginTop="25dp">
+            android:background="#A9D5EAFB"
+            android:layout_marginTop="15dp">
 
             <ImageView
-                android:layout_width="120dp"
-                android:layout_height="120dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/tesda_logo"
+                android:layout_marginLeft="15dp"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="7dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="7dp"
+                android:layout_marginBottom="7dp">
+
+                <TextView
+                    android:id="@+id/tesda_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/tesdaName"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:layout_centerHorizontal="true"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/black"
+                    android:gravity="center_horizontal" />
+
+                <TextView
+                    android:id="@+id/tesda_link"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tesda_text"
+                    android:layout_marginTop="5dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginEnd="15dp"
+                    android:text="@string/tesda_link"
+                    android:textSize="20sp"
+                    android:textAlignment="center"
+                    android:linksClickable="true"
+                    android:layout_marginRight="15dp"
+                    android:gravity="center_horizontal" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:orientation="horizontal"
+            android:background="#A9D5EAFB"
+            android:layout_marginTop="15dp">
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center_vertical"
                 android:src="@drawable/dot_logo"
                 android:layout_marginLeft="15dp"/>
 
@@ -62,7 +114,7 @@
 
                 <TextView
                     android:id="@+id/dot_link"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/dot_text"
                     android:layout_marginTop="5dp"
@@ -81,13 +133,15 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="130dp"
             android:orientation="horizontal"
-            android:layout_marginTop="35dp">
+            android:background="#A9D5EAFB"
+            android:layout_marginTop="15dp">
 
             <ImageView
-                android:layout_width="120dp"
-                android:layout_height="120dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center_vertical"
                 android:src="@drawable/lto_logo"
                 android:layout_marginLeft="15dp"/>
 
@@ -114,7 +168,7 @@
 
                 <TextView
                     android:id="@+id/lto_link"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/lto_text"
                     android:layout_marginTop="5dp"
@@ -133,13 +187,15 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="130dp"
             android:orientation="horizontal"
-            android:layout_marginTop="35dp">
+            android:background="#A9D5EAFB"
+            android:layout_marginTop="15dp">
 
             <ImageView
-                android:layout_width="120dp"
-                android:layout_height="120dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center_vertical"
                 android:src="@drawable/ltfrb_logo"
                 android:layout_marginStart="15dp"
                 android:layout_marginLeft="15dp" />
@@ -168,7 +224,7 @@
 
                 <TextView
                     android:id="@+id/ltfrb_link"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/ltfrb_text"
                     android:layout_marginTop="5dp"

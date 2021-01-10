@@ -38,6 +38,8 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -79,41 +81,27 @@ public class Lessons_Basic_Content extends AppCompatActivity {
         dateFinished = getIntent().getStringExtra("dateFinished");
         currentLessonId = getIntent().getStringExtra("currLessonId");
         moduleName = getIntent().getStringExtra("moduleName");
-      //  currentLesson = getIntent().getStringExtra("lessonTitle");
 
         insertUserProgressModules();
         retrievedatas();
 
         email_lesson = findViewById(R.id.emailBContent);
         email_lesson.setText(dashboard_email);
-        Dashboard.resumeLesson.setText("Resume");
 
-        btnBack = findViewById(R.id.button4);
         content = (WebView) findViewById(R.id.content);
 
         btnNext = findViewById(R.id.btn_to_voiceR);
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                textToSpeech.stop();
                 SharedPreferences sp = getSharedPreferences("mySavedAttempt", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor1 = sp.edit();
                 editor1.putString("email", dashboard_email);
                 editor1.putString("username", nameVR);
                 editor1.apply();
                 startActivity(new Intent(Lessons_Basic_Content.this, VoiceResponse.class));
-            }
-        });
 
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(view==btnBack)
-                {
-                    if(content.canGoBack())
-                    {
-                        content.goBack();
-                    }
-                }
             }
         });
 
@@ -130,7 +118,7 @@ public class Lessons_Basic_Content extends AppCompatActivity {
             @Override
             public void onInit(int status) {
                 if (status == TextToSpeech.SUCCESS) {
-                    int result = textToSpeech.setLanguage(Locale.GERMAN);
+                    int result = textToSpeech.setLanguage(Locale.US);
                     if (result == TextToSpeech.LANG_MISSING_DATA
                             || result == TextToSpeech.LANG_NOT_SUPPORTED) {
                         Log.e("TTS", "Language not supported");
@@ -195,6 +183,7 @@ public class Lessons_Basic_Content extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        textToSpeech.stop();
         Intent intent = new Intent(Lessons_Basic_Content.this, Basic_Content.class);
         Bundle extras = new Bundle();
         extras.putString("email", email_lesson.getText().toString());
@@ -204,7 +193,6 @@ public class Lessons_Basic_Content extends AppCompatActivity {
     }
 
     public void retrievedatas() {
-//        final String course1 = course;
 
         class show_prod extends AsyncTask<Void, Void, String> {
 
@@ -280,7 +268,6 @@ public class Lessons_Basic_Content extends AppCompatActivity {
         try {
             myPdfDocument.writeTo(new FileOutputStream(fileLocation));
             savedPdf.setVisibility(View.VISIBLE);
-//            Toast.makeText(Lessons_Basic_Content.this, "Saved to Files -> DriverLesson folder.", Toast.LENGTH_SHORT).show();
         }
         catch (Exception e){
             e.printStackTrace();
@@ -336,7 +323,7 @@ public class Lessons_Basic_Content extends AppCompatActivity {
                     @Override
                     public void onResponse(String s) {
                         progressDialog.dismiss();
-                        Toast.makeText(Lessons_Basic_Content.this, "Loading all attempts", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(Lessons_Basic_Content.this, "Loading all attempts", Toast.LENGTH_SHORT).show();
                         try {
                             JSONObject jObj = new JSONObject("");
 
@@ -365,8 +352,8 @@ public class Lessons_Basic_Content extends AppCompatActivity {
                                 myProgressDateFinished = menuitemArray.getJSONObject(i).getString("dateFinished");
                             }
 
-                            Toast.makeText(Lessons_Basic_Content.this, "Fetched from Progress: " + myProgressUserId, Toast.LENGTH_SHORT).show();
-                            Toast.makeText(Lessons_Basic_Content.this, "Progress Module: " + myProgressModule, Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(Lessons_Basic_Content.this, "Fetched from Progress: " + myProgressUserId, Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(Lessons_Basic_Content.this, "Progress Module: " + myProgressModule, Toast.LENGTH_SHORT).show();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

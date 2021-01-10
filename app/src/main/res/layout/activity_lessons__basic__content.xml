@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
-        android:text="Learn this!"
+        android:text="Lesson"
         android:textSize="20sp"
         android:textStyle="bold" />
 
@@ -35,7 +35,7 @@
         android:layout_marginTop="5dp"
         android:layout_marginHorizontal="3dp"
         android:orientation="vertical"
-        android:background="@drawable/border">
+        android:background="@drawable/border_light">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -116,9 +116,12 @@
             android:layout_width="170dp"
             android:layout_height="wrap_content"
             android:text="Download Lesson PDF"
+            android:background="@drawable/yellow_button"
+            android:textColor="@android:color/white"
             android:visibility="visible"
             android:textAllCaps="false"
             android:layout_marginTop="10dp"
+            android:paddingHorizontal="10dp"
             android:layout_gravity="center_horizontal"/>
 
         <TableRow
@@ -132,6 +135,7 @@
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/ic_arrow_left_long"
+                android:visibility="invisible"
                 />
 
             <Button
@@ -166,6 +170,7 @@
         android:text="emailBContent"
         android:layout_below="@id/linear1"
         android:layout_alignParentRight="true"
+        android:visibility="invisible"
         />
 
 

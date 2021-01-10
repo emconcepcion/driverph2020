@@ -10,18 +10,12 @@ import androidx.appcompat.widget.Toolbar;
 
 public class Advisory extends AppCompatActivity {
 
-    TextView dot_link, lto_link, ltfrb_link;
+    TextView tesda_link, dot_link, lto_link, ltfrb_link;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_advisory);
-
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        //getSupportActionBar().setTitle("Advisory");
 
         dot_link = findViewById(R.id.dot_link);
         dot_link.setText("Visit website:\n https://dotr.gov.ph/");
@@ -34,5 +28,10 @@ public class Advisory extends AppCompatActivity {
         ltfrb_link = findViewById(R.id.ltfrb_link);
         ltfrb_link.setText("Visit website:\n https://ltfrb.gov.ph/");
         Linkify.addLinks(ltfrb_link, Linkify.WEB_URLS);
+
+        tesda_link = findViewById(R.id.tesda_link);
+        tesda_link.setText("Visit website:\n https://www.tesda.gov.ph/");
+        Linkify.addLinks(tesda_link, Linkify.WEB_URLS);
+
     }
 }

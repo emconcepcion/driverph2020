@@ -138,7 +138,7 @@
                         android:layout_marginRight="30dp"
                         android:text="quizChap"
                         android:textSize="10dp"
-                        android:visibility="visible" />
+                        android:visibility="invisible" />
 
                     <TextView
                         android:id="@+id/emailForAttempts"
@@ -147,7 +147,8 @@
                         android:layout_gravity="end"
                         android:layout_marginRight="30dp"
                         android:text="yourEmail"
-                        android:textSize="10dp" />
+                        android:textSize="10dp"
+                        android:visibility="invisible"/>
 
                     <TextView
                         android:id="@+id/lessonIdServer"
@@ -156,7 +157,8 @@
                         android:layout_gravity="end"
                         android:layout_marginRight="30dp"
                         android:text="lessonId"
-                        android:textSize="10dp" />
+                        android:textSize="10dp"
+                        android:visibility="invisible"/>
 
                     <TextView
                         android:id="@+id/moduleIdServer"
@@ -165,7 +167,8 @@
                         android:layout_gravity="end"
                         android:layout_marginRight="30dp"
                         android:text="moduleId"
-                        android:textSize="10dp" />
+                        android:textSize="10dp"
+                        android:visibility="invisible"/>
 
                 </TableRow>
 

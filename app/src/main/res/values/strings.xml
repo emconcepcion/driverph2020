@@ -40,6 +40,7 @@
     <string name="dot_link">dot_link</string>
     <string name="lto_link">lto_link</string>
     <string name="ltfrb_link">ltfrb_link</string>
+    <string name="tesdaName">TESDA: Technical Education and Skills Development Authority</string>
     <string name="department_of_transportation">Department of Transportation</string>
     <string name="land_transportation_office">Land Transportation Office</string>
     <string name="ltfrb">Land Transportation Franchising and Regulatory Board</string>
@@ -122,5 +123,6 @@
     <string name="reload_this_page">Please connect to the internet to save your scores.\nOnce done, reload this page.</string>
     <string name="click_refresh_list_to_proceed">Click Refresh list to proceed.</string>
     <string name="prepForTest">We believe in second chances, too. Take a deep breath and take the test again.</string>
+    <string name="tesda_link">tesda_link</string>
 
 </resources>

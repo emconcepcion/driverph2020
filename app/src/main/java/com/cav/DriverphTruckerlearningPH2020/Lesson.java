@@ -21,7 +21,8 @@ import static com.cav.DriverphTruckerlearningPH2020.Constant.SP_LESSONID;
 public class Lesson extends AppCompatActivity {
 
     ActivityLessonBinding binding;
-    String[] descriptionData = {"One", "Two", "Three", "Four", "Five", "Six"};
+//    String[] descriptionData = {"Most recent lesson", "Most recent test attempt", "Completed tests", "Evaluation"};
+    String[] descriptionData = {"1", "2", "3", "4"};
     int arrSize;
     public static TextView arraySize, progress_Module, progress_LessonTitle;
     int current_state = 0;
@@ -33,9 +34,9 @@ public class Lesson extends AppCompatActivity {
         binding = ActivityLessonBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        arraySize = findViewById(R.id.arr_size);
-        arrSize = descriptionData.length;
-        arraySize.setText(String.valueOf(arrSize));
+//        arraySize = findViewById(R.id.arr_size);
+//        arrSize = descriptionData.length;
+//        arraySize.setText(String.valueOf(arrSize));
         progress_Module = findViewById(R.id.progress_Module);
         progress_LessonTitle = findViewById(R.id.lessTitle);
 
@@ -50,13 +51,6 @@ public class Lesson extends AppCompatActivity {
             progress_Module.setText(progMod);
             progress_LessonTitle.setText(progLess);
         }
-
-//        String currentModule = Lessons_Basic_Content.module;
-//        if (!currentModule.equals("null")){
-//            progress_Module.setText("Active Module");
-//        }else{
-//            progress_Module.setText(currentModule);
-//        }
 
         binding.spb.setLabels(descriptionData)
                 .setBarColorIndicator(Color.BLACK)
@@ -76,6 +70,10 @@ public class Lesson extends AppCompatActivity {
                     binding.spb.setCompletedPosition(current_state).drawView();
                     if (data != null) {
                         current_state = data.getInt("progress", current_state);
+                        switch (current_state){
+                            case 0:
+
+                        }
 
                     } else {
                         Intent i = new Intent(Lesson.this, Lesson.class);
@@ -85,8 +83,6 @@ public class Lesson extends AppCompatActivity {
                         finish();
                         startActivity(getIntent());
                     }
-//                data.getInt("progress", current_state);
-
                     StyleableToast.makeText(Lesson.this, "Lesson number: " + (current_state+1), Toast.LENGTH_SHORT, R.style.toastStyle).show();
                 }else if(binding.btnNextLesson.isPressed()){
                     startActivity(new Intent(Lesson.this, VoiceResponse.class));
@@ -114,7 +110,7 @@ public class Lesson extends AppCompatActivity {
                         finish();
                         startActivity(getIntent());
                     }
-                    StyleableToast.makeText(Lesson.this, "Lesson number: " + (current_state-1), Toast.LENGTH_SHORT, R.style.toastStyle).show();
+                    StyleableToast.makeText(Lesson.this, "Lesson number: " + (current_state+1), Toast.LENGTH_SHORT, R.style.toastStyle).show();
                 }
                 //  Log.d("current state = ", current_state + "");
             }
