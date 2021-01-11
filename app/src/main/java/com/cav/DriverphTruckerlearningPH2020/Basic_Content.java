@@ -29,8 +29,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 import static com.cav.DriverphTruckerlearningPH2020.Constant.SP_LESSONID;
+import static com.cav.DriverphTruckerlearningPH2020.Constant._1;
 import static com.cav.DriverphTruckerlearningPH2020.Dashboard.dashboard_email;
 import static com.cav.DriverphTruckerlearningPH2020.Dashboard.myLatestChapter;
 import static com.cav.DriverphTruckerlearningPH2020.Dashboard.myLatestIsCompleted;
@@ -88,10 +90,10 @@ public class Basic_Content extends AppCompatActivity {
                 SharedPreferences.Editor myEdit = sharedPreferences.edit();
                 myEdit.putString("lessonTitle", currentLesson);
                 myEdit.putString("moduleName", moduleName);
+                myEdit.putString("moduleId", module);
+                myEdit.putString("lessonId", currLessonId);
                 myEdit.apply();
 
-                Dashboard.activeLesson.setText(currentLesson);
-                Dashboard.activeModule.setText(moduleName);
             }
         });
     }
@@ -99,7 +101,6 @@ public class Basic_Content extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         if (Lessons_Menu.isFromLessonsMenu){
-//            startActivity(new Intent(Basic_Content.this, Lessons_Menu.class));
             Intent intent = new Intent(Basic_Content.this, Lessons_Menu.class);
             Bundle bundle = new Bundle();
             bundle.putInt("user_idFromServer", Integer.parseInt(myLatestUserId));
@@ -110,7 +111,11 @@ public class Basic_Content extends AppCompatActivity {
             intent.putExtras(bundle);
             startActivity(intent);
         }else{
-            startActivity(new Intent(Basic_Content.this, Dashboard.class));
+            Intent intent = new Intent(Basic_Content.this, Dashboard.class);
+            Bundle extras = new Bundle();
+            extras.putString("email", dashboard_email);
+            intent.putExtras(extras);
+            startActivity(intent);
         }
         finish();
     }

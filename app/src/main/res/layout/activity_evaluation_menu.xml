@@ -30,19 +30,19 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginBottom="7dp"
-                android:outlineProvider="background"
                 app:cardCornerRadius="40dp"
                 app:cardElevation="2dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginRight="5dp">
 
                 <TextView
                     android:id="@+id/textView15"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:text="70%"
+                    android:text="0%"
                     android:textColor="@android:color/black"
                     android:textSize="20sp" />
 
@@ -64,12 +64,13 @@
                 android:layout_marginStart="13dp"
                 android:layout_marginTop="13dp"
                 android:layout_marginBottom="13dp"
-                android:text="BASIC COMPETENCIES (6 module)"
+                android:text="BASIC COMPETENCIES"
                 android:textColor="#0235EC"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/img1"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginLeft="13dp" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -82,6 +83,8 @@
         android:layout_margin="15dp"
         android:layout_marginTop="31dp"
         android:background="@drawable/rounded_corner"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
         app:cardCornerRadius="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -90,6 +93,32 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/common_percent_tv"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="7dp"
+                android:outlineProvider="background"
+                android:visibility="invisible"
+                app:cardCornerRadius="40dp"
+                app:cardElevation="2dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginRight="5dp">
+
+                <TextView
+                    android:id="@+id/common_percent"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp" />
+
+            </androidx.cardview.widget.CardView>
 
             <ImageView
                 android:id="@+id/img2"
@@ -106,9 +135,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="16dp"
+                android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_lock" />
+                app:srcCompat="@drawable/ic_lock"
+                android:layout_marginRight="16dp"
+                tools:ignore="VectorDrawableCompat" />
 
             <TextView
                 android:id="@+id/textView11"
@@ -117,13 +149,14 @@
                 android:layout_marginStart="13dp"
                 android:layout_marginTop="13dp"
                 android:layout_marginBottom="13dp"
-                android:text="COMMON COMPETENCIES (8 module)"
+                android:text="COMMON COMPETENCIES"
                 android:textColor="@android:color/darker_gray"
                 android:textStyle="bold"
+                android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/img2"
-                app:layout_constraintTop_toTopOf="parent" />
-
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginLeft="13dp" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
@@ -134,6 +167,8 @@
         android:layout_height="65dp"
         android:layout_margin="15dp"
         android:layout_marginTop="31dp"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
         android:background="@drawable/rounded_corner"
         app:cardCornerRadius="10dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -161,7 +196,9 @@
                 android:layout_marginEnd="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_lock" />
+                app:srcCompat="@drawable/ic_lock"
+                android:layout_marginRight="16dp"
+                tools:ignore="VectorDrawableCompat" />
 
             <TextView
                 android:id="@+id/textView12"
@@ -170,12 +207,39 @@
                 android:layout_marginStart="13dp"
                 android:layout_marginTop="13dp"
                 android:layout_marginBottom="13dp"
-                android:text="CORE COMPETENCIES (6 module)"
+                android:text="CORE COMPETENCIES"
                 android:textColor="@android:color/darker_gray"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/img3"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginLeft="13dp" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/core_percent_tv"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="7dp"
+                android:outlineProvider="background"
+                android:visibility="invisible"
+                app:cardCornerRadius="40dp"
+                app:cardElevation="2dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginRight="5dp">
+
+                <TextView
+                    android:id="@+id/core_percent"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp" />
+
+            </androidx.cardview.widget.CardView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

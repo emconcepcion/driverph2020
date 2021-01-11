@@ -67,6 +67,7 @@ import static com.cav.DriverphTruckerlearningPH2020.Constant.MODULE_ID_1;
 import static com.cav.DriverphTruckerlearningPH2020.Constant.MODULE_ID_2;
 import static com.cav.DriverphTruckerlearningPH2020.Constant.MODULE_ID_3;
 import static com.cav.DriverphTruckerlearningPH2020.Constant.SP_LESSONID;
+import static com.cav.DriverphTruckerlearningPH2020.Constant._1;
 
 public class Dashboard extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     public static WeakReference<Dashboard> weakActivity;
@@ -145,7 +146,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         activeModuleId.setText(moduleIdFromServer);
         activeModule.setText(moduleNameFromServer);
 
-        if (lessonTitleFromServer.equals("null") || moduleNameFromServer.equals("null")){
+        if (lessonTitleFromServer.equals("null") || moduleNameFromServer.equals("null")) {
             resumeLesson.setText("Start Learning");
             activeModule.setVisibility(View.GONE);
             activeLesson.setVisibility(View.GONE);
@@ -201,7 +202,20 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
     }
 
     private void resumeModule() {
-        String module= activeModuleId.getText().toString();
+        String startLearning = resumeLesson.getText().toString();
+        if (startLearning.equals("Start Learning")) {
+            Intent intent = new Intent(Dashboard.this, Basic_Content.class);
+            Bundle extras = new Bundle();
+            extras.putString("module", MODULE_ID_1);
+            extras.putString("moduleName", _1);
+            intent.putExtras(extras);
+            startActivity(intent);
+        } else {
+            goContent();
+        }
+    }
+    public void goContent(){
+        String module = activeModuleId.getText().toString();
 
         SimpleDateFormat simpleDate = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         String currentDate = simpleDate.format(new Date());
@@ -288,7 +302,8 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         cardViewSimulation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(Dashboard.this, "Simulation Activity", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(Dashboard.this, Simulation.class));
+//                Toast.makeText(Dashboard.this, "Simulation Activity", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -296,7 +311,8 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         cardViewAssess.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(Dashboard.this, "Assessment Activity", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(Dashboard.this, Evaluation_Menu.class));
+//                Toast.makeText(Dashboard.this, "Assessment Activity", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -395,9 +411,9 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_change_language:
-                Toast.makeText(this, "Language Changed", Toast.LENGTH_SHORT).show();
-                break;
+//            case R.id.action_change_language:
+//                Toast.makeText(this, "Language Changed", Toast.LENGTH_SHORT).show();
+//                break;
             case R.id.action_log_out:
                 logoutThisUser();
                 break;
@@ -438,7 +454,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
     public void onBackPressed() {
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        } else{
+        } else {
             AlertDialog alertDialog = new AlertDialog.Builder(Dashboard.this).create();
             alertDialog.setTitle("Exit");
             alertDialog.setMessage("Are you sure you want to exit?");
@@ -459,7 +475,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         }
     }
 
-    public void logoutThisUser(){
+    public void logoutThisUser() {
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.remove(SHARED_PREFS);
@@ -718,7 +734,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
                                 String email = menuitemArray.getJSONObject(i).getString("email");
                                 String score = menuitemArray.getJSONObject(i).getString("score");
                                 String num_items = menuitemArray.getJSONObject(i).getString("num_of_items");
-                                myLatestChapter= menuitemArray.getJSONObject(i).getString("chapter");
+                                myLatestChapter = menuitemArray.getJSONObject(i).getString("chapter");
                                 myLatestAttempt = menuitemArray.getJSONObject(i).getString("num_of_attempt");
                                 String duration = menuitemArray.getJSONObject(i).getString("duration");
                                 String date_taken = menuitemArray.getJSONObject(i).getString("date_taken");
@@ -793,7 +809,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
                                         .getString("dateFinished"));
 
                                 myProgressUserId = menuitemArray.getJSONObject(i).getString("userId");
-                                myProgressChapter= menuitemArray.getJSONObject(i).getString("module");
+                                myProgressChapter = menuitemArray.getJSONObject(i).getString("module");
                                 myProgressLessonId = menuitemArray.getJSONObject(i).getString("lessonId");
                                 myProgressStatus = menuitemArray.getJSONObject(i).getString("status");
                                 myProgressDateStarted = menuitemArray.getJSONObject(i).getString("dateStarted");

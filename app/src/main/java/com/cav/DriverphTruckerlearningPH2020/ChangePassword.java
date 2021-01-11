@@ -1,5 +1,7 @@
 package com.cav.DriverphTruckerlearningPH2020;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -10,8 +12,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import java.util.HashMap;
 import java.util.regex.Pattern;
 
@@ -19,7 +19,7 @@ public class ChangePassword extends AppCompatActivity {
     public String email, password;
     Button save, cancel;
     EditText et_old, et_new, et_confirm;
-    private String updateUrl= "https://phportal.net/driverph/change_password.php";
+    private String updateUrl = "https://phportal.net/driverph/change_password.php";
     ProgressDialog pdLoading;
     private static final Pattern PASSWORD_PATTERN =
             Pattern.compile("^" +
@@ -27,7 +27,7 @@ public class ChangePassword extends AppCompatActivity {
                     //"(?=.*[a-z])" +         //at least 1 lower case letter
                     //"(?=.*[A-Z])" +         //at least 1 upper case letter
                     "(?=.*[a-zA-Z])" +      //any letter
-                    "(?=.*[@#$%^&+=])" +    //at least 1 special character
+                    "(?=.*[@#&!.])" +    //at least 1 special character
                     "(?=\\S+$)" +           //no white spaces
                     ".{8,}" +               //at least 4 characters
                     "$");
@@ -46,7 +46,7 @@ public class ChangePassword extends AppCompatActivity {
         et_confirm = findViewById(R.id.et_confirm_password);
         save = findViewById(R.id.btn_save);
         cancel = findViewById(R.id.btn_cancel);
-        pdLoading = new ProgressDialog(  ChangePassword.this);
+        pdLoading = new ProgressDialog(ChangePassword.this);
 
         save.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,27 +56,18 @@ public class ChangePassword extends AppCompatActivity {
                 pdLoading.show();
                 pdLoading.setMax(3000000);
 
-                String old = et_old.getText().toString();
-                String news = et_new.getText().toString();
-                String confirm = et_confirm.getText().toString();
-                if(password.equals(old)){
-                    if(news.equals(confirm)){
-                        newpassword();
-                    }else{
-                        pdLoading.dismiss();
-                        Toast.makeText(  ChangePassword.this, "New Password Didn't Match", Toast.LENGTH_SHORT).show();
-                    }
-                }else{
-                    pdLoading.dismiss();
-                    Toast.makeText(  ChangePassword.this, "Old Password Incorrect", Toast.LENGTH_SHORT).show();
+                if (!validateOldPassword() | !validatePassword() | !validatePassword() | !validateConfirmPassword()) {
+                    return;
                 }
+
+                newpassword();
             }
         });
 
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(  ChangePassword.this, MyAccount.class);
+                Intent intent = new Intent(ChangePassword.this, MyAccount.class);
                 Bundle extras = new Bundle();
                 extras.putString("email", email);
                 intent.putExtras(extras);
@@ -107,33 +98,51 @@ public class ChangePassword extends AppCompatActivity {
 
                 //creating request parameters
                 HashMap<String, String> params = new HashMap<>();
-                params.put("password",upassword);
-                params.put("email",uemail);
+                params.put("password", upassword);
+                params.put("email", uemail);
                 //returing the response
                 return requestHandler.sendPostRequest(updateUrl, params);
             }
 
             @Override
-            protected void onPostExecute(String s){
+            protected void onPostExecute(String s) {
                 super.onPostExecute(s);
                 pdLoading.dismiss();
 
-                Intent intent = new Intent(  ChangePassword.this, Login.class);
+                Intent intent = new Intent(ChangePassword.this, Login.class);
                 startActivity(intent);
-                Toast.makeText(  ChangePassword.this, "Changed Success", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ChangePassword.this, "Changed Success", Toast.LENGTH_SHORT).show();
             }
         }
         Update update = new Update();
         update.execute();
     }
 
+    private boolean validateOldPassword() {
+        String passwordInput = et_old.getText().toString().trim();
+        if (passwordInput.isEmpty()) {
+            et_old.setError("Field can't be empty");
+            pdLoading.dismiss();
+            return false;
+        }else if (!password.equals(passwordInput)) {
+            et_old.setError("Password didn't Match");
+            pdLoading.dismiss();
+            return false;
+        }else{
+            et_new.setError(null);
+            return true;
+        }
+    }
+
     private boolean validatePassword() {
         String passwordInput = et_new.getText().toString().trim();
         if (passwordInput.isEmpty()) {
             et_new.setError("Field can't be empty");
+            pdLoading.dismiss();
             return false;
         } else if (!PASSWORD_PATTERN.matcher(passwordInput).matches()) {
-            et_new.setError("Password must consist of minimum 8 characters and must contain a number, special character, letters");
+            et_new.setError("Password must consist of minimum 8 characters and must contain a number, letters,special character @#&!.");
+            pdLoading.dismiss();
             return false;
         } else {
             et_new.setError(null);
@@ -146,10 +155,12 @@ public class ChangePassword extends AppCompatActivity {
         String password = et_new.getText().toString().trim();
         if (emailInput.isEmpty()) {
             et_confirm.setError("Field can't be empty");
+            pdLoading.dismiss();
             return false;
         } else if(!emailInput.equals(password)) {
             et_confirm.setError("Password didn't Match");
             et_new.setError("Password didn't Match");
+            pdLoading.dismiss();
             return false;
         } else {
             et_confirm.setError(null);

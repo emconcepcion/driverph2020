@@ -10,14 +10,15 @@
         android:id="@+id/textView_signUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="117dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="60dp"
         android:text="SIGN UP"
         android:textColor="#fca10b"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/textView7"
-        app:layout_constraintTop_toBottomOf="@+id/btn_login"
-        android:layout_marginLeft="8dp" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_login" />
 
     <View
         android:id="@+id/view"
@@ -118,20 +119,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view" />
 
-    <Button
-        android:id="@+id/btn_guest"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="232dp"
-        android:background="@drawable/rounded_login_button"
-        android:fontFamily="sans-serif-medium"
-        android:text="Login as guest"
-        android:textColor="@android:color/white"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@id/btn_login"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view" />
+<!--    <Button-->
+<!--        android:id="@+id/btn_guest"-->
+<!--        android:layout_width="250dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="232dp"-->
+<!--        android:background="@drawable/rounded_login_button"-->
+<!--        android:fontFamily="sans-serif-medium"-->
+<!--        android:text="Login as guest"-->
+<!--        android:textColor="@android:color/white"-->
+<!--        android:textSize="18sp"-->
+<!--        app:layout_constraintEnd_toEndOf="@id/btn_login"-->
+<!--        app:layout_constraintHorizontal_bias="1.0"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/view" />-->
 
     <TextView
         android:id="@+id/textView_fgtpassword"
@@ -142,22 +143,24 @@
         android:text="Forgot password"
         android:textColor="@color/dark_blue"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_guest" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_login"
+        android:layout_marginRight="127dp" />
 
     <TextView
         android:id="@+id/textView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="44dp"
-        android:layout_marginTop="124dp"
+        android:layout_marginLeft="44dp"
+        android:layout_marginTop="76dp"
         android:layout_marginEnd="173dp"
+        android:layout_marginRight="173dp"
         android:text="Don't have an account?"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_login"
-        android:layout_marginLeft="44dp"
-        android:layout_marginRight="173dp" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_login" />
 
     <TextView
         android:id="@+id/textView9"

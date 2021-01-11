@@ -15,22 +15,10 @@
         android:layout_marginTop="10dp">
 
         <TextView
-            android:id="@+id/progress_Module"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Module"
+            android:text="My Progress Overview"
             android:textSize="22sp"
-            android:textStyle="bold"
-            android:textColor="#2B2B2B"
-            android:textAlignment="center"
-            android:gravity="center_horizontal" />
-
-        <TextView
-            android:id="@+id/lessTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Lesson"
-            android:textSize="18sp"
             android:textStyle="bold"
             android:textColor="#2B2B2B"
             android:textAlignment="center"
@@ -42,6 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
+            android:layout_marginHorizontal="20dp"
             />
 
 
@@ -69,6 +58,42 @@
 <!--            android:layout_marginTop="20dp"-->
 <!--            android:visibility="invisible"-->
 <!--            android:gravity="center_horizontal" />-->
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:background="#A9D5EAFB"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="30dp"
+            android:layout_height="200dp">
+
+            <TextView
+                android:id="@+id/progress_Module"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_horizontal"
+                android:layout_marginTop="50dp"
+                android:text="Module"
+                android:textAlignment="center"
+                android:textColor="#2B2B2B"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/lessTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/progress_Module"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginTop="20dp"
+                android:gravity="center_horizontal"
+                android:text="Lesson"
+                android:textAlignment="center"
+                android:textColor="#2B2B2B"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
 
     </LinearLayout>
 
