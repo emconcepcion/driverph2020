@@ -126,14 +126,6 @@ public class Evaluation_Menu extends AppCompatActivity {
         });
     }
 
-    @Override
-    public void onBackPressed() {
-        if (Lesson.isFromMyProgressNav){
-            startActivity(new Intent(Evaluation_Menu.this,Lesson.class));
-        }else{
-            startActivity(new Intent(Evaluation_Menu.this,Dashboard.class));
-        }
-    }
 
     public void retrievedatas(String r_email){
         final String email = r_email;

@@ -5,16 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#EAEAEA"
+    android:orientation="vertical"
     tools:context=".Lessons_Basic_Content">
-
-    <!--    <View-->
-    <!--        android:id="@+id/view2"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="55dp"-->
-    <!--        android:background="#fca10b"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toTopOf="parent" />-->
 
     <TextView
         android:id="@+id/textView31"

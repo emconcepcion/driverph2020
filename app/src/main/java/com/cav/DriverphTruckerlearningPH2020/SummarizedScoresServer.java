@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -67,7 +68,6 @@ public class SummarizedScoresServer extends AppCompatActivity {
             StyleableToast.makeText(getApplicationContext(), SummarizedScoresServer.this.getString(R.string.connect_to_net_to_view_summary),
                     Toast.LENGTH_LONG, R.style.toastStyle).show();
         }
-
 
         SharedPreferences sharedPreferences = getSharedPreferences(Uid_PREFS, MODE_PRIVATE);
         int uid = sharedPreferences.getInt("user_id", 0);
@@ -137,5 +137,6 @@ public class SummarizedScoresServer extends AppCompatActivity {
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
         return (networkInfo != null && networkInfo.isConnected());
     }
+
 
 }

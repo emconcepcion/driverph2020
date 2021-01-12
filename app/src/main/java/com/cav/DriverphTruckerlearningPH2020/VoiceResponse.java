@@ -1,6 +1,7 @@
 package com.cav.DriverphTruckerlearningPH2020;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -11,6 +12,8 @@ import android.os.Environment;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -20,13 +23,14 @@ import java.io.IOException;
 
 import static com.cav.DriverphTruckerlearningPH2020.Dashboard.Uid_PREFS;
 import static com.cav.DriverphTruckerlearningPH2020.Dashboard.dashboard_email;
+import static com.cav.DriverphTruckerlearningPH2020.Lessons_Basic_Content.isFromLessonBasicContent;
 
 public class VoiceResponse extends AppCompatActivity {
 
     MediaRecorder mediaRecorder = null;
     MediaPlayer mediaPlayer = null;
     Button start_rec,  play_rec, btn_next;
-    TextView textView, userName, chapVr;
+    TextView textView, userName, chapVr, whatWasLearned;
 
     public static String fileName = "recorded.3gp";
     String file = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + fileName;
@@ -49,22 +53,29 @@ public class VoiceResponse extends AppCompatActivity {
         play_rec = findViewById(R.id.btn_playback);
         btn_next = findViewById(R.id.btn_next);
         chapVr = findViewById(R.id.chapterVR);
+        whatWasLearned = findViewById(R.id.whatHaveYouLearned);
 
-        userName.setText("Hi, " + uname);
-//        userName.setText(AccountEdit.fname);
+        userName.setText("\nHi, " + uname);
         chapVr.setText(chapter);
         textView.setVisibility(View.GONE);
 
+        if (Lesson.isFromMyProgressNav) {
+            btn_next.setVisibility(View.GONE);
+            start_rec.setVisibility(View.GONE);
+            textView.setText(R.string.play_recording);
+            whatWasLearned.setText("\nListen to what you have recently recorded as your recitation.\n\n\n\n\n");
+        }else if (isFromLessonBasicContent){
+            btn_next.setVisibility(View.VISIBLE);
+            textView.setText(R.string.playback_ended);
+        }
 
         btn_next.setVisibility(View.INVISIBLE);
         btn_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //if (lastModule == true){
-                //    startActivity(new Intent(VoiceResponse.this, QuizInstructions.class));
-//                  }else{
-//                     startActivity(new Intent(VoiceResponse.this, Simulation.class));
-//                  }
+                if(mediaPlayer!=null && mediaPlayer.isPlaying()){
+                    mediaPlayer.release();
+                }
                 SharedPreferences sharedPreferences = getSharedPreferences(Uid_PREFS, MODE_PRIVATE);
                 int user_id = sharedPreferences.getInt("user_id", 0);
                 Intent intent = new Intent(VoiceResponse.this, Simulation.class);
@@ -111,7 +122,7 @@ public class VoiceResponse extends AppCompatActivity {
     private void requestPermission() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED ) {
             ActivityCompat
-                    .requestPermissions(VoiceResponse.this, new String[]{Manifest.permission.RECORD_AUDIO, 
+                    .requestPermissions(VoiceResponse.this, new String[]{Manifest.permission.RECORD_AUDIO,
                             Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
         }
     }
@@ -132,12 +143,23 @@ public class VoiceResponse extends AppCompatActivity {
         if (start) {
             play();
             textView.setVisibility(View.VISIBLE);
-            textView.setText(R.string.play_recording);
+            File noFile = new File(file);
+            if (!noFile.exists()){
+                textView.setText(R.string.noRecording);
+            }else{
+                textView.setText(R.string.play_recording);
+            }
             mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                 public void onCompletion(MediaPlayer mp) {
-                    textView.setText(R.string.playback_ended);
-//                    Log.i("Completion Listener","Song Complete");
-                    btn_next.setVisibility(View.VISIBLE);
+                    if (Lesson.isFromMyProgressNav) {
+                        btn_next.setVisibility(View.GONE);
+                        start_rec.setVisibility(View.GONE);
+                        textView.setText("Go ahead, visit your lessons\nand tell us about your new learning.");
+                        whatWasLearned.setText("\nListen to what you have recently recorded as your recitation.\n\n\n\n\n");
+                    }else if (isFromLessonBasicContent) {
+                        textView.setText(R.string.playback_ended);
+                        btn_next.setVisibility(View.VISIBLE);
+                    }
                 }
             });
         } else {
@@ -176,15 +198,25 @@ public class VoiceResponse extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
+
+    public void deleteRecording() {
+        try {
+            File fileDelete = new File(file);
+            if (fileDelete.exists()) {
+                fileDelete.delete();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
     @Override
     public void onBackPressed() {
-        if (Lesson.isFromMyProgressNav){
-            startActivity(new Intent(VoiceResponse.this,Lesson.class));
-        }else{
-            super.onBackPressed();
+        if(mediaPlayer!=null && mediaPlayer.isPlaying()){
+            mediaPlayer.release();
         }
+        super.onBackPressed();
     }
 }

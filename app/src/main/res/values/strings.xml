@@ -125,6 +125,9 @@
     <string name="passenger_bus_driver_n_straight_truck_driver">•Passenger Bus Driver \n •Straight Truck Driver</string>
     <string name="confirm">Confirm</string>
     <string name="i_understand">I Understand</string>
+    <string name="perEval">This shows how well or poor you have performed based on the scores and number of retries you made for each module.</string>
+    <string name="keepLearning">Keep learning and become a more knowledgeable trucker!</string>
+    <string name="noRecording">No recently recorded recitation.</string>
 
 
 </resources>

@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#EAEAEA"
+    android:orientation="vertical"
     tools:context=".Lessons_Menu">
 
     <androidx.cardview.widget.CardView

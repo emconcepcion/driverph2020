@@ -3,15 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".VoiceResponse">
-
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="16dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         >
 
         <TextView
@@ -46,9 +46,11 @@
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/whatHaveYouLearned"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:gravity="center"
             android:layout_marginTop="5dp"
             android:text="@string/recap_msg"
             android:textColor="@android:color/black"
@@ -86,13 +88,14 @@
             <Button
                 android:id="@+id/btn_playback"
                 android:layout_width="140dp"
-                android:layout_height="70dp"
+                android:layout_height="60dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="0dp"
                 android:background="@drawable/custom_playback_btn"
                 android:padding="5dp"
                 android:text="@string/play_recorded"
                 android:textColor="@android:color/white"
+                android:textAllCaps="false"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -104,10 +107,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="15dp"
             android:layout_marginBottom="50dp"
             android:text="@string/recording_status"
             android:textSize="16sp"
+            android:gravity="center"
             android:textStyle="bold"
             android:textColor="#003397" />
 
@@ -116,12 +120,15 @@
 
     <Button
         android:id="@+id/btn_next"
-        android:layout_width="130dp"
+        android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="50dp"
         android:layout_marginTop="15dp"
-        android:text="@string/next"
+        android:text="Ice breaker, please!"
+        android:textSize="16sp"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
         android:background="@drawable/yellow_button"
         android:layout_centerHorizontal="true"/>
 

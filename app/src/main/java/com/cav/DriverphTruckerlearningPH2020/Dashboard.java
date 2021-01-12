@@ -214,7 +214,8 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
             goContent();
         }
     }
-    public void goContent(){
+
+    public void goContent() {
         String module = activeModuleId.getText().toString();
 
         SimpleDateFormat simpleDate = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
@@ -501,11 +502,15 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         editor4.remove("MySharedPrefForEmail");
         editor4.apply();
 
+        VoiceResponse vr = new VoiceResponse();
+        vr.deleteRecording();
+
         Intent logout = new Intent(Dashboard.this, Login.class);
         startActivity(logout);
 //        Toast.makeText(this, "Log Out Success", Toast.LENGTH_SHORT).show();
         System.exit(0);
     }
+
 
     //for viewing of passed tests (summarized)
     private void loadRecyclerViewData() {

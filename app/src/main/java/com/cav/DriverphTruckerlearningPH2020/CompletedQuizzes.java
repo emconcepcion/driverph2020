@@ -96,16 +96,6 @@ public class CompletedQuizzes extends AppCompatActivity {
 
     }
 
-//    public void onClick (View v){
-//        Intent intent = getIntent();
-//        finish();
-//        overridePendingTransition(0, 0);
-//        startActivity(intent);
-//        overridePendingTransition(0, 0);
-//        StyleableToast.makeText(getApplicationContext(), CompletedQuizzes.this.getString(R.string.list_updated),
-//                Toast.LENGTH_LONG, R.style.toastStyle).show();
-//    }
-
     public void readFromLocalStorage(){
 
         //clear data from arraylist

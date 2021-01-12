@@ -65,11 +65,14 @@ public class Lessons_Basic_Content extends AppCompatActivity {
     public static String myProgressStatus;
     public static String myProgressDateStarted;
     public static String myProgressDateFinished;
+    public static boolean isFromLessonBasicContent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lessons__basic__content);
+        isFromLessonBasicContent = true;
+        Lesson.isFromMyProgressNav = false;
 
         ActivityCompat.requestPermissions(Lessons_Basic_Content.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE}, PackageManager.PERMISSION_GRANTED);
