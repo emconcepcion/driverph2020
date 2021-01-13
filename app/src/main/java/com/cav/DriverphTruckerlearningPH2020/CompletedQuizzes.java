@@ -44,14 +44,15 @@ public class CompletedQuizzes extends AppCompatActivity {
     BroadcastReceiver broadcastReceiver;
     SwipeRefreshLayout swipeRefreshLayout;
     Button summary_btn;
+    TextView pullDown;
     private final String SCORES_URL = "https://phportal.net/driverph/scoresOnline.php";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_completed_quizzes);
 
+        pullDown = findViewById(R.id.reload_page_inst);
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.refreshView);
         summary_btn = findViewById(R.id.btn_summarized_scorelist);
         recyclerView = findViewById(R.id.recyclerView);
@@ -72,14 +73,15 @@ public class CompletedQuizzes extends AppCompatActivity {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                pullDown.setVisibility(View.INVISIBLE);
                 swipeRefreshLayout.setRefreshing(false);
                 Intent intent = getIntent();
                 finish();
                 overridePendingTransition(0, 0);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
-                StyleableToast.makeText(getApplicationContext(), CompletedQuizzes.this.getString(R.string.list_updated),
-                        Toast.LENGTH_LONG, R.style.toastStyle).show();
+//                StyleableToast.makeText(getApplicationContext(), CompletedQuizzes.this.getString(R.string.list_updated),
+//                        Toast.LENGTH_LONG, R.style.toastStyle).show();
             }
         });
 

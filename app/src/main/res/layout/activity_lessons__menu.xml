@@ -181,7 +181,7 @@
         android:id="@+id/view"
         android:layout_width="wrap_content"
         android:layout_height="260dp"
-        android:background="@drawable/gradient_circular"
+        android:background="@color/red"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -193,14 +193,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/view"
-        app:srcCompat="@drawable/dlessons_dash_btn" />
+        app:srcCompat="@drawable/truck_char" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="45dp"
-        android:text="Competency Standards"
+        android:text="Modules"
         android:textColor="@android:color/white"
         android:textSize="24sp"
         android:textStyle="bold"

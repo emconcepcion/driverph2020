@@ -87,7 +87,9 @@
     <string name="click_refresh_list_to_proceed">Click Refresh list to proceed.</string>
     <string name="no">No</string>
     <string name="yes">Yes</string>
-    <string name="your_quiz_is_not">Your quiz is not yet finished.</string>
+    <string name="your_quiz_is_not">Your quiz is not yet finished.<br></br>
+        You will automatically get zero (0) as your score.<br></br>
+        Do you wish to end this attempt?</string>
     <string name="oops">Oops!</string>
     <string name="synced">Sync successful!</string>
     <string name="sync_error_json">Response for sync failed!</string>

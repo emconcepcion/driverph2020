@@ -249,7 +249,7 @@
         android:id="@+id/view"
         android:layout_width="wrap_content"
         android:layout_height="260dp"
-        android:background="@drawable/gradient_circular"
+        android:background="@drawable/gradient_blue"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -261,7 +261,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/view"
-        app:srcCompat="@drawable/dlessons_dash_btn" />
+        app:srcCompat="@drawable/truck_char" />
 
     <TextView
         android:id="@+id/textView2"

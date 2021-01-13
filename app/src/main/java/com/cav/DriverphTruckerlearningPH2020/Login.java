@@ -91,7 +91,7 @@ public class Login extends AppCompatActivity {
             protected void onPreExecute() {
                 super.onPreExecute();
                 pdLoading.setMessage("\tLoading...");
-                pdLoading.setCancelable(false);
+                pdLoading.setCancelable(true);
                 pdLoading.show();
             }
 

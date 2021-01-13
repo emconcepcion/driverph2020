@@ -17,7 +17,7 @@
                     android:id="@+id/nav_my_progress"
                     android:checkable="true"
                     android:icon="@drawable/ic_my_progress"
-                    android:title="My Progress" />
+                    android:title="My Progress Overview" />
                 <item
                     android:id="@+id/nav_advisory"
                     android:checkable="true"

@@ -178,7 +178,7 @@ public class QuizResults extends AppCompatActivity {
     }
 
     public void review() {
-        startActivity(new Intent(QuizResults.this, Lessons_Menu.class));
+        startActivity(new Intent(QuizResults.this, Dashboard.class));
     }
 
     public void retake() {

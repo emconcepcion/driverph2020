@@ -22,21 +22,21 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+<!--            android:background="@drawable/cardview_gradient_bg"-->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/cardview_gradient_bg">
+                android:layout_marginTop="0.5dp"
+                android:background="@drawable/border_yellow"
+                >
 
                 <TextView
                     android:id="@+id/textView_userID"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="5dp"
                     android:paddingHorizontal="4dp"
                     android:text="Welcome Juan!"
-                    android:textColor="@android:color/white"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
@@ -46,12 +46,11 @@
                     android:id="@+id/textView_greeting"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginBottom="5dp"
                     android:text="@string/current_date"
-                    android:textColor="@android:color/white"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/textView_userID" />
@@ -60,7 +59,7 @@
                     android:id="@+id/dashboard_avatar"
                     android:layout_width="50dp"
                     android:layout_height="40dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="5dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginRight="16dp"
                     android:src="@drawable/ic_boy"
@@ -73,7 +72,6 @@
                 android:id="@+id/dash_progress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#A9D5EAFB"
                 android:orientation="vertical">
 
                 <TextView
@@ -118,7 +116,7 @@
                     android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="10dp"
-                    android:background="@drawable/rounded_login_button"
+                    android:background="@drawable/yellow_login_button"
                     android:padding="10dp"
                     android:text="Resume"
                     android:textAllCaps="false"
@@ -318,6 +316,7 @@
                                 <ImageView
                                     android:layout_width="358dp"
                                     android:layout_height="130dp"
+                                    android:layout_marginTop="56dp"
                                     android:background="@drawable/dassessment_btn"
                                     android:scaleType="centerCrop"
                                     app:layout_constraintStart_toStartOf="parent"

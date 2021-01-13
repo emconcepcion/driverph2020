@@ -25,6 +25,9 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import static com.cav.DriverphTruckerlearningPH2020.Constant._1;
+import static com.cav.DriverphTruckerlearningPH2020.Constant._2;
+import static com.cav.DriverphTruckerlearningPH2020.Constant._3;
 import static com.cav.DriverphTruckerlearningPH2020.Dashboard.Uid_PREFS;
 
 
@@ -32,12 +35,10 @@ public class QuizInstructions extends AppCompatActivity {
 
     public static String chapter;
     Button buttonStartQuiz, back_btn;
-
-    // Adding HTTP Server URL to string variable.
     private final String QUESTIONS_URL = "https://phportal.net/driverph/questions.php";
 
     private TextView textViewChapter;
-    public static TextView textViewModuleTitle;
+    public static TextView textViewModuleTitle, tvModuleName;
     public TextView myEmailQuizInst, userIdQInst;
     SharedPreferences sp;
 
@@ -54,6 +55,7 @@ public class QuizInstructions extends AppCompatActivity {
         myEmailQuizInst = findViewById(R.id.myEmailQuizInst);
         userIdQInst = findViewById(R.id.myUserIdQuizInst);
         textViewModuleTitle = findViewById(R.id.textview_moduleTest);
+        tvModuleName = findViewById(R.id.tv_moduleName);
 
         sp = getApplicationContext().getSharedPreferences("mySavedAttempt", Context.MODE_PRIVATE);
         String myEmail = sp.getString("email", "");
@@ -63,6 +65,7 @@ public class QuizInstructions extends AppCompatActivity {
         int uid = sharedPreferences.getInt("user_id", 0);
         userIdQInst.setText(String.valueOf(uid));
 
+        //quiz will be taken if user comes from the lessons menu
         if (Lessons_Menu.isFromLessonsMenu) {
             SharedPreferences sp1 = getApplicationContext()
                     .getSharedPreferences("SharedPrefChapter", Context.MODE_PRIVATE);
@@ -73,6 +76,17 @@ public class QuizInstructions extends AppCompatActivity {
                     .getSharedPreferences("ChapFromQuizzes", Context.MODE_PRIVATE);
             String qChapter = sp2.getString("Qchapter", "");
              textViewChapter.setText(qChapter);
+             switch (qChapter){
+                 case "1":
+                     tvModuleName.setText(_1);
+                     break;
+                 case "2":
+                     tvModuleName.setText(_2);
+                     break;
+                 case "3":
+                     tvModuleName.setText(_3);
+                     break;
+             }
         }
 
         buttonStartQuiz.setOnClickListener(new View.OnClickListener() {
@@ -88,11 +102,10 @@ public class QuizInstructions extends AppCompatActivity {
             }
         });
         getJSON(QUESTIONS_URL);
-
     }
 
     private void backToLessons() {
-        startActivity(new Intent(com.cav.DriverphTruckerlearningPH2020.QuizInstructions.this, com.cav.DriverphTruckerlearningPH2020.Lessons_Basic_Content.class));
+        startActivity(new Intent(QuizInstructions.this, Dashboard.class));
     }
 
     private void startQuiz() {
@@ -147,7 +160,6 @@ public class QuizInstructions extends AppCompatActivity {
             @Override
             protected String doInBackground(Void... voids) {
                 chapter = textViewChapter.getText().toString();
-
                 try {
                     URL url = new URL(urlWebService);
                     HttpURLConnection con = (HttpURLConnection) url.openConnection();

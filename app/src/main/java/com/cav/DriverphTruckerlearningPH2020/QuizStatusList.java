@@ -204,13 +204,15 @@ public class QuizStatusList extends AppCompatActivity {
         //save the score to web server for all attempts table if there is internet connection
         if (checkNetworkConnection()){
             saveAllAttemptsToAppServer(userIdA,emailA, scoreA, itemsA, chapA, attemptsA, durationA, dateTakenA, isLockedA, isCompletedA);
+            saveToLocalStorage(userIdA,emailA, scoreA, itemsA, chapA, attemptsA, durationA,
+                    dateTakenA, isLockedA, isCompletedA, DbContract.SYNC_STATUS_SAVED);
+        }else{
+            saveToLocalStorage(userIdA,emailA, scoreA, itemsA, chapA, attemptsA, durationA,
+                    dateTakenA, isLockedA, isCompletedA, DbContract.SYNC_STATUS_FAILED);
         }
         //save the score to web server only if the user passed the test, else, save only to local db
         if (QuizActivity.unlocked && checkNetworkConnection()){
             saveToAppServer(userIdA,emailA, scoreA, itemsA, chapA, attemptsA, durationA, dateTakenA, isLockedA, isCompletedA);
-        }else{
-            saveToLocalStorage(userIdA,emailA, scoreA, itemsA, chapA, attemptsA, durationA,
-                    dateTakenA, isLockedA, isCompletedA, DbContract.SYNC_STATUS_SAVED);
         }
     }
 
@@ -251,7 +253,8 @@ public class QuizStatusList extends AppCompatActivity {
                                 int num_of_attempt, String duration, String date_taken,
                                 int isLocked, int isCompleted) {
         if (checkNetworkConnection()) {
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, DbContract.ScoresTable.SERVER_URL,
+            StringRequest stringRequest = new StringRequest(Request.Method.POST,
+                    DbContract.ScoresTable.SERVER_URL,
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {

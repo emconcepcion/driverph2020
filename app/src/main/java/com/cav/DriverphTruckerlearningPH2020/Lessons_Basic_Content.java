@@ -44,6 +44,10 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+import static com.cav.DriverphTruckerlearningPH2020.Constant.SP_LESSONID;
+import static com.cav.DriverphTruckerlearningPH2020.Constant._1;
+import static com.cav.DriverphTruckerlearningPH2020.Constant._2;
+import static com.cav.DriverphTruckerlearningPH2020.Constant._3;
 import static com.cav.DriverphTruckerlearningPH2020.Dashboard.dashboard_email;
 import static com.cav.DriverphTruckerlearningPH2020.Dashboard.nameVR;
 import static com.cav.DriverphTruckerlearningPH2020.Constant.SERVER_USER_PROGRESS;
@@ -54,7 +58,7 @@ public class Lessons_Basic_Content extends AppCompatActivity {
     Button download, textspeech;
     TextToSpeech textToSpeech;
     public static TextView email_lesson;
-    Button btnBack, btnNext;
+    Button btnNext;
     private SeekBar mSeekBarPitch, mSeekBarSpeed;
     private TextView pitch, speed, savedPdf;
     public static String module, course, status, dateStarted, dateFinished,
@@ -83,7 +87,26 @@ public class Lessons_Basic_Content extends AppCompatActivity {
         dateStarted = getIntent().getStringExtra("dateStarted");
         dateFinished = getIntent().getStringExtra("dateFinished");
         currentLessonId = getIntent().getStringExtra("currLessonId");
-        moduleName = getIntent().getStringExtra("moduleName");
+//        moduleName = getIntent().getStringExtra("moduleName");
+
+        SharedPreferences sharedPreferences = getSharedPreferences(SP_LESSONID, MODE_PRIVATE);
+        SharedPreferences.Editor myEdit = sharedPreferences.edit();
+        myEdit.putString("lessonTitle", course);
+        switch(module){
+            case "1":
+                moduleName = _1;
+                break;
+            case "2":
+                moduleName = _2;
+                break;
+            case "3":
+                moduleName = _3;
+                break;
+        }
+        myEdit.putString("moduleName", moduleName);
+        myEdit.putString("moduleId", module);
+        myEdit.putString("lessonId", currentLessonId);
+        myEdit.apply();
 
         insertUserProgressModules();
         retrievedatas();

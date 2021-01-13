@@ -30,8 +30,8 @@ public class Lesson extends AppCompatActivity {
 
     public static boolean isFromMyProgressNav;
     ActivityLessonBinding binding;
-    String[] descriptionData = {"Most recent\nLesson", "Most recent\nRecitation", "Completed\nTests",
-                                "Performance\nEvaluation", "Keep\nLearning!"};
+    String[] descriptionData = {"Most\nrecent\nLesson", "Most\nrecent\nRecitation", "My\nCompleted\nTests",
+                                "My\nPerformance\nEvaluation", "Just\nKeep\nLearning!"};
 
     public static TextView progress_Module, progress_LessonTitle;
     int current_state = 0;
@@ -107,14 +107,14 @@ public class Lesson extends AppCompatActivity {
                                 break;
                             case 2:
                                 progress_Module.setText("Completed tests");
-                                progress_LessonTitle.setText("This is where you can find the summary of the " +
-                                        "results of the tests that you have successfully passed.");
+                                progress_LessonTitle.setText("This is where you can find the summarized result " +
+                                        "of your passed and final attempt for each module tests.");
                                 startActivity(new Intent(Lesson.this, SummarizedScoresServer.class));
                                 break;
                             case 3:
                                 progress_Module.setText("Performance Evaluation");
                                 progress_LessonTitle.setText("This shows how well or poor you have performed based " +
-                                        "on the scores and number of retries you made for each module.");
+                                        "on the scores and number of retries you made for each module test.");
                                 startActivity(new Intent(Lesson.this, Evaluation_Menu.class));
                                 break;
                             case 4:

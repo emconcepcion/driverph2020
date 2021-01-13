@@ -4,33 +4,42 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
+    android:paddingHorizontal="16dp"
+    android:paddingBottom="16dp"
     tools:context=".QuizInstructions">
+
+    <TextView
+        android:id="@+id/textview_chapter_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="@string/course_title"
+        android:visibility="invisible"
+        />
 
     <TextView
         android:id="@+id/textview_moduleTest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/textview_chapter_title"
         android:layout_centerHorizontal="true"
         android:text="Module Test"
-        android:layout_marginTop="30dp"
         android:textSize="20sp"
         android:textColor="@android:color/black"
         android:textStyle="bold"
         />
 
     <TextView
-        android:id="@+id/textview_chapter_title"
+        android:id="@+id/tv_moduleName"
         android:layout_below="@id/textview_moduleTest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:text="@string/course_title"
+        android:text="Module Name"
         android:textSize="20sp"
         android:textColor="@android:color/black"
         android:textStyle="bold"
         />
-
 
     <View
         android:id="@+id/divider_up"
@@ -38,13 +47,13 @@
         android:layout_height="3dp"
         android:layout_marginTop="5dp"
         android:background="?android:attr/listDivider"
-        android:layout_below="@id/textview_chapter_title"/>
+        android:layout_below="@id/tv_moduleName"/>
 
     <TextView
         android:id="@+id/textview_questions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textview_chapter_title"
+        android:layout_below="@id/tv_moduleName"
         android:text="@string/questions_5"
         android:layout_marginTop="15dp"
         android:textSize="14sp"
@@ -77,7 +86,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="INSTRUCTIONS"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:textSize="18sp"
         android:textColor="@android:color/black"
         android:textStyle="bold"
@@ -97,8 +106,8 @@
 
     <Button
         android:id="@+id/btn_start_quiz"
-        android:layout_width="230dp"
-        android:layout_height="60dp"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
         android:layout_below="@id/textview_instruct_msg"
         android:text="Begin"
         android:layout_marginTop="30dp"
@@ -114,12 +123,11 @@
         android:id="@+id/btn_back_to_take_quiz"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Back"
+        android:text="I need to review"
         android:layout_alignParentBottom="true"
-        android:textColor="@android:color/white"
-        android:paddingStart="20dp"
-        android:paddingEnd="20dp"
-        android:background="@drawable/yellow_button"
+        android:paddingHorizontal="15dp"
+        android:background="@drawable/border_yellow"
+        android:textAllCaps="false"
         android:layout_marginBottom="20dp"/>
 
     <TextView

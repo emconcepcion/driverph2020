@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_above="@id/button6"
             android:layout_marginHorizontal="5dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:layout_marginBottom="10dp"
             android:textSize="16sp"
             android:text="Here are your most recent attempts for the tests:"
@@ -41,6 +41,7 @@
             android:id="@+id/main_linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="5dp"
             android:layout_below="@id/toolbar"
             android:orientation="vertical">
 
@@ -80,8 +81,7 @@
             android:layout_height="wrap_content"
             android:layout_above="@id/button6"
             android:layout_marginHorizontal="10dp"
-            android:layout_marginBottom="10dp"
-            android:textColor="@color/dark_blue"
+            android:layout_marginBottom="5dp"
             android:text="Pull down to refresh this list"
             android:gravity="center_horizontal"/>
 

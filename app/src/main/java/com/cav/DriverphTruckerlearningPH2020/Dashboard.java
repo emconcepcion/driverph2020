@@ -366,7 +366,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
                         CircleImageView navImage = (CircleImageView) headerView.findViewById(R.id.headerimage);
                         user_id = obj.getString("id");
                         nameVR = obj.getString("first_name");
-                        welcome_fname.setText("Welcome " + obj.getString("first_name"));
+                        welcome_fname.setText("Welcome, " + obj.getString("first_name"));
                         navUsername.setText(obj.getString("first_name") + " " + obj.getString("last_name"));
                         navemail.setText(obj.getString("email"));
                         String img_num = obj.getString("image");
@@ -507,7 +507,6 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
 
         Intent logout = new Intent(Dashboard.this, Login.class);
         startActivity(logout);
-//        Toast.makeText(this, "Log Out Success", Toast.LENGTH_SHORT).show();
         System.exit(0);
     }
 

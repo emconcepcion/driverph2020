@@ -46,7 +46,6 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="5dp"
-        android:textColor="@color/dark_blue"
         android:text="Note: Only the questions that you attempted to answer will be displayed below:"
         />
 
@@ -89,7 +88,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="35dp"
-        android:background="@drawable/cardview_gradient_bg"
+        android:background="@drawable/yellow_login_button"
         android:textColor="@android:color/white"
         android:layout_margin="16dp"/>
 

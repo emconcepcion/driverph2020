@@ -41,11 +41,9 @@
             android:layout_height="match_parent"
             android:layout_marginHorizontal="5dp"
             android:layout_marginVertical="30dp"
-            android:background="@drawable/truck_dash"
-            android:gravity="center"
             >
-
-<!--            #F2F6F8FA-->
+<!--            #F2F6F8FA
+                #D9F6F8FA-->
             <TextView
                 android:id="@+id/progress_Module"
                 android:layout_width="match_parent"
@@ -53,10 +51,11 @@
                 android:layout_gravity="center_vertical"
                 android:gravity="center"
                 android:text="Module"
-                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginHorizontal="25dp"
                 android:textAlignment="center"
-                android:background="#CCF6F8FA"
-                android:textColor="#2B2B2B"
+                android:background="@color/yellow"
+                android:textColor="@android:color/white"
                 android:textSize="22sp"
                 android:textStyle="bold" />
 
@@ -64,11 +63,10 @@
                 android:id="@+id/lessTitle"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                android:background="#CCF6F8FA"
+                android:background="@drawable/border_yellow"
                 android:layout_below="@id/progress_Module"
-                android:layout_marginHorizontal="30dp"
+                android:layout_marginHorizontal="25dp"
                 android:paddingHorizontal="10dp"
-                android:layout_marginTop="20dp"
                 android:gravity="center"
                 android:text="Lesson"
                 android:textAlignment="center"

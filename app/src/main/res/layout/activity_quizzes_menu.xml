@@ -180,7 +180,7 @@
         android:id="@+id/view"
         android:layout_width="wrap_content"
         android:layout_height="260dp"
-        android:background="@drawable/gradient_circular"
+        android:background="@drawable/cardview_gradient_bg"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -192,7 +192,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/view"
-        app:srcCompat="@drawable/quicktrans_logo" />
+        app:srcCompat="@drawable/truck_char" />
 
     <TextView
         android:id="@+id/textView2"
@@ -200,36 +200,39 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="45dp"
         android:text="Chapter Tests"
-        android:textColor="@android:color/white"
         android:textSize="24sp"
         android:textStyle="bold"
+        android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView6" />
 
     <Button
         android:id="@+id/button5"
-        android:layout_width="match_parent"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="61dp"
         android:layout_marginHorizontal="20dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginTop="64dp"
         android:background="@drawable/rounded_login_button"
         android:padding="15dp"
-        android:textColor="@android:color/white"
         android:text="View Leaderboard"
-        android:textSize="18sp"
         android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView_core_competencies"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/cardView_core_competencies" />
 
     <Button
         android:id="@+id/button6"
-        android:layout_width="match_parent"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="120dp"
-        android:background="@drawable/rounded_login_button"
+        android:layout_marginStart="80dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginTop="122dp"
+        android:background="@drawable/yellow_login_button"
         android:padding="15dp"
         android:text="View Test Scores"
         android:textAllCaps="false"

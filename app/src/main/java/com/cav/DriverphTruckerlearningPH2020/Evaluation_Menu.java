@@ -137,7 +137,7 @@ public class Evaluation_Menu extends AppCompatActivity {
                 super.onPreExecute();
                 pdLoading.setMessage("\tLoading...");
                 pdLoading.setMax(2000);
-                pdLoading.setCancelable(false);
+                pdLoading.setCancelable(true);
                 pdLoading.show();
             }
 

@@ -19,24 +19,23 @@
         android:text="Completed Test Scores"
         android:gravity="center_horizontal" />
 
-    <TextView
-        android:id="@+id/summarized_scoreList"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:layout_below="@id/sumScores"
-        android:textColor="@color/dark_blue"
-        android:text="Showing the summarized result for each chapter test:"
-        android:gravity="center_horizontal" />
+<!--    <TextView-->
+<!--        android:id="@+id/summarized_scoreList"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginHorizontal="10dp"-->
+<!--        android:layout_marginTop="3dp"-->
+<!--        android:layout_marginBottom="10dp"-->
+<!--        android:layout_below="@id/sumScores"-->
+<!--        android:text="Showing the summarized result for each chapter test:"-->
+<!--        android:gravity="center_horizontal" />-->
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         card_view:cardUseCompatPadding="true"
-        android:layout_below="@id/summarized_scoreList"
+        android:layout_below="@id/sumScores"
         card_view:cardElevation="5dp"
         card_view:cardCornerRadius="5dp"
         android:scrollbars="vertical"

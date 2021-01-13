@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
+        android:layout_marginVertical="10dp"
         android:text="Lesson"
         android:textSize="20sp"
         android:textStyle="bold" />
@@ -24,7 +24,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/textView31"
         android:layout_above="@id/bottomLinear"
-        android:layout_marginTop="5dp"
         android:layout_marginHorizontal="3dp"
         android:orientation="vertical"
         android:background="@drawable/border_light">

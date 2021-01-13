@@ -155,7 +155,7 @@ public class Database {
 			return db.insertWithOnConflict(TABLE_NAME, null, cv, SQLiteDatabase.CONFLICT_IGNORE);
 	}
 
-	public long addAllAttempts( Score score)
+	public long addAllAttempts(Score score)
 	{
 		ContentValues contentValues = new ContentValues();
 		contentValues.put( DbContract.ScoresTable.COLUMN_NAME_USER_ID, score.getUser_id());
