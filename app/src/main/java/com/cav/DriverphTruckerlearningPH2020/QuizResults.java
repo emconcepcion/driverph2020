@@ -249,5 +249,8 @@ public class QuizResults extends AppCompatActivity {
         return (networkInfo != null && networkInfo.isConnected());
     }
 
+    @Override
+    public void onBackPressed() {
+    }
 }
 

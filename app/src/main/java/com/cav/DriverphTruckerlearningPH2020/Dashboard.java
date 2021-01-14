@@ -16,6 +16,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
@@ -73,6 +74,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
     public static WeakReference<Dashboard> weakActivity;
 
     private DrawerLayout drawer;
+    String img_num;
     static Button resumeLesson;
     public static String dashboard_email;
     public static TextView recentModule, activeModule, activeLesson,
@@ -198,6 +200,19 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+
+        dahsboard_avatar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent1 = new Intent(Dashboard.this, SelectAvatar.class);
+                Bundle extras1 = new Bundle();
+                extras1.putString("email", dashboard_email);
+                extras1.putString("image", img_num);
+                extras1.putString("id", "0");
+                intent1.putExtras(extras1);
+                startActivity(intent1);
+            }
+        });
 
     }
 
@@ -369,27 +384,12 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
                         welcome_fname.setText("Welcome, " + obj.getString("first_name"));
                         navUsername.setText(obj.getString("first_name") + " " + obj.getString("last_name"));
                         navemail.setText(obj.getString("email"));
-                        String img_num = obj.getString("image");
+                        img_num = obj.getString("image");
 
-                        if (img_num.equals("1")) {
-                            navImage.setImageDrawable(getResources().getDrawable(R.drawable.avatar1));
-                            dahsboard_avatar.setImageDrawable(getResources().getDrawable(R.drawable.avatar1));
-                        } else if (img_num.equals("2")) {
-                            navImage.setImageDrawable(getResources().getDrawable(R.drawable.avatar2));
-                            dahsboard_avatar.setImageDrawable(getResources().getDrawable(R.drawable.avatar2));
-                        } else if (img_num.equals("3")) {
-                            navImage.setImageDrawable(getResources().getDrawable(R.drawable.avatar3));
-                            dahsboard_avatar.setImageDrawable(getResources().getDrawable(R.drawable.avatar3));
-                        } else if (img_num.equals("4")) {
-                            navImage.setImageDrawable(getResources().getDrawable(R.drawable.avatar4));
-                            dahsboard_avatar.setImageDrawable(getResources().getDrawable(R.drawable.avatar4));
-                        } else if (img_num.equals("5")) {
-                            navImage.setImageDrawable(getResources().getDrawable(R.drawable.avatar5));
-                            dahsboard_avatar.setImageDrawable(getResources().getDrawable(R.drawable.avatar5));
-                        } else if (img_num.equals("6")) {
-                            navImage.setImageDrawable(getResources().getDrawable(R.drawable.avatar6));
-                            dahsboard_avatar.setImageDrawable(getResources().getDrawable(R.drawable.avatar6));
-                        }
+                        int imageResource = getResources().getIdentifier("avatar" + img_num, "drawable", getPackageName());
+                        Drawable image = getResources().getDrawable(imageResource);
+                        navImage.setImageDrawable(image);
+                        dahsboard_avatar.setImageDrawable(image);
 //                        Toast.makeText(Dashboard.this, "Fetched from user table: " + user_id, Toast.LENGTH_SHORT).show();
                     }
                 } catch (Exception e) {

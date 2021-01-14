@@ -496,4 +496,10 @@ public class Simulation extends Activity {
             }
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(Simulation.this, Dashboard.class));
+        finish();
+    }
 }

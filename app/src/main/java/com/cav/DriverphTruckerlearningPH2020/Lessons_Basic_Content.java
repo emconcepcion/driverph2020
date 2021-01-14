@@ -17,6 +17,10 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.print.PrintAttributes;
+import android.print.PrintDocumentAdapter;
+import android.print.PrintJob;
+import android.print.PrintManager;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.View;
@@ -161,7 +165,7 @@ public class Lessons_Basic_Content extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onClick(View v) {
-                createMyPDF();
+                PrintTheWebPage(content);
             }
         });
 
@@ -249,11 +253,13 @@ public class Lessons_Basic_Content extends AppCompatActivity {
                     JSONObject obj = new JSONObject(s);
 
                     //if no error in response
-                    if (!obj.getBoolean("error")) {
+                    if (!obj.getBoolean("error")){
                         lessonId = obj.getString("id");
-                        lessonpdf = obj.getString("pdflesson");
                         htmlData = obj.getString("htmldata");
                         content.loadData(htmlData, "text/html", "UTF-8");
+                        lessonpdf = htmlData.replaceAll("<br>", "\n\n");
+                        lessonpdf = lessonpdf.replaceAll("\\<.*?\\>", " ");
+                        Toast.makeText(Lessons_Basic_Content.this, lessonpdf, Toast.LENGTH_SHORT).show();
                     }
                 } catch (Exception e) {
                     Toast.makeText(Lessons_Basic_Content.this, "Exception: " + e, Toast.LENGTH_SHORT).show();
@@ -266,40 +272,72 @@ public class Lessons_Basic_Content extends AppCompatActivity {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    public void createMyPDF(){
+    PrintJob printJob;
 
-        PdfDocument myPdfDocument = new PdfDocument();
-        PdfDocument.PageInfo myPageInfo = new PdfDocument.PageInfo.Builder(595,842,1).create();
-        PdfDocument.Page myPage = myPdfDocument.startPage(myPageInfo);
+    //a boolean to check the status of printing
+    boolean printBtnPressed=false;
 
-        Paint myPaint = new Paint();
-        int x = 10, y=25;
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    private void PrintTheWebPage(WebView webView) {
 
-        for (String line:lessonpdf.split("\n")){
-            myPage.getCanvas().drawText(line, x, y, myPaint);
-            y+=myPaint.descent()-myPaint.ascent();
+        //set printBtnPressed true
+        printBtnPressed=true;
+
+        // Creating  PrintManager instance
+        PrintManager printManager = (PrintManager) this
+                .getSystemService(Context.PRINT_SERVICE);
+
+        //setting the name of job
+        String jobName = course;
+
+        // Creating  PrintDocumentAdapter instance
+        PrintDocumentAdapter printAdapter = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            printAdapter = webView.createPrintDocumentAdapter(jobName);
         }
 
-        myPdfDocument.finishPage(myPage);
+        // Create a print job with name and adapter instance
+        assert printManager != null;
+        printJob = printManager.print(jobName, printAdapter,
+                new PrintAttributes.Builder().build());
+    }
 
-        File folder = new File(Environment.getExternalStorageDirectory() +
-                File.separator + "DriverLesson");
-        boolean success = true;
-        if (!folder.exists()) {
-            success = folder.mkdirs();
-        }
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(printJob!=null &&printBtnPressed) {
+            if (printJob.isCompleted()) {
+                //Showing Toast Message
+                retrievedatas();
+                //Toast.makeText(this, "Completed", Toast.LENGTH_SHORT).show();
+            } else if (printJob.isStarted()) {
+                //Showing Toast Message
+                retrievedatas();
+                //Toast.makeText(this, "isStarted", Toast.LENGTH_SHORT).show();
 
-        File fileLocation = new File(folder, course + ".pdf");
+            } else if (printJob.isBlocked()) {
+                //Showing Toast Message
+                //retrievedatas();
+                Toast.makeText(this, "isBlocked", Toast.LENGTH_SHORT).show();
+            } else if (printJob.isCancelled()) {
+                //Showing Toast Message
+                retrievedatas();
+                Toast.makeText(this, "isCancelled", Toast.LENGTH_SHORT).show();
 
-        try {
-            myPdfDocument.writeTo(new FileOutputStream(fileLocation));
-            savedPdf.setVisibility(View.VISIBLE);
+            } else if (printJob.isFailed()) {
+                //Showing Toast Message
+                retrievedatas();
+                //Toast.makeText(this, "isFailed", Toast.LENGTH_SHORT).show();
+
+            } else if (printJob.isQueued()) {
+                //Showing Toast Message
+                retrievedatas();
+                //Toast.makeText(this, "isQueued", Toast.LENGTH_SHORT).show();
+            }
+            //set printBtnPressed false
+            printBtnPressed=false;
         }
-        catch (Exception e){
-            e.printStackTrace();
-            //myEditText.setText("ERROR");
-        }
-        myPdfDocument.close();
     }
 
     public void txttospeech() {

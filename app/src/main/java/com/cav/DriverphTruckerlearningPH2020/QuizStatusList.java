@@ -131,7 +131,6 @@ public class QuizStatusList extends AppCompatActivity {
                         @Override
                         public void onClick(View v) {
                             startActivity(new Intent(QuizStatusList.this, Dashboard.class));
-
                         }
                     });
                 }else{
@@ -148,6 +147,7 @@ public class QuizStatusList extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 goToQuizResults();
+                finish();
             }
         });
     }
@@ -324,10 +324,10 @@ public class QuizStatusList extends AppCompatActivity {
                 }
             };
             MySingleton.getInstance(QuizStatusList.this).addToRequestQueue(stringRequest);
-            saveToLocalStorage(userId, email, score, num_items, chap, num_of_attempt, duration,
-                    date_taken, isLocked, isCompleted, DbContract.SYNC_STATUS_SAVED);
-            StyleableToast.makeText(getApplicationContext(), QuizStatusList.this.getString(R.string.saved),
-                    Toast.LENGTH_LONG, R.style.toastStyle).show();
+//            saveToLocalStorage(userId, email, score, num_items, chap, num_of_attempt, duration,
+//                    date_taken, isLocked, isCompleted, DbContract.SYNC_STATUS_SAVED);
+//            StyleableToast.makeText(getApplicationContext(), QuizStatusList.this.getString(R.string.saved),
+//                    Toast.LENGTH_LONG, R.style.toastStyle).show();
         } else { // no internet, save to SQLite
             saveToLocalStorage(userId, email, score, num_items, chap, num_of_attempt, duration,
                     date_taken, isLocked, isCompleted, DbContract.SYNC_STATUS_FAILED);
@@ -377,18 +377,18 @@ public class QuizStatusList extends AppCompatActivity {
                             Toast.LENGTH_LONG, R.style.toastStyle).show();
 
                     if (error instanceof TimeoutError) {
-                        Toast.makeText(QuizStatusList.this, "Timeout error", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(QuizStatusList.this, "Timeout error. Please restart your internet connection and try again later.", Toast.LENGTH_LONG).show();
                     } else if (error instanceof NoConnectionError) {
                         checkNetworkConnection();
-                        Toast.makeText(QuizStatusList.this, "Network error", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(QuizStatusList.this, "Network error. Please restart your internet connection and try again later.", Toast.LENGTH_LONG).show();
                     } else if (error instanceof AuthFailureError) {
-                        Toast.makeText(QuizStatusList.this, "Auth error", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(QuizStatusList.this, "Auth error. Please restart your internet connection and try again later.", Toast.LENGTH_LONG).show();
                     } else if (error instanceof ServerError) {
-                        Toast.makeText(QuizStatusList.this, "Server error", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(QuizStatusList.this, "Server error. Please restart your internet connection and try again later.", Toast.LENGTH_LONG).show();
                     } else if (error instanceof NetworkError) {
-                        Toast.makeText(QuizStatusList.this, "Network error", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(QuizStatusList.this, "Network error. Please restart your internet connection and try again later.", Toast.LENGTH_LONG).show();
                     } else if (error instanceof ParseError) {
-                        Toast.makeText(QuizStatusList.this, "Parse error", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(QuizStatusList.this, "Parse error. Please restart your internet connection and try again later.", Toast.LENGTH_LONG).show();
                     }
                 }
             }) {

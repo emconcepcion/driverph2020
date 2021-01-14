@@ -87,18 +87,18 @@
         android:textAllCaps="false"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="35dp"
+        android:layout_marginBottom="40dp"
         android:background="@drawable/yellow_login_button"
         android:textColor="@android:color/white"
         android:layout_margin="16dp"/>
 
     <Button
         android:id="@+id/btn_review"
-        android:layout_width="100dp"
-        android:layout_height="40dp"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
         android:text="@string/review"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="25dp"
+        android:layout_marginBottom="40dp"
         android:layout_margin="16dp"
         android:background="@drawable/rounded_login_button"
         android:textColor="@android:color/white"
@@ -106,10 +106,11 @@
 
     <Button
         android:id="@+id/btn_retake"
-        android:layout_width="100dp"
-        android:layout_height="40dp"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
         android:text="@string/retake"
         android:layout_alignParentBottom="true"
+        android:layout_marginBottom="40dp"
         android:layout_alignParentEnd="true"
         android:layout_margin="16dp"
         android:textAllCaps="false"

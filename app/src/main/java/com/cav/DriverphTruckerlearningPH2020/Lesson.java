@@ -74,6 +74,7 @@ public class Lesson extends AppCompatActivity {
         String null_lessonId = "No active modules yet.";
         if (progMod.equals("null") || progLess.equals("null")){
             progress_Module.setText(null_lessonId);
+            progress_LessonTitle.setText("Go to Dashboard and access the available modules for you!");
         }else{
             progress_Module.setText(progMod);
             progress_LessonTitle.setText(progLess);

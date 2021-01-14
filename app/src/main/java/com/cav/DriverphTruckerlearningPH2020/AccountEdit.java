@@ -6,6 +6,7 @@ import androidx.appcompat.widget.Toolbar;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -57,7 +58,8 @@ public class AccountEdit extends AppCompatActivity {
         changeavatar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AccountEdit.this, ChangeAvatar.class);
+                //Intent intent = new Intent(AccountEdit.this, ChangeAvatar.class);
+                Intent intent = new Intent(AccountEdit.this, SelectAvatar.class);
                 Bundle extras = new Bundle();
                 extras.putString("first_name", fname);
                 extras.putString("last_name", lname);
@@ -96,19 +98,9 @@ public class AccountEdit extends AppCompatActivity {
         et_email.setText(set_email);
         et_username.setText(set_username);
 
-        if (set_image.equals("1")) {
-            avatar_edit.setImageDrawable(getResources().getDrawable(R.drawable.avatar1));
-        } else if (set_image.equals("2")) {
-            avatar_edit.setImageDrawable(getResources().getDrawable(R.drawable.avatar2));
-        } else if (set_image.equals("3")) {
-            avatar_edit.setImageDrawable(getResources().getDrawable(R.drawable.avatar3));
-        } else if (set_image.equals("4")) {
-            avatar_edit.setImageDrawable(getResources().getDrawable(R.drawable.avatar4));
-        } else if (set_image.equals("5")) {
-            avatar_edit.setImageDrawable(getResources().getDrawable(R.drawable.avatar5));
-        } else if (set_image.equals("6")) {
-            avatar_edit.setImageDrawable(getResources().getDrawable(R.drawable.avatar6));
-        }
+        int imageResource = getResources().getIdentifier("avatar" + set_image, "drawable", getPackageName());
+        Drawable image = getResources().getDrawable(imageResource);
+        avatar_edit.setImageDrawable(image);
     }
 
     public void check_user_exist() {

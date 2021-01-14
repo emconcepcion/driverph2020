@@ -127,7 +127,7 @@
             android:textAllCaps="false"
             android:textSize="20sp"
             android:textColor="@android:color/white"
-            android:background="#A82196F3"
+            android:background="@color/yellow"
             android:layout_marginBottom="5dp"/>
 
         <Button
