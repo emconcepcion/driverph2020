@@ -7,6 +7,7 @@ import androidx.appcompat.widget.Toolbar;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -127,20 +128,9 @@ public class MyAccount extends AppCompatActivity {
                         img_num = obj.getString("image");
                         id = obj.getString("id");
 
-                        if(img_num.equals("1")){
-                            avatarimage.setImageDrawable(getResources().getDrawable(R.drawable.avatar1));
-                        }else if(img_num.equals("2")){
-                            avatarimage.setImageDrawable(getResources().getDrawable(R.drawable.avatar2));
-                        }else if(img_num.equals("3")){
-                            avatarimage.setImageDrawable(getResources().getDrawable(R.drawable.avatar3));
-                        }else if(img_num.equals("4")){
-                            avatarimage.setImageDrawable(getResources().getDrawable(R.drawable.avatar4));
-                        }else if(img_num.equals("5")){
-                            avatarimage.setImageDrawable(getResources().getDrawable(R.drawable.avatar5));
-                        }else if(img_num.equals("6")){
-                            avatarimage.setImageDrawable(getResources().getDrawable(R.drawable.avatar6));
-                        }
-
+                        int imageResource = getResources().getIdentifier("avatar" + img_num, "drawable", getPackageName());
+                        Drawable image = getResources().getDrawable(imageResource);
+                        avatarimage.setImageDrawable(image);
                         pdLoading.dismiss();
                     }
                 } catch (Exception e ){
@@ -148,7 +138,6 @@ public class MyAccount extends AppCompatActivity {
                 }
             }
         }
-
         show_prod show = new show_prod();
         show.execute();
     }
