@@ -413,7 +413,7 @@ public class QuizStatusList extends AppCompatActivity {
                 }
             };
             MySingleton.getInstance(QuizStatusList.this).addToRequestQueue(stringRequest);
-            Toast.makeText(this, "Saved to all attempts db.", Toast.LENGTH_SHORT).show();
+        //    Toast.makeText(this, "Saved to all attempts db.", Toast.LENGTH_SHORT).show();
         }
 
     }

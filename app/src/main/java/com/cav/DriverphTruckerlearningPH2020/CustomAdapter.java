@@ -75,7 +75,7 @@ public class CustomAdapter extends RecyclerView.Adapter<com.cav.DriverphTruckerl
                     break;
             }
         holder.chapter.setText(chap);
-        holder.num_of_attempt.setText("Total attempts: " +myScoresServerList.get(position).getNum_of_attempt());
+        holder.num_of_attempt.setText("Total retakes: " +myScoresServerList.get(position).getNum_of_attempt());
         holder.duration.setText("Duration: " + myScoresServerList.get(position).getDuration());
         holder.date_taken.setText("Date taken: " + myScoresServerList.get(position).getDate_taken());
 

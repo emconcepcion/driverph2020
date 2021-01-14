@@ -50,14 +50,13 @@ public class RecyclerAdapter extends RecyclerView.Adapter <RecyclerAdapter.MyVie
                 break;
         }
         holder.Chapter.setText(chap);
-        holder.Attempt.setText("Attempt #:" +arrayList.get(position).getNum_of_attempt());
+        holder.Attempt.setText("Retake #:" +arrayList.get(position).getNum_of_attempt());
         int sync_status = arrayList.get(position).getSync_status();
         if (sync_status == DbContract.SYNC_STATUS_SAVED) {
             holder.Sync_status.setImageResource(R.drawable.saved);
         }else {
             holder.Sync_status.setImageResource(R.drawable.ic_sync);
         }
-
     }
 
     @Override

@@ -55,6 +55,7 @@ public class QuizActivity extends AppCompatActivity {
     ImageButton btn_sound;
     public static String duration;
 
+    public static boolean userFinishedQuiz = true;
     public int num_of_attempt;
 
     ProgressBar progressBar;
@@ -162,6 +163,9 @@ public class QuizActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         mediaPlayer.pause();
+        if (!userFinishedQuiz){
+            exittedQuiz();
+        }
     }
 
     @Override
@@ -413,22 +417,22 @@ public class QuizActivity extends AppCompatActivity {
     }
 
     private void getAttempt() {
-        int resetAttempt = 1;
+        int resetAttempt = 0;
         attempt.setText(String.valueOf(resetAttempt));
         int currUser = Integer.parseInt(textViewUserIdQAct.getText().toString());
-        int dbUser = com.cav.DriverphTruckerlearningPH2020.Dashboard.thisUserId;
-        int currAttempt = Integer.parseInt(com.cav.DriverphTruckerlearningPH2020.Dashboard.myLatestAttempt);
+        int dbUser = Dashboard.thisUserId;
+        int currAttempt = Integer.parseInt(Dashboard.myLatestAttempt);
         boolean sameUser = String.valueOf(dbUser).equals(String.valueOf(currUser));
         String currChap = textViewChapter.getText().toString();
-        String dbChap = com.cav.DriverphTruckerlearningPH2020.Dashboard.myLatestChapter;
+        String dbChap = Dashboard.myLatestChapter;
 
-        if (currAttempt >= 1 && sameUser && currChap.equals(dbChap)) {
+        if (currAttempt >= 0 && sameUser && currChap.equals(dbChap)) {
             attempt.setText(String.valueOf(++currAttempt));
         } else {
-            resetAttempt = 1;
+            resetAttempt = 0;
             attempt.setText(String.valueOf(resetAttempt));
         }
-        if (com.cav.DriverphTruckerlearningPH2020.QuizResults.isRetake && currAttempt >= 1 && sameUser && currChap.equals(dbChap)) {
+        if (QuizResults.isRetake && currAttempt >= 0 && sameUser && currChap.equals(dbChap)) {
             attempt.setText(String.valueOf(currAttempt));
         }
     }
@@ -459,57 +463,8 @@ public class QuizActivity extends AppCompatActivity {
         btn_exit_quiz_yes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mediaPlayer.pause();
-                Calendar calendar = Calendar.getInstance();
-                SimpleDateFormat simpleDate = new SimpleDateFormat("EEEE MMMM dd, yyyy");
-                String currentDate = simpleDate.format(calendar.getTime());
-
-                int tenQuestions = (questionList.size() - 10);
-                questionCountTotal = (questionList.size() - tenQuestions);
-
-                String timeSet = "10:00";
-                String timeLeft = textViewCountdown.getText().toString();
-
-                int newAttempt = Integer.parseInt(attempt.getText().toString());
-                int myUserId = Integer.parseInt(textViewUserIdQAct.getText().toString());
-                String myEmail = textViewEmail.getText().toString();
-
-                Intent i = new Intent(com.cav.DriverphTruckerlearningPH2020.QuizActivity.this, com.cav.DriverphTruckerlearningPH2020.QuizStatusList.class);
-                Bundle bundle = new Bundle();
-                bundle.putInt("score", 0);
-                bundle.putInt("items", questionCountTotal);
-                bundle.putString("chapter", currentQuestion.getChapter());
-                bundle.putInt("attempt", newAttempt);
-                bundle.putInt("myUserId", myUserId);
-                i.putExtras(bundle);
-                i.putExtra("email", myEmail);
-                bundle.putInt("myUserId", myUserId);
-                bundle.putInt("myLatestUnlocked", 1);
-                bundle.putInt("myLatestCompleted", 0);
-                SimpleDateFormat sdf = new SimpleDateFormat("mm:ss");
-                try {
-                    Date start = sdf.parse(timeSet);
-                    Date finish = sdf.parse(timeLeft);
-
-                    long difference = start.getTime() - finish.getTime();
-                    int totalTime = (int) difference;
-
-                    int minutes = (totalTime / 1000) / 60;
-                    int seconds = (totalTime / 1000) % 60;
-
-                    String timeConsumed = String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
-                    String timeTaken = String.valueOf(timeConsumed);
-                    duration = "00:" + timeTaken;
-                    bundle.putString("duration", duration);
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-                i.putExtra("date_taken", currentDate);
-                i.putStringArrayListExtra("askedQuestions", askedQuestions);
-                i.putExtras(bundle);
-                startActivity(i);
-                finish();
-                endedAttempt = true;
+                userFinishedQuiz = false;
+                exittedQuiz();
             }
         });
 
@@ -520,6 +475,59 @@ public class QuizActivity extends AppCompatActivity {
                 exit_quiz_popup.dismiss();
             }
         });
+    }
+
+    public void exittedQuiz(){
+        mediaPlayer.pause();
+        SimpleDateFormat simpleDate = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        String currentDate = simpleDate.format(new Date());
+
+        int tenQuestions = (questionList.size() - 10);
+        questionCountTotal = (questionList.size() - tenQuestions);
+
+        String timeSet = "10:00";
+        String timeLeft = textViewCountdown.getText().toString();
+
+        int newAttempt = Integer.parseInt(attempt.getText().toString());
+        int myUserId = Integer.parseInt(textViewUserIdQAct.getText().toString());
+        String myEmail = textViewEmail.getText().toString();
+
+        Intent i = new Intent(QuizActivity.this, QuizStatusList.class);
+        Bundle bundle = new Bundle();
+        bundle.putInt("score", 0);
+        bundle.putInt("items", questionCountTotal);
+        bundle.putString("chapter", currentQuestion.getChapter());
+        bundle.putInt("attempt", newAttempt);
+        bundle.putInt("myUserId", myUserId);
+        i.putExtras(bundle);
+        i.putExtra("email", myEmail);
+        bundle.putInt("myUserId", myUserId);
+        bundle.putInt("myLatestUnlocked", 1);
+        bundle.putInt("myLatestCompleted", 0);
+        SimpleDateFormat sdf = new SimpleDateFormat("mm:ss");
+        try {
+            Date start = sdf.parse(timeSet);
+            Date finish = sdf.parse(timeLeft);
+
+            long difference = start.getTime() - finish.getTime();
+            int totalTime = (int) difference;
+
+            int minutes = (totalTime / 1000) / 60;
+            int seconds = (totalTime / 1000) % 60;
+
+            String timeConsumed = String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
+            String timeTaken = String.valueOf(timeConsumed);
+            duration = "00:" + timeTaken;
+            bundle.putString("duration", duration);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        i.putExtra("date_taken", currentDate);
+        i.putStringArrayListExtra("askedQuestions", askedQuestions);
+        i.putExtras(bundle);
+        startActivity(i);
+        finish();
+        endedAttempt = true;
     }
 
     private boolean paused = true;
@@ -607,4 +615,5 @@ public class QuizActivity extends AppCompatActivity {
             }
         });
     }
+
 }

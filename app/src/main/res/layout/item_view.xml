@@ -29,7 +29,7 @@
             android:layout_below="@id/txt_chapter_list"
             android:layout_marginTop="2dp"
             android:gravity="center"
-            android:text="Attempt #: "
+            android:text="Retake #: "
             android:textSize="14sp"
             android:textStyle="bold" />
 

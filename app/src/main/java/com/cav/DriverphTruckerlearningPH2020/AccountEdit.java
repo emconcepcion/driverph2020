@@ -34,7 +34,6 @@ public class AccountEdit extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_edit);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
         changeavatar = findViewById(R.id.changeavatar);
         et_firstname = findViewById(R.id.et_firstname);
         et_lastname = findViewById(R.id.et_lastname);

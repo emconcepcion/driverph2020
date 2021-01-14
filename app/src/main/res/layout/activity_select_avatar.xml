@@ -6,9 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".SelectAvatar">
 
-    <include
-        android:id="@+id/toolbar"
-        layout="@layout/toolbar" />
+
+    <TextView
+        android:id="@+id/choose"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Choose Your Avatar"
+        app:layout_constraintTop_toTopOf="parent"
+        android:gravity="center_horizontal"
+        android:layout_margin="20dp"
+        android:textSize="22sp"
+        android:textStyle="bold"/>
 
     <ImageView
         android:id="@+id/imageView6"
@@ -16,20 +24,23 @@
         android:layout_height="132dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        app:srcCompat="@drawable/cardview_gradient_bg" />
+        app:layout_constraintTop_toBottomOf="@+id/choose"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginHorizontal="45dp"
+        app:srcCompat="@drawable/border_yellow" />
 
     <ImageView
         android:id="@+id/imageView7"
         android:layout_width="123dp"
         android:layout_height="103dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="112dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="72dp"
+        android:layout_marginRight="72dp"
         app:layout_constraintEnd_toEndOf="@+id/imageView6"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintTop_toBottomOf="@+id/choose"
         app:srcCompat="@drawable/avatar1"
-        tools:ignore="MissingConstraints"
-        android:layout_marginRight="112dp" />
+        tools:ignore="MissingConstraints" />
 
     <ScrollView
         android:id="@+id/scrollView2"
@@ -287,32 +298,48 @@
                 app:srcCompat="@drawable/avatar18"
                 tools:ignore="MissingConstraints"
                 android:layout_marginRight="4dp" />
+
+
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
 
-    <Button
-        android:id="@+id/selectbtn"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="624dp"
-        android:layout_marginEnd="52dp"
-        android:text="Select"
-        android:textAllCaps="false"
-        app:layout_constraintEnd_toStartOf="@+id/cancelbtn"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginRight="52dp" />
+        android:gravity="center_horizontal"
+        android:layout_marginBottom="25dp"
+        android:paddingHorizontal="10dp"
+        android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/cancelbtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="624dp"
-        android:layout_marginEnd="60dp"
-        android:text="Cancel"
-        android:textAllCaps="false"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginRight="60dp" />
+        <Button
+            android:id="@+id/selectbtn"
+            android:layout_width="100dp"
+            android:layout_height="45dp"
+            android:layout_weight="1"
+            android:textColor="@android:color/white"
+            android:background="@drawable/yellow_login_button"
+            android:text="Select"
+            android:textAllCaps="false"
+            android:layout_marginBottom="5dp"
+            android:textSize="18sp"
+            android:layout_marginRight="10dp" />
+
+        <Button
+            android:id="@+id/cancelbtn"
+            android:layout_width="100dp"
+            android:layout_height="45dp"
+            android:textSize="18sp"
+            android:layout_weight="1"
+            android:layout_marginBottom="5dp"
+            android:textColor="@android:color/white"
+            android:background="@drawable/rounded_login_button"
+            android:text="Cancel"
+            android:textAllCaps="false" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

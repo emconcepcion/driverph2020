@@ -38,16 +38,12 @@ public class MyAccount extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_account);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
         fabedit = findViewById(R.id.fab_edit);
         avatarimage = findViewById(R.id.avatarimage);
         tv_fullname = findViewById(R.id.tv_fullname);
         tv_email = findViewById(R.id.tv_email);
         tv_username = findViewById(R.id.tv_username);
         changepassword = findViewById(R.id.changepassword);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         pdLoading = new ProgressDialog(MyAccount.this);
         pdLoading.setMessage("\tLoading...");

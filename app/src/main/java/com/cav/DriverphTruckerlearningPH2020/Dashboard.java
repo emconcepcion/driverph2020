@@ -332,13 +332,13 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
             }
         });
 
-        CardView cardViewPolGuide = findViewById(R.id.cardView_polguide);
-        cardViewPolGuide.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(Dashboard.this, "Policies and Guidelines Activity", Toast.LENGTH_SHORT).show();
-            }
-        });
+//        CardView cardViewPolGuide = findViewById(R.id.cardView_polguide);
+//        cardViewPolGuide.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Toast.makeText(Dashboard.this, "Policies and Guidelines Activity", Toast.LENGTH_SHORT).show();
+//            }
+//        });
     }
 
     public void retrievedatas(String r_email) {

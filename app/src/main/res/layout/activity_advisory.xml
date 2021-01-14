@@ -33,12 +33,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="130dp"
                 android:layout_marginTop="2dp"
-                android:background="@drawable/border_yellow"
+                android:background="@android:color/white"
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_width="92dp"
+                    android:layout_height="111dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="15dp"
                     android:src="@drawable/tesda_logo" />
@@ -86,7 +86,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="130dp"
                 android:layout_marginTop="15dp"
-                android:background="@drawable/border_yellow"
+                android:background="@android:color/white"
                 android:orientation="horizontal">
 
                 <ImageView
@@ -139,7 +139,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="130dp"
                 android:layout_marginTop="15dp"
-                android:background="@drawable/border_yellow"
+                android:background="@android:color/white"
                 android:orientation="horizontal">
 
                 <ImageView
@@ -192,7 +192,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="130dp"
                 android:layout_marginTop="15dp"
-                android:background="@drawable/border_yellow"
+                android:background="@android:color/white"
                 android:orientation="horizontal">
 
                 <ImageView

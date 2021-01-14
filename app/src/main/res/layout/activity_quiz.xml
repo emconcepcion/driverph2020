@@ -34,25 +34,14 @@
         android:textStyle="bold"
         />
 
-    <ImageButton
-        android:id="@+id/btn_sound"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_gravity="center_horizontal"
-        android:background="@android:color/transparent"
-        android:onClick="buttonPressed"
-        android:paddingHorizontal="6dp"
-        android:paddingTop="6dp"
-        android:src="@drawable/ic_sound_off" />
+
 
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/btn_sound"
-        android:layout_above="@id/btn_next"
+        android:layout_below="@id/thisQuiz"
+        android:layout_above="@id/btn_sound"
         android:orientation="vertical"
         android:paddingLeft="15dp"
         android:paddingRight="15dp">
@@ -117,7 +106,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="0"
-                    android:text="Attempt #"
+                    android:text="Retake #"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -127,7 +116,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="0"
-                    android:text="72"
+                    android:text="0"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -177,8 +166,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
-
-
 
                     <RadioGroup
                         android:id="@+id/radio_grp_options"
@@ -301,11 +288,25 @@
         </LinearLayout>
 
     </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/btn_sound"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginVertical="15dp"
+        android:background="@android:color/transparent"
+        android:onClick="buttonPressed"
+        android:layout_above="@id/btn_next"
+        android:padding="6dp"
+        android:src="@drawable/ic_sound_off" />
+
     <Button
         android:id="@+id/btn_next"
         android:layout_width="match_parent"
         android:layout_height="45dp"
-        android:layout_margin="20dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginBottom="20dp"
         android:layout_alignParentBottom="true"
         android:background="@drawable/rounded_login_button"
         android:freezesText="true"
