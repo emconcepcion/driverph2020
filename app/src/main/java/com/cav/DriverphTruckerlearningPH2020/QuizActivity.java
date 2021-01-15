@@ -416,6 +416,7 @@ public class QuizActivity extends AppCompatActivity {
 
     private void finishQuiz() {
         userFinishedQuiz = true;
+        endedAttempt = false;
         showScore();
     }
 
@@ -466,7 +467,7 @@ public class QuizActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 userFinishedQuiz = false;
-                exitedQuiz();
+                startActivity(new Intent(QuizActivity.this, Buffer.class));
             }
         });
 
@@ -606,6 +607,7 @@ public class QuizActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 userFinishedQuiz = true;
+                endedAttempt = false;
                 mediaPlayer.pause();
                 toResults();
                 finish();
@@ -616,6 +618,7 @@ public class QuizActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 userFinishedQuiz = true;
+                endedAttempt = false;
                 mediaPlayer.pause();
                 toResults();
                 finish();

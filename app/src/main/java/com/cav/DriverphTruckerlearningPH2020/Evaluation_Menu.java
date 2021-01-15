@@ -92,7 +92,7 @@ public class Evaluation_Menu extends AppCompatActivity {
         cardViewCommonBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(module.get(1).equals("")){
+                if(tv2.getText().equals("")){
 
                 }else{
                     Intent intent = new Intent(Evaluation_Menu.this, Evaluation_Basic_Content.class);
@@ -110,7 +110,7 @@ public class Evaluation_Menu extends AppCompatActivity {
         cardViewCoreBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(module.get(2).equals(2)){
+                if( tv3.getText().equals("")){
 
                 }else{
                     Intent intent = new Intent(Evaluation_Menu.this, Evaluation_Basic_Content.class);

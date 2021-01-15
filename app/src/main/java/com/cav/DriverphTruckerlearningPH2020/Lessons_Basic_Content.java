@@ -74,6 +74,8 @@ public class Lessons_Basic_Content extends AppCompatActivity {
     public static String myProgressDateStarted;
     public static String myProgressDateFinished;
     public static boolean isFromLessonBasicContent;
+    String firstspeech, secondspeech;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,6 +113,11 @@ public class Lessons_Basic_Content extends AppCompatActivity {
         myEdit.putString("moduleId", module);
         myEdit.putString("lessonId", currentLessonId);
         myEdit.apply();
+
+        SharedPreferences spr = getSharedPreferences("SharedPrefChapter", MODE_PRIVATE);
+        SharedPreferences.Editor editor = spr.edit();
+        editor.putString("chapter", moduleName);
+        editor.apply();
 
         insertUserProgressModules();
         retrievedatas();
@@ -258,7 +265,10 @@ public class Lessons_Basic_Content extends AppCompatActivity {
                         content.loadData(htmlData, "text/html", "UTF-8");
                         lessonpdf = htmlData.replaceAll("<br>", "\n\n");
                         lessonpdf = lessonpdf.replaceAll("\\<.*?\\>", " ");
-                     //   Toast.makeText(Lessons_Basic_Content.this, lessonpdf, Toast.LENGTH_SHORT).show();
+                        int f = lessonpdf.length() / 2;
+                        firstspeech = lessonpdf.substring(0, f);
+                        f++;
+                        secondspeech = lessonpdf.substring(f, lessonpdf.length());
                     }
                 } catch (Exception e) {
                     Toast.makeText(Lessons_Basic_Content.this, "Exception: " + e, Toast.LENGTH_SHORT).show();
@@ -370,7 +380,8 @@ public class Lessons_Basic_Content extends AppCompatActivity {
         if (speed < 0.1) speed = 0.1f;
         textToSpeech.setPitch(pitch);
         textToSpeech.setSpeechRate(speed);
-        textToSpeech.speak(lessonpdf, TextToSpeech.QUEUE_FLUSH, null);
+        textToSpeech.speak(firstspeech, TextToSpeech.QUEUE_FLUSH, null);
+        textToSpeech.speak(secondspeech, TextToSpeech.QUEUE_ADD, null);
     }
 
     //load all data for user's progress / latest module

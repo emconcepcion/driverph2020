@@ -6,6 +6,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -13,6 +14,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -21,6 +24,7 @@ import android.text.util.Linkify;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -179,6 +183,7 @@ public class Quizzes_menu extends AppCompatActivity {
                 startActivity(new Intent(Quizzes_menu.this, CompletedQuizzes.class));
             }
         });
+
     }
 
     @Override
@@ -233,6 +238,7 @@ public class Quizzes_menu extends AppCompatActivity {
                     passedLockMod1();
                     passedLockMod2();
                     passedLockMod3();
+                    userPassedAllTests();
                 } else{
                     passedLockMod1();
                     passedLockMod2();
@@ -252,6 +258,33 @@ public class Quizzes_menu extends AppCompatActivity {
         if (!sameUser && !myLatestChapter.equals("")) {
             initialLock();
         }
+
+    }
+
+    public void userPassedAllTests(){
+        Dialog congrats = new Dialog(this);
+        ImageView close_exit_popup;
+        Button btn_OK;
+        congrats.setContentView(R.layout.congrats);
+        close_exit_popup = congrats.findViewById(R.id.close_exit_quiz);
+        btn_OK = (Button) congrats.findViewById(R.id.btn_congrats_ok);
+
+        btn_OK.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                congrats.dismiss();
+            }
+        });
+
+        close_exit_popup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                congrats.dismiss();
+            }
+        });
+
+        congrats.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        congrats.show();
     }
 
     public void initialLock(){

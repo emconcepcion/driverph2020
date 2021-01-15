@@ -30,8 +30,10 @@ public class Lesson extends AppCompatActivity {
 
     public static boolean isFromMyProgressNav;
     ActivityLessonBinding binding;
-    String[] descriptionData = {"Most\nrecent\nLesson", "Most\nrecent\nRecitation", "My\nCompleted\nTests",
-                                "My\nPerformance\nEvaluation", "Just\nKeep\nLearning!"};
+//    String[] descriptionData = {"Most\nrecent\nLesson", "Most\nrecent\nRecitation", "My\nCompleted\nTests",
+//            "My\nPerformance\nEvaluation", "Just\nKeep\nLearning!"};
+    String[] descriptionData = {"Lesson\n", "Recitation", "  Tests\n",
+                                "Evaluation", "Learn!\n"};
 
     public static TextView progress_Module, progress_LessonTitle;
     int current_state = 0;

@@ -70,7 +70,7 @@
             <ListView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#F1F1F1"
+                android:background="@android:color/white"
                 android:id="@+id/list_view">
             </ListView>
         </LinearLayout>

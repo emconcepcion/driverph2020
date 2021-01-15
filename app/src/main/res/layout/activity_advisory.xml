@@ -10,7 +10,7 @@
         android:id="@+id/advisory"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginVertical="10dp"
         android:gravity="center_horizontal"
         android:text="Advisory"
         android:textAlignment="center"
@@ -21,17 +21,19 @@
         android:layout_below="@id/advisory"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/gradient_blue"
         android:layout_marginBottom="20dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="130dp"
+                android:layout_height="160dp"
                 android:layout_marginTop="2dp"
                 android:background="@android:color/white"
                 android:orientation="horizontal">
@@ -48,6 +50,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="4dp"
                     android:layout_marginTop="7dp"
+                    android:layout_gravity="center_vertical"
                     android:layout_marginRight="7dp"
                     android:layout_marginBottom="7dp">
 
@@ -84,9 +87,10 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="130dp"
-                android:layout_marginTop="15dp"
+                android:layout_height="160dp"
+                android:layout_marginTop="10dp"
                 android:background="@android:color/white"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <ImageView
@@ -101,6 +105,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="4dp"
                     android:layout_marginTop="7dp"
+                    android:layout_gravity="center_vertical"
                     android:layout_marginRight="7dp"
                     android:layout_marginBottom="7dp">
 
@@ -137,9 +142,10 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="130dp"
-                android:layout_marginTop="15dp"
+                android:layout_height="160dp"
+                android:layout_marginTop="10dp"
                 android:background="@android:color/white"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <ImageView
@@ -154,6 +160,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="4dp"
                     android:layout_marginTop="7dp"
+                    android:layout_gravity="center_vertical"
                     android:layout_marginRight="7dp"
                     android:layout_marginBottom="7dp">
 
@@ -190,9 +197,10 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="130dp"
-                android:layout_marginTop="15dp"
+                android:layout_height="160dp"
+                android:layout_marginVertical="10dp"
                 android:background="@android:color/white"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <ImageView
@@ -210,6 +218,7 @@
                     android:layout_marginLeft="4dp"
                     android:layout_marginEnd="7dp"
                     android:layout_marginRight="7dp"
+                    android:layout_gravity="center_vertical"
                     android:layout_marginBottom="7dp">
 
                     <TextView
