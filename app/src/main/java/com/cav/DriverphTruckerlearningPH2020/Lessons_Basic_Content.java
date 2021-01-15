@@ -64,7 +64,7 @@ public class Lessons_Basic_Content extends AppCompatActivity {
     public static TextView email_lesson;
     Button btnNext;
     private SeekBar mSeekBarPitch, mSeekBarSpeed;
-    private TextView pitch, speed, savedPdf;
+    private TextView pitch, speed;
     public static String module, course, status, dateStarted, dateFinished,
             htmlData, lessonpdf, lessonId, currentLessonId, moduleName;
     public static String myProgressUserId;
@@ -142,7 +142,6 @@ public class Lessons_Basic_Content extends AppCompatActivity {
         mSeekBarSpeed = findViewById(R.id.seek_bar_speed);
         pitch = findViewById(R.id.pitch);
         speed = findViewById(R.id.speed);
-        savedPdf = findViewById(R.id.savedPdfOffline);
 
         textToSpeech = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
             @Override
@@ -259,7 +258,7 @@ public class Lessons_Basic_Content extends AppCompatActivity {
                         content.loadData(htmlData, "text/html", "UTF-8");
                         lessonpdf = htmlData.replaceAll("<br>", "\n\n");
                         lessonpdf = lessonpdf.replaceAll("\\<.*?\\>", " ");
-                        Toast.makeText(Lessons_Basic_Content.this, lessonpdf, Toast.LENGTH_SHORT).show();
+                     //   Toast.makeText(Lessons_Basic_Content.this, lessonpdf, Toast.LENGTH_SHORT).show();
                     }
                 } catch (Exception e) {
                     Toast.makeText(Lessons_Basic_Content.this, "Exception: " + e, Toast.LENGTH_SHORT).show();
@@ -319,11 +318,11 @@ public class Lessons_Basic_Content extends AppCompatActivity {
             } else if (printJob.isBlocked()) {
                 //Showing Toast Message
                 //retrievedatas();
-                Toast.makeText(this, "isBlocked", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Download was blocked", Toast.LENGTH_SHORT).show();
             } else if (printJob.isCancelled()) {
                 //Showing Toast Message
                 retrievedatas();
-                Toast.makeText(this, "isCancelled", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "PDF Download was canceled", Toast.LENGTH_SHORT).show();
 
             } else if (printJob.isFailed()) {
                 //Showing Toast Message

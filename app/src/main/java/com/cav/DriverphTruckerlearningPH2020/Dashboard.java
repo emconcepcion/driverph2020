@@ -412,9 +412,9 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-//            case R.id.action_change_language:
-//                Toast.makeText(this, "Language Changed", Toast.LENGTH_SHORT).show();
-//                break;
+            case R.id.about:
+                startActivity(new Intent(Dashboard.this, About.class));
+                break;
             case R.id.action_log_out:
                 logoutThisUser();
                 break;

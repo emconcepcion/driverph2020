@@ -30,12 +30,10 @@ import com.muddzdev.styleabletoast.StyleableToast;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
-
 import static com.cav.DriverphTruckerlearningPH2020.Dashboard.Uid_PREFS;
 
 public class QuizActivity extends AppCompatActivity {
@@ -55,7 +53,7 @@ public class QuizActivity extends AppCompatActivity {
     ImageButton btn_sound;
     public static String duration;
 
-    public static boolean userFinishedQuiz = true;
+    public static boolean userFinishedQuiz;
     public int num_of_attempt;
 
     ProgressBar progressBar;
@@ -65,13 +63,12 @@ public class QuizActivity extends AppCompatActivity {
     private ColorStateList textColorDefaultRb;
     private CountDownTimer countDownTimer;
     private long timeLeftInMillis;
-
-
-    private List<com.cav.DriverphTruckerlearningPH2020.Question> questionList;
-    private List<com.cav.DriverphTruckerlearningPH2020.Score> scoreList;
+    
+    private List<Question> questionList;
+    private List<Score> scoreList;
     private int questionCounter;
     private int questionCountTotal;
-    private com.cav.DriverphTruckerlearningPH2020.Question currentQuestion;
+    private Question currentQuestion;
 
     public static boolean unlocked;
     private int score;
@@ -114,7 +111,7 @@ public class QuizActivity extends AppCompatActivity {
 
         textViewScore.setVisibility(View.GONE);
         textViewEmail.setVisibility(View.GONE);
-        QuizDbHelper dbHelper = new com.cav.DriverphTruckerlearningPH2020.QuizDbHelper(this);
+        QuizDbHelper dbHelper = new QuizDbHelper(this);
         questionList = dbHelper.getAllQuestions();
         int tenQuestions = (questionList.size() - 10);
         questionCountTotal = (questionList.size() - tenQuestions);
@@ -143,7 +140,7 @@ public class QuizActivity extends AppCompatActivity {
                     if (rb1.isChecked() || rb2.isChecked() || rb3.isChecked() || rb4.isChecked()) {
                         checkAnswer();
                     } else {
-                        StyleableToast.makeText(getApplicationContext(), com.cav.DriverphTruckerlearningPH2020.QuizActivity.this.getString(R.string.please_select_an_answer),
+                        StyleableToast.makeText(getApplicationContext(), QuizActivity.this.getString(R.string.please_select_an_answer),
                                 Toast.LENGTH_LONG, R.style.toastStyle).show();
                     }
                 } else {
@@ -163,9 +160,16 @@ public class QuizActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         mediaPlayer.pause();
-        if (!userFinishedQuiz){
-            exittedQuiz();
+    }
+
+    @Override
+    protected void onStop() {
+        if (userFinishedQuiz){
+            finishQuiz();
+        }else{
+            exitedQuiz();
         }
+        super.onStop();
     }
 
     @Override
@@ -230,9 +234,6 @@ public class QuizActivity extends AppCompatActivity {
                 String timeRemaining = String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
                 textViewCountdown.setText(String.valueOf(timeRemaining));
 
-
-//                long remTime = (millisUntilFinished / 1000);
-
                 if (timeLeftInMillis < 10000) {
                     textViewCountdown.setTextColor(Color.parseColor("#006400"));
                 } else {
@@ -254,7 +255,7 @@ public class QuizActivity extends AppCompatActivity {
                 textViewCountdown.setText("00:00");
                 timeLeftInMillis = 0;
 
-                StyleableToast.makeText(getApplicationContext(), com.cav.DriverphTruckerlearningPH2020.QuizActivity.this.getString(R.string.timeUp),
+                StyleableToast.makeText(getApplicationContext(), QuizActivity.this.getString(R.string.timeUp),
                         Toast.LENGTH_LONG, R.style.toastStyle).show();
                 mediaPlayer.pause();
                 toResults();
@@ -362,6 +363,7 @@ public class QuizActivity extends AppCompatActivity {
     }
 
     public void toResults() {
+        userFinishedQuiz = true;
         SimpleDateFormat simpleDate = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         String currentDate = simpleDate.format(new Date());
         Log.d("QuizActivity", "Current Timestamp: " + currentDate);
@@ -413,6 +415,7 @@ public class QuizActivity extends AppCompatActivity {
     }
 
     private void finishQuiz() {
+        userFinishedQuiz = true;
         showScore();
     }
 
@@ -436,7 +439,6 @@ public class QuizActivity extends AppCompatActivity {
             attempt.setText(String.valueOf(currAttempt));
         }
     }
-
 
     @Override
     public void onBackPressed() {
@@ -464,7 +466,7 @@ public class QuizActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 userFinishedQuiz = false;
-                exittedQuiz();
+                exitedQuiz();
             }
         });
 
@@ -477,7 +479,9 @@ public class QuizActivity extends AppCompatActivity {
         });
     }
 
-    public void exittedQuiz(){
+    public void exitedQuiz(){
+        StyleableToast.makeText(getApplicationContext(), QuizActivity.this.getString(R.string.exitedAndZero),
+                Toast.LENGTH_LONG, R.style.toastStyle).show();
         mediaPlayer.pause();
         SimpleDateFormat simpleDate = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         String currentDate = simpleDate.format(new Date());
@@ -553,6 +557,7 @@ public class QuizActivity extends AppCompatActivity {
     }
 
     public void showScore() {
+        userFinishedQuiz = true;
         if (countDownTimer != null) {
             countDownTimer.cancel();
         }
@@ -600,6 +605,7 @@ public class QuizActivity extends AppCompatActivity {
         btn_view_result.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                userFinishedQuiz = true;
                 mediaPlayer.pause();
                 toResults();
                 finish();
@@ -609,6 +615,7 @@ public class QuizActivity extends AppCompatActivity {
         close_exit_popup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                userFinishedQuiz = true;
                 mediaPlayer.pause();
                 toResults();
                 finish();

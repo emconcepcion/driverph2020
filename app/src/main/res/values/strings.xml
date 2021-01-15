@@ -103,8 +103,8 @@
         Take a deep breath and take the test again.</string>
     <string name="letsGo">Retake the test</string>
     <string name="connect_to_net_to_view_summary">Oops! Please connect to the internet to view your score details.</string>
-    <string name="questions_5">Questions: 5</string>
-    <string name="time_limit">Time limit: 3 minutes</string>
+    <string name="questions_5">Questions: 10</string>
+    <string name="time_limit">Time limit: 10 minutes</string>
     <string name="lessons_go_here">Lessons go here\nLessons go here\nLessons go here\nLessons go here\nLessons go here\nLessons go here\nLessons go here\nLessons go here</string>
     <string name="previous">Previous</string>
     <string name="next">Next</string>
@@ -130,6 +130,8 @@
     <string name="perEval">This shows how well or poor you have performed based on the scores and number of retries you made for each module.</string>
     <string name="keepLearning">Keep learning and become a more knowledgeable trucker!</string>
     <string name="noRecording">No recently recorded recitation.</string>
+    <string name="exitedAndZero">You have exited the current test. Your score is 0 for this attempt.</string>
+    <string name="about_text">In partnership with QuickTrans Cargo Moving, Inc., located in Tondo, Manila, the Technological Institute of the Philippines Quezon City - College of Information Technology and Education (TIPQC - CITE) developed DRIVER.PH-TruckerLearningPH, a mobile learning application under the project: "Drivers Roadworthiness Improvement Verification Education Readiness for the Philippine Logistics Industry", that aims to educate and evaluate both professional and non-professional licensed vehicle drivers using categorized learning modules, videos, and tests that will enable them to be professionally competent and fully equipped with the essential knowledge of what a truck driver is expected to possess and apply in the trucking industry and on the road. The materials used in the application were derived from the Technical Education and Skills Development Authority (TESDA) competency standards and guidelines for TESDA NC III Driving (Passenger Bus/Straight Truck) certification. This mobile app is developed by a group of 4th Year BSIT Students of TIPQC - CITE.</string>
 
 
 </resources>

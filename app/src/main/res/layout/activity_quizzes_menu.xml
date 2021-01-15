@@ -231,7 +231,7 @@
         android:layout_marginHorizontal="20dp"
         android:layout_marginStart="80dp"
         android:layout_marginLeft="80dp"
-        android:layout_marginTop="122dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/yellow_login_button"
         android:padding="15dp"
         android:text="View Test Scores"
@@ -239,7 +239,7 @@
         android:textColor="@android:color/white"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView_core_competencies" />
+        app:layout_constraintTop_toBottomOf="@+id/button5" />
 
     <TextView
         android:id="@+id/tChap"

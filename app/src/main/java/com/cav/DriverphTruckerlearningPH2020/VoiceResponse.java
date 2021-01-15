@@ -63,7 +63,7 @@ public class VoiceResponse extends AppCompatActivity {
             btn_next.setVisibility(View.GONE);
             start_rec.setVisibility(View.GONE);
             textView.setText(R.string.play_recording);
-            whatWasLearned.setText("\nListen to what you have recently recorded as your recitation for this session.\n\n");
+            whatWasLearned.setText("\nListen to what you have recently recorded as your recitation for this session.\n");
         }else if (isFromLessonBasicContent){
             btn_next.setVisibility(View.VISIBLE);
             textView.setText(R.string.playback_ended);
@@ -155,7 +155,7 @@ public class VoiceResponse extends AppCompatActivity {
                         btn_next.setVisibility(View.GONE);
                         start_rec.setVisibility(View.GONE);
                         textView.setText("Go ahead, visit your lessons\nand tell us about your new learning.");
-                        whatWasLearned.setText("\nListen to what you have recently recorded as your recitation.\n\n\n\n\n");
+                        whatWasLearned.setText("\nListen to what you have recently recorded as your recitation.\n");
                     }else if (isFromLessonBasicContent) {
                         textView.setText(R.string.playback_ended);
                         btn_next.setVisibility(View.VISIBLE);

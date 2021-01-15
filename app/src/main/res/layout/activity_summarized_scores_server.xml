@@ -16,7 +16,8 @@
         android:layout_marginBottom="10dp"
         android:textSize="22sp"
         android:textStyle="bold"
-        android:text="Completed Test Scores"
+        android:textColor="@android:color/black"
+        android:text="Final Attempt Test Scores"
         android:gravity="center_horizontal" />
 
 <!--    <TextView-->

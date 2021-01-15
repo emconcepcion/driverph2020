@@ -130,11 +130,12 @@
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="10dp"
                         android:layout_weight="1"
-                        android:background="@drawable/custom_button_exit_quiz_no"
+                        android:background="@drawable/rounded_login_button"
                         android:text="View My Result"
                         android:textAllCaps="false"
                         android:textSize="18sp"
                         android:textStyle="bold"
+                        android:textColor="@android:color/white"
                         android:clickable="true"/>
 
                 </LinearLayout>
