@@ -2,6 +2,7 @@ package com.cav.DriverphTruckerlearningPH2020;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
@@ -28,6 +29,8 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,51 +39,106 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 public class Simulation extends Activity {
 
+    private int mBGFarMoveX = 0;
+    private int mBGNearMoveX = 0;
+    //String restartHere = String.valueOf(R.string.restart);
+
+    Bitmap bmp, pause, resume;
+    Bitmap background,kinfe,note1,powerimg,note2;
+    Bitmap run1;
+    Bitmap run2;
+    Bitmap run3;
+    Bitmap coin;
+    Bitmap off,on;
+    Bitmap exit;
+    // MediaPlayer mp1,jump,takecoin;
+    private SurfaceHolder holder;
+    //private gameloop gameLoopThread;
+    private int x = 0,y=0,z=0,delay=0,getx,gety,sound=1;
+    int show=0,sx,sy;
+    int cspeed=0,kspeed=0,gameover=0;
+    int score=0,health=100,reset=0;
+    int pausecount=0,volume,power=0,powerrun=0,shieldrun=0;
+
     MediaPlayer mp1,jump,takecoin, kinfehit;
     gameloop gameLoopThread;
     String selectedGender = "male";
+    Dialog instructionsDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        instructionsDialog = new Dialog(this);
+        //showInstructions();
+
         //for no title
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(new GameView(this));
     }
 
-    private void showPopup(){
-        View view = LayoutInflater.from(Simulation.this).inflate(
-                R.layout.activity_simulation_popup,
-                (ConstraintLayout)findViewById(R.id.layoutDialogContainer)
-        );
-        if(getWindow() != null){
-            getWindow().setBackgroundDrawable(new ColorDrawable(0));
-        }
+    private void exitDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(Simulation.this);
+        builder.setTitle("Exit game");
+        builder.setMessage("Are you sure?");
+        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                startActivity(new Intent(Simulation.this, Dashboard.class));
+                SharedPreferences pref = getApplicationContext().getSharedPreferences("higher", MODE_PRIVATE);
+                Editor editor = pref.edit();
+                editor.putInt("Score", score);
+                editor.commit();
+                System.exit(0);
+
+            }
+        });
+        builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                gameLoopThread.setPause(0);
+                pausecount=0;
+            }
+        });
+        AlertDialog dialog = builder.show();
     }
 
+    /**
+     private void showPopup(){
+     //To move to next popup screen START
+     popup2Title = myDialog.findViewById(R.id.txtView_simulation_popup2);
+     popup2Message = myDialog.findViewById(R.id.txtMessage2);
+     myDialog.setContentView(R.layout.activity_simulation_popup2);
+
+     closepop2 = myDialog.findViewById(R.id.btn_closePop);
+     closepop2.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+    myDialog.dismiss();
+    }
+    });
+     myDialog.show();
+     // END
+     }
+
+
+     private void showInstructions(){
+
+     Button closeButton;
+     instructionsDialog.setContentView(R.layout.simulation_instructions_popup);
+     closeButton = instructionsDialog.findViewById(R.id.btnClose_Instructions);
+     closeButton.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+    instructionsDialog.dismiss();
+    }
+    });
+     instructionsDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+     instructionsDialog.show();
+     }
+     **/
+
     public class GameView extends SurfaceView{
-
-        private int mBGFarMoveX = 0;
-        private int mBGNearMoveX = 0;
-        //String restartHere = String.valueOf(R.string.restart);
-
-        Bitmap bmp, pause, resume;
-        Bitmap background,kinfe,note1,powerimg,note2;
-        Bitmap run1;
-        Bitmap run2;
-        Bitmap run3;
-        Bitmap coin;
-        Bitmap off,on;
-        Bitmap exit;
-        // MediaPlayer mp1,jump,takecoin;
-        private SurfaceHolder holder;
-        //private gameloop gameLoopThread;
-        private int x = 0,y=0,z=0,delay=0,getx,gety,sound=1;
-        int show=0,sx,sy;
-        int cspeed=0,kspeed=0,gameover=0;
-        int score=0,health=100,reset=0;
-        int pausecount=0,volume,power=0,powerrun=0,shieldrun=0;
 
         private void doDrawRunning(Canvas canvas1){
             // decrement the far background
@@ -201,29 +259,7 @@ public class Simulation extends Activity {
                     pausecount=1;
                     mp1.pause();
 
-                    AlertDialog.Builder builder = new AlertDialog.Builder(Simulation.this);
-                    builder.setTitle("Exit game");
-                    builder.setMessage("Are you sure?");
-                    builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            startActivity(new Intent(Simulation.this, Dashboard.class));
-                            SharedPreferences pref = getApplicationContext().getSharedPreferences("higher", MODE_PRIVATE);
-                            Editor editor = pref.edit();
-                            editor.putInt("Score", score);
-                            editor.commit();
-                            System.exit(0);
-
-                        }
-                    });
-                    builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            gameLoopThread.setPause(0);
-                            pausecount=0;
-                        }
-                    });
-                    AlertDialog dialog = builder.show();
+                    exitDialog();
                 }
 
                 //sound off
@@ -264,7 +300,6 @@ public class Simulation extends Activity {
                     pausecount=0;
                 }
             }
-
             return true;
         }
 
@@ -322,9 +357,11 @@ public class Simulation extends Activity {
                 {
                     canvas.drawBitmap(run1, sx/16, 15*sy/18, null);
                 }
+                // canvas.drawBitmap(run1, sx/16, 15*sy/18, null); Original code
 
                 //knife hit
-                if(kspeed<=sx/4&&kspeed>=sx/24)
+                //if(kspeed<=sx/4&&kspeed>=sx/24) Original Code
+                if(kspeed==sx/4)
                 {
                     kspeed=sx/2;
                     health-=25;
@@ -332,7 +369,8 @@ public class Simulation extends Activity {
                 }
 
                 //power take
-                if(powerrun==sx/8)
+                //if(powerrun==sx/8) Original Code
+                if(powerrun==sx/4)
                 {
                     powerrun=3/sx;
                     health+=25;
@@ -349,7 +387,8 @@ public class Simulation extends Activity {
                 }
                 canvas.drawBitmap(run2, sx/16, 3*sy/4, null);
                 //point up
-                if(cspeed<=sx/8&&cspeed>=sx/16)
+                if(cspeed==sx/4)
+                //if(cspeed<=sx/8&&cspeed>=sx/16) Original Code
                 {
                     if(sound==1)
                     {
@@ -359,7 +398,6 @@ public class Simulation extends Activity {
                     if(pausecount==0)       //---------------- Pause and Resume condition
                     {
                         mp1.pause();
-                        gameLoopThread.setPause(1);
                         pausecount=1;
                     }
 
@@ -368,7 +406,6 @@ public class Simulation extends Activity {
 
                     //showPopup();
                     startActivity(new Intent(Simulation.this,SimulationPopup.class));
-
 
                     Paint resumePaint = new Paint();
                     resumePaint.setColor(Color.RED);
@@ -405,14 +442,10 @@ public class Simulation extends Activity {
 
             //for coins loop
             cspeed=cspeed-5;
-            if(cspeed==-sx/2)
+            canvas.drawBitmap(coin, cspeed, 3*sy/4, null);
+            if(cspeed<0)
             {
                 cspeed=sx/2;
-                canvas.drawBitmap(coin, cspeed, 3*sy/4, null);
-            }
-            else
-            {
-                canvas.drawBitmap(coin, cspeed, 3*sy/4, null);
             }
 
             //knife loop
@@ -495,9 +528,10 @@ public class Simulation extends Activity {
                 score=0;
             }
         }
+
     }
 
     @Override
     public void onBackPressed() {
     }
-}
+}//Latest Working Jan. 16, 7:06 PM

@@ -2,7 +2,6 @@ package com.cav.DriverphTruckerlearningPH2020;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -11,61 +10,38 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import java.util.Random;
 
 public class SimulationPopup extends AppCompatActivity {
 
-    TextView tv;
-    Button submitbutton, quitbutton;
-    RadioGroup radio_g;
-    RadioButton rb1,rb2,rb3,rb4;
-    Dialog myDialog;
+    TextView question,explanation,explanationTitle;
+    ImageView questionImg;
+    Button answer1,answer2,answer3,answer4;
 
-    String questions[] = {
-            "Which method can be defined only once in a program?",
-            "Which of these is not a bitwise operator?",
-            "Which keyword is used by method to refer to the object that invoked it?",
-            "Which of these keywords is used to define interfaces in Java?",
-            "Which of these access specifiers can be used for an interface?",
-            "Which of the following is correct way of importing an entire package ‘pkg’?",
-            "What is the return type of Constructors?",
-            "Which of the following package stores all the standard java classes?",
-            "Which of these method of class String is used to compare two String objects for their equality?",
-            "An expression involving byte, int, & literal numbers is promoted to which of these?"
-    };
+    private SimulationPopupQuestions mQuestions = new SimulationPopupQuestions();
 
-    String answers[] = {"main method","<=","this","interface","public","import pkg.*","None of the mentioned","java","equals()","int"};
+    private String mAnswer;
+    private int mQuestionsLenght = mQuestions.mQuestions.length;
 
-    String opt[] = {
-            "finalize method","main method","static method","private method",
-            "&","&=","|=","<=",
-            "import","this","catch","abstract",
-            "Interface","interface","intf","Intf",
-            "public","protected","private","All of the mentioned",
-            "Import pkg.","import pkg.*","Import pkg.*","import pkg.",
-            "int","float","void","None of the mentioned",
-            "lang","java","util","java.packages",
-            "equals()","Equals()","isequal()","Isequal()",
-            "int","long","byte","float"
-    };
+    String mExplanation,mTitle;
 
-    int flag=0;
-    public static int marks=0,correct=0,wrong=0;
+    Random random;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_simulation_popup);
 
+        random = new Random();
         setScreen();
-        setBtn();
-
+        updateQuestion(random.nextInt(mQuestionsLenght));
     }
 
     private void setScreen(){
+
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
 
@@ -84,93 +60,115 @@ public class SimulationPopup extends AppCompatActivity {
             getWindow().setBackgroundDrawable(new ColorDrawable(0));
         }
 
-        myDialog = new Dialog(this);
-    }
+        question = findViewById(R.id.txtQuestion);
+        explanation = findViewById(R.id.txtView_explanationHolder);
+        explanationTitle = findViewById(R.id.txtView_explanationTitleHolder);
+        questionImg = findViewById(R.id.imgView_QuestionPic);
 
-    private void showPopup2(){
-        //To move to next popup screen START
-        myDialog.setContentView(R.layout.activity_simulation_popup2);
-        Button closepop2;
-        closepop2 = myDialog.findViewById(R.id.btn_closePop);
-        closepop2.setOnClickListener(new View.OnClickListener() {
+        answer1 = findViewById(R.id.btnAnswer1);
+        answer2 = findViewById(R.id.btnAnswer2);
+        answer3 = findViewById(R.id.btnAnswer3);
+        answer4 = findViewById(R.id.btnAnswer4);
+
+        answer1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                myDialog.dismiss();
+                if(answer1.getText()==mAnswer){
+                    explanationTitle.setText(R.string.correct);
+                }else {
+                    explanationTitle.setText(R.string.incorrect);
+                }
+                mTitle = explanationTitle.getText().toString();
+                mExplanation = explanation.getText().toString();
+                Intent intent = new Intent(SimulationPopup.this, SimulationPopup2.class);
+                Bundle bundleSend = new Bundle();
+                bundleSend.putString("key_explanation",mExplanation);
+                bundleSend.putString("key_title",mTitle);
+
+                intent.putExtras(bundleSend);
+                startActivity(intent);
+                finish();
             }
         });
-        myDialog.show();
-        // END
-    }
 
-    private void setBtn(){
-
-        /**
-         Button btnAction = findViewById(R.id.buttonAction);
-         btnAction.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-        finish();
-        }
-        });
-         **/
-
-        submitbutton = findViewById(R.id.buttonAction);
-        tv = findViewById(R.id.txtQuestion);
-
-        radio_g = findViewById(R.id.answersgrp);
-        rb1 = findViewById(R.id.radioButton);
-        rb2 = findViewById(R.id.radioButton2);
-        rb3 = findViewById(R.id.radioButton3);
-        rb4 = findViewById(R.id.radioButton4);
-        tv.setText(questions[flag]);
-        rb1.setText(opt[0]);
-        rb2.setText(opt[1]);
-        rb3.setText(opt[2]);
-        rb4.setText(opt[3]);
-        submitbutton.setOnClickListener(new View.OnClickListener() {
+        answer2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(radio_g.getCheckedRadioButtonId()==-1)
-                {
-                    Toast.makeText(getApplicationContext(), "Please select one choice", Toast.LENGTH_SHORT).show();
-                    return;
+                if(answer2.getText()==mAnswer){
+                    explanationTitle.setText(R.string.correct);
+                }else {
+                    explanationTitle.setText(R.string.incorrect);
                 }
-                RadioButton uans = (RadioButton) findViewById(radio_g.getCheckedRadioButtonId());
-                String ansText = uans.getText().toString();
-//                Toast.makeText(getApplicationContext(), ansText, Toast.LENGTH_SHORT).show();
-                if(ansText.equals(answers[flag])) {
-                    correct++;
-                    Toast.makeText(getApplicationContext(), "Correct", Toast.LENGTH_SHORT).show();
+                mTitle = explanationTitle.getText().toString();
+                mExplanation = explanation.getText().toString();
+                Intent intent = new Intent(SimulationPopup.this, SimulationPopup2.class);
+                Bundle bundleSend = new Bundle();
+                bundleSend.putString("key_explanation",mExplanation);
+                bundleSend.putString("key_title",mTitle);
 
-                    showPopup2();
+                intent.putExtras(bundleSend);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        answer3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(answer3.getText()==mAnswer){
+                    explanationTitle.setText(R.string.correct);
+                }else {
+                    explanationTitle.setText(R.string.incorrect);
                 }
-                else {
-                    wrong++;
-                    Toast.makeText(getApplicationContext(), "Wrong", Toast.LENGTH_SHORT).show();
-                    //startActivity(new Intent(SimulationPopup.this,SimulationPopup2.class));
+                mTitle = explanationTitle.getText().toString();
+                mExplanation = explanation.getText().toString();
+                Intent intent = new Intent(SimulationPopup.this, SimulationPopup2.class);
+                Bundle bundleSend = new Bundle();
+                bundleSend.putString("key_explanation",mExplanation);
+                bundleSend.putString("key_title",mTitle);
 
-                    showPopup2();
+                intent.putExtras(bundleSend);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        answer4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(answer4.getText()==mAnswer){
+                    explanationTitle.setText(R.string.correct);
+                }else {
+                    explanationTitle.setText(R.string.incorrect);
                 }
+                mTitle = explanationTitle.getText().toString();
+                mExplanation = explanation.getText().toString();
+                Intent intent = new Intent(SimulationPopup.this, SimulationPopup2.class);
+                Bundle bundleSend = new Bundle();
+                bundleSend.putString("key_explanation",mExplanation);
+                bundleSend.putString("key_title",mTitle);
 
-                flag++;
-
-                //if (score != null)
-                //score.setText(""+correct);
-
-                if(flag<questions.length)
-                {
-                    tv.setText(questions[flag]);
-                    rb1.setText(opt[flag*4]);
-                    rb2.setText(opt[flag*4 +1]);
-                    rb3.setText(opt[flag*4 +2]);
-                    rb4.setText(opt[flag*4 +3]);
-                }
-
-                radio_g.clearCheck();
+                //intent.putExtra("KEY", mExplanation);
+                intent.putExtras(bundleSend);
+                startActivity(intent);
+                finish();
             }
         });
     }
 
+    private void updateQuestion(int num){
+        question.setText(mQuestions.getQuestions(num));
+        explanation.setText(mQuestions.getExplanation(num));
+        questionImg.setImageResource(mQuestions.getQuestionPics(num));
+        answer1.setText(mQuestions.getChoice1(num));
+        answer2.setText(mQuestions.getChoice2(num));
+        answer3.setText(mQuestions.getChoice3(num));
+        answer4.setText(mQuestions.getChoice4(num));
 
+        mAnswer = mQuestions.getCorrectAnswers(num);
 
-}
+        mExplanation = explanation.toString().trim();
+
+    }
+
+}//SIMULATION POPUP Jan. 17, 9:05 AM

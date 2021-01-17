@@ -21,7 +21,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Buffer"></activity>
+        <activity android:name=".SimulationInstructions"></activity>
+        <activity android:name=".Buffer" />
         <activity android:name=".About" />
         <activity android:name=".SelectAvatar" />
         <activity

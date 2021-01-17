@@ -24,6 +24,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class NetworkMonitor extends BroadcastReceiver {
+    public static final String TEST_POST_ALL = "https://phportal.net/driverph/paa.php";
     StringRequest stringRequest, stringRequest1;
     int counter = 0;
     @Override
@@ -103,8 +104,9 @@ public class NetworkMonitor extends BroadcastReceiver {
                             Toast.LENGTH_LONG, R.style.toastStyle).show();
 
 
-                    if(QuizActivity.unlocked){
-                        stringRequest1 = new StringRequest(Request.Method.POST, DbContract.ScoresTable.SERVER_URL,
+//                    if(QuizActivity.unlocked){
+                        stringRequest1 = new StringRequest(Request.Method.POST, TEST_POST_ALL,
+//                                DbContract.ScoresTable.SERVER_URL,
                                 new Response.Listener<String>() {
                                     @Override
                                     public void onResponse(String response) {
@@ -148,7 +150,7 @@ public class NetworkMonitor extends BroadcastReceiver {
                             }
                         };
                         MySingleton.getInstance(context).addToRequestQueue(stringRequest1);
-                    }
+//                    }
                 }
             }
             //  dbHelper.close();

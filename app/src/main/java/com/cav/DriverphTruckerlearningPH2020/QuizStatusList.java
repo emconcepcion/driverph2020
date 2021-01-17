@@ -70,6 +70,8 @@ public class QuizStatusList extends AppCompatActivity {
     Button refresh_list;
     public static boolean completedQuizzes;
     public static TextView tv_userId_sList;
+    public static final String TEST_POST_ALL = "https://phportal.net/driverph/paa.php";
+
 
     public static int isLockedA, isCompletedA;
     boolean submittedScore;
@@ -204,6 +206,7 @@ public class QuizStatusList extends AppCompatActivity {
         //save the score to web server for all attempts table if there is internet connection
         if (checkNetworkConnection()){
             saveAllAttemptsToAppServer(userIdA,emailA, scoreA, itemsA, chapA, attemptsA, durationA, dateTakenA, isLockedA, isCompletedA);
+            saveToAppServer(userIdA,emailA, scoreA, itemsA, chapA, attemptsA, durationA, dateTakenA, isLockedA, isCompletedA);
             saveToLocalStorage(userIdA,emailA, scoreA, itemsA, chapA, attemptsA, durationA,
                     dateTakenA, isLockedA, isCompletedA, DbContract.SYNC_STATUS_SAVED);
         }else{
@@ -211,9 +214,9 @@ public class QuizStatusList extends AppCompatActivity {
                     dateTakenA, isLockedA, isCompletedA, DbContract.SYNC_STATUS_FAILED);
         }
         //save the score to web server only if the user passed the test, else, save only to local db
-        if (QuizActivity.unlocked && checkNetworkConnection()){
-            saveToAppServer(userIdA,emailA, scoreA, itemsA, chapA, attemptsA, durationA, dateTakenA, isLockedA, isCompletedA);
-        }
+//        if (QuizActivity.unlocked && checkNetworkConnection()){
+//            saveToAppServer(userIdA,emailA, scoreA, itemsA, chapA, attemptsA, durationA, dateTakenA, isLockedA, isCompletedA);
+//        }
     }
 
     public void readFromLocalStorage() {
@@ -253,8 +256,8 @@ public class QuizStatusList extends AppCompatActivity {
                                 int num_of_attempt, String duration, String date_taken,
                                 int isLocked, int isCompleted) {
         if (checkNetworkConnection()) {
-            StringRequest stringRequest = new StringRequest(Request.Method.POST,
-                    DbContract.ScoresTable.SERVER_URL,
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, TEST_POST_ALL,
+//                    DbContract.ScoresTable.SERVER_URL,
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {

@@ -200,31 +200,48 @@
                         <!--LESSONS CARDVIEW!-->
                         <androidx.cardview.widget.CardView
                             android:id="@+id/cardView_lessons"
-                            android:layout_width="150dp"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="30dp"
-                            android:layout_marginLeft="30dp"
-                            android:layout_marginTop="16dp"
-                            android:layout_marginEnd="194dp"
-                            android:layout_marginRight="194dp"
+                            android:layout_marginTop="16sp"
+                            android:layout_marginStart="21dp"
+                            android:layout_marginEnd="189dp"
                             android:clickable="true"
                             android:foreground="?android:attr/selectableItemBackground"
                             app:cardCornerRadius="8dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/cardView_userGreeting">
+                            app:layout_constraintTop_toBottomOf="@+id/cardView_userGreeting"
+                            android:layout_marginLeft="21dp"
+                            android:layout_marginRight="189dp">
 
                             <androidx.constraintlayout.widget.ConstraintLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent">
 
                                 <ImageView
-                                    android:layout_width="150dp"
-                                    android:layout_height="170dp"
-                                    android:background="@drawable/dlessons_dash_btn"
-                                    android:scaleType="centerCrop"
+                                    android:id="@+id/imgV_lessonImg"
+                                    android:layout_width="80dp"
+                                    android:layout_height="70dp"
+                                    android:background="@drawable/lessons_icon2"
+                                    android:layout_marginTop="20dp"
                                     app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent" />
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent"/>
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_marginBottom="15dp"
+                                    android:text="Lessons"
+                                    android:textSize="24sp"
+                                    android:fontFamily="sans-serif-condensed-light"
+                                    android:gravity="center"
+                                    android:textColor="@android:color/black"
+                                    app:layout_constraintTop_toBottomOf="@+id/imgV_lessonImg"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintBottom_toBottomOf="parent"/>
 
                             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -233,31 +250,48 @@
                         <!--QUIZZES CARDVIEW!-->
                         <androidx.cardview.widget.CardView
                             android:id="@+id/cardView_quizzes"
-                            android:layout_width="150dp"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
-                            android:layout_marginLeft="16dp"
+                            android:layout_marginStart="189dp"
                             android:layout_marginTop="16dp"
-                            android:layout_marginEnd="30dp"
-                            android:layout_marginRight="30dp"
+                            android:layout_marginEnd="21dp"
                             android:clickable="true"
                             android:foreground="?android:attr/selectableItemBackground"
                             app:cardCornerRadius="8dp"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toEndOf="@+id/cardView_lessons"
-                            app:layout_constraintTop_toBottomOf="@+id/cardView_userGreeting">
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/cardView_userGreeting"
+                            android:layout_marginLeft="189dp"
+                            android:layout_marginRight="21dp">
 
                             <androidx.constraintlayout.widget.ConstraintLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent">
 
                                 <ImageView
-                                    android:layout_width="150dp"
-                                    android:layout_height="170dp"
-                                    android:background="@drawable/dquizzes_btn_img"
-                                    android:scaleType="centerCrop"
+                                    android:id="@+id/imgV_quizImg"
+                                    android:layout_width="80dp"
+                                    android:layout_height="70dp"
+                                    android:background="@drawable/quizzes_icon2"
+                                    android:layout_marginTop="20dp"
                                     app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent" />
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent"/>
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_marginBottom="15dp"
+                                    android:text="Take Quiz"
+                                    android:textSize="24sp"
+                                    android:fontFamily="sans-serif-condensed-light"
+                                    android:gravity="center"
+                                    android:textColor="@android:color/black"
+                                    app:layout_constraintTop_toBottomOf="@+id/imgV_quizImg"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintBottom_toBottomOf="parent"/>
 
                             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -266,31 +300,49 @@
                         <!--ASSESSMENT CARDVIEW!-->
                         <androidx.cardview.widget.CardView
                             android:id="@+id/cardView_assessment"
-                            android:layout_width="150dp"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="30dp"
-                            android:layout_marginLeft="30dp"
+                            android:layout_marginStart="21dp"
                             android:layout_marginTop="8dp"
-                            android:layout_marginEnd="194dp"
-                            android:layout_marginRight="194dp"
+                            android:layout_marginEnd="189dp"
+                            android:layout_marginBottom="12dp"
                             android:clickable="true"
                             android:foreground="?android:attr/selectableItemBackground"
                             app:cardCornerRadius="8dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/cardView_lessons">
+                            app:layout_constraintTop_toBottomOf="@+id/cardView_lessons"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            android:layout_marginLeft="21dp"
+                            android:layout_marginRight="189dp">
 
                             <androidx.constraintlayout.widget.ConstraintLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent">
 
                                 <ImageView
-                                    android:layout_width="150dp"
-                                    android:layout_height="170dp"
-                                    android:background="@drawable/dassessment_btn"
-                                    android:scaleType="centerCrop"
+                                    android:id="@+id/imgV_assessmentImg"
+                                    android:layout_width="80dp"
+                                    android:layout_height="70dp"
+                                    android:background="@drawable/assessment_icon2"
+                                    android:layout_marginTop="20dp"
                                     app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent" />
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent"/>
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="10dp"
+                                    android:text="Performance Evaluation"
+                                    android:textSize="20dp"
+                                    android:fontFamily="sans-serif-condensed-light"
+                                    android:gravity="center"
+                                    android:textColor="@android:color/black"
+                                    app:layout_constraintTop_toBottomOf="@+id/imgV_assessmentImg"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintBottom_toBottomOf="parent"/>
 
                             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -299,39 +351,52 @@
                         <!--SIMULATION CARDVIEW!-->
                         <androidx.cardview.widget.CardView
                             android:id="@+id/cardView_simulation"
-                            android:layout_width="150dp"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
-                            android:layout_marginLeft="16dp"
+                            android:layout_marginStart="189dp"
                             android:layout_marginTop="8dp"
-                            android:layout_marginEnd="30dp"
-                            android:layout_marginRight="30dp"
+                            android:layout_marginEnd="21dp"
                             android:clickable="true"
                             android:foreground="?android:attr/selectableItemBackground"
                             app:cardCornerRadius="8dp"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toEndOf="@+id/cardView_assessment"
-                            app:layout_constraintTop_toBottomOf="@+id/cardView_quizzes">
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/cardView_quizzes"
+                            android:layout_marginLeft="189dp"
+                            android:layout_marginRight="21dp">
 
                             <androidx.constraintlayout.widget.ConstraintLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent">
 
                                 <ImageView
-                                    android:layout_width="150dp"
-                                    android:layout_height="170dp"
-                                    android:background="@drawable/dsimulation_img"
-                                    android:scaleType="centerCrop"
+                                    android:id="@+id/imgV_gameImg"
+                                    android:layout_width="80dp"
+                                    android:layout_height="70dp"
+                                    android:background="@drawable/game_icon"
+                                    android:layout_marginTop="20dp"
                                     app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent" />
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent"/>
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_marginBottom="18dp"
+                                    android:text="Practice Driving"
+                                    android:textSize="24sp"
+                                    android:fontFamily="sans-serif-condensed-light"
+                                    android:gravity="center"
+                                    android:textColor="@android:color/black"
+                                    app:layout_constraintTop_toBottomOf="@+id/imgV_gameImg"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintBottom_toBottomOf="parent"/>
 
                             </androidx.constraintlayout.widget.ConstraintLayout>
-
                         </androidx.cardview.widget.CardView>
-
-
                     </androidx.constraintlayout.widget.ConstraintLayout>
-
                 </ScrollView>
             </LinearLayout>
         </LinearLayout>

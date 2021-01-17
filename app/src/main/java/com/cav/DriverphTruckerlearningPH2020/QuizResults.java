@@ -232,7 +232,7 @@ public class QuizResults extends AppCompatActivity {
                     Map<String, String> params = new HashMap<>();
                     params.put("email", Dashboard.dashboard_email);
                     params.put("chapter", chap);
-                    params.put("isLocked", String.valueOf(isUnLocked));
+                    params.put("isUnlocked", String.valueOf(isUnLocked));
                     params.put("isCompleted", String.valueOf(isCompleted));
                     return params;
                 }

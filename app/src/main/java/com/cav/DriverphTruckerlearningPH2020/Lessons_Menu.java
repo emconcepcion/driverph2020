@@ -157,7 +157,7 @@ public class Lessons_Menu extends AppCompatActivity {
         switch (myLatestChapter) {
             case MODULE_ID_1:
                 if (sameUser && myLatestChapter.equals(MODULE_ID_1)
-                        && latestUnlocked == 0 && latestCompleted == 1) {
+                       && latestCompleted == 1) {
                     cardViewMod2.setClickable(true);
                     passedLockMod1();
                     lockedMod3();
@@ -168,7 +168,7 @@ public class Lessons_Menu extends AppCompatActivity {
                 break;
             case MODULE_ID_2:
                 if (sameUser && myLatestChapter.equals(MODULE_ID_2)
-                        && latestUnlocked == 0 && latestCompleted == 1) {
+                      && latestCompleted == 1) {
                     cardViewMod3.setClickable(true);
                     passedLockMod1();
                     passedLockMod2();
@@ -179,7 +179,7 @@ public class Lessons_Menu extends AppCompatActivity {
                 break;
             case MODULE_ID_3:
                 if (sameUser && myLatestChapter.equals(MODULE_ID_3)
-                        && latestUnlocked == 0 && latestCompleted == 1) {
+                        && latestCompleted == 1) {
                     passedLockMod1();
                     passedLockMod2();
                     passedLockMod3();
@@ -191,7 +191,7 @@ public class Lessons_Menu extends AppCompatActivity {
         }
 
         if (sameUser && myLatestChapter.equals(MODULE_ID_1) &&
-                latestUnlocked == 1 && latestCompleted == 0) {
+                latestCompleted == 0) {
             cardViewMod1.setClickable(true);
         }
 

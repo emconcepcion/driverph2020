@@ -318,7 +318,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         cardViewSimulation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(Dashboard.this, Simulation.class));
+                startActivity(new Intent(Dashboard.this, SimulationInstructions.class));
 //                Toast.makeText(Dashboard.this, "Simulation Activity", Toast.LENGTH_SHORT).show();
             }
         });
