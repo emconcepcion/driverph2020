@@ -36,18 +36,20 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:paddingHorizontal="4dp"
+                    android:layout_marginStart="3dp"
                     android:text="Welcome Juan!"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginLeft="3dp" />
 
                 <TextView
                     android:id="@+id/textView_greeting"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
                     android:layout_marginBottom="5dp"
                     android:text="@string/current_date"
                     android:textSize="16sp"
@@ -82,8 +84,7 @@
                     android:layout_marginTop="10dp"
                     android:text="Your active module is: "
                     android:textColor="@color/dark_blue"
-                    android:textSize="16dp"
-                    android:textStyle="bold" />
+                    android:textSize="16dp" />
 
                 <TextView
                     android:id="@+id/Module"

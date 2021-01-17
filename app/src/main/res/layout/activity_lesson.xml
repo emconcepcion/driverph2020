@@ -63,14 +63,14 @@
                 android:id="@+id/lessTitle"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                android:background="@drawable/border_yellow"
+                android:background="@drawable/gradient_blue"
                 android:layout_below="@id/progress_Module"
                 android:layout_marginHorizontal="25dp"
                 android:paddingHorizontal="10dp"
                 android:gravity="center"
                 android:text="Lesson"
                 android:textAlignment="center"
-                android:textColor="#2B2B2B"
+                android:textColor="@android:color/white"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
