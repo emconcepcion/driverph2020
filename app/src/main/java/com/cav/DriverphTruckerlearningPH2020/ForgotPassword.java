@@ -1,5 +1,7 @@
 package com.cav.DriverphTruckerlearningPH2020;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -7,14 +9,21 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
+import com.google.android.material.navigation.NavigationView;
 
 import org.json.JSONObject;
 
 import java.security.SecureRandom;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ForgotPassword extends AppCompatActivity {
     EditText firstname, lastname, email;
@@ -38,7 +47,7 @@ public class ForgotPassword extends AppCompatActivity {
         save = findViewById(R.id.btn_signUp);
         cancel = findViewById(R.id.btn_cancel);
 
-        pdLoading = new ProgressDialog(  ForgotPassword.this);
+        pdLoading = new ProgressDialog(ForgotPassword.this);
 
         save.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,8 +82,8 @@ public class ForgotPassword extends AppCompatActivity {
                 params.put("email", femail);
                 params.put("first_name", ffname);
                 params.put("last_name", flname);
-                
-                
+
+
                 //returing the response
                 return requestHandler.sendPostRequest(retrieveUrl, params);
             }
@@ -92,7 +101,7 @@ public class ForgotPassword extends AppCompatActivity {
 
                         if(user_id.equals("0")){
                             pdLoading.dismiss();
-                            Toast.makeText(  ForgotPassword.this, "Fields Doesn't Exist", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ForgotPassword.this, "Fields Doesn't Exist", Toast.LENGTH_SHORT).show();
                         }else{
                             //pdLoading.dismiss();
                             String strLowerCase = generateRandomString(CHAR_LOWERCASE, 3);
@@ -148,8 +157,9 @@ public class ForgotPassword extends AppCompatActivity {
                 super.onPostExecute(s);
                 pdLoading.dismiss();
 
-                Intent intent = new Intent(  ForgotPassword.this, Login.class);
+                Intent intent = new Intent(ForgotPassword.this, Login.class);
                 startActivity(intent);
+                Toast.makeText(ForgotPassword.this, "Your new password has been sent to your email.\nPlease check your email", Toast.LENGTH_SHORT).show();
             }
         }
         Update update = new Update();

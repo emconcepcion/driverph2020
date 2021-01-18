@@ -53,7 +53,7 @@
                 android:layout_width="85dp"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                android:src="@drawable/dlessons_dash_btn"
+                android:src="@drawable/rules_and_regs_img"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -125,7 +125,7 @@
                 android:layout_width="85dp"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                android:src="@drawable/dpol_guide"
+                android:src="@drawable/specializations_img"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -184,7 +184,7 @@
                 android:layout_width="85dp"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                android:src="@drawable/dassessment_btn"
+                android:src="@drawable/polguide_img"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
 

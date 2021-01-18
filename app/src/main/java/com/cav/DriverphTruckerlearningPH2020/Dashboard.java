@@ -1,6 +1,7 @@
 package com.cav.DriverphTruckerlearningPH2020;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
@@ -15,6 +16,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentSender;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
@@ -37,6 +39,13 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.play.core.appupdate.AppUpdateInfo;
+import com.google.android.play.core.appupdate.AppUpdateManager;
+import com.google.android.play.core.appupdate.AppUpdateManagerFactory;
+import com.google.android.play.core.install.model.AppUpdateType;
+import com.google.android.play.core.install.model.UpdateAvailability;
+import com.google.android.play.core.tasks.OnSuccessListener;
+import com.google.android.play.core.tasks.Task;
 import com.muddzdev.styleabletoast.StyleableToast;
 
 import org.json.JSONArray;
@@ -73,6 +82,9 @@ import static com.cav.DriverphTruckerlearningPH2020.Constant._1;
 
 public class Dashboard extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     public static WeakReference<Dashboard> weakActivity;
+
+    //for google play in-app updates
+    private final int REQUEST_CODE = 11;
 
     private DrawerLayout drawer;
     String img_num;
@@ -215,6 +227,38 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
             }
         });
 
+        //update the app after deployment if app is in google play store
+        AppUpdateManager appUpdateManager = AppUpdateManagerFactory.create(Dashboard.this);
+        Task<AppUpdateInfo> appUpdateInfoTask = appUpdateManager.getAppUpdateInfo();
+
+        appUpdateInfoTask.addOnSuccessListener(new OnSuccessListener<AppUpdateInfo>() {
+            @Override
+            public void onSuccess(AppUpdateInfo result) {
+
+                if (result.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
+                        && result.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)){
+                    try {
+                        appUpdateManager.startUpdateFlowForResult(result, AppUpdateType.IMMEDIATE,
+                                Dashboard.this, REQUEST_CODE);
+                    } catch (IntentSender.SendIntentException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+    }
+    //update the app after deployment if app is in google play store
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == REQUEST_CODE){
+            Toast.makeText(this, "Start Download", Toast.LENGTH_SHORT).show();
+
+            if (resultCode != RESULT_OK){
+                Log.d("mm", "Update flow failed" + resultCode);
+            }
+        }
     }
 
     private void resumeModule() {

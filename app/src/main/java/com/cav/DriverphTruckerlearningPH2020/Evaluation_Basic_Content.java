@@ -3,6 +3,7 @@ package com.cav.DriverphTruckerlearningPH2020;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListAdapter;
@@ -45,20 +46,23 @@ public class Evaluation_Basic_Content extends AppCompatActivity {
         getData();
         int res = Integer.parseInt(getIntent().getStringExtra("percent"));
         over.setText(res + "/10");
-        over2.setText(getIntent().getStringExtra("attempt") + " Attempt");
+        over2.setText(getIntent().getStringExtra("attempt") + " Retake(s)");
 
         if(res <= 7){
             passorfailed.setText("FAILED");
-            details.setText("You have failed the " + getIntent().getStringExtra("module") +
-                    "\nWe recommend you to please review them to pass the tests and unlock ng next Chapters.");
+            passorfailed.setTextColor(Color.RED);
+            details.setText("You have failed the " + getIntent().getStringExtra("module") + " module." +
+                    "\n\nWe recommend you to please review this module to pass the test and unlock the succeeding modules.");
         }else if((res == 8) || (res == 9)){
             passorfailed.setText("PASSED");
-            details.setText("Well done! You have passed the \n" + getIntent().getStringExtra("module") +
-                    "\n\nYou can now move on to the next chapter or you can review for a perfect score!");
+            passorfailed.setTextColor(Color.GREEN);
+            details.setText("Well done! You have passed the \n" + getIntent().getStringExtra("module") + " module." +
+                    "\n\nYou can now move on to the next module!");
         }else if(res == 10){
             passorfailed.setText("PASSED");
+            passorfailed.setTextColor(Color.GREEN);
             recommendation.setVisibility(View.INVISIBLE);
-            details.setText("Good job! \nYou have achieved a perfect score!\nYou can now move on to the next chapter!");
+            details.setText("Excellent job!\nYou have achieved a perfect score!\nYou can now move on to the next module!");
         }
     }
 

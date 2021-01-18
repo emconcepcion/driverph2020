@@ -38,7 +38,7 @@ public class Registration extends AppCompatActivity {
                     //"(?=.*[a-z])" +         //at least 1 lower case letter
                     //"(?=.*[A-Z])" +         //at least 1 upper case letter
                     "(?=.*[a-zA-Z])" +      //any letter
-                    "(?=.*[@#$%^&+=])" +    //at least 1 special character
+                    "(?=.*[@#&!.])" +    //at least 1 special character
                     "(?=\\S+$)" +           //no white spaces
                     ".{8,}" +               //at least 4 characters
                     "$");
@@ -126,7 +126,7 @@ public class Registration extends AppCompatActivity {
 //
 //                            newpassword = strUppercaseCase + strLowerCase + strDigit;
 //
-                        Toast.makeText(Registration.this, "Email And Username is Already Register", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Registration.this, "Email and username are already taken", Toast.LENGTH_SHORT).show();
                     }
                 } catch (Exception e ){
                     //Toast.makeText(Dashboard.this, "Exception: "+e, Toast.LENGTH_SHORT).show();
@@ -182,11 +182,11 @@ public class Registration extends AppCompatActivity {
                     JSONObject obj = new JSONObject(s);
                     //if no error in response
                     if (!obj.getBoolean("error")) {
-                        Toast.makeText(getApplicationContext(), obj.getString("Register Failed"), Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), obj.getString("Registration failed"), Toast.LENGTH_LONG).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    Toast.makeText(Registration.this, "Register Successfully", Toast.LENGTH_LONG).show();
+                    Toast.makeText(Registration.this, "Registered successfully!", Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(Registration.this, Login.class);
                     intent.addFlags(intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
@@ -219,7 +219,7 @@ public class Registration extends AppCompatActivity {
             edittext_password.setError("Field can't be empty");
             return false;
         } else if (!PASSWORD_PATTERN.matcher(passwordInput).matches()) {
-            edittext_password.setError("Password must consist of minimum 8 characters and must contain a number, special character, letters");
+            edittext_password.setError("Password must consist a minimum of 8 characters and must contain a combination of letters, numbers, and special characters like @#&!., only.");
             return false;
         } else {
             edittext_password.setError(null);
@@ -267,7 +267,7 @@ public class Registration extends AppCompatActivity {
             edittext_confirm.setError("Field can't be empty");
             return false;
         } else if(!emailInput.equals(password)) {
-            edittext_confirm.setError("Password didn't Match");
+            edittext_confirm.setError("Passwords don't match");
             return false;
         } else {
             edittext_confirm.setError(null);

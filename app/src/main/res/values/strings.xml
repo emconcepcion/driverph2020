@@ -20,10 +20,12 @@
     <string name="dot_link">dot_link</string>
     <string name="lto_link">lto_link</string>
     <string name="ltfrb_link">ltfrb_link</string>
+    <string name="mmda_link">mmda_link</string>
+    <string name="mmda">MMDA: Metropolitan Manila Development Authority</string>
     <string name="tesdaName">TESDA: Technical Education and Skills Development Authority</string>
-    <string name="department_of_transportation">Department of Transportation</string>
-    <string name="land_transportation_office">Land Transportation Office</string>
-    <string name="ltfrb">Land Transportation Franchising and Regulatory Board</string>
+    <string name="department_of_transportation">DoT: Department of Transportation</string>
+    <string name="land_transportation_office">LTO: Land Transportation Office</string>
+    <string name="ltfrb">LTFRB: Land Transportation Franchising and Regulatory Board</string>
     <string name="playback_nresponse">Playback\nResponse</string>
     <string name="back">Back</string>
     <string name="stop_recording">Stop Recording</string>

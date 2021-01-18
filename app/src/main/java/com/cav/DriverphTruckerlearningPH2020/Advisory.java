@@ -10,7 +10,7 @@ import androidx.appcompat.widget.Toolbar;
 
 public class Advisory extends AppCompatActivity {
 
-    TextView tesda_link, dot_link, lto_link, ltfrb_link;
+    TextView tesda_link, dot_link, lto_link, ltfrb_link, mmda_link;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +32,10 @@ public class Advisory extends AppCompatActivity {
         tesda_link = findViewById(R.id.tesda_link);
         tesda_link.setText("Visit website:\n https://www.tesda.gov.ph/");
         Linkify.addLinks(tesda_link, Linkify.WEB_URLS);
+
+        mmda_link = findViewById(R.id.mmda_link);
+        mmda_link.setText("Visit website:\n https://mmda.gov.ph/");
+        Linkify.addLinks(mmda_link, Linkify.WEB_URLS);
 
     }
 }
