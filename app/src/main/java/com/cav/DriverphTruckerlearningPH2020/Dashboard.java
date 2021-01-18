@@ -37,6 +37,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.navigation.NavigationView;
+import com.muddzdev.styleabletoast.StyleableToast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -318,7 +319,8 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         cardViewSimulation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(Dashboard.this, SimulationInstructions.class));
+                StyleableToast.makeText(getApplicationContext(), Dashboard.this.getString(R.string.comingSoon),
+                        Toast.LENGTH_LONG, R.style.toastStyle).show();
             }
         });
 

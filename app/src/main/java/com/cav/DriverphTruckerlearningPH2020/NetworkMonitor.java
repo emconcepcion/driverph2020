@@ -52,7 +52,8 @@ public class NetworkMonitor extends BroadcastReceiver {
                     int isLockedY = cursor.getInt(cursor.getColumnIndex(DbContract.ScoresTable.COLUMN_NAME_IS_LOCKED));
                     int isCompletedY = cursor.getInt(cursor.getColumnIndex(DbContract.ScoresTable.COLUMN_NAME_IS_COMPLETED));
 
-                    stringRequest = new StringRequest(Request.Method.POST, DbContract.ScoresTable.SERVER_ALL_ATTEMPTS_URL,
+                    stringRequest = new StringRequest(Request.Method.POST,
+                            DbContract.ScoresTable.SERVER_ALL_ATTEMPTS_URL,
                             new Response.Listener<String>() {
                                 @Override
                                 public void onResponse(String response) {

@@ -10,246 +10,257 @@
         android:id="@+id/advisory"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="10dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="10dp"
         android:gravity="center_horizontal"
         android:text="Advisory"
         android:textAlignment="center"
+        android:background="@drawable/cardview_gradient_bg"
         android:textSize="25sp"
+        android:textColor="@android:color/white"
         android:textStyle="bold" />
 
-    <ScrollView
+    <LinearLayout
         android:layout_below="@id/advisory"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/gradient_blue"
-        android:layout_marginBottom="20dp">
+        android:padding="16dp"
+        android:layout_height="wrap_content">
 
-        <LinearLayout
+
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="10dp"
-            android:gravity="center_vertical"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:layout_below="@id/advisory"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/gradient_blue">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="160dp"
-                android:layout_marginTop="2dp"
-                android:background="@android:color/white"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="92dp"
-                    android:layout_height="111dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="15dp"
-                    android:src="@drawable/tesda_logo" />
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="4dp"
-                    android:layout_marginTop="7dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginRight="7dp"
-                    android:layout_marginBottom="7dp">
-
-                    <TextView
-                        android:id="@+id/tesda_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="10dp"
-                        android:gravity="center_horizontal"
-                        android:text="@string/tesdaName"
-                        android:textAlignment="center"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/tesda_link"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/tesda_text"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginEnd="15dp"
-                        android:layout_marginRight="15dp"
-                        android:gravity="center_horizontal"
-                        android:linksClickable="true"
-                        android:text="@string/tesda_link"
-                        android:textAlignment="center"
-                        android:textSize="20sp" />
-
-                </RelativeLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="160dp"
+                android:layout_height="match_parent"
                 android:layout_marginTop="10dp"
-                android:background="@android:color/white"
                 android:gravity="center_vertical"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
-                <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="15dp"
-                    android:src="@drawable/dot_logo" />
-
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="4dp"
-                    android:layout_marginTop="7dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginRight="7dp"
-                    android:layout_marginBottom="7dp">
+                    android:layout_height="160dp"
+                    android:layout_marginTop="2dp"
+                    android:background="@android:color/white"
+                    android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/dot_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="10dp"
-                        android:gravity="center_horizontal"
-                        android:text="@string/department_of_transportation"
-                        android:textAlignment="center"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="15dp"
+                        android:src="@drawable/tesda_logo" />
 
-                    <TextView
-                        android:id="@+id/dot_link"
+                    <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/dot_text"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginEnd="15dp"
-                        android:layout_marginRight="15dp"
-                        android:gravity="center_horizontal"
-                        android:linksClickable="true"
-                        android:text="@string/dot_link"
-                        android:textAlignment="center"
-                        android:textSize="20sp" />
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginTop="7dp"
+                        android:layout_marginRight="7dp"
+                        android:layout_marginBottom="7dp">
 
-                </RelativeLayout>
+                        <TextView
+                            android:id="@+id/tesda_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="10dp"
+                            android:gravity="center_horizontal"
+                            android:text="@string/tesdaName"
+                            android:textAlignment="center"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
 
-            </LinearLayout>
+                        <TextView
+                            android:id="@+id/tesda_link"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tesda_text"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginEnd="15dp"
+                            android:layout_marginRight="15dp"
+                            android:gravity="center_horizontal"
+                            android:linksClickable="true"
+                            android:text="@string/tesda_link"
+                            android:textAlignment="center"
+                            android:textSize="20sp" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="160dp"
-                android:layout_marginTop="10dp"
-                android:background="@android:color/white"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
+                    </RelativeLayout>
 
-                <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="15dp"
-                    android:src="@drawable/lto_logo" />
+                </LinearLayout>
 
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="4dp"
-                    android:layout_marginTop="7dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginRight="7dp"
-                    android:layout_marginBottom="7dp">
+                    android:layout_height="160dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@android:color/white"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/lto_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="10dp"
-                        android:gravity="center_horizontal"
-                        android:text="@string/land_transportation_office"
-                        android:textAlignment="center"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="15dp"
+                        android:src="@drawable/dot_logo" />
 
-                    <TextView
-                        android:id="@+id/lto_link"
+                    <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/lto_text"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginEnd="15dp"
-                        android:layout_marginRight="15dp"
-                        android:gravity="center_horizontal"
-                        android:linksClickable="true"
-                        android:text="@string/lto_link"
-                        android:textAlignment="center"
-                        android:textSize="20sp" />
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginTop="7dp"
+                        android:layout_marginRight="7dp"
+                        android:layout_marginBottom="7dp">
 
-                </RelativeLayout>
+                        <TextView
+                            android:id="@+id/dot_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="10dp"
+                            android:gravity="center_horizontal"
+                            android:text="@string/department_of_transportation"
+                            android:textAlignment="center"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
 
-            </LinearLayout>
+                        <TextView
+                            android:id="@+id/dot_link"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/dot_text"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginEnd="15dp"
+                            android:layout_marginRight="15dp"
+                            android:gravity="center_horizontal"
+                            android:linksClickable="true"
+                            android:text="@string/dot_link"
+                            android:textAlignment="center"
+                            android:textSize="20sp" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="160dp"
-                android:layout_marginVertical="10dp"
-                android:background="@android:color/white"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
+                    </RelativeLayout>
 
-                <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginLeft="15dp"
-                    android:src="@drawable/ltfrb_logo" />
+                </LinearLayout>
 
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginLeft="4dp"
-                    android:layout_marginEnd="7dp"
-                    android:layout_marginRight="7dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginBottom="7dp">
+                    android:layout_height="160dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@android:color/white"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/ltfrb_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="10dp"
-                        android:gravity="center_horizontal"
-                        android:text="@string/ltfrb"
-                        android:textAlignment="center"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="15dp"
+                        android:src="@drawable/lto_logo" />
 
-                    <TextView
-                        android:id="@+id/ltfrb_link"
+                    <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/ltfrb_text"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginEnd="15dp"
-                        android:layout_marginRight="15dp"
-                        android:gravity="center_horizontal"
-                        android:linksClickable="true"
-                        android:text="@string/ltfrb_link"
-                        android:textAlignment="center"
-                        android:textSize="20sp" />
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginTop="7dp"
+                        android:layout_marginRight="7dp"
+                        android:layout_marginBottom="7dp">
 
-                </RelativeLayout>
+                        <TextView
+                            android:id="@+id/lto_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="10dp"
+                            android:gravity="center_horizontal"
+                            android:text="@string/land_transportation_office"
+                            android:textAlignment="center"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/lto_link"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/lto_text"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginEnd="15dp"
+                            android:layout_marginRight="15dp"
+                            android:gravity="center_horizontal"
+                            android:linksClickable="true"
+                            android:text="@string/lto_link"
+                            android:textAlignment="center"
+                            android:textSize="20sp" />
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="160dp"
+                    android:layout_marginVertical="10dp"
+                    android:background="@android:color/white"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginLeft="15dp"
+                        android:src="@drawable/ltfrb_logo" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginEnd="7dp"
+                        android:layout_marginRight="7dp"
+                        android:layout_marginBottom="7dp">
+
+                        <TextView
+                            android:id="@+id/ltfrb_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="10dp"
+                            android:gravity="center_horizontal"
+                            android:text="@string/ltfrb"
+                            android:textAlignment="center"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/ltfrb_link"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/ltfrb_text"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginEnd="15dp"
+                            android:layout_marginRight="15dp"
+                            android:gravity="center_horizontal"
+                            android:linksClickable="true"
+                            android:text="@string/ltfrb_link"
+                            android:textAlignment="center"
+                            android:textSize="20sp" />
+
+                    </RelativeLayout>
+                </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
-    </ScrollView>
+        </ScrollView>
+    </LinearLayout>
 </RelativeLayout>

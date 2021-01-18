@@ -65,7 +65,7 @@
             android:orientation="vertical"
             android:padding="5dp"
             android:layout_margin="5dp"
-            android:background="@drawable/border_light">
+            android:background="@drawable/border_yellow">
 
             <ListView
                 android:layout_width="match_parent"
@@ -100,7 +100,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="40dp"
         android:layout_margin="16dp"
-        android:background="@drawable/rounded_login_button"
+        android:background="@drawable/yellow_login_button"
         android:textColor="@android:color/white"
         android:textAllCaps="false"/>
 

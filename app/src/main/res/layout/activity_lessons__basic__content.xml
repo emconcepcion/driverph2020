@@ -137,7 +137,7 @@
             android:textColor="@android:color/white"
             android:visibility="visible"
             android:textAllCaps="false"
-            android:layout_marginTop="5dp"
+            android:layout_margin="5dp"
             android:paddingHorizontal="10dp"
             android:layout_gravity="center_horizontal"/>
 

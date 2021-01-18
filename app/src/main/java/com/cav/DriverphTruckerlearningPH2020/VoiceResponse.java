@@ -78,7 +78,7 @@ public class VoiceResponse extends AppCompatActivity {
                 }
                 SharedPreferences sharedPreferences = getSharedPreferences(Uid_PREFS, MODE_PRIVATE);
                 int user_id = sharedPreferences.getInt("user_id", 0);
-                Intent intent = new Intent(VoiceResponse.this, Simulation.class);
+                Intent intent = new Intent(VoiceResponse.this, SimulationInstructions.class);
                 Bundle bundle = new Bundle();
                 bundle.putInt("user_idFromServer", user_id);
                 bundle.putInt("user_idFromDashboard", user_id);

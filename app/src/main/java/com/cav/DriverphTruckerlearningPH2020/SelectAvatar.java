@@ -49,7 +49,7 @@ public class SelectAvatar extends AppCompatActivity {
         lname = getIntent().getStringExtra("last_name");
         username = getIntent().getStringExtra("username");
         oldimage = getIntent().getStringExtra("image");
-        Toast.makeText(SelectAvatar.this, id, Toast.LENGTH_SHORT).show();
+   //     Toast.makeText(SelectAvatar.this, id, Toast.LENGTH_SHORT).show();
         framesetv();
 
         selectbtn.setOnClickListener(new View.OnClickListener() {
