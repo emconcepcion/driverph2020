@@ -13,11 +13,11 @@
         android:layout_height="33dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="12dp"
+        android:foreground="?android:attr/selectableItemBackground"
         android:background="@drawable/ic_arrow_left_long"
         android:backgroundTint="@android:color/white"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginLeft="8dp" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <View
         android:id="@+id/view2"
@@ -64,18 +64,14 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/textView32"
+            <View
+                android:id="@+id/view32"
                 android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_marginStart="31dp"
+                android:layout_height="1dp"
+                android:background="@color/dark_blue"
                 android:layout_marginTop="10dp"
-                android:text="_____________________________________________"
-                android:textColor="@color/dark_blue"
-                android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView13"
-                android:layout_marginLeft="31dp" />
+                app:layout_constraintTop_toBottomOf="@+id/textView13"/>
 
             <TextView
                 android:id="@+id/textView33"
@@ -86,8 +82,7 @@
                 android:textColor="@color/dark_blue"
                 android:textSize="24sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView32"
-                android:layout_marginLeft="31dp" />
+                app:layout_constraintTop_toBottomOf="@+id/view32" />
 
             <TextView
                 android:id="@+id/over"
@@ -99,21 +94,19 @@
                 android:textColor="@color/dark_blue"
                 android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView32"
-                android:layout_marginRight="104dp" />
+                app:layout_constraintTop_toBottomOf="@+id/view32" />
 
             <TextView
                 android:id="@+id/over2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:layout_marginEnd="44dp"
+                android:layout_marginStart="10dp"
                 android:text="70/100"
                 android:textColor="@color/dark_blue"
                 android:textSize="15sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView32"
-                android:layout_marginRight="44dp" />
+                app:layout_constraintStart_toEndOf="@+id/over"
+                app:layout_constraintTop_toBottomOf="@+id/view32" />
 
             <TextView
                 android:id="@+id/textView13"
@@ -124,8 +117,7 @@
                 android:textColor="#329F0B"
                 android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cardView_basic_competencies"
-                android:layout_marginRight="31dp" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/passorfailed"
@@ -139,9 +131,7 @@
                 android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/over"
-                android:layout_marginLeft="116dp"
-                android:layout_marginRight="101dp" />
+                app:layout_constraintTop_toBottomOf="@+id/over" />
 
             <TextView
                 android:id="@+id/textView36"
@@ -154,8 +144,7 @@
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/passorfailed"
-                android:layout_marginLeft="35dp" />
+                app:layout_constraintTop_toBottomOf="@+id/passorfailed" />
 
             <TextView
                 android:id="@+id/details"
@@ -172,75 +161,10 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView36"
-                android:layout_marginLeft="35dp"
-                android:layout_marginRight="33dp"
-                android:gravity="start" />
+                app:layout_constraintTop_toBottomOf="@+id/textView36" />
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardView_basic_competencies"
-                android:layout_width="match_parent"
-                android:layout_height="65dp"
-                android:layout_margin="15dp"
-                android:background="@drawable/rounded_corner"
-                app:cardCornerRadius="10dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView8">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <ImageView
-                        android:id="@+id/img_icon"
-                        android:layout_width="80dp"
-                        android:layout_height="match_parent"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/dlessons_dash_btn"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/module_tv"
-                        android:layout_width="155dp"
-                        android:layout_height="39dp"
-                        android:layout_marginStart="13dp"
-                        android:layout_marginTop="13dp"
-                        android:layout_marginBottom="13dp"
-                        android:textColor="@color/dark_blue"
-                        android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/img_icon"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:layout_marginLeft="13dp" />
-
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="5dp"
-                        android:layout_marginBottom="7dp"
-                        android:outlineProvider="background"
-                        app:cardCornerRadius="40dp"
-                        app:cardElevation="2dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:layout_marginRight="5dp">
-
-                        <TextView
-                            android:id="@+id/percent_tv"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:text="70%"
-                            android:textColor="@android:color/black"
-                            android:textSize="20sp" />
-
-                    </androidx.cardview.widget.CardView>
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.cardview.widget.CardView>
         </androidx.constraintlayout.widget.ConstraintLayout>
+
     </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,139 +6,160 @@
     android:layout_height="match_parent"
     tools:context=".AccountEdit">
 
+    <View
+        android:id="@+id/view"
+        android:layout_width="wrap_content"
+        android:layout_height="180dp"
+        android:background="@color/colorPrimaryDark"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/avatar_edit"
-        android:layout_width="159dp"
-        android:layout_height="168dp"
+        android:layout_width="110dp"
+        android:layout_height="115dp"
         android:layout_marginTop="30dp"
-        android:layout_marginEnd="100dp"
-        android:layout_marginRight="100dp"
+        app:srcCompat="@drawable/avatar1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/avatar1" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/txtV_editAccount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Edit Account"
+        android:layout_marginTop="15dp"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@+id/view"/>
 
     <TextView
         android:id="@+id/changeavatar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="147dp"
-        android:layout_marginTop="23dp"
-        android:layout_marginEnd="141dp"
         android:text="Change Avatar"
+        android:textSize="16sp"
+        android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/avatar_edit"
-        android:layout_marginLeft="147dp"
-        android:layout_marginRight="141dp" />
+        app:layout_constraintTop_toBottomOf="@+id/avatar_edit"/>
 
-    <FrameLayout
-        android:id="@+id/frameLayout2"
-        android:layout_width="287dp"
-        android:layout_height="230dp"
-        android:layout_marginStart="31dp"
-        android:layout_marginTop="33dp"
-        android:layout_marginEnd="30dp"
-        android:background="@drawable/border"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/changeavatar"
-        android:layout_marginLeft="31dp"
-        android:layout_marginRight="30dp">
+    <TextView
+        android:id="@+id/firstnamelabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="20dp"
+        android:text="First Name: "
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        app:layout_constraintTop_toBottomOf="@+id/txtV_editAccount"
+        app:layout_constraintStart_toStartOf="parent"/>
 
-        <EditText
-            android:id="@+id/et_firstname"
-            android:layout_width="155dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="110dp"
-            android:layout_marginTop="10.5dp"
-            android:text="" />
+    <EditText
+        android:id="@+id/et_firstname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Juan"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@+id/firstnamelabel"
+        app:layout_constraintStart_toStartOf="parent"/>
 
-        <EditText
-            android:id="@+id/et_lastname"
-            android:layout_width="155dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="110dp"
-            android:layout_marginTop="60.5dp"
-            android:text="" />
+    <TextView
+        android:id="@+id/lastnamelabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        android:text="Last Name: "
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/et_firstname"
+        app:layout_constraintStart_toStartOf="parent"/>
 
-        <EditText
-            android:id="@+id/et_email"
-            android:layout_width="155dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="110dp"
-            android:layout_marginTop="110.5dp"
-            android:text="" />
+    <EditText
+        android:id="@+id/et_lastname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Dela Cruz"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@+id/lastnamelabel"
+        app:layout_constraintStart_toStartOf="parent"/>
 
-        <EditText
-            android:id="@+id/et_username"
-            android:layout_width="155dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="110dp"
-            android:layout_marginTop="160.5dp"
-            android:text="" />
+    <TextView
+        android:id="@+id/tve_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        android:text="Email: "
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/et_lastname"
+        app:layout_constraintStart_toStartOf="parent"/>
 
-        <TextView
-            android:id="@+id/firstnamelabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="20dp"
-            android:text="First Name: "
-            android:textStyle="bold" />
+    <EditText
+        android:id="@+id/et_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="jdelacruz"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@+id/tve_email"
+        app:layout_constraintStart_toStartOf="parent"/>
 
-        <TextView
-            android:id="@+id/lastnamelabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="70dp"
-            android:text="Last Name: "
-            android:textStyle="bold" />
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        android:text="Username: "
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/et_email"
+        app:layout_constraintStart_toStartOf="parent"/>
 
-        <TextView
-            android:id="@+id/tve_email"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="120dp"
-            android:text="Email: "
-            android:textStyle="bold" />
+    <EditText
+        android:id="@+id/et_username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="jdelacruz"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@+id/textView15"
+        app:layout_constraintStart_toStartOf="parent" />
 
-        <TextView
-            android:id="@+id/textView15"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="170dp"
-            android:text="Username: "
-            android:textStyle="bold" />
 
-    </FrameLayout>
 
     <Button
         android:id="@+id/btn_save"
-        android:layout_width="wrap_content"
+        android:layout_width="110dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="131dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="110dp"
         android:textAllCaps="false"
         android:text="Save"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/colorAccent"
+        android:background="@drawable/signup_btn_bg"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/frameLayout2"
-        android:layout_marginLeft="131dp" />
+        app:layout_constraintTop_toBottomOf="@+id/et_username" />
 
     <Button
         android:id="@+id/btn_cancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="24dp"
         android:textAllCaps="false"
         android:text="Cancel"
+        android:textSize="14sp"
+        android:textColor="@color/colorAccent"
+        android:background="@drawable/signup_btn_bg"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/frameLayout2"
-        android:layout_marginRight="24dp" />
+        app:layout_constraintTop_toBottomOf="@+id/et_username" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

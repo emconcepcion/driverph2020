@@ -6,49 +6,44 @@
     android:layout_height="match_parent"
     tools:context=".SelectAvatar">
 
+    <View
+        android:id="@+id/view"
+        android:layout_width="wrap_content"
+        android:layout_height="240dp"
+        android:background="@color/colorPrimaryDark"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/choose"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Choose Your Avatar"
+        android:textColor="@android:color/white"
+        android:fontFamily="sans-serif-condensed-light"
         app:layout_constraintTop_toTopOf="parent"
-        android:gravity="center_horizontal"
+        android:gravity="center"
         android:layout_margin="20dp"
-        android:textSize="22sp"
-        android:textStyle="bold"/>
-
-    <ImageView
-        android:id="@+id/imageView6"
-        android:layout_width="match_parent"
-        android:layout_height="132dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/choose"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="20dp"
-        android:layout_marginHorizontal="45dp"
-        app:srcCompat="@drawable/border_yellow" />
+        android:textSize="24sp"
+        android:textStyle="bold" />
 
     <ImageView
         android:id="@+id/imageView7"
-        android:layout_width="123dp"
-        android:layout_height="103dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="72dp"
-        android:layout_marginRight="72dp"
-        app:layout_constraintEnd_toEndOf="@+id/imageView6"
-        app:layout_constraintTop_toBottomOf="@+id/choose"
+        android:layout_width="150dp"
+        android:layout_height="130dp"
+        android:layout_marginTop="30dp"
         app:srcCompat="@drawable/avatar1"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintTop_toBottomOf="@+id/choose"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="wrap_content"
-        android:layout_height="428dp"
+        android:layout_height="400dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView6">
+        app:layout_constraintTop_toBottomOf="@+id/view">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

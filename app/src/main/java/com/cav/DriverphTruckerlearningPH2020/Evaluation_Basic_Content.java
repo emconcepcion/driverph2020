@@ -34,14 +34,12 @@ public class Evaluation_Basic_Content extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_evaluation__basic__content);
 
-        module_tv = findViewById(R.id.module_tv);
-        percent_tv = findViewById(R.id.percent_tv);
         over = findViewById(R.id.over);
         over2 = findViewById(R.id.over2);
         lessons_topic = findViewById(R.id.textView13);
         details = findViewById(R.id.details);
         passorfailed = findViewById(R.id.passorfailed);
-        module_tv.setText(getIntent().getStringExtra("module"));
+//        module_tv.setText(getIntent().getStringExtra("module"));
         module = getIntent().getStringExtra("module_code");
         recommendation = findViewById(R.id.textView36);
         getData();
