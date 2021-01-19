@@ -14,6 +14,9 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
+
 
 public class PrepareForTest extends AppCompatActivity {
 
@@ -33,6 +36,7 @@ public class PrepareForTest extends AppCompatActivity {
         textViewChapter = findViewById(R.id.textview_module_title);
         secondChance = findViewById(R.id.textview_instruct_msg1);
         secondChance.setText("We believe in second chances, too.\nTake a deep breath and take the test again.");
+
 
         if (Lessons_Menu.isFromLessonsMenu) {
             SharedPreferences sp1 = getApplicationContext()

@@ -18,6 +18,8 @@ import android.widget.Toast;
 
 import com.anton46.stepsview.StepsView;
 import com.cav.DriverphTruckerlearningPH2020.databinding.ActivityLessonBinding;
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.muddzdev.styleabletoast.StyleableToast;
 
 import static com.cav.DriverphTruckerlearningPH2020.Constant.SP_LESSONID;
@@ -50,6 +52,11 @@ public class Lesson extends AppCompatActivity {
 
         isFromMyProgressNav = true;
         Lessons_Basic_Content.isFromLessonBasicContent = false;
+
+        YoYo.with(Techniques.Bounce)
+                .duration(700)
+                .repeat(1)
+                .playOn(progress_LessonTitle);
 
         SharedPreferences shp = getSharedPreferences("MySharedPrefForEmail", MODE_PRIVATE);
         SharedPreferences.Editor myEdit = shp.edit();
@@ -123,6 +130,10 @@ public class Lesson extends AppCompatActivity {
                             case 4:
                                 progress_Module.setText("Way to go!");
                                 progress_LessonTitle.setText("Keep learning and become a more knowledgeable trucker!");
+                                YoYo.with(Techniques.Bounce)
+                                        .duration(700)
+                                        .repeat(1)
+                                        .playOn(progress_LessonTitle);
                                 break;
                             default:
                                 String null_lessonId = "No active modules yet.";
@@ -131,6 +142,10 @@ public class Lesson extends AppCompatActivity {
                                 }else{
                                     progress_Module.setText(progMod);
                                     progress_LessonTitle.setText(progLess);
+                                    YoYo.with(Techniques.Bounce)
+                                            .duration(700)
+                                            .repeat(1)
+                                            .playOn(progress_LessonTitle);
                                 }
                                 break;
                         }
@@ -168,7 +183,6 @@ public class Lesson extends AppCompatActivity {
                                 progress_LessonTitle.setText("This will play your last recorded recitation for the current session.\n" +
                                         "\nNote that all recordings are only stored momentarily while you are logged in.");
                                 startActivity(new Intent(Lesson.this, VoiceResponse.class));
-
                                 break;
                             case 2:
                                 progress_Module.setText("Completed tests");
@@ -184,6 +198,10 @@ public class Lesson extends AppCompatActivity {
                             case 4:
                                 progress_Module.setText("Way to go!");
                                 progress_LessonTitle.setText(R.string.keepLearning);
+                                YoYo.with(Techniques.Bounce)
+                                        .duration(700)
+                                        .repeat(1)
+                                        .playOn(progress_LessonTitle);
                                 break;
                             default:
                                 String null_lessonId = "No active modules yet.";
@@ -192,6 +210,10 @@ public class Lesson extends AppCompatActivity {
                                 }else{
                                     progress_Module.setText(progMod);
                                     progress_LessonTitle.setText(progLess);
+                                    YoYo.with(Techniques.Bounce)
+                                            .duration(700)
+                                            .repeat(1)
+                                            .playOn(progress_LessonTitle);
                                 }
                                 break;
                         }

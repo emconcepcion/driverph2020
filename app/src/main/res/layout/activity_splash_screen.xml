@@ -22,7 +22,7 @@
         android:layout_below="@id/imageView5"
         android:layout_centerHorizontal="true"
         android:fontFamily="sans-serif-light"
-        android:text="TruckerLearningPH"
+        android:text="DRIVER.PH"
         android:textColor="@android:color/white"
         android:layout_margin="15dp"
         android:textSize="24sp"
@@ -33,7 +33,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="70dp"
+        android:layout_marginBottom="80dp"
         android:gravity="center"
         android:orientation="horizontal">
 

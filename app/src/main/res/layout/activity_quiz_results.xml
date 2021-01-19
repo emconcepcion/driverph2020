@@ -13,7 +13,7 @@
         android:layout_centerHorizontal="true"
         android:text="Chapter name"
         android:textColor="@android:color/transparent"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/you_scored"
@@ -39,84 +39,85 @@
 
     <TextView
         android:id="@+id/questionsAttempted"
-        android:layout_below="@id/txt_score_result"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_below="@id/txt_score_result"
         android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="5dp"
-        android:text="Note: Only the questions that you attempted to answer will be displayed below:"
-        />
+        android:text="Note: Only the questions that you attempted to answer will be displayed below:" />
 
-    <ScrollView
+    <LinearLayout
+        android:layout_below="@+id/questionsAttempted"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/questionsAttempted"
+        android:layout_height="match_parent"
+        android:layout_margin="5dp"
+        android:layout_marginHorizontal="15dp"
+        android:background="@drawable/border_yellow"
         android:layout_above="@id/btn_unlock"
-        android:layout_marginTop="0dp"
-        android:scrollbarAlwaysDrawVerticalTrack="true"
-        android:fillViewport="true"
-        >
+        android:orientation="vertical"
+        android:padding="5dp">
 
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="5dp"
-            android:layout_margin="5dp"
-            android:background="@drawable/border_yellow">
+            android:layout_height="match_parent"
+            android:layout_marginTop="0dp"
+            android:fillViewport="true"
+            android:scrollbarAlwaysDrawVerticalTrack="true">
+
 
             <ListView
+                android:id="@+id/list_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@android:color/white"
-                android:id="@+id/list_view">
-            </ListView>
-        </LinearLayout>
+                android:background="@android:color/white" />
 
-    </ScrollView>
+        </ScrollView>
+    </LinearLayout>
 
-    <!--    </LinearLayout>-->
 
     <Button
         android:id="@+id/btn_unlock"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:text="Unlock next lesson"
-        android:textAllCaps="false"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:layout_margin="16dp"
         android:layout_marginBottom="40dp"
         android:background="@drawable/yellow_login_button"
+        android:text="Unlock next lesson"
+        android:textAllCaps="false"
         android:textColor="@android:color/white"
-        android:layout_margin="16dp"/>
+        android:textSize="16sp" />
 
     <Button
         android:id="@+id/btn_review"
         android:layout_width="130dp"
         android:layout_height="wrap_content"
-        android:text="@string/review"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="40dp"
         android:layout_margin="16dp"
+        android:layout_marginBottom="40dp"
         android:background="@drawable/yellow_login_button"
+        android:text="@string/review"
+        android:textAllCaps="false"
         android:textColor="@android:color/white"
-        android:textAllCaps="false"/>
+        android:textSize="16sp" />
 
     <Button
         android:id="@+id/btn_retake"
         android:layout_width="130dp"
         android:layout_height="wrap_content"
-        android:text="@string/retake"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="40dp"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
         android:layout_margin="16dp"
-        android:textAllCaps="false"
+        android:layout_marginBottom="40dp"
         android:background="@drawable/rounded_login_button"
+        android:text="@string/retake"
+        android:textAllCaps="false"
         android:textColor="@android:color/white"
-        android:layout_alignParentRight="true" />
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/email_result"
@@ -127,7 +128,7 @@
         android:layout_centerHorizontal="true"
         android:text="myEmail"
         android:textStyle="bold"
-        android:visibility="invisible"/>
+        android:visibility="invisible" />
 
     <TextView
         android:id="@+id/userId_result"
@@ -140,6 +141,6 @@
         android:layout_toLeftOf="@id/email_result"
         android:text="myUserId"
         android:textStyle="bold"
-        android:visibility="invisible"/>
+        android:visibility="invisible" />
 
 </RelativeLayout>

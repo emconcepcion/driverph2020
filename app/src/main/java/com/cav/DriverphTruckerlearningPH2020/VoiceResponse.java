@@ -2,6 +2,7 @@ package com.cav.DriverphTruckerlearningPH2020;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -18,6 +19,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
+
 import java.io.File;
 import java.io.IOException;
 
@@ -30,7 +34,7 @@ public class VoiceResponse extends AppCompatActivity {
     MediaRecorder mediaRecorder = null;
     MediaPlayer mediaPlayer = null;
     Button start_rec,  play_rec, btn_next;
-    TextView textView, userName, chapVr, whatWasLearned;
+    TextView textView, userName, chapVr, whatWasLearned, recap;
 
     public static String fileName = "recorded.3gp";
     String file = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + fileName;
@@ -47,6 +51,7 @@ public class VoiceResponse extends AppCompatActivity {
         SharedPreferences spr = getSharedPreferences("SharedPrefChapter", MODE_PRIVATE);
         String chapter = spr.getString("chapter", "");
 
+        recap = findViewById(R.id.quickRecap);
         start_rec = findViewById(R.id.btn_start_record);
         textView = findViewById(R.id.textView_status);
         userName = findViewById(R.id.user_name);
@@ -57,9 +62,15 @@ public class VoiceResponse extends AppCompatActivity {
 
         userName.setText("\nHi, " + uname);
         chapVr.setText(chapter);
-        textView.setVisibility(View.GONE);
+        textView.setVisibility(View.INVISIBLE);
+        YoYo.with(Techniques.Tada)
+                .duration(300)
+                .repeat(2)
+                .playOn(userName);
 
         if (Lesson.isFromMyProgressNav) {
+            recap.setVisibility(View.GONE);
+            chapVr.setText("Recently Recorded Recitation");
             btn_next.setVisibility(View.GONE);
             start_rec.setVisibility(View.GONE);
             textView.setText(R.string.play_recording);
@@ -111,6 +122,11 @@ public class VoiceResponse extends AppCompatActivity {
             public void onClick(View view) {
                 if(start_rec.isSelected()){
                     textView.setText(R.string.stop_rec_first_before_play);
+                    textView.setVisibility(View.VISIBLE);
+                    YoYo.with(Techniques.Tada)
+                            .duration(300)
+                            .repeat(1)
+                            .playOn(textView);
                 }else {
                     onPlay(true);
                 }
@@ -132,6 +148,10 @@ public class VoiceResponse extends AppCompatActivity {
             record();
             textView.setVisibility(View.VISIBLE);
             textView.setText(R.string.start_recording);
+            YoYo.with(Techniques.Pulse)
+                    .duration(700)
+                    .repeat(1)
+                    .playOn(textView);
         } else {
             if (mediaRecorder != null){
                 stop();
@@ -146,8 +166,16 @@ public class VoiceResponse extends AppCompatActivity {
             File noFile = new File(file);
             if (!noFile.exists()){
                 textView.setText(R.string.noRecording);
+                YoYo.with(Techniques.Shake)
+                        .duration(300)
+                        .repeat(1)
+                        .playOn(textView);
             }else{
                 textView.setText(R.string.play_recording);
+                YoYo.with(Techniques.Pulse)
+                        .duration(300)
+                        .repeat(1)
+                        .playOn(textView);
             }
             mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                 public void onCompletion(MediaPlayer mp) {
@@ -159,6 +187,10 @@ public class VoiceResponse extends AppCompatActivity {
                     }else if (isFromLessonBasicContent) {
                         textView.setText(R.string.playback_ended);
                         btn_next.setVisibility(View.VISIBLE);
+                        YoYo.with(Techniques.Tada)
+                                .duration(500)
+                                .repeat(1)
+                                .playOn(textView);
                     }
                 }
             });

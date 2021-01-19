@@ -26,7 +26,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Evaluation_Basic_Content extends AppCompatActivity {
-    TextView module_tv, percent_tv, over, over2, lessons_topic, details, passorfailed, recommendation;
+    TextView  details2, over, over2, lessons_topic, details, passorfailed, recommendation;
     ConstraintLayout seeDetailsContainer;
     String module;
     List<String> al, lesson_id_key;
@@ -39,8 +39,8 @@ public class Evaluation_Basic_Content extends AppCompatActivity {
         over2 = findViewById(R.id.over2);
         lessons_topic = findViewById(R.id.textView13);
         details = findViewById(R.id.details);
+        details2 = findViewById(R.id.details2);
         passorfailed = findViewById(R.id.passorfailed);
-//        module_tv.setText(getIntent().getStringExtra("module"));
         module = getIntent().getStringExtra("module_code");
         recommendation = findViewById(R.id.textView36);
         getData();
@@ -48,21 +48,33 @@ public class Evaluation_Basic_Content extends AppCompatActivity {
         over.setText(res + "/10");
         over2.setText(getIntent().getStringExtra("attempt") + " Retake(s)");
 
+        int attempt = Integer.parseInt(getIntent().getStringExtra("attempt"));
         if(res <= 7){
             passorfailed.setText("FAILED");
-            passorfailed.setTextColor(Color.RED);
-            details.setText("You have failed the " + getIntent().getStringExtra("module") + " module." +
+            details.setText("We're sorry, but you have failed the " + getIntent().getStringExtra("module") + " module test." +
                     "\n\nWe recommend you to please review this module to pass the test and unlock the succeeding modules.");
+        }else if(res >= 8 && attempt >= 5) {
+            passorfailed.setText("PASSED");
+            details.setText("Well done! You have passed the \n" + getIntent().getStringExtra("module") +" module test.\n" +
+                    "\nYou can now move on to the next chapter or you can review the lessons to learn more from this Chapter!" + "\n\nHowever, based on the number of retakes that you have for this module, we have detected that you had a difficult time passing the test. Therefore, we highly recommend you to continue reviewing this module even after passing the test. \n" +
+                    "\nThe concepts that were discussed must be thoroughly learned and the practical application must be applied on a regular basis to improve your knowledge and roadworthiness.");
         }else if((res == 8) || (res == 9)){
             passorfailed.setText("PASSED");
-            passorfailed.setTextColor(Color.GREEN);
-            details.setText("Well done! You have passed the \n" + getIntent().getStringExtra("module") + " module." +
-                    "\n\nYou can now move on to the next module!");
+            details.setText("Well done! You have passed the \n" + getIntent().getStringExtra("module") + " module test." +
+                    "\n\nYou can now move on to the next chapter or you can review the lessons to learn more from this Chapter!");
         }else if(res == 10){
             passorfailed.setText("PASSED");
-            passorfailed.setTextColor(Color.GREEN);
             recommendation.setVisibility(View.INVISIBLE);
-            details.setText("Excellent job!\nYou have achieved a perfect score!\nYou can now move on to the next module!");
+            details.setText("Excellent job! \nYou have achieved a perfect score!\nYou can now move on to the next chapter!");
+        }
+
+
+        if(getIntent().getStringExtra("module").equals("Basic Competencies")){
+            details2.setText("For this module, you must work on further studying how your work relationship and communication is practiced. Your professionalism will add value to your career as a truck driver.");
+        }else if(getIntent().getStringExtra("module").equals("Common Competencies")){
+            details2.setText("For this module, studying about sealants and adhesive and how these are applied would give you a clear idea which to apply on specific surface materials. Cleanliness through proper waste disposal or storage also improves your self-discipline.");
+        }else if(getIntent().getStringExtra("module").equals("Core Competencies")){
+            details2.setText("For this module, it is important to be knowledgeable about the parts of your vehicle, how to maintain the truck and which units need to be checked regularly for your safety. Your ability to identify road markers and signals, and also obey traffic rules and regulations are also an indicator of how competent you are as truck driver.");
         }
     }
 

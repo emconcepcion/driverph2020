@@ -18,7 +18,7 @@
         android:id="@+id/constraintLayout"
         android:layout_width="300dp"
         android:layout_height="230dp"
-        android:background="@drawable/rounded_corner"
+        android:background="@drawable/view_border"
         android:layout_marginTop="68dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -89,15 +89,15 @@
             app:layout_constraintEnd_toEndOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <View
-        android:id="@+id/shadow_login_panel"
-        android:layout_width="342dp"
-        android:layout_height="230dp"
-        android:layout_marginTop="56dp"
-        android:background="@drawable/shape_login_panel"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+<!--    <View-->
+<!--        android:id="@+id/shadow_login_panel"-->
+<!--        android:layout_width="342dp"-->
+<!--        android:layout_height="230dp"-->
+<!--        android:layout_marginTop="56dp"-->
+<!--        android:background="@drawable/shape_login_panel"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/imageView4" />-->
 
     <ImageView
         android:id="@+id/imageView4"
@@ -110,6 +110,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:src="@drawable/app_logo" />
+
+
 
     <Button
         android:id="@+id/btn_login"
@@ -141,11 +143,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView4" />
 
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_login">
+
     <TextView
         android:id="@+id/textView_fgtpassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginStart="50dp"
         android:layout_marginEnd="50dp"
         android:fontFamily="sans-serif-light"
@@ -161,7 +172,7 @@
         android:id="@+id/txtV_dontHaveAnAcct"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="20dp"
         android:text="Don't have an account?"
         android:fontFamily="sans-serif-light"
         android:gravity="center"
@@ -173,9 +184,10 @@
         android:id="@+id/textView_signUp"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:layout_marginStart="50dp"
         android:layout_marginEnd="50dp"
+        android:layout_marginBottom="20dp"
         android:background="@drawable/signup_btn_bg"
         android:text="Sign up"
         android:gravity="center"
@@ -185,5 +197,7 @@
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtV_dontHaveAnAcct" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

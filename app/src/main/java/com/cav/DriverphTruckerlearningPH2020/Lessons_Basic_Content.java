@@ -126,6 +126,8 @@ public class Lessons_Basic_Content extends AppCompatActivity {
         email_lesson.setText(dashboard_email);
 
         content = (WebView) findViewById(R.id.content);
+        content.getSettings().setJavaScriptEnabled(true);
+
 
         btnNext = findViewById(R.id.btn_to_voiceR);
         btnNext.setOnClickListener(new View.OnClickListener() {

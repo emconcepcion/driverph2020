@@ -27,6 +27,8 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.cav.DriverphTruckerlearningPH2020.QuizActivity.*;
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -84,6 +86,11 @@ public class QuizResults extends AppCompatActivity {
         String thisChapter = getIntent().getExtras().getString("chapter");
         chapter_name.setText(thisChapter);
         showResult();
+
+        YoYo.with(Techniques.Bounce)
+                .duration(700)
+                .repeat(1)
+                .playOn(score_result);
     }
 
     public void showResult() {

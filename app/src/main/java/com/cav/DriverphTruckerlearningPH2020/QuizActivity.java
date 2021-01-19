@@ -25,6 +25,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.muddzdev.styleabletoast.StyleableToast;
 
 import java.text.ParseException;
@@ -313,6 +315,10 @@ public class QuizActivity extends AppCompatActivity {
 
         if (answerNr != currentQuestion.getAnswerNr()) {
             textViewQuestion.setText("Wrong Answer.");
+            YoYo.with(Techniques.Shake)
+                    .duration(300)
+                    .repeat(1)
+                    .playOn(textViewQuestion);
             rb1.setTextColor(Color.RED);
             rb2.setTextColor(Color.RED);
             rb3.setTextColor(Color.RED);
@@ -323,18 +329,34 @@ public class QuizActivity extends AppCompatActivity {
                 case 1:
                     rb1.setTextColor(Color.GREEN);
                     textViewQuestion.setText("Correct!");
+                    YoYo.with(Techniques.Pulse)
+                            .duration(300)
+                            .repeat(1)
+                            .playOn(textViewQuestion);
                     break;
                 case 2:
                     rb2.setTextColor(Color.GREEN);
                     textViewQuestion.setText("Correct!");
+                    YoYo.with(Techniques.Pulse)
+                            .duration(300)
+                            .repeat(1)
+                            .playOn(textViewQuestion);
                     break;
                 case 3:
                     rb3.setTextColor(Color.GREEN);
                     textViewQuestion.setText("Correct!");
+                    YoYo.with(Techniques.Pulse)
+                            .duration(300)
+                            .repeat(1)
+                            .playOn(textViewQuestion);
                     break;
                 case 4:
                     rb4.setTextColor(Color.GREEN);
                     textViewQuestion.setText("Correct!");
+                    YoYo.with(Techniques.Pulse)
+                            .duration(300)
+                            .repeat(1)
+                            .playOn(textViewQuestion);
                     break;
             }
             rbGroup.clearCheck();
@@ -564,7 +586,7 @@ public class QuizActivity extends AppCompatActivity {
         }
         scoreShown = true;
         mediaPlayer.pause();
-        Dialog show_score = new Dialog(this);
+        Dialog show_score = new Dialog(this, R.style.dialogstyle);
         Button btn_view_result;
         show_score.setContentView(R.layout.show_score);
         ImageView result_icon, fail_icon, close_exit_popup;
@@ -606,6 +628,7 @@ public class QuizActivity extends AppCompatActivity {
         btn_view_result.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                show_score.dismiss();
                 userFinishedQuiz = true;
                 endedAttempt = false;
                 mediaPlayer.pause();
@@ -617,6 +640,7 @@ public class QuizActivity extends AppCompatActivity {
         close_exit_popup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                show_score.dismiss();
                 userFinishedQuiz = true;
                 endedAttempt = false;
                 mediaPlayer.pause();

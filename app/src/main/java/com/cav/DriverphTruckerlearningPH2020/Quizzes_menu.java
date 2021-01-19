@@ -262,7 +262,7 @@ public class Quizzes_menu extends AppCompatActivity {
     }
 
     public void userPassedAllTests(){
-        Dialog congrats = new Dialog(this);
+        Dialog congrats = new Dialog(this, R.style.dialogstyle);
         ImageView close_exit_popup;
         Button btn_OK;
         congrats.setContentView(R.layout.congrats);

@@ -38,6 +38,8 @@ import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.play.core.appupdate.AppUpdateInfo;
 import com.google.android.play.core.appupdate.AppUpdateManager;
@@ -142,6 +144,11 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         resumeLesson = findViewById(R.id.resume);
         myEmailForAttempts = findViewById(R.id.emailForAttempts);
         myEmailForAttempts.setText(dashboard_email);
+
+        YoYo.with(Techniques.Bounce)
+                .duration(700)
+                .repeat(3)
+                .playOn(welcome_fname);
 
         recentModule.setText(myLatestChapter);
 
