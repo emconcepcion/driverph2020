@@ -51,19 +51,23 @@ public class Evaluation_Basic_Content extends AppCompatActivity {
         int attempt = Integer.parseInt(getIntent().getStringExtra("attempt"));
         if(res <= 7){
             passorfailed.setText("FAILED");
+            passorfailed.setTextColor(Color.RED);
             details.setText("We're sorry, but you have failed the " + getIntent().getStringExtra("module") + " module test." +
                     "\n\nWe recommend you to please review this module to pass the test and unlock the succeeding modules.");
         }else if(res >= 8 && attempt >= 5) {
             passorfailed.setText("PASSED");
+            passorfailed.setTextColor(Color.GREEN);
             details.setText("Well done! You have passed the \n" + getIntent().getStringExtra("module") +" module test.\n" +
                     "\nYou can now move on to the next chapter or you can review the lessons to learn more from this Chapter!" + "\n\nHowever, based on the number of retakes that you have for this module, we have detected that you had a difficult time passing the test. Therefore, we highly recommend you to continue reviewing this module even after passing the test. \n" +
                     "\nThe concepts that were discussed must be thoroughly learned and the practical application must be applied on a regular basis to improve your knowledge and roadworthiness.");
         }else if((res == 8) || (res == 9)){
             passorfailed.setText("PASSED");
+            passorfailed.setTextColor(Color.GREEN);
             details.setText("Well done! You have passed the \n" + getIntent().getStringExtra("module") + " module test." +
                     "\n\nYou can now move on to the next chapter or you can review the lessons to learn more from this Chapter!");
         }else if(res == 10){
             passorfailed.setText("PASSED");
+            passorfailed.setTextColor(Color.GREEN);
             recommendation.setVisibility(View.INVISIBLE);
             details.setText("Excellent job! \nYou have achieved a perfect score!\nYou can now move on to the next chapter!");
         }

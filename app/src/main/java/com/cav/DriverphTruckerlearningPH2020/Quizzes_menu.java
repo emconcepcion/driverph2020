@@ -171,8 +171,8 @@ public class Quizzes_menu extends AppCompatActivity {
                 Intent intent = new Intent();
                 intent.setAction(Intent.ACTION_VIEW);
                 intent.addCategory(Intent.CATEGORY_BROWSABLE);
-                intent.setData(Uri.parse("https://phportal.net/driver-user/#/login"));
-               // https://phportal.net/driver-user/#/login?r=leaderboards
+//                intent.setData(Uri.parse("https://phportal.net/driver-user/#/login"));
+                intent.setData(Uri.parse("https://phportal.net/driver-user/#/login?r=leaderboards"));
                 startActivity(intent);
             }
         });
