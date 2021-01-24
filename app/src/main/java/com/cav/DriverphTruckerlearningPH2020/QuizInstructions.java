@@ -208,6 +208,8 @@ public class QuizInstructions extends AppCompatActivity {
                         .getString("correctAnswer"));
                 Log.d("module" + i, menuitemArray.getJSONObject(i)
                         .getString("module"));
+                Log.d("imageUrl" + i, menuitemArray.getJSONObject(i)
+                        .getString("imageUrl"));
 
                 String question = menuitemArray.getJSONObject(i).getString("questionText");
                 String option1 = menuitemArray.getJSONObject(i).getString("choiceA");
@@ -217,8 +219,9 @@ public class QuizInstructions extends AppCompatActivity {
                 String answer_nr = menuitemArray.getJSONObject(i).getString("correctAnswer");
                 String chapter = menuitemArray.getJSONObject(i).getString("module");
                 String moduleName = menuitemArray.getJSONObject(i).getString("moduleName");
+                String image = menuitemArray.getJSONObject(i).getString("imageUrl");
                 Question q1 = new Question(question, option1, option2, option3, option4,
-                        Integer.parseInt(answer_nr), chapter, moduleName);
+                        Integer.parseInt(answer_nr), chapter, moduleName, image);
                 db.addQuestion(q1);
             }
 

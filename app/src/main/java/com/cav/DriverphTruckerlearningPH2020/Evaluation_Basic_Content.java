@@ -25,6 +25,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import static com.cav.DriverphTruckerlearningPH2020.Constant._1;
+import static com.cav.DriverphTruckerlearningPH2020.Constant._2;
+import static com.cav.DriverphTruckerlearningPH2020.Constant._3;
+
 public class Evaluation_Basic_Content extends AppCompatActivity {
     TextView  details2, over, over2, lessons_topic, details, passorfailed, recommendation;
     ConstraintLayout seeDetailsContainer;
@@ -58,13 +62,13 @@ public class Evaluation_Basic_Content extends AppCompatActivity {
             passorfailed.setText("PASSED");
             passorfailed.setTextColor(Color.GREEN);
             details.setText("Well done! You have passed the \n" + getIntent().getStringExtra("module") +" module test.\n" +
-                    "\nYou can now move on to the next chapter or you can review the lessons to learn more from this Chapter!" + "\n\nHowever, based on the number of retakes that you have for this module, we have detected that you had a difficult time passing the test. Therefore, we highly recommend you to continue reviewing this module even after passing the test. \n" +
+                    "\nYou can now move on to the next chapter or you can review the lessons to learn more about this module!" + "\n\nHowever, based on the number of retakes that you have for this module, we have detected that you had a difficult time passing the test. Therefore, we highly recommend you to continue reviewing this module even after passing the test. \n" +
                     "\nThe concepts that were discussed must be thoroughly learned and the practical application must be applied on a regular basis to improve your knowledge and roadworthiness.");
         }else if((res == 8) || (res == 9)){
             passorfailed.setText("PASSED");
             passorfailed.setTextColor(Color.GREEN);
             details.setText("Well done! You have passed the \n" + getIntent().getStringExtra("module") + " module test." +
-                    "\n\nYou can now move on to the next chapter or you can review the lessons to learn more from this Chapter!");
+                    "\n\nYou can now move on to the next chapter or you can review the lessons to learn more about this module!");
         }else if(res == 10){
             passorfailed.setText("PASSED");
             passorfailed.setTextColor(Color.GREEN);
@@ -73,12 +77,12 @@ public class Evaluation_Basic_Content extends AppCompatActivity {
         }
 
 
-        if(getIntent().getStringExtra("module").equals("Basic Competencies")){
-            details2.setText("For this module, you must work on further studying how your work relationship and communication is practiced. Your professionalism will add value to your career as a truck driver.");
-        }else if(getIntent().getStringExtra("module").equals("Common Competencies")){
-            details2.setText("For this module, studying about sealants and adhesive and how these are applied would give you a clear idea which to apply on specific surface materials. Cleanliness through proper waste disposal or storage also improves your self-discipline.");
-        }else if(getIntent().getStringExtra("module").equals("Core Competencies")){
-            details2.setText("For this module, it is important to be knowledgeable about the parts of your vehicle, how to maintain the truck and which units need to be checked regularly for your safety. Your ability to identify road markers and signals, and also obey traffic rules and regulations are also an indicator of how competent you are as truck driver.");
+        if(getIntent().getStringExtra("module").equals(_1)){
+            details2.setText("For this module, you are expected to work on further studying the different traffic and road signs, including the pavement markings.\n\nWe highly suggest that you read the detailed feedback for any questions that you answered incorrectly. Try to memorize the meaning of each traffic sign and the pavement markings. Random questions will be asked during your Driving Licensure Exam.\n\nThis will not only help you obey traffic rules, but will ultimately prevent you from violating the rules and getting involved in accidents caused by incorrect interpretation of the road signs. ");
+        }else if(getIntent().getStringExtra("module").equals(_2)){
+            details2.setText("For this module, studying about the traffic rules and regulations will equip you on how you should strictly observe the traffic rules before and while driving. We suggest that you focus on learning more about the detailed lessons of this module, which you can definitely use while on the road.\n\nA good knowledge about the traffic rules and regulations will keep you from unnecessary violation tickets if you are aware if you have done anything wrong, or vindicate yourself if you know that what you have committed is not at all a traffic violation.");
+        }else if(getIntent().getStringExtra("module").equals(_3)){
+            details2.setText("For this module, it is important that you have learned about being knowledgeable of the know-hows of driving. You will be expected to possess a good driving attitude and skills each time you are on the road.\n\nWe suggest that you review the topics of this module to better understand how to handle different driving scenarios, when to give way to another motorist, what to do during an accident, the consequences of negligent and irresponsible driving and a lot more.\n\nMake sure that you understand the lessons before going out on the road again.");
         }
     }
 
@@ -87,7 +91,6 @@ public class Evaluation_Basic_Content extends AppCompatActivity {
         String value = module;
 
         String url = Config5.DATA_URL + value;
-
 
 
         StringRequest stringRequest = new StringRequest(url, new Response.Listener<String>() {

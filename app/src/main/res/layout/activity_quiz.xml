@@ -56,24 +56,24 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/textview_instruction"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Instructions:"
-            android:textColor="@android:color/black"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+<!--        <TextView-->
+<!--            android:id="@+id/textview_instruction"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Instructions:"-->
+<!--            android:textColor="@android:color/black"-->
+<!--            android:textSize="16sp"-->
+<!--            android:textStyle="bold" />-->
 
-        <TextView
-            android:id="@+id/textview_instruct_msg"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/textview_instruction"
-            android:layout_marginTop="5dp"
-            android:text="@string/read_questions"
-            android:textColor="@android:color/black"
-            android:textSize="16sp" />
+<!--        <TextView-->
+<!--            android:id="@+id/textview_instruct_msg"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_below="@id/textview_instruction"-->
+<!--            android:layout_marginTop="5dp"-->
+<!--            android:text="@string/read_questions"-->
+<!--            android:textColor="@android:color/black"-->
+<!--            android:textSize="16sp" />-->
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -98,7 +98,7 @@
                     android:layout_weight="3"
                     android:freezesText="true"
                     android:text="03:00"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:textColor="@color/colorAccent"
                     android:textSize="20sp" />
 
                 <TextView
@@ -107,7 +107,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0"
                     android:text="Retake #"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:textColor="@color/colorAccent"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -117,7 +117,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0"
                     android:text="0"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:textColor="@color/colorAccent"
                     android:textSize="18sp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -140,6 +140,18 @@
                 android:layout_height="1dp"
                 android:layout_marginTop="1dp"
                 android:background="@android:color/darker_gray" />
+
+            <ImageView
+                android:id="@+id/imageQuestion"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:scaleType="fitCenter"
+                android:layout_marginTop="15dp"
+                android:src="@drawable/placeholder"
+                android:visibility="visible"
+                />
+
             <TextView
                 android:id="@+id/txt_question"
                 android:layout_width="match_parent"

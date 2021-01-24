@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,6 +42,9 @@ import static com.cav.DriverphTruckerlearningPH2020.BackgroundTask.SHARED_PREFS;
 import static com.cav.DriverphTruckerlearningPH2020.Constant.MODULE_ID_1;
 import static com.cav.DriverphTruckerlearningPH2020.Constant.MODULE_ID_2;
 import static com.cav.DriverphTruckerlearningPH2020.Constant.MODULE_ID_3;
+import static com.cav.DriverphTruckerlearningPH2020.Constant._1;
+import static com.cav.DriverphTruckerlearningPH2020.Constant._2;
+import static com.cav.DriverphTruckerlearningPH2020.Constant._3;
 import static com.cav.DriverphTruckerlearningPH2020.Dashboard.Uid_PREFS;
 import static com.cav.DriverphTruckerlearningPH2020.Dashboard.thisUserId;
 import static com.cav.DriverphTruckerlearningPH2020.Quizzes_menu.myLatestUserId;
@@ -55,6 +59,7 @@ public class QuizResults extends AppCompatActivity {
     TextView myEmailResult, myUserId;
     SharedPreferences sp;
     int UNLOCK_MOD2, UNLOCK_MOD3;
+    public static String thisChapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,25 +88,27 @@ public class QuizResults extends AppCompatActivity {
         score_result = findViewById(R.id.txt_score_result);
         chapter_name = findViewById(R.id.chapter_name_result);
         listView = findViewById(R.id.list_view);
-        String thisChapter = getIntent().getExtras().getString("chapter");
+        thisChapter = getIntent().getExtras().getString("chapter");
         chapter_name.setText(thisChapter);
         showResult();
 
         YoYo.with(Techniques.Bounce)
                 .duration(700)
-                .repeat(1)
+                .repeat(2)
                 .playOn(score_result);
     }
 
     public void showResult() {
-        ArrayList<String> arrayList = new ArrayList<>();
-        arrayList = (ArrayList<String>) getIntent().getSerializableExtra("askedQuestions");
+        ArrayList<Results> arrayList = new ArrayList<>();
+        arrayList = (ArrayList<Results>) getIntent().getSerializableExtra("askedQuestions");
         int txt_score_result = getIntent().getExtras().getInt("score");
         int items_test = getIntent().getExtras().getInt("items");
 
         score_result.setText(txt_score_result + "/" + items_test);
-        ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, arrayList);
-        listView.setAdapter(arrayAdapter);
+//        ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, arrayList);
+//        listView.setAdapter(arrayAdapter);
+        ResultsAdapter resultsAdapter = new ResultsAdapter(this, arrayList);
+        listView.setAdapter((ListAdapter) resultsAdapter);
 
 
         if (txt_score_result >= (items_test * 0.8)) {
@@ -185,7 +192,24 @@ public class QuizResults extends AppCompatActivity {
     }
 
     public void review() {
-        startActivity(new Intent(QuizResults.this, Dashboard.class));
+        Intent intent = new Intent(QuizResults.this, Basic_Content.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("module", thisChapter);
+        String moduleName = "";
+        switch(thisChapter){
+            case "1":
+                moduleName = _1;
+                break;
+            case "2":
+                moduleName = _2;
+                break;
+            case "3":
+                moduleName = _3;
+                break;
+        }
+        bundle.putString("moduleName", moduleName);
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 
     public void retake() {

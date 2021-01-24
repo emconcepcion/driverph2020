@@ -60,7 +60,8 @@ public class QuizActivity extends AppCompatActivity {
 
     ProgressBar progressBar;
 
-    ArrayList<String> askedQuestions = new ArrayList<>();
+//    ArrayList<String> askedQuestions = new ArrayList<>();
+    ArrayList<Results> askedQuestions = new ArrayList<>();
 
     private ColorStateList textColorDefaultRb;
     private CountDownTimer countDownTimer;
@@ -80,6 +81,8 @@ public class QuizActivity extends AppCompatActivity {
     int correct_answer = 0;
     MediaPlayer mediaPlayer;
     public static int testResultUnlock, testResultCompleted;
+
+    ImageView imgQuestion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,6 +109,7 @@ public class QuizActivity extends AppCompatActivity {
         attempt = findViewById(R.id.textview_attempt);
         textViewUserIdQAct = findViewById(R.id.textview_user_id);
         isModLocked = findViewById(R.id.textview_isLocked);
+        imgQuestion = (ImageView) findViewById(R.id.imageQuestion);
 
         textViewCountdown.setTextColor(Color.parseColor("#006400"));
 
@@ -209,6 +213,12 @@ public class QuizActivity extends AppCompatActivity {
             textViewQuestion.setText(currentQuestion.getQuestion());
             textViewChapter.setText(currentQuestion.getChapter());
             textViewModuleName.setText(currentQuestion.getModuleName());
+            if (currentQuestion.getImageUrl().isEmpty()){
+                imgQuestion.setVisibility(View.GONE);
+            }else if (!currentQuestion.getImageUrl().isEmpty()){
+                imgQuestion.setVisibility(View.VISIBLE);
+                PicassoClient.loadImage(this,currentQuestion.getImageUrl(), imgQuestion);
+            }
 
             rb1.setText(currentQuestion.getOption1());
             rb2.setText(currentQuestion.getOption2());
@@ -282,27 +292,55 @@ public class QuizActivity extends AppCompatActivity {
             switch (currentQuestion.getAnswerNr()) {
                 case 1:
                     currentQuestion.getOption1();
-                    askedQuestions.add("\n" +currentQuestion.getQuestion() + "\n\nAnswer: " + currentQuestion.getOption1() + "\n");
+                    askedQuestions.add(new Results("\n" + currentQuestion.getQuestion(),
+                            "\n" + currentQuestion.getOption1()+ "\n", currentQuestion.getImageUrl()));
                     break;
                 case 2:
                     currentQuestion.getOption2();
-                    askedQuestions.add("\n" +currentQuestion.getQuestion() + "\n\nAnswer: " + currentQuestion.getOption2()+ "\n");
-                    break;
+                    askedQuestions.add(new Results("\n" + currentQuestion.getQuestion(),
+                            "\n" + currentQuestion.getOption2()+ "\n", currentQuestion.getImageUrl()));
+                   break;
                 case 3:
                     currentQuestion.getOption3();
-                    askedQuestions.add("\n" +currentQuestion.getQuestion() + "\n\nAnswer: " + currentQuestion.getOption3()+ "\n");
+                    askedQuestions.add(new Results("\n" + currentQuestion.getQuestion(),
+                            "\n" + currentQuestion.getOption3()+ "\n", currentQuestion.getImageUrl()));
                     break;
                 case 4:
                     currentQuestion.getOption4();
-                    askedQuestions.add("\n" +currentQuestion.getQuestion() + "\n\nAnswer: " + currentQuestion.getOption4()+ "\n");
+                    askedQuestions.add(new Results("\n" + currentQuestion.getQuestion(),
+                            "\n" + currentQuestion.getOption4() + "\n", currentQuestion.getImageUrl()));
                     break;
             }
             score++;
             textViewScore.setText("Score: " + score);
 
         } else {
-            String ansNotAvailable = "\nCorrect answer is hidden.\n";
-            askedQuestions.add("\n" +currentQuestion.getQuestion() + "\n" + ansNotAvailable);
+            switch (currentQuestion.getAnswerNr()) {
+                case 1:
+                    currentQuestion.getOption1();
+                    askedQuestions.add(new Results("\n" + currentQuestion.getQuestion(),
+                            "\n" + "Your answer was incorrect.\nThe correct answer is: " + currentQuestion.getOption1()+ "\n",
+                            currentQuestion.getImageUrl()));
+                    break;
+                case 2:
+                    currentQuestion.getOption2();
+                    askedQuestions.add(new Results("\n" + currentQuestion.getQuestion(),
+                            "\n" + "Your answer was incorrect.\nThe correct answer is: " + currentQuestion.getOption2()+ "\n",
+                            currentQuestion.getImageUrl()));
+                    break;
+                case 3:
+                    currentQuestion.getOption3();
+                    askedQuestions.add(new Results("\n" + currentQuestion.getQuestion(),
+                            "\n" + "Your answer was incorrect.\nThe correct answer is: " + currentQuestion.getOption3()+ "\n",
+                            currentQuestion.getImageUrl()));
+                    break;
+                case 4:
+                    currentQuestion.getOption4();
+                    askedQuestions.add(new Results("\n" + currentQuestion.getQuestion(),
+                            "\n" + "Your answer was incorrect.\nThe correct answer is: " + currentQuestion.getOption4() + "\n",
+                            currentQuestion.getImageUrl()));
+                    break;
+            }
         }
 
         showSolution();
@@ -403,7 +441,7 @@ public class QuizActivity extends AppCompatActivity {
 
         Intent i = new Intent(QuizActivity.this, QuizStatusList.class);
         Bundle bundle = new Bundle();
-        bundle.putStringArrayList("askedQuestions", askedQuestions);
+        bundle.putParcelableArrayList("askedQuestions", askedQuestions);
         bundle.putInt("score", score);
         bundle.putInt("items", questionCountTotal);
         bundle.putString("chapter", currentQuestion.getChapter());
@@ -430,7 +468,7 @@ public class QuizActivity extends AppCompatActivity {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        i.putStringArrayListExtra("askedQuestions", askedQuestions);
+        i.putParcelableArrayListExtra("askedQuestions", askedQuestions);
         i.putExtra("date_taken", currentDate);
         i.putExtras(bundle);
         startActivity(i);
@@ -550,7 +588,7 @@ public class QuizActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         i.putExtra("date_taken", currentDate);
-        i.putStringArrayListExtra("askedQuestions", askedQuestions);
+        i.putParcelableArrayListExtra("askedQuestions", askedQuestions);
         i.putExtras(bundle);
         startActivity(i);
         finish();

@@ -34,6 +34,9 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+import static com.cav.DriverphTruckerlearningPH2020.Constant._1;
+import static com.cav.DriverphTruckerlearningPH2020.Constant._2;
+import static com.cav.DriverphTruckerlearningPH2020.Constant._3;
 import static com.cav.DriverphTruckerlearningPH2020.R.attr.selectableItemBackground;
 
 public class Evaluation_Menu extends AppCompatActivity {
@@ -80,7 +83,7 @@ public class Evaluation_Menu extends AppCompatActivity {
                     Intent intent = new Intent(Evaluation_Menu.this, Evaluation_Basic_Content.class);
                     Bundle extras = new Bundle();
                     extras.putString("module_code", module.get(0));
-                    extras.putString("module", "Basic Competencies");
+                    extras.putString("module", _1);
                     extras.putString("percent", correctAnswer.get(0));
                     extras.putString("attempt", noOfAttempt.get(0));
                     intent.putExtras(extras);
@@ -98,7 +101,7 @@ public class Evaluation_Menu extends AppCompatActivity {
                     Intent intent = new Intent(Evaluation_Menu.this, Evaluation_Basic_Content.class);
                     Bundle extras = new Bundle();
                     extras.putString("module_code", module.get(1));
-                    extras.putString("module", "Common Competencies");
+                    extras.putString("module", _2);
                     extras.putString("percent", correctAnswer.get(1));
                     extras.putString("attempt", noOfAttempt.get(1));
                     intent.putExtras(extras);
@@ -116,7 +119,7 @@ public class Evaluation_Menu extends AppCompatActivity {
                     Intent intent = new Intent(Evaluation_Menu.this, Evaluation_Basic_Content.class);
                     Bundle extras = new Bundle();
                     extras.putString("module_code", module.get(2));
-                    extras.putString("module", "Core Competencies");
+                    extras.putString("module", _3);
                     extras.putString("percent", correctAnswer.get(2));
                     extras.putString("attempt", noOfAttempt.get(2));
                     intent.putExtras(extras);
