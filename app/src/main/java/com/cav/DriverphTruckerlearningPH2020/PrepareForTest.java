@@ -17,13 +17,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 
+import static com.cav.DriverphTruckerlearningPH2020.Constant._1;
+import static com.cav.DriverphTruckerlearningPH2020.Constant._2;
+import static com.cav.DriverphTruckerlearningPH2020.Constant._3;
+
 
 public class PrepareForTest extends AppCompatActivity {
 
     public static String chapter;
     Button buttonStartQuiz, back_btn;
     private TextView textViewChapter, secondChance;
-
+    String qChapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +50,7 @@ public class PrepareForTest extends AppCompatActivity {
         } else if (Quizzes_menu.isFromQuizMenu) {
             SharedPreferences sp2 = getApplicationContext()
                     .getSharedPreferences("ChapFromQuizzes", Context.MODE_PRIVATE);
-            String qChapter = sp2.getString("Qchapter", "");
+            qChapter = sp2.getString("Qchapter", "");
             textViewChapter.setText(qChapter);
         }
 
@@ -65,7 +69,24 @@ public class PrepareForTest extends AppCompatActivity {
     }
 
     private void backToQuizMenu() {
-        startActivity(new Intent(PrepareForTest.this, Dashboard.class));
+        Intent intent = new Intent(PrepareForTest.this, Basic_Content.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("module", qChapter);
+        String moduleName = "";
+        switch(qChapter){
+            case "1":
+                moduleName = _1;
+                break;
+            case "2":
+                moduleName = _2;
+                break;
+            case "3":
+                moduleName = _3;
+                break;
+        }
+        bundle.putString("moduleName", moduleName);
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 
     private void startQuiz() {

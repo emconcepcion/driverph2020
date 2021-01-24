@@ -41,6 +41,7 @@ public class QuizInstructions extends AppCompatActivity {
     public static TextView textViewModuleTitle, tvModuleName;
     public TextView myEmailQuizInst, userIdQInst;
     SharedPreferences sp;
+    String qChapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +75,7 @@ public class QuizInstructions extends AppCompatActivity {
         }else if (Quizzes_menu.isFromQuizMenu){
             SharedPreferences sp2 = getApplicationContext()
                     .getSharedPreferences("ChapFromQuizzes", Context.MODE_PRIVATE);
-            String qChapter = sp2.getString("Qchapter", "");
+            qChapter = sp2.getString("Qchapter", "");
              textViewChapter.setText(qChapter);
              switch (qChapter){
                  case "1":
@@ -105,7 +106,24 @@ public class QuizInstructions extends AppCompatActivity {
     }
 
     private void backToLessons() {
-        startActivity(new Intent(QuizInstructions.this, Dashboard.class));
+        Intent intent = new Intent(QuizInstructions.this, Basic_Content.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("module", qChapter);
+        String moduleName = "";
+        switch(qChapter){
+            case "1":
+                moduleName = _1;
+                break;
+            case "2":
+                moduleName = _2;
+                break;
+            case "3":
+                moduleName = _3;
+                break;
+        }
+        bundle.putString("moduleName", moduleName);
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 
     private void startQuiz() {
