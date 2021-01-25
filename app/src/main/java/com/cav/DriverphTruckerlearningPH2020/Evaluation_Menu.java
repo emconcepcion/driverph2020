@@ -70,6 +70,10 @@ public class Evaluation_Menu extends AppCompatActivity {
 
         retrievedatas(dashboard_email);
 
+        Simulation.isFromSimulation = false;
+        Lessons_Menu.isFromLessonsMenu = false;
+        Basic_Content.isFromBasicContent = false;
+
         cardViewBasicBtn = findViewById(R.id.cardView_eMenu_basic_competencies);
         cardViewCommonBtn = findViewById(R.id.cardView_common_competencies);
         cardViewCoreBtn = findViewById(R.id.cardView_core_competencies);

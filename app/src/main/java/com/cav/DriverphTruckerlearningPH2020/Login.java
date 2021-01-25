@@ -182,6 +182,7 @@ public class Login extends AppCompatActivity {
                         String module_id = obj.getString("moduleId");
                         String module_name = obj.getString("moduleName");
                         Intent intent = new Intent(Login.this, Dashboard.class);
+                        intent.addFlags(intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
 
                         SharedPreferences sharedPreferences = getSharedPreferences(SP_LESSONID, MODE_PRIVATE);

@@ -11,7 +11,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView_basic_competencies"
         android:layout_width="match_parent"
-        android:layout_height="65dp"
+        android:layout_height="70dp"
         android:layout_margin="15dp"
         android:background="@drawable/rounded_corner"
         android:clickable="true"
@@ -30,18 +30,18 @@
                 android:layout_width="85dp"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                android:src="@drawable/rules_and_regs_img"
+                android:src="@drawable/traffic_signs"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/textView10"
                 android:layout_width="155dp"
-                android:layout_height="39dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="13dp"
                 android:layout_marginTop="13dp"
                 android:layout_marginBottom="13dp"
-                android:text="BASIC COMPETENCIES (6 module)"
+                android:text="TRAFFIC SIGNS"
                 android:textColor="#0235EC"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -68,7 +68,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView_common_competencies"
         android:layout_width="match_parent"
-        android:layout_height="65dp"
+        android:layout_height="70dp"
         android:layout_margin="15dp"
         android:layout_marginTop="31dp"
         android:background="@drawable/rounded_corner"
@@ -86,7 +86,7 @@
                 android:layout_width="85dp"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                android:src="@drawable/specializations_img"
+                android:src="@drawable/rules_and_regulations"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -105,11 +105,11 @@
             <TextView
                 android:id="@+id/textView11"
                 android:layout_width="174dp"
-                android:layout_height="39dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="13dp"
                 android:layout_marginTop="13dp"
                 android:layout_marginBottom="13dp"
-                android:text="COMMON COMPETENCIES (8 module)"
+                android:text="RULES &amp; REGULATIONS"
                 android:textColor="#0235EC"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -124,7 +124,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView_core_competencies"
         android:layout_width="match_parent"
-        android:layout_height="65dp"
+        android:layout_height="70dp"
         android:layout_margin="15dp"
         android:layout_marginTop="31dp"
         android:background="@drawable/rounded_corner"
@@ -142,7 +142,7 @@
                 android:layout_width="85dp"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                android:src="@drawable/polguide_img"
+                android:src="@drawable/general_knowledge"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -161,11 +161,11 @@
             <TextView
                 android:id="@+id/textView12"
                 android:layout_width="154dp"
-                android:layout_height="39dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="13dp"
                 android:layout_marginTop="13dp"
                 android:layout_marginBottom="13dp"
-                android:text="CORE COMPETENCIES (6 module)"
+                android:text="GENERAL KNOWLEDGE"
                 android:textColor="#0235EC"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"

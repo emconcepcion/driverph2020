@@ -12,12 +12,15 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -29,6 +32,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -194,6 +198,14 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
             isModuleCompleted.setText(myLatestIsCompleted);
         }
 
+        if (Simulation.isFromSimulation || Lessons_Menu.isFromLessonsMenu || Basic_Content.isFromBasicContent){
+            if ((myLatestChapter.equals("") || myLatestChapter.equals("1") || myLatestChapter.equals("2")
+                    || myLatestChapter.equals("3"))
+                    && myLatestIsCompleted.equals("0")){
+                    takeQuizReminder();
+            }
+        }
+
         retrievedatas(dashboard_email);
         getJSON(QUESTIONS_URL);
         loadRecyclerViewData();
@@ -271,6 +283,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
     private void resumeModule() {
         String startLearning = resumeLesson.getText().toString();
         if (startLearning.equals("Start Learning")) {
+            Lessons_Menu.isFromLessonsMenu=false;
             Intent intent = new Intent(Dashboard.this, Basic_Content.class);
             Bundle extras = new Bundle();
             extras.putString("module", MODULE_ID_1);
@@ -341,28 +354,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         cardViewQuizzes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                sp = getSharedPreferences("mySavedAttempt", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor1 = sp.edit();
-                editor1.putString("email", dashboard_email);
-                editor1.putString("username", nameVR);
-                editor1.apply();
-
-                thisUserId = Integer.parseInt(user_id);
-                SharedPreferences sp = getApplicationContext().getSharedPreferences(Uid_PREFS, Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sp.edit();
-                editor.putInt("user_id", thisUserId);
-                editor.apply();
-//                Toast.makeText(Dashboard.this, "Dashboard User id: " + thisUserId, Toast.LENGTH_SHORT).show();
-
-                Intent intent = new Intent(Dashboard.this, Quizzes_menu.class);
-                Bundle bundle = new Bundle();
-                bundle.putInt("user_idFromServer", Integer.parseInt(myLatestUserId));
-                bundle.putInt("user_idFromDashboard", thisUserId);
-                bundle.putInt("myLatestIsUnlocked", Integer.parseInt(myLatestIsUnlocked));
-                bundle.putInt("myLatestIsCompleted", Integer.parseInt(myLatestIsCompleted));
-                bundle.putString("myLatestChapter", myLatestChapter);
-                intent.putExtras(bundle);
-                startActivity(intent);
+                toQuizzesMenu();
             }
         });
 
@@ -383,6 +375,66 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
             }
         });
 
+    }
+
+    public void toQuizzesMenu(){
+        sp = getSharedPreferences("mySavedAttempt", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor1 = sp.edit();
+        editor1.putString("email", dashboard_email);
+        editor1.putString("username", nameVR);
+        editor1.apply();
+
+        thisUserId = Integer.parseInt(user_id);
+        SharedPreferences sp = getApplicationContext().getSharedPreferences(Uid_PREFS, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putInt("user_id", thisUserId);
+        editor.apply();
+//                Toast.makeText(Dashboard.this, "Dashboard User id: " + thisUserId, Toast.LENGTH_SHORT).show();
+
+        Intent intent = new Intent(Dashboard.this, Quizzes_menu.class);
+        Bundle bundle = new Bundle();
+        bundle.putInt("user_idFromServer", Integer.parseInt(myLatestUserId));
+        bundle.putInt("user_idFromDashboard", thisUserId);
+        bundle.putInt("myLatestIsUnlocked", Integer.parseInt(myLatestIsUnlocked));
+        bundle.putInt("myLatestIsCompleted", Integer.parseInt(myLatestIsCompleted));
+        bundle.putString("myLatestChapter", myLatestChapter);
+        intent.putExtras(bundle);
+        startActivity(intent);
+    }
+
+    public void takeQuizReminder() {
+        Dialog take_quiz_popup = new Dialog(this);
+        ImageView close_exit_popup;
+        Button btn_dismiss, btn_ready;
+        take_quiz_popup.setContentView(R.layout.take_quiz_reminder);
+        close_exit_popup = take_quiz_popup.findViewById(R.id.close_exit_quiz);
+        btn_dismiss = (Button) take_quiz_popup.findViewById(R.id.btn_dismiss);
+        btn_ready = (Button) take_quiz_popup.findViewById(R.id.btn_imReady);
+
+        close_exit_popup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                take_quiz_popup.dismiss();
+            }
+        });
+
+        take_quiz_popup.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        take_quiz_popup.show();
+
+        btn_dismiss.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                take_quiz_popup.dismiss();
+            }
+        });
+
+        btn_ready.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                take_quiz_popup.dismiss();
+                toQuizzesMenu();
+            }
+        });
     }
 
     public void retrievedatas(String r_email) {
@@ -470,18 +522,23 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case R.id.nav_dashboard:
+                noQuizReminder();
                 startActivity(new Intent(Dashboard.this, Dashboard.class));
                 break;
             case R.id.nav_my_progress:
+                noQuizReminder();
                 startActivity(new Intent(Dashboard.this, Lesson.class));
                 break;
             case R.id.nav_advisory:
+                noQuizReminder();
                 startActivity(new Intent(Dashboard.this, Advisory.class));
                 break;
             case R.id.nav_help:
+                noQuizReminder();
                 startActivity(new Intent(Dashboard.this, Help.class));
                 break;
             case R.id.nav_my_account:
+                noQuizReminder();
                 Intent intent = new Intent(Dashboard.this, MyAccount.class);
                 Bundle extras = new Bundle();
                 extras.putString("email", dashboard_email);
@@ -493,6 +550,12 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
                 break;
         }
         return true;
+    }
+
+    public void noQuizReminder(){
+        Simulation.isFromSimulation = false;
+        Lessons_Menu.isFromLessonsMenu = false;
+        Basic_Content.isFromBasicContent = false;
     }
 
     @Override

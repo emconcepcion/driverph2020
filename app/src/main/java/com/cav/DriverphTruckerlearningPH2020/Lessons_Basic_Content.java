@@ -222,6 +222,7 @@ public class Lessons_Basic_Content extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         textToSpeech.stop();
+//        Lessons_Menu.isFromLessonsMenu=false;
         Intent intent = new Intent(Lessons_Basic_Content.this, Basic_Content.class);
         Bundle extras = new Bundle();
         extras.putString("email", email_lesson.getText().toString());

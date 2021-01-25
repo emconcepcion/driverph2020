@@ -30,6 +30,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.cav.DriverphTruckerlearningPH2020.QuizActivity.*;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
+import com.muddzdev.styleabletoast.StyleableToast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -269,7 +270,16 @@ public class QuizResults extends AppCompatActivity {
                 }
             };
             MySingleton.getInstance(QuizResults.this).addToRequestQueue(stringRequest);
-            Toast.makeText(this, "Updated unlocked modules.", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "Congratulations! You have unlocked the next module!.", Toast.LENGTH_SHORT).show();
+
+            if (chap.equals("3") && isCompleted == 1){
+                StyleableToast.makeText(getApplicationContext(), QuizResults.this.getString(R.string.unlockedAllModules),
+                        Toast.LENGTH_LONG, R.style.toastStyle).show();
+            }else{
+                StyleableToast.makeText(getApplicationContext(), QuizResults.this.getString(R.string.unlockedNextModule),
+                        Toast.LENGTH_LONG, R.style.toastStyle).show();
+            }
+
         }
     }
 

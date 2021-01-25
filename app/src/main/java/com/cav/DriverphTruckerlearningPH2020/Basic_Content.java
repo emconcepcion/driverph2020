@@ -48,11 +48,13 @@ public class Basic_Content extends AppCompatActivity {
     public static List<String> al, lesson_id_key;
     public static String currentLesson, currLessonId;
     public static TextView currLesson, Email;
+    public static boolean isFromBasicContent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_basic__content);
         weakActivityBasicContent = new WeakReference<>(Basic_Content.this);
+
 
         content = findViewById(R.id.listview);
         currLesson = findViewById(R.id.currLessonBasic);
@@ -111,6 +113,7 @@ public class Basic_Content extends AppCompatActivity {
             intent.putExtras(bundle);
             startActivity(intent);
         }else{
+            isFromBasicContent = true;
             Intent intent = new Intent(Basic_Content.this, Dashboard.class);
             Bundle extras = new Bundle();
             extras.putString("email", dashboard_email);

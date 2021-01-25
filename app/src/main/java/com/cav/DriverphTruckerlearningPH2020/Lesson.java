@@ -160,6 +160,9 @@ public class Lesson extends AppCompatActivity {
                     }
 //                    StyleableToast.makeText(Lesson.this, "Lesson number: " + (current_state+1), Toast.LENGTH_SHORT, R.style.toastStyle).show();
                 }else if(binding.btnNextLesson.isPressed()){
+                    Simulation.isFromSimulation = false;
+                    Lessons_Menu.isFromLessonsMenu = false;
+                    Basic_Content.isFromBasicContent = false;
                     startActivity(new Intent(Lesson.this, Dashboard.class));
                 }
 

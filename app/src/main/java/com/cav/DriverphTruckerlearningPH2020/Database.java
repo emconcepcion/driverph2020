@@ -20,7 +20,7 @@ public class Database {
 	final String SQL_CREATE_QUESTIONS_TABLE = "CREATE TABLE " +
 			 QuizContract.QuestionsTable.TABLE_NAME + "(" +
 			 QuizContract.QuestionsTable._ID + " INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE, " +
-			 QuizContract.QuestionsTable.COLUMN_QUESTION + " TEXT UNIQUE, " +
+			 QuizContract.QuestionsTable.COLUMN_QUESTION + " TEXT, " +
 			 QuizContract.QuestionsTable.COLUMN_OPTION1 + " TEXT, " +
 			 QuizContract.QuestionsTable.COLUMN_OPTION2 + " TEXT, " +
 			 QuizContract.QuestionsTable.COLUMN_OPTION3 + " TEXT, " +
@@ -30,6 +30,8 @@ public class Database {
 			QuizContract.QuestionsTable.COLUMN_MODULE_NAME + " TEXT," +
 			QuizContract.QuestionsTable.COLUMN_IMAGE + " TEXT" +
 			");";
+
+	//final String SQL_CREATE_index = "CREATE UNIQUE INDEX indUnique ON tbl_questions(image) WHERE image IS NOT NULL";
 
 	final String SQL_CREATE_SCORES_TABLE = "CREATE TABLE " +
 			 DbContract.ScoresTable.TABLE_NAME_SCORES + "(" +
@@ -103,6 +105,7 @@ public class Database {
 		public void onCreate(SQLiteDatabase db) {
 			// TODO Auto-generated method stub
 			db.execSQL(SQL_CREATE_QUESTIONS_TABLE);
+		//	db.execSQL(SQL_CREATE_index);
 			db.execSQL(SQL_CREATE_SCORES_TABLE);
 			db.execSQL(SQL_CREATE_SCORES_TABLE_FROM_SERVER);
 			db.execSQL(SQL_CREATE_SCORES_ALL_ATTEMPTS_TABLE_FROM_SERVER);
@@ -113,6 +116,7 @@ public class Database {
 		public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 			// TODO Auto-generated method stub
 			db.execSQL("DROP TABLE IF EXISTS tbl_questions");
+		//	db.execSQL("DROP INDEX IF EXISTS indUnique");
 			db.execSQL("DROP TABLE IF EXISTS tbl_scores");
 			db.execSQL("DROP TABLE IF EXISTS tbl_scores_server");
 			db.execSQL("DROP TABLE IF EXISTS tbl_scores_all_attempts");
@@ -155,6 +159,7 @@ public class Database {
 		Log.d("inserted... ", question.getQuestion()+"");
 			Log.d("inserted... ", question.getAnswerNr()+"");
 			return db.insertWithOnConflict(TABLE_NAME, null, cv, SQLiteDatabase.CONFLICT_IGNORE);
+//		return db.insert(TABLE_NAME, null, cv);
 	}
 
 	public long addAllAttempts(Score score)

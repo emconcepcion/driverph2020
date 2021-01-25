@@ -43,6 +43,7 @@ public class Simulation extends Activity {
     private int mBGNearMoveX = 0;
     //String restartHere = String.valueOf(R.string.restart);
 
+    public static boolean isFromSimulation;
     Bitmap bmp, pause, resume;
     Bitmap background,kinfe,note1,powerimg,note2;
     Bitmap run1;
@@ -84,6 +85,7 @@ public class Simulation extends Activity {
         builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                isFromSimulation = true;
                 startActivity(new Intent(Simulation.this, Dashboard.class));
                 SharedPreferences pref = getApplicationContext().getSharedPreferences("higher", MODE_PRIVATE);
                 Editor editor = pref.edit();

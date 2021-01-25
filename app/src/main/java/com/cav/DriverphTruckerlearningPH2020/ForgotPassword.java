@@ -58,6 +58,13 @@ public class ForgotPassword extends AppCompatActivity {
                 retrievedatas();
             }
         });
+
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ForgotPassword.this,Login.class));
+            }
+        });
     }
 
     public void retrievedatas(){

@@ -23,7 +23,7 @@
         android:layout_height="100dp"
         android:layout_gravity="center"
         android:layout_marginTop="15dp"
-        android:src="@drawable/truck_pencil"/>
+        android:src="@drawable/d_icon"/>
 
     <ScrollView
         android:id="@+id/scrollView"

@@ -132,6 +132,9 @@ public class QuizStatusList extends AppCompatActivity {
                     backToQMenu.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+                            Simulation.isFromSimulation = false;
+                            Lessons_Menu.isFromLessonsMenu = false;
+                            Basic_Content.isFromBasicContent = false;
                             startActivity(new Intent(QuizStatusList.this, Dashboard.class));
                         }
                     });
@@ -250,7 +253,6 @@ public class QuizStatusList extends AppCompatActivity {
         cursor.close();
         dbHelper.close();
     }
-
 
     public void saveToAppServer(int userId, String email, int score, int num_items, String chap,
                                 int num_of_attempt, String duration, String date_taken,

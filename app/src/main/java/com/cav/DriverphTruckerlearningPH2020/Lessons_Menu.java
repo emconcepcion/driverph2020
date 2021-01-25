@@ -244,6 +244,7 @@ public class Lessons_Menu extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+//        isFromLessonsMenu = true;
         Dashboard.activeLesson.setText(currentLesson);
         Dashboard.activeModule.setText(moduleName);
         Intent intent = new Intent(Lessons_Menu.this, Dashboard.class);

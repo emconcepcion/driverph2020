@@ -188,6 +188,9 @@ public class Quizzes_menu extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        Simulation.isFromSimulation = false;
+        Lessons_Menu.isFromLessonsMenu = false;
+        Basic_Content.isFromBasicContent = false;
         Intent intent = new Intent(Quizzes_menu.this, Dashboard.class);
         Bundle extras = new Bundle();
         extras.putString("email", myEmailQMenu.getText().toString());
