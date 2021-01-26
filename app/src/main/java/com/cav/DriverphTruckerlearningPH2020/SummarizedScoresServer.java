@@ -122,7 +122,7 @@ public class SummarizedScoresServer extends AppCompatActivity {
                 String emSum = myEmailSum.getText().toString();
                 params.put("email", emSum);
                 Log.d("email", emSum + "");
-                Log.d("yes", "successful...");
+                Log.d("Fetch passed tests:", "successful...");
                 return params;
             }
         };

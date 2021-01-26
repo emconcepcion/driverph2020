@@ -122,36 +122,5 @@ public class QuizDbHelper extends SQLiteOpenHelper {
         c.close();
         return questionList;
     }
-
-//    public List<MyScoresServer> getAllScores() {
-//    //    List<Score> scoresList = new ArrayList<>();
-//        List<MyScoresServer> myScoresServerList = new ArrayList<>();
-//        db = getReadableDatabase();
-//
-//        String user_id = "\"" + Dashboard.user_id + "\"";
-//
-//        Cursor c = db.rawQuery("SELECT * FROM " + DbContract.ScoresMySQLTable.TABLE_NAME_SCORES_MYSQL +
-//                " WHERE user_id " + "=" + user_id, null);
-//
-//        if (c.moveToFirst()) {
-//            do {
-//                  MyScoresServer myScoresServer = new   MyScoresServer();
-//                myScoresServer.setUser_id(c.getInt(c.getColumnIndex(ScoresMySQLTable.COLUMN_NAME_USER_ID_MYSQL)));
-//                myScoresServer.setEmail(c.getString(c.getColumnIndex(ScoresMySQLTable.COLUMN_NAME_EMAIL_MYSQL)));
-//                myScoresServer.setScore(c.getInt(c.getColumnIndex(ScoresMySQLTable.COLUMN_NAME_SCORE_MYSQL)));
-//                myScoresServer.setNum_of_items(c.getInt(c.getColumnIndex(ScoresMySQLTable.COLUMN_NAME_NUM_ITEMS_MYSQL)));
-//                myScoresServer.setChapter(c.getString(c.getColumnIndex(ScoresMySQLTable.COLUMN_NAME_CHAPTER_MYSQL)));
-//                myScoresServer.setNum_of_attempt(c.getInt(c.getColumnIndex(ScoresMySQLTable.COLUMN_NAME_NUM_ATTEMPT_MYSQL)));
-//                myScoresServer.setDate_taken(c.getString(c.getColumnIndex(ScoresMySQLTable.COLUMN_NAME_DATE_TAKEN_MYSQL)));
-//                myScoresServer.setIsLocked(c.getInt(c.getColumnIndex(ScoresMySQLTable.COLUMN_NAME_IS_LOCKED_MYSQL)));
-//                myScoresServer.setIsCompleted(c.getInt(c.getColumnIndex(ScoresMySQLTable.COLUMN_NAME_IS_COMPLETED_MYSQL)));
-//                myScoresServerList.add(myScoresServer);
-//            } while (c.moveToNext());
-//        }
-//
-//        c.close();
-//        return myScoresServerList;
-//    }
-
 }
 

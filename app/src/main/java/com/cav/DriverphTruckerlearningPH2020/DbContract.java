@@ -9,9 +9,7 @@ public class DbContract {
 
     public static class ScoresTable implements BaseColumns {
 
-        //android access to localhost
-//        public static final String SERVER_URL = "https://phportal.net/driverph/scores.php";
-        public static final String SERVER_URL = "https://phportal.net/driverph/xample_score.php";
+
         public static final String SERVER_ALL_ATTEMPTS_URL = "https://phportal.net/driverph/post_all_attempts.php";
         public static final String SERVER_UPDATE_PROGRESS = "https://phportal.net/driverph/update_progress.php";
         public static final String UI_UPDATE_BROADCAST = "com.cav.quizinstructions.uiupdatebroadcast";
@@ -34,8 +32,6 @@ public class DbContract {
 
     public static class ScoresMySQLTable implements BaseColumns {
 
-        //android access to server
-        public static final String SERVER_URL = "https://phportal.net/driverph/scores.php";
 
         public static final String TABLE_NAME_SCORES_MYSQL = "tbl_scores_server";
         public static final String COLUMN_NAME_USER_ID_MYSQL = "user_id";
@@ -48,7 +44,6 @@ public class DbContract {
         public static final String COLUMN_NAME_DATE_TAKEN_MYSQL = "date_taken";
         public static final String COLUMN_NAME_IS_COMPLETED_MYSQL = "isCompleted";
         public static final String COLUMN_NAME_IS_LOCKED_MYSQL = "isLocked";
-//        public static final String SYNC_STATUS_MYSQL = "syncStatus";
     }
 
     public static class AllAttemptsMySQLTable implements BaseColumns {

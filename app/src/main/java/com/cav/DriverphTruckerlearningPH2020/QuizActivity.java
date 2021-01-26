@@ -60,7 +60,6 @@ public class QuizActivity extends AppCompatActivity {
 
     ProgressBar progressBar;
 
-//    ArrayList<String> askedQuestions = new ArrayList<>();
     ArrayList<Results> askedQuestions = new ArrayList<>();
 
     private ColorStateList textColorDefaultRb;

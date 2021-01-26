@@ -58,7 +58,7 @@ public class NetworkMonitor extends BroadcastReceiver {
                                 @Override
                                 public void onResponse(String response) {
                                     try {
-                                        JSONObject jsonObject = new JSONObject(response);
+                                        JSONObject jsonObject = new JSONObject("");
                                         stringRequest.setRetryPolicy(new DefaultRetryPolicy(20*1000,3, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
                                         String Response = jsonObject.getString("response");
                                         counter = 1;

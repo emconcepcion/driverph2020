@@ -16,12 +16,12 @@ import static com.cav.DriverphTruckerlearningPH2020.Constant._1;
 import static com.cav.DriverphTruckerlearningPH2020.Constant._2;
 import static com.cav.DriverphTruckerlearningPH2020.Constant._3;
 
-public class CustomAdapter extends RecyclerView.Adapter<com.cav.DriverphTruckerlearningPH2020.CustomAdapter.Viewholder> {
+public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.Viewholder> {
 
-    private List<com.cav.DriverphTruckerlearningPH2020.MyScoresServer> myScoresServerList;
+    private List<MyScoresServer> myScoresServerList;
     private Context context;
 
-    public CustomAdapter(List<com.cav.DriverphTruckerlearningPH2020.MyScoresServer> myScoresServerList, Context context) {
+    public CustomAdapter(List<MyScoresServer> myScoresServerList, Context context) {
         this.myScoresServerList = myScoresServerList;
         this.context = context;
     }
@@ -50,14 +50,14 @@ public class CustomAdapter extends RecyclerView.Adapter<com.cav.DriverphTruckerl
 
     @NonNull
     @Override
-    public com.cav.DriverphTruckerlearningPH2020.CustomAdapter.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public CustomAdapter.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.summary_list_view, parent, false);
         return new Viewholder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull com.cav.DriverphTruckerlearningPH2020.CustomAdapter.Viewholder holder, int position) {
+    public void onBindViewHolder(@NonNull CustomAdapter.Viewholder holder, int position) {
 
         holder.score.setText("Score: " +myScoresServerList.get(position).getScore());
         holder.num_of_items.setText("/" +myScoresServerList.get(position).getNum_of_items());

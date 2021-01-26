@@ -106,8 +106,6 @@ public class QuizResults extends AppCompatActivity {
         int items_test = getIntent().getExtras().getInt("items");
 
         score_result.setText(txt_score_result + "/" + items_test);
-//        ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, arrayList);
-//        listView.setAdapter(arrayAdapter);
         ResultsAdapter resultsAdapter = new ResultsAdapter(this, arrayList);
         listView.setAdapter((ListAdapter) resultsAdapter);
 
@@ -272,7 +270,8 @@ public class QuizResults extends AppCompatActivity {
             MySingleton.getInstance(QuizResults.this).addToRequestQueue(stringRequest);
 //            Toast.makeText(this, "Congratulations! You have unlocked the next module!.", Toast.LENGTH_SHORT).show();
 
-            if (chap.equals("3") && isCompleted == 1){
+            //UPDATE WITH THE LAST MODULE ID - AS OF NOW, MODULE_ID_3
+            if (chap.equals(MODULE_ID_3) && isCompleted == 1){
                 StyleableToast.makeText(getApplicationContext(), QuizResults.this.getString(R.string.unlockedAllModules),
                         Toast.LENGTH_LONG, R.style.toastStyle).show();
             }else{

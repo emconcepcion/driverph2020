@@ -67,12 +67,6 @@ public class Lessons_Basic_Content extends AppCompatActivity {
     private TextView pitch, speed;
     public static String module, course, status, dateStarted, dateFinished,
             htmlData, lessonpdf, lessonId, currentLessonId, moduleName;
-    public static String myProgressUserId;
-    public static String myProgressModule;
-    public static String myProgressLessonId;
-    public static String myProgressStatus;
-    public static String myProgressDateStarted;
-    public static String myProgressDateFinished;
     public static boolean isFromLessonBasicContent;
     String firstspeech, secondspeech;
 
@@ -93,7 +87,6 @@ public class Lessons_Basic_Content extends AppCompatActivity {
         dateStarted = getIntent().getStringExtra("dateStarted");
         dateFinished = getIntent().getStringExtra("dateFinished");
         currentLessonId = getIntent().getStringExtra("currLessonId");
-//        moduleName = getIntent().getStringExtra("moduleName");
 
         SharedPreferences sharedPreferences = getSharedPreferences(SP_LESSONID, MODE_PRIVATE);
         SharedPreferences.Editor myEdit = sharedPreferences.edit();
@@ -400,41 +393,6 @@ public class Lessons_Basic_Content extends AppCompatActivity {
                     @Override
                     public void onResponse(String s) {
                         progressDialog.dismiss();
-//                        Toast.makeText(Lessons_Basic_Content.this, "Loading all attempts", Toast.LENGTH_SHORT).show();
-                        try {
-                            JSONObject jObj = new JSONObject("");
-
-                            JSONArray menuitemArray = jObj.getJSONArray("data");
-
-                            for (int i = 0; i < menuitemArray.length(); i++) {
-
-                                Log.d("userId " + i,
-                                        menuitemArray.getJSONObject(i).getString("userId"));
-                                Log.d("module: " + i, menuitemArray.getJSONObject(i)
-                                        .getString("module"));
-                                Log.d("lessonId: " + i, menuitemArray.getJSONObject(i)
-                                        .getString("lessonId"));
-                                Log.d("status: " + i, menuitemArray.getJSONObject(i)
-                                        .getString("status"));
-                                Log.d("dateStarted: " + i, menuitemArray.getJSONObject(i)
-                                        .getString("dateStarted"));
-                                Log.d("dateFinished: " + i, menuitemArray.getJSONObject(i)
-                                        .getString("dateFinished"));
-
-                                myProgressUserId = menuitemArray.getJSONObject(i).getString("userId");
-                                myProgressModule= menuitemArray.getJSONObject(i).getString("module");
-                                myProgressLessonId = menuitemArray.getJSONObject(i).getString("lessonId");
-                                myProgressStatus = menuitemArray.getJSONObject(i).getString("status");
-                                myProgressDateStarted = menuitemArray.getJSONObject(i).getString("dateStarted");
-                                myProgressDateFinished = menuitemArray.getJSONObject(i).getString("dateFinished");
-                            }
-
-//                            Toast.makeText(Lessons_Basic_Content.this, "Fetched from Progress: " + myProgressUserId, Toast.LENGTH_SHORT).show();
-//                            Toast.makeText(Lessons_Basic_Content.this, "Progress Module: " + myProgressModule, Toast.LENGTH_SHORT).show();
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
                     }
                 },
                 new com.android.volley.Response.ErrorListener() {
@@ -454,7 +412,7 @@ public class Lessons_Basic_Content extends AppCompatActivity {
                 params.put("dateStarted", dateStarted);
                 params.put("dateFinished", dateFinished);
                 Log.d("email", dashboard_email + "");
-                Log.d("yes", "successful...");
+                Log.d("udpating module: ", "update last accessed module successful...");
                 return params;
             }
         };

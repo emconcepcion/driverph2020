@@ -85,6 +85,7 @@ import static com.cav.DriverphTruckerlearningPH2020.Constant.MODULE_ID_2;
 import static com.cav.DriverphTruckerlearningPH2020.Constant.MODULE_ID_3;
 import static com.cav.DriverphTruckerlearningPH2020.Constant.SP_LESSONID;
 import static com.cav.DriverphTruckerlearningPH2020.Constant._1;
+import static com.cav.DriverphTruckerlearningPH2020.Constant.retrieveprogress;
 
 public class Dashboard extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     public static WeakReference<Dashboard> weakActivity;
@@ -210,7 +211,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         getJSON(QUESTIONS_URL);
         loadRecyclerViewData();
         loadDataAllAttemptsAndLevels();
-        loadUserProgressModules();
+       // loadUserProgressModules();
         btnSetter();
 
         Calendar calendar = Calendar.getInstance();
@@ -696,7 +697,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
                 Map<String, String> params = new HashMap<>();
                 params.put("email", dashboard_email);
                 Log.d("email", dashboard_email + "");
-                Log.d("yes", "successful...");
+                Log.d("Load passed tests:", "successful...");
                 return params;
             }
         };
@@ -883,7 +884,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
                 Map<String, String> params = new HashMap<>();
                 params.put("email", dashboard_email);
                 Log.d("email", Login.email + "");
-                Log.d("yes", "successful...");
+                Log.d("Load all attempts:", "successful...");
                 return params;
             }
         };
@@ -891,72 +892,4 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         requestQueue.add(stringRequest);
     }
 
-    //load all data for user's progress / latest module
-    public void loadUserProgressModules() {
-        ProgressDialog progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Loading data...");
-        progressDialog.show();
-        Database db = new Database(this);
-        db.Open();
-        StringRequest stringRequest = new StringRequest(com.android.volley.Request.Method.DEPRECATED_GET_OR_POST,
-                SERVER_DASHBOARD,
-                new com.android.volley.Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String s) {
-                        progressDialog.dismiss();
-//                        Toast.makeText(Dashboard.this, "Loading all attempts", Toast.LENGTH_SHORT).show();
-                        try {
-                            JSONObject jObj = new JSONObject(s);
-
-                            JSONArray menuitemArray = jObj.getJSONArray("data");
-
-                            for (int i = 0; i < menuitemArray.length(); i++) {
-
-                                Log.d("userId " + i,
-                                        menuitemArray.getJSONObject(i).getString("userId"));
-                                Log.d("module: " + i, menuitemArray.getJSONObject(i)
-                                        .getString("module"));
-                                Log.d("lessonId: " + i, menuitemArray.getJSONObject(i)
-                                        .getString("lessonId"));
-                                Log.d("status: " + i, menuitemArray.getJSONObject(i)
-                                        .getString("status"));
-                                Log.d("dateStarted: " + i, menuitemArray.getJSONObject(i)
-                                        .getString("dateStarted"));
-                                Log.d("dateFinished: " + i, menuitemArray.getJSONObject(i)
-                                        .getString("dateFinished"));
-
-                                myProgressUserId = menuitemArray.getJSONObject(i).getString("userId");
-                                myProgressChapter = menuitemArray.getJSONObject(i).getString("module");
-                                myProgressLessonId = menuitemArray.getJSONObject(i).getString("lessonId");
-                                myProgressStatus = menuitemArray.getJSONObject(i).getString("status");
-                                myProgressDateStarted = menuitemArray.getJSONObject(i).getString("dateStarted");
-                                myProgressDateFinished = menuitemArray.getJSONObject(i).getString("dateFinished");
-                            }
-
-//                            Toast.makeText(Dashboard.this, "Fetched from Progress: " + myProgressUserId, Toast.LENGTH_SHORT).show();
-//                            Toast.makeText(Dashboard.this, "Progress Module: " + myProgressChapter, Toast.LENGTH_SHORT).show();
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                },
-                new com.android.volley.Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError volleyError) {
-                        progressDialog.dismiss();
-                        Toast.makeText(Dashboard.this, volleyError.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("email", dashboard_email);
-                Log.d("email", dashboard_email + "");
-                Log.d("yes", "successful...");
-                return params;
-            }
-        };
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(stringRequest);
-    }
 }

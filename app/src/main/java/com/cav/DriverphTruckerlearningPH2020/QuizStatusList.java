@@ -216,10 +216,6 @@ public class QuizStatusList extends AppCompatActivity {
             saveToLocalStorage(userIdA,emailA, scoreA, itemsA, chapA, attemptsA, durationA,
                     dateTakenA, isLockedA, isCompletedA, DbContract.SYNC_STATUS_FAILED);
         }
-        //save the score to web server only if the user passed the test, else, save only to local db
-//        if (QuizActivity.unlocked && checkNetworkConnection()){
-//            saveToAppServer(userIdA,emailA, scoreA, itemsA, chapA, attemptsA, durationA, dateTakenA, isLockedA, isCompletedA);
-//        }
     }
 
     public void readFromLocalStorage() {
@@ -329,10 +325,6 @@ public class QuizStatusList extends AppCompatActivity {
                 }
             };
             MySingleton.getInstance(QuizStatusList.this).addToRequestQueue(stringRequest);
-//            saveToLocalStorage(userId, email, score, num_items, chap, num_of_attempt, duration,
-//                    date_taken, isLocked, isCompleted, DbContract.SYNC_STATUS_SAVED);
-//            StyleableToast.makeText(getApplicationContext(), QuizStatusList.this.getString(R.string.saved),
-//                    Toast.LENGTH_LONG, R.style.toastStyle).show();
         } else { // no internet, save to SQLite
             saveToLocalStorage(userId, email, score, num_items, chap, num_of_attempt, duration,
                     date_taken, isLocked, isCompleted, DbContract.SYNC_STATUS_FAILED);

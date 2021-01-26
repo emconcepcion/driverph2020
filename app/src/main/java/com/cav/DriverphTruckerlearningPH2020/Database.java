@@ -32,7 +32,6 @@ public class Database {
 			QuizContract.QuestionsTable.COLUMN_QUES_NUM + " TEXT UNIQUE" +
 			");";
 
-//	final String SQL_CREATE_index = "CREATE UNIQUE INDEX indUnique ON tbl_questions(image) WHERE image != '' OR image is not null OR image != 'null'";
 
 	final String SQL_CREATE_SCORES_TABLE = "CREATE TABLE " +
 			 DbContract.ScoresTable.TABLE_NAME_SCORES + "(" +
@@ -106,7 +105,6 @@ public class Database {
 		public void onCreate(SQLiteDatabase db) {
 			// TODO Auto-generated method stub
 			db.execSQL(SQL_CREATE_QUESTIONS_TABLE);
-//			db.execSQL(SQL_CREATE_index);
 			db.execSQL(SQL_CREATE_SCORES_TABLE);
 			db.execSQL(SQL_CREATE_SCORES_TABLE_FROM_SERVER);
 			db.execSQL(SQL_CREATE_SCORES_ALL_ATTEMPTS_TABLE_FROM_SERVER);
@@ -117,7 +115,6 @@ public class Database {
 		public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 			// TODO Auto-generated method stub
 			db.execSQL("DROP TABLE IF EXISTS tbl_questions");
-		//	db.execSQL("DROP INDEX IF EXISTS indUnique");
 			db.execSQL("DROP TABLE IF EXISTS tbl_scores");
 			db.execSQL("DROP TABLE IF EXISTS tbl_scores_server");
 			db.execSQL("DROP TABLE IF EXISTS tbl_scores_all_attempts");
