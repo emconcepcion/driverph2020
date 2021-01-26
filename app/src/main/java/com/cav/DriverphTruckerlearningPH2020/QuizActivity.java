@@ -215,7 +215,7 @@ public class QuizActivity extends AppCompatActivity {
             textViewModuleName.setText(currentQuestion.getModuleName());
             if (currentQuestion.getImageUrl().isEmpty()){
                 imgQuestion.setVisibility(View.GONE);
-            }else if (!currentQuestion.getImageUrl().isEmpty()){
+            }else if (!currentQuestion.getImageUrl().isEmpty() || currentQuestion.getImageUrl().equals("null")){
                 imgQuestion.setVisibility(View.VISIBLE);
                 PicassoClient.loadImage(this,currentQuestion.getImageUrl(), imgQuestion);
             }

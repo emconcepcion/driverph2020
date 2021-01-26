@@ -15,12 +15,13 @@ public class Question implements Serializable {
     public String chapter;
     public String moduleName;
     public String imageUrl;
+    public int questionNum;
 
     public Question() {
     }
 
     public Question(String question, String option1, String option2, String option3, String option4,
-                    int answerNr, String chapter, String moduleName, String imageUrl) {
+                    int answerNr, String chapter, String moduleName, String imageUrl, int questionNum) {
         this.question = question;
         this.option1 = option1;
         this.option2 = option2;
@@ -30,6 +31,7 @@ public class Question implements Serializable {
         this.chapter = chapter;
         this.moduleName = moduleName;
         this.imageUrl = imageUrl;
+        this.questionNum = questionNum;
     }
 
     public String getQuestion() {
@@ -102,5 +104,13 @@ public class Question implements Serializable {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public int getQuestionNum() {
+        return questionNum;
+    }
+
+    public void setQuestionNum(int questionNum) {
+        this.questionNum = questionNum;
     }
 }

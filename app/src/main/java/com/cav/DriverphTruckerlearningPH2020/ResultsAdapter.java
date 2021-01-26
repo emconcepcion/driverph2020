@@ -71,7 +71,7 @@ class ResultsAdapter implements ListAdapter {
             }else{
                 Answer.setTextColor(Color.GREEN);
             }
-            if (resultsData.askedImage.isEmpty()){
+            if (resultsData.askedImage.isEmpty() || resultsData.askedImage.equals("null")){
                 Image.setImageResource(R.drawable.white);
                 Image.setVisibility(View.GONE);
             }else {

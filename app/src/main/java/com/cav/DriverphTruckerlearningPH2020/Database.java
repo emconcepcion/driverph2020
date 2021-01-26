@@ -28,10 +28,11 @@ public class Database {
 			 QuizContract.QuestionsTable.COLUMN_ANSWER_NR + " INTEGER, " +
 			 QuizContract.QuestionsTable.COLUMN_CHAPTER + " TEXT," +
 			QuizContract.QuestionsTable.COLUMN_MODULE_NAME + " TEXT," +
-			QuizContract.QuestionsTable.COLUMN_IMAGE + " TEXT" +
+			QuizContract.QuestionsTable.COLUMN_IMAGE + " TEXT," +
+			QuizContract.QuestionsTable.COLUMN_QUES_NUM + " TEXT UNIQUE" +
 			");";
 
-	//final String SQL_CREATE_index = "CREATE UNIQUE INDEX indUnique ON tbl_questions(image) WHERE image IS NOT NULL";
+//	final String SQL_CREATE_index = "CREATE UNIQUE INDEX indUnique ON tbl_questions(image) WHERE image != '' OR image is not null OR image != 'null'";
 
 	final String SQL_CREATE_SCORES_TABLE = "CREATE TABLE " +
 			 DbContract.ScoresTable.TABLE_NAME_SCORES + "(" +
@@ -105,7 +106,7 @@ public class Database {
 		public void onCreate(SQLiteDatabase db) {
 			// TODO Auto-generated method stub
 			db.execSQL(SQL_CREATE_QUESTIONS_TABLE);
-		//	db.execSQL(SQL_CREATE_index);
+//			db.execSQL(SQL_CREATE_index);
 			db.execSQL(SQL_CREATE_SCORES_TABLE);
 			db.execSQL(SQL_CREATE_SCORES_TABLE_FROM_SERVER);
 			db.execSQL(SQL_CREATE_SCORES_ALL_ATTEMPTS_TABLE_FROM_SERVER);
@@ -155,6 +156,7 @@ public class Database {
 		cv.put( QuizContract.QuestionsTable.COLUMN_CHAPTER, question.getChapter());
 		cv.put(QuizContract.QuestionsTable.COLUMN_MODULE_NAME, question.getModuleName());
 		cv.put(QuizContract.QuestionsTable.COLUMN_IMAGE, question.getImageUrl());
+		cv.put(QuizContract.QuestionsTable.COLUMN_QUES_NUM, question.getQuestionNum());
 
 		Log.d("inserted... ", question.getQuestion()+"");
 			Log.d("inserted... ", question.getAnswerNr()+"");

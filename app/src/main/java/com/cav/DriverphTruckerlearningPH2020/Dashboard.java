@@ -778,6 +778,8 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
                         .getString("module"));
                 Log.d("imageUrl" + i, menuitemArray.getJSONObject(i)
                         .getString("imageUrl"));
+                Log.d("questionNumMob" + i, menuitemArray.getJSONObject(i)
+                        .getString("questionNumMob"));
 
                 String question = menuitemArray.getJSONObject(i).getString("questionText");
                 String option1 = menuitemArray.getJSONObject(i).getString("choiceA");
@@ -788,8 +790,9 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
                 String chapter = menuitemArray.getJSONObject(i).getString("module");
                 String moduleName = menuitemArray.getJSONObject(i).getString("moduleName");
                 String image = menuitemArray.getJSONObject(i).getString("imageUrl");
+                String quesNum = menuitemArray.getJSONObject(i).getString("questionNumMob");
                 Question q1 = new Question(question, option1, option2, option3, option4,
-                        Integer.parseInt(answer_nr), chapter, moduleName, image);
+                        Integer.parseInt(answer_nr), chapter, moduleName, image, Integer.parseInt(quesNum));
                 db.addQuestion(q1);
             }
 
