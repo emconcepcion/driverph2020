@@ -38,12 +38,11 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 public class Simulation extends Activity {
-
+    public static boolean isFromSimulation;
     private int mBGFarMoveX = 0;
     private int mBGNearMoveX = 0;
     //String restartHere = String.valueOf(R.string.restart);
 
-    public static boolean isFromSimulation;
     Bitmap bmp, pause, resume;
     Bitmap background,kinfe,note1,powerimg,note2;
     Bitmap run1;
@@ -72,10 +71,14 @@ public class Simulation extends Activity {
         instructionsDialog = new Dialog(this);
         //showInstructions();
 
+        isFromSimulation = true;
         //for no title
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(new GameView(this));
+
+        mp1.setLooping(true);
+        mp1.start();
     }
 
     private void exitDialog(){
@@ -85,7 +88,6 @@ public class Simulation extends Activity {
         builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                isFromSimulation = true;
                 startActivity(new Intent(Simulation.this, Dashboard.class));
                 SharedPreferences pref = getApplicationContext().getSharedPreferences("higher", MODE_PRIVATE);
                 Editor editor = pref.edit();
@@ -100,45 +102,11 @@ public class Simulation extends Activity {
             public void onClick(DialogInterface dialog, int which) {
                 gameLoopThread.setPause(0);
                 pausecount=0;
+                mp1.start();
             }
         });
         AlertDialog dialog = builder.show();
     }
-
-    /**
-     private void showPopup(){
-     //To move to next popup screen START
-     popup2Title = myDialog.findViewById(R.id.txtView_simulation_popup2);
-     popup2Message = myDialog.findViewById(R.id.txtMessage2);
-     myDialog.setContentView(R.layout.activity_simulation_popup2);
-
-     closepop2 = myDialog.findViewById(R.id.btn_closePop);
-     closepop2.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View view) {
-    myDialog.dismiss();
-    }
-    });
-     myDialog.show();
-     // END
-     }
-
-
-     private void showInstructions(){
-
-     Button closeButton;
-     instructionsDialog.setContentView(R.layout.simulation_instructions_popup);
-     closeButton = instructionsDialog.findViewById(R.id.btnClose_Instructions);
-     closeButton.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View view) {
-    instructionsDialog.dismiss();
-    }
-    });
-     instructionsDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-     instructionsDialog.show();
-     }
-     **/
 
     public class GameView extends SurfaceView{
 
@@ -166,82 +134,83 @@ public class Simulation extends Activity {
 
         @SuppressWarnings("deprecation")
         @SuppressLint("NewApi")
-        public GameView(Context context)
-        {
+        public GameView(Context context) {
             super(context);
+            try {
+                gameLoopThread = new gameloop(this);
+                holder = getHolder();
 
-            gameLoopThread = new gameloop(this);
-            holder = getHolder();
+                holder.addCallback(new SurfaceHolder.Callback() {
+                    @SuppressWarnings("deprecation")
+                    @Override
+                    public void surfaceDestroyed(SurfaceHolder holder) {
+                        //for stopping the game
+                        gameLoopThread.setRunning(false);
+                        gameLoopThread.getThreadGroup().interrupt();
+                    }
 
-            holder.addCallback(new SurfaceHolder.Callback() {
-                @SuppressWarnings("deprecation")
-                @Override
-                public void surfaceDestroyed(SurfaceHolder holder)
-                {
-                    //for stopping the game
-                    gameLoopThread.setRunning(false);
-                    gameLoopThread.getThreadGroup().interrupt();
-                }
+                    @SuppressLint("WrongCall")
+                    @Override
+                    public void surfaceCreated(SurfaceHolder holder) {
+                        gameLoopThread.setRunning(true);
+                        gameLoopThread.start();
+                    }
 
-                @SuppressLint("WrongCall")
-                @Override
-                public void surfaceCreated(SurfaceHolder holder)
-                {
-                    gameLoopThread.setRunning(true);
-                    gameLoopThread.start();
-                }
-                @Override
-                public void surfaceChanged(SurfaceHolder holder, int format,int width, int height)
-                {
+                    @Override
+                    public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
 
-                }
-            });
+                    }
+                });
 
-            //getting the screen size
-            Display display = getWindowManager().getDefaultDisplay();
+                //getting the screen size
+                Display display = getWindowManager().getDefaultDisplay();
 
-            sx = display.getWidth();
-            sy = display.getHeight();
+                sx = display.getWidth();
+                sy = display.getHeight();
 
-            cspeed=sx/2;
-            kspeed=sx/2;
-            powerrun=(3*sx/4);
-            shieldrun=sx/8;
-            background = BitmapFactory.decodeResource(getResources(), R.drawable.game_background_153);
-            run1=BitmapFactory.decodeResource(getResources(), R.drawable.truck_char);
-            run2=BitmapFactory.decodeResource(getResources(), R.drawable.truck_char2);
-            run3=BitmapFactory.decodeResource(getResources(), R.drawable.truck_char2);
+                cspeed = sx / 2;
+                kspeed = sx / 2;
+                powerrun = (3 * sx / 4);
+                shieldrun = sx / 8;
+                background = BitmapFactory.decodeResource(getResources(), R.drawable.game_background_153);
+                run1 = BitmapFactory.decodeResource(getResources(), R.drawable.truck_char);
+                run2 = BitmapFactory.decodeResource(getResources(), R.drawable.truck_char2);
+                run3 = BitmapFactory.decodeResource(getResources(), R.drawable.truck_char2);
 
-            coin=BitmapFactory.decodeResource(getResources(), R.drawable.dfuel_small);
-            off=BitmapFactory.decodeResource(getResources(), R.drawable.sound_off1);
-            on=BitmapFactory.decodeResource(getResources(), R.drawable.sound_on1);
-            exit=BitmapFactory.decodeResource(getResources(), R.drawable.power_off1);
+                coin = BitmapFactory.decodeResource(getResources(), R.drawable.dfuel_small);
+                off = BitmapFactory.decodeResource(getResources(), R.drawable.sound_off1);
+                on = BitmapFactory.decodeResource(getResources(), R.drawable.sound_on1);
+                exit = BitmapFactory.decodeResource(getResources(), R.drawable.power_off1);
 
-            kinfe=BitmapFactory.decodeResource(getResources(), R.drawable.dcone_small );
-            note1=BitmapFactory.decodeResource(getResources(), R.drawable.note1);
-            note2=BitmapFactory.decodeResource(getResources(), R.drawable.note2);
-            pause=BitmapFactory.decodeResource(getResources(), R.drawable.pause_btn);
-            powerimg=BitmapFactory.decodeResource(getResources(), R.drawable.heart_up);
-            resume=BitmapFactory.decodeResource(getResources(),R.drawable.resume_btn);
+                kinfe = BitmapFactory.decodeResource(getResources(), R.drawable.dcone_small);
+                note1 = BitmapFactory.decodeResource(getResources(), R.drawable.note1);
+                note2 = BitmapFactory.decodeResource(getResources(), R.drawable.note2);
+                pause = BitmapFactory.decodeResource(getResources(), R.drawable.pause_btn);
+                powerimg = BitmapFactory.decodeResource(getResources(), R.drawable.heart_up);
+                resume = BitmapFactory.decodeResource(getResources(), R.drawable.resume_btn);
 
-            off=Bitmap.createScaledBitmap(off, 90,90, true);
-            exit=Bitmap.createScaledBitmap(exit, 90,90, true);
-            on=Bitmap.createScaledBitmap(on, 90,90, true);
-            pause=Bitmap.createScaledBitmap(pause, 90,90, true);
-            resume=Bitmap.createScaledBitmap(resume, 90,90, true);
-            powerimg=Bitmap.createScaledBitmap(powerimg, 40,40, true);
+                off = Bitmap.createScaledBitmap(off, 90, 90, true);
+                exit = Bitmap.createScaledBitmap(exit, 90, 90, true);
+                on = Bitmap.createScaledBitmap(on, 90, 90, true);
+                pause = Bitmap.createScaledBitmap(pause, 90, 90, true);
+                resume = Bitmap.createScaledBitmap(resume, 90, 90, true);
+                powerimg = Bitmap.createScaledBitmap(powerimg, 40, 40, true);
 
-            //powerup
-            note2=Bitmap.createScaledBitmap(note2, sx,sy, true);
-            //health dec
-            note1=Bitmap.createScaledBitmap(note1, sx,sy, true);
+                //powerup
+                note2 = Bitmap.createScaledBitmap(note2, sx, sy, true);
+                //health dec
+                note1 = Bitmap.createScaledBitmap(note1, sx, sy, true);
 
-            //background=Bitmap.createScaledBitmap(background, 2*sx,sy, true);
-            background=Bitmap.createScaledBitmap(background, 2*sx,sy, true);
+                //background=Bitmap.createScaledBitmap(background, 2*sx,sy, true);
+                background = Bitmap.createScaledBitmap(background, 2 * sx, sy, true);
 
-            mp1=MediaPlayer.create(Simulation.this,R.raw.game_bg_music1);
-            jump=MediaPlayer.create(Simulation.this,R.raw.jump);
-            takecoin=MediaPlayer.create(Simulation.this,R.raw.cointake);
+                mp1 = MediaPlayer.create(Simulation.this, R.raw.game_bg_music1);
+                jump = MediaPlayer.create(Simulation.this, R.raw.jump);
+                takecoin = MediaPlayer.create(Simulation.this, R.raw.cointake);
+            } catch (Exception e) {
+                Toast.makeText(Simulation.this, "Android version must be 5.1 and above", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(Simulation.this, Dashboard.class));
+            }
         }
 
         // on touch method
@@ -268,6 +237,7 @@ public class Simulation extends Activity {
                 if(getx>130&&getx<200&&gety<150)
                 {
                     sound=0;
+                    mp1.pause();
                 }
 
                 //sound on
@@ -275,6 +245,7 @@ public class Simulation extends Activity {
                 {
                     sound=1;
                     mp1.start();
+                    mp1.setLooping(true);
                     takecoin.start();
                     jump.start();
                 }
@@ -300,6 +271,7 @@ public class Simulation extends Activity {
                 {
                     gameLoopThread.setPause(0);
                     pausecount=0;
+                    mp1.start();
                 }
             }
             return true;
@@ -312,21 +284,6 @@ public class Simulation extends Activity {
             //volume
             SharedPreferences pref = getApplicationContext().getSharedPreferences("higher", MODE_PRIVATE);
             Editor editor = pref.edit();
-            volume=pref.getInt("vloume", 0);
-            if(volume==0)
-            {
-                sound=0;
-            }
-
-            if(sound==1)
-            {
-                mp1.start();
-                mp1.setLooping(true);
-            }
-            else
-            {
-                mp1.pause();
-            }
 
             canvas.drawColor(Color.BLACK);
 
@@ -399,7 +356,7 @@ public class Simulation extends Activity {
 
                     if(pausecount==0)       //---------------- Pause and Resume condition
                     {
-                        mp1.pause();
+                        //mp1.pause();
                         pausecount=1;
                     }
 
@@ -418,7 +375,8 @@ public class Simulation extends Activity {
 
                     //canvas.drawText("Click the", (sx/2)-200, sy/4, resumePaint);
                     canvas.drawText("Click the", (sx/2)-100, sy/4, resumePaint);
-                    canvas.drawText("Play button ", (sx/2)-200, sy/2, resumePaint);
+                    canvas.drawText("Play button ", (sx/2)-100, sy/2, resumePaint);
+//                    canvas.drawText("Play button ", (sx/2)-200, sy/2, resumePaint); ORIGINAL CODE ABOVE
                     canvas.drawText("To continue", (sx/2)-150, (sy/2)+250, resumePaint);
 
                     gameLoopThread.setPause(1);
@@ -536,4 +494,4 @@ public class Simulation extends Activity {
     @Override
     public void onBackPressed() {
     }
-}//Latest Working Jan. 16, 7:06 PM
+}//Latest Working Jan. 27, 5:36

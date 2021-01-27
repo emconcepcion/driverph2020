@@ -146,7 +146,7 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_gravity="center"
-                android:scaleType="fitCenter"
+                android:scaleType="fitXY"
                 android:layout_marginTop="15dp"
                 android:src="@drawable/placeholder"
                 android:visibility="visible"
@@ -189,7 +189,7 @@
                         <RadioButton
                             android:id="@+id/radio_btn_option1"
                             android:layout_width="match_parent"
-                            android:layout_height="42dp"
+                            android:layout_height="wrap_content"
                             android:freezesText="true"
                             android:text="A"
                             android:textColor="@android:color/black"
@@ -200,7 +200,7 @@
                         <RadioButton
                             android:id="@+id/radio_btn_option2"
                             android:layout_width="match_parent"
-                            android:layout_height="42dp"
+                            android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:freezesText="true"
                             android:text="B"
@@ -212,7 +212,7 @@
                         <RadioButton
                             android:id="@+id/radio_btn_option3"
                             android:layout_width="match_parent"
-                            android:layout_height="42dp"
+                            android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:freezesText="true"
                             android:text="C"
@@ -224,7 +224,7 @@
                         <RadioButton
                             android:id="@+id/radio_btn_option4"
                             android:layout_width="match_parent"
-                            android:layout_height="42dp"
+                            android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:freezesText="true"
                             android:text="D"

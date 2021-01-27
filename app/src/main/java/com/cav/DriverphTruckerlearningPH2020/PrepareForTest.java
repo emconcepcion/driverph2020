@@ -100,12 +100,11 @@ public class PrepareForTest extends AppCompatActivity {
             startActivity(i);
         } else {
             AlertDialog alertDialog = new AlertDialog.Builder(PrepareForTest.this).create();
-            alertDialog.setTitle("Log in to Continue");
-            alertDialog.setMessage("Please connect to the internet and log in before clicking \"Retake the Test.\"");
+            alertDialog.setTitle("No internet");
+            alertDialog.setMessage("Please connect to the internet before clicking \"Retake the Test.\"");
             alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
-                            startActivity(new Intent(PrepareForTest.this, Login.class));
                             dialog.dismiss();
                         }
                     });

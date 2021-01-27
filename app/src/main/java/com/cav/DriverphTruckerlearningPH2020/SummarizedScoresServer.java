@@ -20,7 +20,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkError;
+import com.android.volley.NoConnectionError;
+import com.android.volley.ParseError;
 import com.android.volley.RequestQueue;
+import com.android.volley.ServerError;
+import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
@@ -113,7 +118,21 @@ public class SummarizedScoresServer extends AppCompatActivity {
                 new com.android.volley.Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-                        Toast.makeText(SummarizedScoresServer.this, volleyError.getMessage(), Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(SummarizedScoresServer.this, volleyError.getMessage(), Toast.LENGTH_SHORT).show();
+                        if (volleyError instanceof TimeoutError) {
+                            Toast.makeText(SummarizedScoresServer.this, "Timeout error. Please try again later.", Toast.LENGTH_SHORT).show();
+                        } else if (volleyError instanceof NoConnectionError) {
+                            checkNetworkConnection();
+                            Toast.makeText(SummarizedScoresServer.this, R.string.conn_net, Toast.LENGTH_SHORT).show();
+                        } else if (volleyError instanceof AuthFailureError) {
+                            Toast.makeText(SummarizedScoresServer.this, "Auth error. Please try again later.", Toast.LENGTH_SHORT).show();
+                        } else if (volleyError instanceof ServerError) {
+                            Toast.makeText(SummarizedScoresServer.this, "Server error. Please try again later.", Toast.LENGTH_SHORT).show();
+                        } else if (volleyError instanceof NetworkError) {
+                            Toast.makeText(SummarizedScoresServer.this, "Network error", Toast.LENGTH_SHORT).show();
+                        } else if (volleyError instanceof ParseError) {
+                            Toast.makeText(SummarizedScoresServer.this, "Parse error. Please try again later.", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 }) {
             @Override

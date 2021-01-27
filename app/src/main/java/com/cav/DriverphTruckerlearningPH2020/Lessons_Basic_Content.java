@@ -13,6 +13,8 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.pdf.PdfDocument;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -31,7 +33,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkError;
+import com.android.volley.NoConnectionError;
+import com.android.volley.ParseError;
 import com.android.volley.RequestQueue;
+import com.android.volley.ServerError;
+import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
@@ -68,7 +75,7 @@ public class Lessons_Basic_Content extends AppCompatActivity {
     public static String module, course, status, dateStarted, dateFinished,
             htmlData, lessonpdf, lessonId, currentLessonId, moduleName;
     public static boolean isFromLessonBasicContent;
-    String firstspeech, secondspeech;
+    String firstspeech, secondspeech, thirdspeech, fourthspeech;
 
 
     @Override
@@ -261,13 +268,33 @@ public class Lessons_Basic_Content extends AppCompatActivity {
                         content.loadData(htmlData, "text/html", "UTF-8");
                         lessonpdf = htmlData.replaceAll("<br>", "\n\n");
                         lessonpdf = lessonpdf.replaceAll("\\<.*?\\>", " ");
-                        int f = lessonpdf.length() / 2;
+                        int f = lessonpdf.length() / 4;
+                        int i = f * 2;
+                        int g = f * 3;
                         firstspeech = lessonpdf.substring(0, f);
                         f++;
-                        secondspeech = lessonpdf.substring(f, lessonpdf.length());
+                        secondspeech = lessonpdf.substring(f, i);
+                        i++;
+                        thirdspeech = lessonpdf.substring(i, g);
+                        g++;
+                        fourthspeech = lessonpdf.substring(g);
                     }
                 } catch (Exception e) {
-                    Toast.makeText(Lessons_Basic_Content.this, "Exception: " + e, Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(Lessons_Basic_Content.this, "Exception: " + e, Toast.LENGTH_SHORT).show();
+                    if (e instanceof TimeoutError) {
+                        Toast.makeText(Lessons_Basic_Content.this, "Timeout error. Please try again later.", Toast.LENGTH_SHORT).show();
+                    } else if (e instanceof NoConnectionError) {
+                        checkNetworkConnection();
+                        Toast.makeText(Lessons_Basic_Content.this, R.string.conn_net, Toast.LENGTH_SHORT).show();
+                    } else if (e instanceof AuthFailureError) {
+                        Toast.makeText(Lessons_Basic_Content.this, "Auth error. Please try again later.", Toast.LENGTH_SHORT).show();
+                    } else if (e instanceof ServerError) {
+                        Toast.makeText(Lessons_Basic_Content.this, "Server error. Please try again later.", Toast.LENGTH_SHORT).show();
+                    } else if (e instanceof NetworkError) {
+                        Toast.makeText(Lessons_Basic_Content.this, "Network error", Toast.LENGTH_SHORT).show();
+                    } else if (e instanceof ParseError) {
+                        Toast.makeText(Lessons_Basic_Content.this, "Parse error. Please try again later.", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         }
@@ -378,6 +405,8 @@ public class Lessons_Basic_Content extends AppCompatActivity {
         textToSpeech.setSpeechRate(speed);
         textToSpeech.speak(firstspeech, TextToSpeech.QUEUE_FLUSH, null);
         textToSpeech.speak(secondspeech, TextToSpeech.QUEUE_ADD, null);
+        textToSpeech.speak(thirdspeech, TextToSpeech.QUEUE_ADD, null);
+        textToSpeech.speak(fourthspeech, TextToSpeech.QUEUE_ADD, null);
     }
 
     //load all data for user's progress / latest module
@@ -399,7 +428,21 @@ public class Lessons_Basic_Content extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
                         progressDialog.dismiss();
-                        Toast.makeText(Lessons_Basic_Content.this, volleyError.getMessage(), Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(Lessons_Basic_Content.this, volleyError.getMessage(), Toast.LENGTH_SHORT).show();
+                        if (volleyError instanceof TimeoutError) {
+                            Toast.makeText(Lessons_Basic_Content.this, "Timeout error. Please try again later.", Toast.LENGTH_SHORT).show();
+                        } else if (volleyError instanceof NoConnectionError) {
+                            checkNetworkConnection();
+                            Toast.makeText(Lessons_Basic_Content.this, R.string.conn_net, Toast.LENGTH_SHORT).show();
+                        } else if (volleyError instanceof AuthFailureError) {
+                            Toast.makeText(Lessons_Basic_Content.this, "Auth error. Please try again later.", Toast.LENGTH_SHORT).show();
+                        } else if (volleyError instanceof ServerError) {
+                            Toast.makeText(Lessons_Basic_Content.this, "Server error. Please try again later.", Toast.LENGTH_SHORT).show();
+                        } else if (volleyError instanceof NetworkError) {
+                            Toast.makeText(Lessons_Basic_Content.this, "Network error", Toast.LENGTH_SHORT).show();
+                        } else if (volleyError instanceof ParseError) {
+                            Toast.makeText(Lessons_Basic_Content.this, "Parse error. Please try again later.", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 }) {
             @Override
@@ -418,5 +461,11 @@ public class Lessons_Basic_Content extends AppCompatActivity {
         };
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
+    }
+
+    public boolean checkNetworkConnection() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        return (networkInfo != null && networkInfo.isConnected());
     }
 }

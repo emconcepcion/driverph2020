@@ -135,13 +135,12 @@ public class QuizInstructions extends AppCompatActivity {
             i.putExtras(b);
             startActivity(i);
         } else {
-            AlertDialog alertDialog = new AlertDialog.Builder(com.cav.DriverphTruckerlearningPH2020.QuizInstructions.this).create();
-            alertDialog.setTitle("Log in to Continue");
-            alertDialog.setMessage("Please connect to the internet and log in before clicking \"Start the quiz\"");
+            AlertDialog alertDialog = new AlertDialog.Builder(QuizInstructions.this).create();
+            alertDialog.setTitle("No internet");
+            alertDialog.setMessage("Please connect to the internet before clicking \"Begin\"");
             alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
-                            startActivity(new Intent(com.cav.DriverphTruckerlearningPH2020.QuizInstructions.this, Login.class));
                             dialog.dismiss();
                         }
                     });

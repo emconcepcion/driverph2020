@@ -3,7 +3,10 @@ package com.cav.DriverphTruckerlearningPH2020;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Patterns;
@@ -14,6 +17,7 @@ import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
+import com.muddzdev.styleabletoast.StyleableToast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -58,6 +62,10 @@ public class Registration extends AppCompatActivity {
         signUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (!checkNetworkConnection()){
+                    StyleableToast.makeText(getApplicationContext(), Registration.this.getString(R.string.conn_net),
+                            Toast.LENGTH_LONG, R.style.toastStyle).show();
+                }
                 firstname = edittext_firstname.getText().toString().trim();
                 lastname = edittext_lastname.getText().toString().trim();
                 email = edittext_email.getText().toString().trim();
@@ -74,6 +82,12 @@ public class Registration extends AppCompatActivity {
 
             }
         });
+    }
+
+    public boolean checkNetworkConnection() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        return (networkInfo != null && networkInfo.isConnected());
     }
 
     public void check_user_exist() {

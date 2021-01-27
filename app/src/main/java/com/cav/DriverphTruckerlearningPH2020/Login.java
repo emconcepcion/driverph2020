@@ -1,8 +1,11 @@
 package com.cav.DriverphTruckerlearningPH2020;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -12,6 +15,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkError;
+import com.android.volley.NoConnectionError;
+import com.android.volley.ParseError;
+import com.android.volley.ServerError;
+import com.android.volley.TimeoutError;
+import com.muddzdev.styleabletoast.StyleableToast;
 
 import org.json.JSONObject;
 
@@ -36,6 +47,10 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        if (!checkNetworkConnection()){
+            StyleableToast.makeText(getApplicationContext(), Login.this.getString(R.string.conn_net),
+                    Toast.LENGTH_LONG, R.style.toastStyle).show();
+        }
         Button loginBtn = findViewById(R.id.btn_login);
         TextView signUpView = findViewById(R.id.textView_signUp);
         username = findViewById(R.id.login_username);
@@ -45,6 +60,7 @@ public class Login extends AppCompatActivity {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 u_name = username.getText().toString().trim();
                 pword = password1.getText().toString().trim();
                 if (u_name.isEmpty() || pword.isEmpty()) {
@@ -77,7 +93,10 @@ public class Login extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        System.exit(0);
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
 
     public void userLogin() {
@@ -131,17 +150,37 @@ public class Login extends AppCompatActivity {
                         pdLoading.dismiss();
                     } else {
                         pdLoading.dismiss();
-                        Toast.makeText(com.cav.DriverphTruckerlearningPH2020.Login.this, "Incorrect", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Login.this, "Incorrect", Toast.LENGTH_SHORT).show();
                     }
 //                            Toast.makeText(Login.this, email, Toast.LENGTH_SHORT).show();
                 } catch (Exception e) {
-                    Toast.makeText(com.cav.DriverphTruckerlearningPH2020.Login.this, "Exception: " + e, Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(Login.this, "Exception: " + e, Toast.LENGTH_SHORT).show();
+                    if (e instanceof TimeoutError) {
+                        Toast.makeText(Login.this, "Timeout error. Please try again later.", Toast.LENGTH_SHORT).show();
+                    } else if (e instanceof NoConnectionError) {
+                        checkNetworkConnection();
+                        Toast.makeText(Login.this, R.string.conn_net, Toast.LENGTH_SHORT).show();
+                    } else if (e instanceof AuthFailureError) {
+                        Toast.makeText(Login.this, "Auth error. Please try again later.", Toast.LENGTH_SHORT).show();
+                    } else if (e instanceof ServerError) {
+                        Toast.makeText(Login.this, "Server error. Please try again later.", Toast.LENGTH_SHORT).show();
+                    } else if (e instanceof NetworkError) {
+                        Toast.makeText(Login.this, "Network error", Toast.LENGTH_SHORT).show();
+                    } else if (e instanceof ParseError) {
+                        Toast.makeText(Login.this, "Parse error. Please try again later.", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         }
 
         show_prod show = new show_prod();
         show.execute();
+    }
+
+    public boolean checkNetworkConnection() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        return (networkInfo != null && networkInfo.isConnected());
     }
 
     public void progress() {

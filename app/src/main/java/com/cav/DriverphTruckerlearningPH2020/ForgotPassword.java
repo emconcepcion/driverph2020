@@ -3,7 +3,10 @@ package com.cav.DriverphTruckerlearningPH2020;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -13,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
+import com.muddzdev.styleabletoast.StyleableToast;
 
 import org.json.JSONObject;
 
@@ -41,6 +45,11 @@ public class ForgotPassword extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_password);
 
+        if (!checkNetworkConnection()){
+            StyleableToast.makeText(getApplicationContext(), ForgotPassword.this.getString(R.string.conn_net),
+                    Toast.LENGTH_LONG, R.style.toastStyle).show();
+        }
+
         firstname = findViewById(R.id.editText_firstname);
         lastname = findViewById(R.id.editText_lastname);
         email = findViewById(R.id.editText_email);
@@ -65,6 +74,12 @@ public class ForgotPassword extends AppCompatActivity {
                 startActivity(new Intent(ForgotPassword.this,Login.class));
             }
         });
+    }
+
+    public boolean checkNetworkConnection() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        return (networkInfo != null && networkInfo.isConnected());
     }
 
     public void retrievedatas(){

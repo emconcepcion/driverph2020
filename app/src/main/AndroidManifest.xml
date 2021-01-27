@@ -76,10 +76,6 @@
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Polguide"
-            android:configChanges="orientation"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".MyAccount"
             android:configChanges="orientation"
             android:parentActivityName=".Dashboard"
@@ -125,10 +121,6 @@
         <activity
             android:name=".Registration"
             android:configChanges="orientation"
-            android:parentActivityName=".Dashboard"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".MyProgress"
             android:parentActivityName=".Dashboard"
             android:screenOrientation="portrait" />
         <activity

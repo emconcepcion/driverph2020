@@ -393,7 +393,21 @@ public class Quizzes_menu extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
                         progressDialog.dismiss();
-                        Toast.makeText(Quizzes_menu.this, volleyError.getMessage(), Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(Quizzes_menu.this, volleyError.getMessage(), Toast.LENGTH_SHORT).show();
+                        if (volleyError instanceof TimeoutError) {
+                            Toast.makeText(Quizzes_menu.this, "Timeout error. Please try again later.", Toast.LENGTH_SHORT).show();
+                        } else if (volleyError instanceof NoConnectionError) {
+                            checkNetworkConnection();
+                            Toast.makeText(Quizzes_menu.this, R.string.conn_net, Toast.LENGTH_SHORT).show();
+                        } else if (volleyError instanceof AuthFailureError) {
+                            Toast.makeText(Quizzes_menu.this, "Auth error. Please try again later.", Toast.LENGTH_SHORT).show();
+                        } else if (volleyError instanceof ServerError) {
+                            Toast.makeText(Quizzes_menu.this, "Server error. Please try again later.", Toast.LENGTH_SHORT).show();
+                        } else if (volleyError instanceof NetworkError) {
+                            Toast.makeText(Quizzes_menu.this, "Network error", Toast.LENGTH_SHORT).show();
+                        } else if (volleyError instanceof ParseError) {
+                            Toast.makeText(Quizzes_menu.this, "Parse error. Please try again later.", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 }) {
             @Override
@@ -410,5 +424,11 @@ public class Quizzes_menu extends AppCompatActivity {
 
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
+    }
+
+    public boolean checkNetworkConnection() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        return (networkInfo != null && networkInfo.isConnected());
     }
 }

@@ -241,18 +241,18 @@ public class QuizResults extends AppCompatActivity {
                 public void onErrorResponse(VolleyError error) {
 
                     if (error instanceof TimeoutError) {
-                        Toast.makeText(QuizResults.this, "Timeout error", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(QuizResults.this, "Timeout error. Please try again later.", Toast.LENGTH_SHORT).show();
                     } else if (error instanceof NoConnectionError) {
                         checkNetworkConnection();
-                        Toast.makeText(QuizResults.this, "Network error", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(QuizResults.this, "Network connection error", Toast.LENGTH_SHORT).show();
                     } else if (error instanceof AuthFailureError) {
-                        Toast.makeText(QuizResults.this, "Auth error", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(QuizResults.this, "Auth error. Please try again later.", Toast.LENGTH_SHORT).show();
                     } else if (error instanceof ServerError) {
-                        Toast.makeText(QuizResults.this, "Server error", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(QuizResults.this, "Server error. Please try again later.", Toast.LENGTH_SHORT).show();
                     } else if (error instanceof NetworkError) {
                         Toast.makeText(QuizResults.this, "Network error", Toast.LENGTH_SHORT).show();
                     } else if (error instanceof ParseError) {
-                        Toast.makeText(QuizResults.this, "Parse error", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(QuizResults.this, "Parse error. Please try again later.", Toast.LENGTH_SHORT).show();
                     }
                 }
             }) {
@@ -279,6 +279,8 @@ public class QuizResults extends AppCompatActivity {
                         Toast.LENGTH_LONG, R.style.toastStyle).show();
             }
 
+        }else{
+            Toast.makeText(this, "Please check your internet connection.", Toast.LENGTH_SHORT).show();
         }
     }
 

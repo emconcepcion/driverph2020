@@ -22,6 +22,8 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
@@ -38,7 +40,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkError;
+import com.android.volley.NoConnectionError;
+import com.android.volley.ParseError;
 import com.android.volley.RequestQueue;
+import com.android.volley.ServerError;
+import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
@@ -92,7 +99,6 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
 
     //for google play in-app updates
     private final int REQUEST_CODE = 11;
-
     private DrawerLayout drawer;
     String img_num;
     static Button resumeLesson;
@@ -107,12 +113,6 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
     public static String myLatestChapter;
     public static String myLatestIsUnlocked;
     public static String myLatestIsCompleted;
-    public static String myProgressUserId;
-    public static String myProgressChapter;
-    public static String myProgressLessonId;
-    public static String myProgressStatus;
-    public static String myProgressDateStarted;
-    public static String myProgressDateFinished;
     public static String nameVR;
     public static String user_idPassedTests;
     private TextView welcome_fname;
@@ -133,6 +133,10 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         setContentView(R.layout.activity_dashboard);
         weakActivity = new WeakReference<>(Dashboard.this);
 
+        if (!checkNetworkConnection()){
+            StyleableToast.makeText(getApplicationContext(), Dashboard.this.getString(R.string.conn_net),
+                    Toast.LENGTH_LONG, R.style.toastStyle).show();
+        }
         SharedPreferences sh = getSharedPreferences("MySharedPrefForEmail", MODE_PRIVATE);
         dashboard_email = sh.getString("driver_email", "");
         sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
@@ -211,7 +215,6 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         getJSON(QUESTIONS_URL);
         loadRecyclerViewData();
         loadDataAllAttemptsAndLevels();
-       // loadUserProgressModules();
         btnSetter();
 
         Calendar calendar = Calendar.getInstance();
@@ -490,7 +493,23 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
 //                        Toast.makeText(Dashboard.this, "Fetched from user table: " + user_id, Toast.LENGTH_SHORT).show();
                     }
                 } catch (Exception e) {
-                    Toast.makeText(Dashboard.this, "Exception: " + e, Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(Dashboard.this, "Exception: " + e, Toast.LENGTH_SHORT).show();
+                    if (checkNetworkConnection()){
+                        if (e instanceof TimeoutError) {
+                            Toast.makeText(Dashboard.this, "Timeout error. Please try again later.", Toast.LENGTH_SHORT).show();
+                        } else if (e instanceof NoConnectionError) {
+                            checkNetworkConnection();
+                            Toast.makeText(Dashboard.this, "Network connection error", Toast.LENGTH_SHORT).show();
+                        } else if (e instanceof AuthFailureError) {
+                            Toast.makeText(Dashboard.this, "Auth error. Please try again later.", Toast.LENGTH_SHORT).show();
+                        } else if (e instanceof ServerError) {
+                            Toast.makeText(Dashboard.this, "Server error. Please try again later.", Toast.LENGTH_SHORT).show();
+                        } else if (e instanceof NetworkError) {
+                            Toast.makeText(Dashboard.this, "Network error", Toast.LENGTH_SHORT).show();
+                        } else if (e instanceof ParseError) {
+                            Toast.makeText(Dashboard.this, "Parse error. Please try again later.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
                 }
             }
         }
@@ -689,7 +708,23 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
                         progressDialog.dismiss();
-                        Toast.makeText(Dashboard.this, volleyError.getMessage(), Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(Dashboard.this, volleyError.getMessage(), Toast.LENGTH_SHORT).show();
+                        if (checkNetworkConnection()){
+                            if (volleyError instanceof TimeoutError) {
+                                Toast.makeText(Dashboard.this, "Timeout error. Please try again later.", Toast.LENGTH_SHORT).show();
+                            } else if (volleyError instanceof NoConnectionError) {
+                                checkNetworkConnection();
+                                Toast.makeText(Dashboard.this, "Network connection error", Toast.LENGTH_SHORT).show();
+                            } else if (volleyError instanceof AuthFailureError) {
+                                Toast.makeText(Dashboard.this, "Auth error. Please try again later.", Toast.LENGTH_SHORT).show();
+                            } else if (volleyError instanceof ServerError) {
+                                Toast.makeText(Dashboard.this, "Server error. Please try again later.", Toast.LENGTH_SHORT).show();
+                            } else if (volleyError instanceof NetworkError) {
+                                Toast.makeText(Dashboard.this, "Network error", Toast.LENGTH_SHORT).show();
+                            } else if (volleyError instanceof ParseError) {
+                                Toast.makeText(Dashboard.this, "Parse error. Please try again later.", Toast.LENGTH_SHORT).show();
+                            }
+                        }
                     }
                 }) {
             @Override
@@ -704,6 +739,12 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
 
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
+    }
+
+    public boolean checkNetworkConnection() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        return (networkInfo != null && networkInfo.isConnected());
     }
 
     //load all questions for tests
@@ -876,7 +917,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
                         progressDialog.dismiss();
-                        Toast.makeText(Dashboard.this, volleyError.getMessage(), Toast.LENGTH_SHORT).show();
+                      //  Toast.makeText(Dashboard.this, volleyError.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }) {
             @Override

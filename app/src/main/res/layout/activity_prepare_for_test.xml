@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
     android:orientation="vertical"
+    android:padding="16dp"
     tools:context=".PrepareForTest">
 
     <TextView
@@ -13,53 +13,64 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
         android:text="@string/course_title"
-        android:layout_marginTop="30dp"
-        android:textSize="20sp"
         android:textColor="@android:color/black"
+        android:textSize="20sp"
         android:textStyle="bold"
         android:visibility="invisible"
-        />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textview_instruct_msg1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="We believe in second chances, too.\n\nTake a deep breath and take the test again."
-        android:layout_marginTop="100dp"
-        android:gravity="center"
         android:layout_marginHorizontal="10dp"
-        android:textSize="30sp"
+        android:layout_marginTop="70dp"
+        android:gravity="center"
+        android:text="We believe in second chances, too.\n\nTake a deep breath and take the test again."
         android:textColor="@android:color/black"
-        />
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <Button
         android:id="@+id/btn_start_myTest"
         android:layout_width="230dp"
         android:layout_height="60dp"
         android:layout_below="@id/textview_instruct_msg1"
-        android:text="@string/letsGo"
-        android:layout_marginTop="30dp"
         android:layout_centerHorizontal="true"
-        android:textAllCaps="false"
-        android:textStyle="bold"
-        android:textSize="18sp"
-        android:textColor="@android:color/white"
+        android:layout_marginTop="52dp"
         android:background="@drawable/yellow_button"
-        />
+        android:text="@string/letsGo"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textview_instruct_msg1" />
 
     <Button
         android:id="@+id/btn_back_to_quizMenu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Maybe later"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="100dp"
         android:background="@drawable/border_yellow"
         android:paddingHorizontal="15dp"
+        android:text="Maybe later"
         android:textAllCaps="false"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="20dp"/>
-
-
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_start_myTest" />
 
     <TextView
         android:id="@+id/myEmailPrepTest"
@@ -67,27 +78,32 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginLeft="135dp"
-        android:layout_marginBottom="35dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="4dp"
         android:layout_toRightOf="@id/btn_back_to_quizMenu"
         android:text="mEmail"
         android:textColor="@android:color/black"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:visibility="invisible"/>
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/myUserIdPrepTest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginLeft="135dp"
-        android:layout_marginBottom="35dp"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="16dp"
         android:text="userId"
         android:textColor="@android:color/black"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:visibility="invisible"/>
+        android:visibility="invisible"
+        app:layout_constraintStart_toEndOf="@+id/textview_module_title"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

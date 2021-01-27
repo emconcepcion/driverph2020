@@ -23,7 +23,7 @@
     <LinearLayout
         android:layout_below="@id/advisory"
         android:layout_width="match_parent"
-        android:padding="16dp"
+        android:padding="10dp"
         android:layout_height="wrap_content">
 
 
@@ -43,7 +43,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="160dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
                     android:background="@android:color/white"
                     android:orientation="horizontal">
@@ -97,7 +97,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="160dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:background="@android:color/white"
                     android:gravity="center_vertical"
@@ -152,7 +152,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="160dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:background="@android:color/white"
                     android:gravity="center_vertical"
@@ -207,7 +207,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="160dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:background="@android:color/white"
                     android:gravity="center_vertical"
@@ -264,7 +264,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="160dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginVertical="10dp"
                     android:background="@android:color/white"
                     android:gravity="center_vertical"
@@ -317,8 +317,6 @@
 
                     </RelativeLayout>
                 </LinearLayout>
-
-
             </LinearLayout>
         </ScrollView>
     </LinearLayout>

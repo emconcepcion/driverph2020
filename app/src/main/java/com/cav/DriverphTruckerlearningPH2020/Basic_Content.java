@@ -2,8 +2,11 @@ package com.cav.DriverphTruckerlearningPH2020;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -13,8 +16,14 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkError;
+import com.android.volley.NoConnectionError;
+import com.android.volley.ParseError;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.ServerError;
+import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
@@ -136,13 +145,33 @@ public class Basic_Content extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(Basic_Content.this, error.getMessage().toString(), Toast.LENGTH_LONG).show();
+             //   Toast.makeText(Basic_Content.this, error.getMessage().toString(), Toast.LENGTH_LONG).show();
+                if (error instanceof TimeoutError) {
+                    Toast.makeText(Basic_Content.this, "Timeout error. Please try again later.", Toast.LENGTH_SHORT).show();
+                } else if (error instanceof NoConnectionError) {
+                    checkNetworkConnection();
+                    Toast.makeText(Basic_Content.this, R.string.conn_net, Toast.LENGTH_SHORT).show();
+                } else if (error instanceof AuthFailureError) {
+                    Toast.makeText(Basic_Content.this, "Auth error. Please try again later.", Toast.LENGTH_SHORT).show();
+                } else if (error instanceof ServerError) {
+                    Toast.makeText(Basic_Content.this, "Server error. Please try again later.", Toast.LENGTH_SHORT).show();
+                } else if (error instanceof NetworkError) {
+                    Toast.makeText(Basic_Content.this, "Network error", Toast.LENGTH_SHORT).show();
+                } else if (error instanceof ParseError) {
+                    Toast.makeText(Basic_Content.this, "Parse error. Please try again later.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
 
+    }
+
+    public boolean checkNetworkConnection() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        return (networkInfo != null && networkInfo.isConnected());
     }
 
     private void showJSON(String response) {

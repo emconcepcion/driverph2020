@@ -289,18 +289,18 @@ public class QuizStatusList extends AppCompatActivity {
                             Toast.LENGTH_LONG, R.style.toastStyle).show();
 
                     if (error instanceof TimeoutError) {
-                        Toast.makeText(QuizStatusList.this, "Timeout error", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(QuizStatusList.this, "Timeout error. Please try again later.", Toast.LENGTH_SHORT).show();
                     } else if (error instanceof NoConnectionError) {
                         checkNetworkConnection();
-                        Toast.makeText(QuizStatusList.this, "Network error", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(QuizStatusList.this, R.string.conn_net, Toast.LENGTH_SHORT).show();
                     } else if (error instanceof AuthFailureError) {
-                        Toast.makeText(QuizStatusList.this, "Auth error", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(QuizStatusList.this, "Auth error. Please try again later.", Toast.LENGTH_SHORT).show();
                     } else if (error instanceof ServerError) {
-                        Toast.makeText(QuizStatusList.this, "Server error", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(QuizStatusList.this, "Server error. Please try again later.", Toast.LENGTH_SHORT).show();
                     } else if (error instanceof NetworkError) {
                         Toast.makeText(QuizStatusList.this, "Network error", Toast.LENGTH_SHORT).show();
                     } else if (error instanceof ParseError) {
-                        Toast.makeText(QuizStatusList.this, "Parse error", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(QuizStatusList.this, "Parse error. Please try again later.", Toast.LENGTH_SHORT).show();
                     }
                 }
             }) {
@@ -435,8 +435,6 @@ public class QuizStatusList extends AppCompatActivity {
     public boolean checkNetworkConnection() {
         ConnectivityManager connectivityManager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
-//        StyleableToast.makeText(getApplicationContext(), QuizStatusList.this.getString(R.string.check_net),
-//                Toast.LENGTH_LONG, R.style.toastStyle).show();
         return (networkInfo != null && networkInfo.isConnected());
     }
 
