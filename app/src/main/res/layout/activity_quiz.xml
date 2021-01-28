@@ -26,6 +26,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp"
         android:layout_marginHorizontal="5dp"
         android:text="Module Test"
         android:textColor="@android:color/black"
@@ -41,8 +42,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/thisQuiz"
-        android:layout_above="@id/btn_sound"
+        android:layout_above="@id/btn_next"
         android:orientation="vertical"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginBottom="@dimen/_15sdp"
         android:paddingLeft="15dp"
         android:paddingRight="15dp">
 
@@ -50,30 +53,12 @@
             android:id="@+id/textview_moduleName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="0dp"
             android:text="Module Name"
             android:textColor="@android:color/black"
+            android:layout_gravity="center_horizontal"
             android:textSize="18sp"
             android:textStyle="bold" />
-
-<!--        <TextView-->
-<!--            android:id="@+id/textview_instruction"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="Instructions:"-->
-<!--            android:textColor="@android:color/black"-->
-<!--            android:textSize="16sp"-->
-<!--            android:textStyle="bold" />-->
-
-<!--        <TextView-->
-<!--            android:id="@+id/textview_instruct_msg"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_below="@id/textview_instruction"-->
-<!--            android:layout_marginTop="5dp"-->
-<!--            android:text="@string/read_questions"-->
-<!--            android:textColor="@android:color/black"-->
-<!--            android:textSize="16sp" />-->
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -155,7 +140,7 @@
             <TextView
                 android:id="@+id/txt_question"
                 android:layout_width="match_parent"
-                android:layout_height="120dp"
+                android:layout_height="wrap_content"
                 android:layout_below="@id/txt_question_counter"
                 android:layout_marginTop="5dp"
                 android:freezesText="true"
@@ -164,7 +149,7 @@
                 android:text="@string/questions_go_here"
                 android:textAlignment="center"
                 android:textColor="@android:color/black"
-                android:textSize="20sp"
+                android:textSize="@dimen/_19ssp"
                 android:textStyle="bold" />
 
             <ScrollView
@@ -194,8 +179,9 @@
                             android:text="A"
                             android:textColor="@android:color/black"
                             android:background="#F0F1F1"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
+                            android:paddingVertical="3dp"
+                            android:paddingHorizontal="2dp"
+                            android:textSize="@dimen/_16ssp"/>
 
                         <RadioButton
                             android:id="@+id/radio_btn_option2"
@@ -206,8 +192,9 @@
                             android:text="B"
                             android:textColor="@android:color/black"
                             android:background="#F0F1F1"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
+                            android:textSize="@dimen/_16ssp"
+                            android:paddingVertical="3dp"
+                            android:paddingHorizontal="2dp"/>
 
                         <RadioButton
                             android:id="@+id/radio_btn_option3"
@@ -218,8 +205,9 @@
                             android:text="C"
                             android:textColor="@android:color/black"
                             android:background="#F0F1F1"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
+                            android:textSize="@dimen/_16ssp"
+                            android:paddingVertical="3dp"
+                            android:paddingHorizontal="2dp" />
 
                         <RadioButton
                             android:id="@+id/radio_btn_option4"
@@ -230,8 +218,9 @@
                             android:text="D"
                             android:textColor="@android:color/black"
                             android:background="#F0F1F1"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
+                            android:textSize="@dimen/_16ssp"
+                            android:paddingVertical="3dp"
+                            android:paddingHorizontal="2dp" />
 
                     </RadioGroup>
                 </LinearLayout>
@@ -306,25 +295,28 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginVertical="15dp"
+        android:layout_alignParentEnd="true"
         android:background="@android:color/transparent"
         android:onClick="buttonPressed"
-        android:layout_above="@id/btn_next"
+        android:layout_above="@id/linearLayout"
         android:padding="6dp"
+        android:layout_marginBottom="3dp"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:layout_marginRight="@dimen/_10sdp"
         android:src="@drawable/ic_sound_off" />
 
     <Button
         android:id="@+id/btn_next"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
+        android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="@dimen/_18sdp"
         android:layout_alignParentBottom="true"
         android:background="@drawable/rounded_login_button"
         android:freezesText="true"
         android:text="NEXT"
         android:textColor="@android:color/white"
-        android:textSize="20sp" />
+        android:textSize="@dimen/_19ssp" />
 
 
 </RelativeLayout>

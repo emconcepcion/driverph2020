@@ -39,6 +39,7 @@
                 android:layout_width="155dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="13dp"
+                android:layout_marginLeft="13dp"
                 android:layout_marginTop="13dp"
                 android:layout_marginBottom="13dp"
                 android:text="TRAFFIC SIGNS"
@@ -46,8 +47,7 @@
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/img4"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginLeft="13dp" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/ic_arrow"
@@ -55,10 +55,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_arrow_right_long"
-                android:layout_marginRight="16dp"
                 tools:ignore="VectorDrawableCompat" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -96,10 +96,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_arrow_right_long"
-                android:layout_marginRight="16dp"
                 tools:ignore="VectorDrawableCompat" />
 
             <TextView
@@ -107,6 +107,7 @@
                 android:layout_width="174dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="13dp"
+                android:layout_marginLeft="13dp"
                 android:layout_marginTop="13dp"
                 android:layout_marginBottom="13dp"
                 android:text="RULES &amp; REGULATIONS"
@@ -114,8 +115,7 @@
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/img5"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginLeft="13dp" />
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -152,10 +152,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_arrow_right_long"
-                android:layout_marginRight="16dp"
                 tools:ignore="VectorDrawableCompat" />
 
             <TextView
@@ -163,6 +163,7 @@
                 android:layout_width="154dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="13dp"
+                android:layout_marginLeft="13dp"
                 android:layout_marginTop="13dp"
                 android:layout_marginBottom="13dp"
                 android:text="GENERAL KNOWLEDGE"
@@ -170,8 +171,7 @@
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/img6"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginLeft="13dp" />
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -212,14 +212,14 @@
         android:id="@+id/button5"
         android:layout_width="190dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="84dp"
-        android:layout_marginLeft="84dp"
         android:layout_marginTop="30dp"
         android:background="@drawable/rounded_login_button"
         android:text="Go to Evaluation"
         android:textAllCaps="false"
-        android:textSize="16sp"
         android:textColor="@android:color/white"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView_core_competencies" />
 
@@ -231,10 +231,10 @@
         android:text="Test Chapter"
         android:textSize="16sp"
         android:textStyle="bold"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button5"
-        android:visibility="invisible"/>
+        app:layout_constraintTop_toBottomOf="@+id/button5" />
 
     <TextView
         android:id="@+id/email_lesson"
@@ -244,11 +244,11 @@
         android:text="email"
         android:textSize="16sp"
         android:textStyle="bold"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="@id/tChap_Lesson"
         app:layout_constraintHorizontal_bias="0.79"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button5"
-        android:visibility="invisible"/>
+        app:layout_constraintTop_toBottomOf="@+id/button5" />
 
     <TextView
         android:id="@+id/txt_userIdLess"
@@ -258,9 +258,9 @@
         android:layout_marginRight="33dp"
         android:layout_marginBottom="90dp"
         android:text="user_id"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:visibility="invisible"/>
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
         android:id="@+id/txt_uidDbLess"
@@ -270,9 +270,9 @@
         android:layout_marginRight="33dp"
         android:layout_marginBottom="132dp"
         android:text="uidDb"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:visibility="invisible"/>
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
         android:id="@+id/latestMod1LockedLesson"
@@ -281,9 +281,9 @@
         android:layout_marginStart="40dp"
         android:layout_marginLeft="40dp"
         android:text="mod1locked"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@id/imageView6"
-        app:layout_constraintStart_toStartOf="parent"
-        android:visibility="invisible"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/latestMod1CompletedLesson"
@@ -292,8 +292,8 @@
         android:layout_marginStart="288dp"
         android:layout_marginLeft="288dp"
         android:text="mod1completed"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@id/imageView6"
-        app:layout_constraintStart_toStartOf="parent"
-        android:visibility="invisible"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
